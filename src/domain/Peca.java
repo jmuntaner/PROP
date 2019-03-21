@@ -24,5 +24,7 @@ public abstract class Peca {
         this.posicio = posicio;
     }
 
-    public abstract ArrayList<Moviment> getMovimentsValids(String ocupacio);
+    public abstract ArrayList<Moviment> getMovimentsValids(Tauler ocupacio);
+
+    public boolean getRei() {return false;}
 }
