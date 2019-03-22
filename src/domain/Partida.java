@@ -10,7 +10,11 @@ public class Partida {
     private Tauler situacioActual;
 
     Partida(Problema p) {
-        this.prob = p;
+        prob = p;
+        torn = p.getTema();
+        situacioActual = prob.getSituacioInicial();
+        historial = new ArrayList<Moviment>();
+        numMoviments = 0;
     }
 
     public int getNumMoviments() {
@@ -22,16 +26,23 @@ public class Partida {
     }
 
 
-    public boolean isTorn() {
+    public boolean getTorn() {
         return torn;
     }
 
     public void reset() {
-
+        historial.clear();
+        numMoviments = 0;
+        situacioActual = prob.getSituacioInicial();
     }
 
     public void moure(boolean jugador, Moviment mov) {
+        if (jugador != torn) throw new RuntimeException("No es el torn del jugador especificat");
+        situacioActual.mou(mov);
+    }
 
+    public String getAtPosicio(int x, int y) {
+        return situacioActual.getCasella(x, y);
     }
 
     public EstadistiquesPartida getEstadistiques() {
