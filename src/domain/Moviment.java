@@ -4,6 +4,8 @@ import javafx.util.Pair;
 
 public class Moviment {
     private Pair<Integer, Integer> posIni, posFinal;
+    private Peca p, k; //p = peça que es mou, k = peça morta;
+    //TODO: implementar nous atributs
 
     public Moviment(){}
 

@@ -68,7 +68,7 @@ public abstract class Peca {
      * @param ocupacio Matriu 8x8, indicant amb 0 casella buida, 1 fitxa blanca, 2 negra.
      * @return Llista de tots els moviments vàlids.
      */
-    public abstract ArrayList<Moviment> getMovimentsValids(int[][] ocupacio);
+    public abstract ArrayList<Moviment> getMovimentsValids(Color[][] ocupacio);
 
     /**
      * Indica si la peça és un rei.
@@ -78,6 +78,12 @@ public abstract class Peca {
     public boolean getRei() {
         return false;
     }
+
+    /**
+     * Retorna el codi char correponent al tipus de peça i color
+     * @return char codi
+     */
+    public abstract char toChar();
 
     /**
      * Indica si la peça es pot moure a la posició indicada.
