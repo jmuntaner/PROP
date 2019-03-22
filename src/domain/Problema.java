@@ -2,13 +2,13 @@ package domain;
 
 public class Problema {
     private String nom;
-    private boolean tema;
+    private Color tema;
     private int numJugades, dificultat;
     private Tauler situacioInicial;
     private RankingProblema ranking;
 
     // Constructor
-    public Problema(String nom, boolean tema, Integer numJugades, Tauler situacioInicial) {
+    public Problema(String nom, Color tema, Integer numJugades, Tauler situacioInicial) {
         this.nom = nom;
         this.tema = tema;
         this.numJugades = numJugades;
@@ -24,11 +24,11 @@ public class Problema {
         this.nom = nom;
     }
 
-    public boolean getTema() {
+    public Color getTema() {
         return tema;
     }
 
-    public void setTema(boolean tema) {
+    public void setTema(Color tema) {
         this.tema = tema;
     }
 
