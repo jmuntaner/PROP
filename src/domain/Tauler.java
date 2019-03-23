@@ -11,23 +11,33 @@ public class Tauler {
     private static final int SIZE = 8;
 
     private Peca[][] peces;
-    // TODO: repassar si cal tenir això apuntat
-    private int escacN; // N: negres han fet escac, B = blanques han fet escac
-    private int escacB; // 0 = res, 1 = escac, 2 = mat
 
     private Rei _reiBlanc, _reiNegre; //Proposo modificar els noms per Melcior i Baltasar
 
-
+    /**
+     * Creadora per defecte
+     */
     public Tauler() {
-        Peca[][] temp = new Peca[SIZE][SIZE];
-        peces = temp;
-        escacB = escacN = 0; //creadora es crida al "iniciar" un problema, i un problema no pot començar en escac/mat
+        peces = new Peca[SIZE][SIZE];
     }
 
-    //pre: pecesInicials és de mida SIZExSIZE
+    /**
+     * Creadora a partir de peces
+     * @param pecesInicials situació inicial de les peces al tauler
+     */
+    //TODO:
+    // - Tal i com implementem la classe, cal que el controlador cridi a esEscacMat després d'entrar totes les peces
+    // - Si és mat d'un dels dos, o si és escac a favor del jugador que té el primer torn, problema invàlid
+    // - Excepció: si no es troben els dos reis (un dels dos és nul, problema invàlid)
     public Tauler(Peca[][] pecesInicials) {
         peces = pecesInicials;
-        checkMate();
+        for (Peca[] row: peces) {
+            for (Peca p: row) {
+                char c = p.toChar();
+                if (c == 'K') _reiBlanc = (Rei) p; //Es lleig però garantir-ho amb un instanceof ho es mes
+                else if (c == 'k') _reiNegre = (Rei) p;
+            }
+        }
     }
 
     /**
@@ -49,6 +59,13 @@ public class Tauler {
 
     // Check if checkmate of player b (against !b)
     // Es poden eliminar alguns moviments a priori per millorar eficiència?
+
+    /**
+     * Indica si la posició actual del tauler és mat pel jugador indicat
+     *
+     * @param b Color pel que es vol comprovar si hi ha escac
+     * @return true si hi ha mat
+     */
     private boolean esMat(Color b) { //TODO: Repassar
         Color[][] ocup = generaOcupacio();
         for (Peca[] f : peces)
@@ -67,9 +84,7 @@ public class Tauler {
     }
 
     /**
-     * Genera la matriu de enters que representa la ocupació del Tauler
-     * <p>
-     * 0: buit, 1: blanques, 2: negres
+     * Genera la matriu de colors que representa l'cupació del Tauler
      *
      * @return Matriu d'ocupació del Tauler
      */
@@ -83,41 +98,52 @@ public class Tauler {
         return oc;
     }
 
-    // Check if checkmate
-    private void checkMate() {
-        if (esEscac(BLANC)) {
-            if (esMat(BLANC)) escacB = 2;
-            else escacB = 1;
-        } else escacB = 0;
-        if (esEscac(NEGRE)) {
-            if (esMat(NEGRE)) escacN = 2;
-            else escacN = 1;
-        } else escacN = 0;
-    }
+    /**
+     *  Afegeix una peça al tauler
+     *  La posició és la de la peça
+     *
+     * @param p Peça a afegir
+     */
+    public void afegirPeca (Peca p) {}
 
-    //Getters i setters
+    /**
+     * Treu la peça situada a la posició x,y del tauler
+     *
+     * @param x Coordenada x de la posició
+     * @param y Coordenada y de la posició
+     */
+    public void treurePeca (int x, int y){}
 
-    // Si b, retorna si les blanques han fet escac/mat; si!b, ídem per les negres
-    public int getEscac(Color c) {
-        if (c==BLANC) return escacB;
-        else return escacN;
-    }
 
-    // Execute movement
+    /**
+     * Executa el moviment d'una peça
+     *
+     * @param mov Moviment a executar
+     */
     public void mou(Moviment mov) {
         Pair<Integer, Integer> pi = mov.getPosIni();
         int x = pi.getKey(); //TODO: En serio, això dels Pairs és una merda
         int y = pi.getValue();
         peces[x][y].setPosicio(mov.getPosFinal());
         // TODO: actualitzar peça moguda (?) + morta
-        checkMate();
+        //checkMate();
     }
 
+    /**
+     * Reverteix el moviment d'una peça
+     *
+     * @param mov Moviment que és vol executar a la inversa
+     */
     public void mou_invers(Moviment mov) {
         //TODO: implementar
     }
 
-    // Return all valid movements for a player
+    /**
+     * Retorna tots els moviments possibles per un dels jugdors
+     *
+     * @param jugador Jugador del qual es volen els moviments
+     * @return Llista de moviments vàlids
+     */
     public ArrayList<Moviment> obteMovimentsJugador(Color jugador) {
         ArrayList<Moviment> al = new ArrayList<>();
         Color[][] ocup = generaOcupacio();
@@ -130,7 +156,49 @@ public class Tauler {
         return al;
     }
 
+    /**
+     * Retorna tots els moviments possibles per una peça concreta
+     * Retorna un moviment i no una posició per poder cridar mou() directament, i pq contè si mata alguna peça
+     *
+     * @param c Color de la peça
+     * @param x Coordenada x de la posició de la peça
+     * @param y Coordenada y de la posició de la peça
+     * @return Llista de moviments vàlids
+     */
+    public ArrayList<Moviment> obteMovimentsPeca(Color c, int x, int y) {
+        return null;
+    }
+
+    /**
+     * Retorna el codi char de la peça situada a la posició indicada
+     * Si no hi ha cap peça, retorna '-'
+     *
+     * @param x Coordenada x de la posició a comprovar
+     * @param y Coordenada y de la posició a comprovar
+     * @return Codi de la peça
+     */
     public char getCasella(int x, int y) {
+        //if null return '-';
         return peces[x][y].toChar();
     }
+
+    /**
+     * Indica si hi ha escac o mat pel jugador indicat
+     *
+     * @param c Jugador
+     * @param b Si false, comprova només escac; si true, comprova escac i mat
+     * @return Retorna 0 si no hi ha res, 1 si hi ha escac i (si b=true) 2 si hi ha escac i mat
+     */
+    public int esEscacMat(Color c, boolean b) {
+        /*if (esEscac(BLANC)) {
+            if (esMat(BLANC)) escacB = 2;
+            else escacB = 1;
+        } else escacB = 0;
+        if (esEscac(NEGRE)) {
+            if (esMat(NEGRE)) escacN = 2;
+            else escacN = 1;
+        } else escacN = 0; */
+        return 0;
+    }
+
 }
