@@ -87,11 +87,22 @@ public abstract class Peca {
 
     /**
      * Indica si la peça es pot moure a la posició indicada.
+     * Ho comprova segons el tipus de peça i segons si hi ha peces entremig
      *
-     * @param ocupacio Matriu 8x8, indicant amb 0 casella buida, 1 fitxa blanca, 2 negra.
+     * @param ocupacio Matriu 8x8, indicant amb null casella buida, sino el color de la peça.
      * @param x        Fila a on es vol moure la peça.
      * @param y        Columna a on es vol moure la peça.
      * @return Vertader si es pot moure la peça a la posició indicada.
      */
-    public abstract boolean esMovimentValid(int[][] ocupacio, int x, int y);
+    public abstract boolean esMovimentValid(Color[][] ocupacio, int x, int y);
+
+    /**
+     * Indica si la peça es pot moure a la posició indicada
+     * Només segons el tipus de peça
+     *
+     * @param x Fila on es vol moure la peça
+     * @param y Columna on es vol moure la peça
+     * @return Vertader si el moviment es vàlid
+     */
+    public abstract boolean esMovimentValid(int x, int y);
 }

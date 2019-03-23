@@ -19,8 +19,8 @@ public class Moviment {
      * @param fy y posició final
      * @param p peça moguda
      */
-    public Moviment(Integer ix, Integer iy, Integer fx, Integer fy, Peca p) {
-        posIni = new Pair<>(ix,iy);
+    public Moviment(Peca p, Integer fx, Integer fy) {
+        posIni = p.getPosicio(); // per assegurar coherència de posicions
         posFinal = new Pair<>(fx,fy);
         this.p = p;
     }

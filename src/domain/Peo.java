@@ -14,7 +14,7 @@ public class Peo extends Peca {
     }
 
     @Override
-    public boolean esMovimentValid(int[][] ocupacio, int x, int y){return false;}
+    public boolean esMovimentValid(Color[][] ocupacio, int x, int y){return false;}
 
     @Override
     public char toChar(){return 'p';}

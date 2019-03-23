@@ -8,6 +8,8 @@ import static domain.Color.*;
 
 public class Tauler {
 
+    // TODO: testing de tota la classe
+
     private static final int SIZE = 8;
 
     private Peca[][] peces;
@@ -26,9 +28,8 @@ public class Tauler {
      * @param pecesInicials situació inicial de les peces al tauler
      */
     //TODO:
-    // - Tal i com implementem la classe, cal que el controlador cridi a esEscacMat després d'entrar totes les peces
-    // - Si és mat d'un dels dos, o si és escac a favor del jugador que té el primer torn, problema invàlid
-    // - Excepció: si no es troben els dos reis (un dels dos és nul, problema invàlid)
+    // - El controlador ha de cridar "finalitzaEntradaTauler" un cop s'han entrat totes les peces
+    // - Tant si s'entren totes de cop o una per una
     public Tauler(Peca[][] pecesInicials) {
         peces = pecesInicials;
         for (Peca[] row: peces) {
@@ -51,35 +52,61 @@ public class Tauler {
         if (b == BLANC) objectiu = _reiBlanc;
         else objectiu = _reiNegre;
         Pair<Integer, Integer> posRei = objectiu.getPosicio();
-        int x = posRei.getKey(); //TODO: Els pairs de JAva son raros, millor utilitzar arrays
+        int x = posRei.getKey();
         int y = posRei.getValue();
 
+        int[][] inc; //increments relatius que poden amenaçar el rei
+        inc = new int[][]{{1,0},{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2},{1,-2},{2,-1}};
+        for (int[] dir: inc) { //comprovem totes direccions
+            boolean exit = false;
+            int step = 1;
+            while (!exit) {
+                int xp = x + step*dir[0];
+                int yp = y + step*dir[1];
+                if (xp<0 || xp>=SIZE || yp<0 || yp>=SIZE) exit = true;
+                else {
+                    Peca p = peces[xp][yp];
+                    if (p != null) {
+                        if (p.getColor() == b) exit = true;
+                        else if (p.esMovimentValid(xp, yp)) return true;
+                    }
+                }
+                if (dir[0]*dir[1]==2 || dir[0]*dir[1] == -2) exit = true; // posicions cavall
+                else step++;
+            }
+        }
         return false;
     }
-
-    // Check if checkmate of player b (against !b)
-    // Es poden eliminar alguns moviments a priori per millorar eficiència?
 
     /**
      * Indica si la posició actual del tauler és mat pel jugador indicat
      *
-     * @param b Color pel que es vol comprovar si hi ha escac
+     * @param b Color pel que es vol comprovar si hi ha mat
      * @return true si hi ha mat
      */
-    private boolean esMat(Color b) { //TODO: Repassar
-        Color[][] ocup = generaOcupacio();
+    private boolean esMat(Color b, Color[][] taula_oc) { //TODO: implementar
         for (Peca[] f : peces)
             for (Peca p : f) {
                 if (p.getColor() != b) {
-                    ArrayList<Moviment> al = p.getMovimentsValids(ocup); //aixo retornara una sola posicio
-                    for (Moviment m : al) {     //caldrà generar bé el moviment
-                        p.setPosicio(m.getPosFinal()); // mou
-                        boolean aux = esEscac(b);
-                        p.setPosicio(m.getPosIni()); // mou invers
-                        if (!aux) return false;
+                    ArrayList<Moviment> al = p.getMovimentsValids(taula_oc);
+                    for (Moviment m : al) {
+                        executaMoviment(m);
+                        boolean esc = esEscac(b);
+                        mou_invers(m);
+                        if (!esc) return false;
                     }
                 }
             }
+        return true;
+    }
+
+    /**
+     * Indica si la partida està en taules perquè només queden els dos reis
+     *
+     * @return true si partida en taules
+     */
+    private boolean esTaules() {
+        for (Peca[] row: peces) for (Peca p: row) if (p!=null && p!=_reiBlanc && p!=_reiNegre) return false;
         return true;
     }
 
@@ -99,12 +126,72 @@ public class Tauler {
     }
 
     /**
+     * Indica si hi ha escac o mat pel jugador indicat
+     *  0: no hi ha res
+     *  1: hi ha escac
+     *  2: hi ha mat
+     *  3: taules
+     *  4: situació invàlida
+     * @param c Jugador
+     * @param b Si false, comprova només escac/taules; si true, comprova escac/mat/taules
+     * @return Retorna codi int d'escac 0 si no hi ha res, 1 si hi ha escac i (si b=true) 2 si hi ha escac i mat
+     */
+    private int esEscacMat(Color c, boolean b) {
+        boolean e = esEscac(c);
+        boolean t = esTaules();
+        if (t) {
+            if (!e) return 3;
+            else return 4; // no hauria de passar però per si de cas
+        }
+
+        if (b) {
+            if (e) return 1;
+            else return 0;
+        }
+
+        Color[][] taula_oc = generaOcupacio();
+        boolean m = esMat(c, taula_oc);
+        if (m) {
+            if (e) return 2;
+            else return 3;
+        }
+
+        if (e) return 1; //no hi ha mat ni taules
+        return 0;
+    }
+
+    private void executaMoviment(Moviment mov) {
+        Pair<Integer, Integer> pi = mov.getPosIni();
+        int xi = pi.getKey();
+        int yi = pi.getValue();
+        Pair<Integer,Integer> pf = mov.getPosFinal();
+        int xf = pf.getKey();
+        int yf = pf.getValue();
+        Peca p = peces[xi][yi];
+        Peca k = peces[xf][yf];
+
+        p.setPosicio(pf);
+        peces[xf][yf] = p;
+        peces[xi][yi] = null;
+
+        if (k != null) { //si mor alguna peça
+            mov.setPecaMorta(k);
+            k.setPosicio(null);
+        }
+    }
+
+    /**
      *  Afegeix una peça al tauler
      *  La posició és la de la peça
      *
      * @param p Peça a afegir
      */
-    public void afegirPeca (Peca p) {}
+    public void afegirPeca (Peca p) {
+        Pair<Integer,Integer> pos = p.getPosicio();
+        int x = pos.getKey();
+        int y = pos.getValue();
+        peces[x][y] = p; //Possible exception si x/y són null o estan fora del rang
+    }
 
     /**
      * Treu la peça situada a la posició x,y del tauler
@@ -112,21 +199,25 @@ public class Tauler {
      * @param x Coordenada x de la posició
      * @param y Coordenada y de la posició
      */
-    public void treurePeca (int x, int y){}
+    public void treurePeca (int x, int y){
+        peces[x][y] = null; // Possible exception si x/y son null o estan fora del rang
+    }
 
 
     /**
-     * Executa el moviment d'una peça
+     * Executa el moviment d'una peça i indica l'estat final del tauler
+     * 0: res, 1: escac, 2:mat, 3: taules, 4: invàlid (pot ser per escac contrari)
+     * Si mor alguna peça, la seva posició passa a ser null.
      *
      * @param mov Moviment a executar
+     * @param b Indica si es tracta d'un moviment definitiu (true) o només possible (false)
+     * @return Estat després del moviment (escac/mat/taules)
      */
-    public void mou(Moviment mov) {
-        Pair<Integer, Integer> pi = mov.getPosIni();
-        int x = pi.getKey(); //TODO: En serio, això dels Pairs és una merda
-        int y = pi.getValue();
-        peces[x][y].setPosicio(mov.getPosFinal());
-        // TODO: actualitzar peça moguda (?) + morta
-        //checkMate();
+    public int mou(Moviment mov, boolean b) {
+        executaMoviment(mov);
+        Peca p = mov.getPecaMoguda();
+        if (esEscacMat(p.getColor().getNext(), false) != 0) return 4;
+        return esEscacMat(p.getColor(), b);
     }
 
     /**
@@ -135,11 +226,25 @@ public class Tauler {
      * @param mov Moviment que és vol executar a la inversa
      */
     public void mou_invers(Moviment mov) {
-        //TODO: implementar
+        Pair<Integer,Integer> pi = mov.getPosIni();
+        int x = pi.getKey();
+        int y = pi.getValue();
+        Peca p = mov.getPecaMoguda();
+
+        peces[x][y] = p;
+        p.setPosicio(pi);
+
+        Pair<Integer,Integer> pf = mov.getPosFinal();
+        int x2 = pi.getKey();
+        int y2 = pi.getValue();
+        Peca k = mov.getPecaMorta();
+
+        peces[x2][y2] = k; //pot ser null;
+        if (k != null) k.setPosicio(pf);
     }
 
     /**
-     * Retorna tots els moviments possibles per un dels jugdors
+     * Retorna tots els moviments possibles per un dels jugadors
      *
      * @param jugador Jugador del qual es volen els moviments
      * @return Llista de moviments vàlids
@@ -157,16 +262,17 @@ public class Tauler {
     }
 
     /**
-     * Retorna tots els moviments possibles per una peça concreta
-     * Retorna un moviment i no una posició per poder cridar mou() directament, i pq contè si mata alguna peça
+     * Retorna tots els moviments possibles per una posició concreta
      *
-     * @param c Color de la peça
      * @param x Coordenada x de la posició de la peça
      * @param y Coordenada y de la posició de la peça
-     * @return Llista de moviments vàlids
+     * @return Llista de moviments vàlids si hi ha una peça, null si no n'hi ha
      */
-    public ArrayList<Moviment> obteMovimentsPeca(Color c, int x, int y) {
-        return null;
+    public ArrayList<Moviment> obteMovimentsPeca(int x, int y) {
+        Peca p = peces[x][y];
+        if (p == null) return null;
+        Color[][] ocup = generaOcupacio();
+        return p.getMovimentsValids(ocup);
     }
 
     /**
@@ -178,27 +284,25 @@ public class Tauler {
      * @return Codi de la peça
      */
     public char getCasella(int x, int y) {
-        //if null return '-';
-        return peces[x][y].toChar();
+        Peca p = peces[x][y];
+        if (p == null) return '-';
+        return p.toChar();
     }
 
     /**
-     * Indica si hi ha escac o mat pel jugador indicat
+     * Indica si el tauler és vàlid com a situació inicial
+     *  0: Correcte
+     *  1: Incorrecte per falta del reig blanc
+     *  2: Incorrecte per falta del rei negre
+     *  3: Incorrecte per escac i mat
+     *  4: Incorrecte per escac del jugador que comença movent
      *
-     * @param c Jugador
-     * @param b Si false, comprova només escac; si true, comprova escac i mat
-     * @return Retorna 0 si no hi ha res, 1 si hi ha escac i (si b=true) 2 si hi ha escac i mat
+     * @param c Jugador que té el primer torn
+     * @return codi indicant la correcció del tauler
      */
-    public int esEscacMat(Color c, boolean b) {
-        /*if (esEscac(BLANC)) {
-            if (esMat(BLANC)) escacB = 2;
-            else escacB = 1;
-        } else escacB = 0;
-        if (esEscac(NEGRE)) {
-            if (esMat(NEGRE)) escacN = 2;
-            else escacN = 1;
-        } else escacN = 0; */
-        return 0;
+    public int finalEntradaTauler(Color c) {
+        return esEscacMat(c,true);
     }
+
 
 }
