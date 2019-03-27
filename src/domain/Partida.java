@@ -18,7 +18,7 @@ public class Partida {
         prob = p;
         torn = p.getTema();
         situacioActual = prob.getSituacioInicial();
-        historial = new ArrayList<Moviment>();
+        historial = new ArrayList<>();
         numMoviments = 0;
     }
 
@@ -64,7 +64,7 @@ public class Partida {
      */
     public void moure(Color jugador, Moviment mov) {
         if (jugador != torn) throw new RuntimeException("No es el torn del jugador especificat");
-        situacioActual.mou(mov);
+        situacioActual.mou(mov, true);
         historial.add(mov);
         numMoviments++;
     }
