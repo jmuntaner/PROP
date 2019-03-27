@@ -70,14 +70,6 @@ public abstract class Peca {
      */
     public abstract ArrayList<Moviment> getMovimentsValids(Color[][] ocupacio);
 
-    /**
-     * Indica si la peça és un rei.
-     *
-     * @return true si la peça és rei.
-     */
-    public boolean getRei() {
-        return false;
-    }
 
     /**
      * Retorna el codi char correponent al tipus de peça i color

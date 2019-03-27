@@ -2,8 +2,8 @@ package domain;
 
 import java.util.ArrayList;
 
-public class Reina extends Peca {
-    Reina(int x, int y, Color color) {
+public class Cavall extends Peca {
+    Cavall(int x, int y, Color color) {
         super(x, y, color);
     }
 
@@ -26,4 +26,5 @@ public class Reina extends Peca {
     public boolean esMovimentValid(int x, int y) {
         return false;
     }
+
 }

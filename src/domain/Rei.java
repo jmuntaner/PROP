@@ -3,13 +3,27 @@ package domain;
 import java.util.ArrayList;
 
 public class Rei extends Peca {
+    Rei(int x, int y, Color color) {
+        super(x, y, color);
+    }
+
     @Override
-    public ArrayList<Moviment> getMovimentsValids(int[][] ocupacio) {
+    public ArrayList<Moviment> getMovimentsValids(Color[][] ocupacio) {
         return null;
     }
 
     @Override
-    public boolean getRei() {
-        return true;
+    public char toChar() {
+        return ' ';
+    }
+
+    @Override
+    public boolean esMovimentValid(Color[][] ocupacio, int x, int y) {
+        return false;
+    }
+
+    @Override
+    public boolean esMovimentValid(int x, int y) {
+        return false;
     }
 }
