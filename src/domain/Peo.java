@@ -59,7 +59,7 @@ public class Peo extends Peca {
     }
 
     @Override
-    public boolean esMovimentValid(int x, int y) {
+    public boolean potMatar(int x, int y) { // TODO: modificar
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
         int sx = Math.abs(x - x0);

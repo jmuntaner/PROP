@@ -4,7 +4,7 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 
-import static domain.Color.*;
+import static domain.Color.BLANC;
 
 public class Tauler {
 
@@ -68,7 +68,7 @@ public class Tauler {
                     Peca p = peces[xp][yp];
                     if (p != null) {
                         if (p.getColor() == b) exit = true;
-                        else if (p.esMovimentValid(xp, yp)) return true;
+                        else if (p.potMatar(xp, yp)) return true;
                     }
                 }
                 if (dir[0]*dir[1]==2 || dir[0]*dir[1] == -2) exit = true; // posicions cavall

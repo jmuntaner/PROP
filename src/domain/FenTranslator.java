@@ -62,7 +62,7 @@ public class FenTranslator {
             color = Color.BLANC;
         } else {
             color = Color.NEGRE;
-            c -= 32; // toLower()
+            c -= 32; // toUpper()
         }
         switch (c) {
             case 'K':

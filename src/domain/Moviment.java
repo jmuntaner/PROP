@@ -13,8 +13,6 @@ public class Moviment {
 
     /**
      * Creadora amb valors inicials
-     * @param ix x posició inicial
-     * @param iy y posició inicial
      * @param fx x posició final
      * @param fy y posició final
      * @param p peça moguda

@@ -56,7 +56,7 @@ public class Reina extends Peca {
     }
 
     @Override
-    public boolean esMovimentValid(int x, int y) {
+    public boolean potMatar(int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
         //moviment diagonal o de torre

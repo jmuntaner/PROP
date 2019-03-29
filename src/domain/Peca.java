@@ -68,7 +68,7 @@ public abstract class Peca {
      * @param ocupacio Matriu 8x8, indicant amb 0 casella buida, 1 fitxa blanca, 2 negra.
      * @return Llista de tots els moviments vàlids.
      */
-    public abstract ArrayList<Moviment> getMovimentsValids(Color[][] ocupacio);
+    public abstract ArrayList<Moviment> getMovimentsValids(Color[][] ocupacio);  // TODO: fora
 
 
     /**
@@ -88,6 +88,10 @@ public abstract class Peca {
      */
     public abstract boolean esMovimentValid(Color[][] ocupacio, int x, int y);
 
+    //TODO:
+    // - matriu ocupacio -> boolea que diu si mata o no (per peó)
+    // - Recorregut des de tauler (comprova totes direccions... igual que tauler)
+
     /**
      * Indica si la peça es pot moure a la posició indicada
      * Només segons el tipus de peça
@@ -96,5 +100,5 @@ public abstract class Peca {
      * @param y Columna on es vol moure la peça
      * @return Vertader si el moviment es vàlid
      */
-    public abstract boolean esMovimentValid(int x, int y);
+    public abstract boolean potMatar(int x, int y);
 }
