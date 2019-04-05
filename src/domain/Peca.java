@@ -81,16 +81,16 @@ public abstract class Peca {
      * Indica si la peça es pot moure a la posició indicada.
      * Ho comprova segons el tipus de peça i segons si hi ha peces entremig
      *
-     * @param ocupacio Matriu 8x8, indicant amb null casella buida, sino el color de la peça.
+     * @param mata     Indica si la peça mata o no
      * @param x        Fila a on es vol moure la peça.
      * @param y        Columna a on es vol moure la peça.
      * @return Vertader si es pot moure la peça a la posició indicada.
      */
-    public abstract boolean esMovimentValid(Color[][] ocupacio, int x, int y);
+    public abstract boolean esMovimentValid(boolean mata, int x, int y);
 
     //TODO:
-    // - matriu ocupacio -> boolea que diu si mata o no (per peó)
-    // - Recorregut des de tauler (comprova totes direccions... igual que tauler)
+    // - Implementació per defecte: crida a pot matar
+    // - Override a peó
 
     /**
      * Indica si la peça es pot moure a la posició indicada
