@@ -16,7 +16,7 @@ public class Tauler {
 
     private Peca[][] peces;
 
-    private Rei _reiBlanc, _reiNegre; //Proposo modificar els noms per Melcior i Baltasar
+    private Peca _reiBlanc, _reiNegre;
 
     /**
      * Creadora per defecte
@@ -37,8 +37,8 @@ public class Tauler {
         for (Peca[] row: peces) {
             for (Peca p: row) {
                 char c = p.toChar();
-                if (c == 'K') _reiBlanc = (Rei) p; //Es lleig però garantir-ho amb un instanceof ho es mes
-                else if (c == 'k') _reiNegre = (Rei) p;
+                if (c == 'K') _reiBlanc = p; //Es lleig però garantir-ho amb un instanceof ho es mes
+                else if (c == 'k') _reiNegre = p;
             }
         }
     }
@@ -51,7 +51,7 @@ public class Tauler {
      * @return true si hi a escac
      */
     private boolean esEscac(Color b) {
-        Rei objectiu;
+        Peca objectiu;
         if (b == BLANC) objectiu = _reiBlanc;
         else objectiu = _reiNegre;
         Pair<Integer, Integer> posRei = objectiu.getPosicio();
@@ -332,14 +332,18 @@ public class Tauler {
      *  0: Correcte
      *  1: Incorrecte per falta del reig blanc
      *  2: Incorrecte per falta del rei negre
-     *  3: Incorrecte per escac i mat
-     *  4: Incorrecte per escac del jugador que comença movent
+     *  3: Incorrecte per escac del jugador que comença / mat / taules
      *
      * @param c Jugador que té el primer torn
      * @return codi indicant la correcció del tauler
      */
     public int finalEntradaTauler(Color c) {
-        return esEscacMat(c,true);
+        if (_reiBlanc == null) return 1;
+        if (_reiNegre == null) return 2;
+        if (esEscacMat(c,true) != 0) return 3;
+        int aux = esEscacMat(c.getNext(), true);
+        if (aux != 0 && aux != 1) return 3; //el contrari pot esta en escac
+        return 0;
     }
 
 }
