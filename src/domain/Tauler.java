@@ -142,7 +142,7 @@ public class Tauler {
      *  4: situació invàlida
      * @param c Jugador
      * @param b Si false, comprova només escac/taules; si true, comprova escac/mat/taules
-     * @return Retorna codi int d'escac 0 si no hi ha res, 1 si hi ha escac i (si b=true) 2 si hi ha escac i mat
+     * @return Retorna un enter segons el codi
      */
     private int esEscacMat(Color c, boolean b) {
         boolean e = esEscac(c);
@@ -221,14 +221,14 @@ public class Tauler {
      * Si mor alguna peça, la seva posició passa a ser null.
      *
      * @param mov Moviment a executar
-     * @param b Indica si es tracta d'un moviment definitiu (true) o només possible (false)
      * @return Estat després del moviment (escac/mat/taules)
      */
-    public int mou(Moviment mov, boolean b) {
+    public int mou(Moviment mov) {
         executaMoviment(mov);
         Peca p = mov.getPecaMoguda();
-        if (esEscacMat(p.getColor().getNext(), false) != 0) return 4;
-        return esEscacMat(p.getColor(), b);
+        int x = esEscacMat(p.getColor().getNext(), false);
+        if (x == 1 || x == 2 || x == 4) return 4; //taules es moviment vàlid
+        return esEscacMat(p.getColor(), true);
     }
 
     /**

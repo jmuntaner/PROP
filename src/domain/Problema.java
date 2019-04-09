@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+
 public class Problema {
     private String nom;
     private Color tema;
@@ -15,15 +17,52 @@ public class Problema {
     private void calculaDificultat() {}
     //TODO: implementar càlcul dificultat
     // - Buscar criteri per fer el càlcul
+    // - Idea: numero de solucions possibles (jugades diferents que acaben en mat)
+
+    //Comprova que totes les jugades de l'oponent porten a un mat
+
+    /**
+     * Funció auxiliar per comprovar si el problema té solució
+     *  - Si torn = tema prova tots els moviments vàlids
+     *  - Sinó, comprova que tots els moviments possibles porten a un mat
+     *
+     * @param torn Color del jugador al que toca moure
+     * @param jugada Número de jugades que ha fet el jugador que ataca
+     * @return True el problema té solució
+     */
+    private boolean comprovaSolAux(Color torn, int jugada) {
+        if (jugada>numJugades) return false;
+        ArrayList<Moviment> al = situacioInicial.obteMovimentsJugador(torn);
+        for (Moviment m: al) {
+            int x = situacioInicial.mou(m);
+            if (x != 3 && x != 4) {
+                if (torn == tema) { //torn atacant
+                    if (x == 2 || comprovaSolAux(torn.getNext(),jugada)) { //existeix mat
+                        situacioInicial.mou_invers(m);
+                        return true;
+                    }
+                }
+                else { //torn defensa
+                    if (x == 2 || !comprovaSolAux(torn.getNext(),jugada+1)) { //mat defensor o branca sense mat
+                        situacioInicial.mou_invers(m);
+                        return false;
+                    }
+                }
+            }
+            situacioInicial.mou_invers(m);
+        }
+        return torn!=tema;
+    }
 
     /**
      * Comprova si el problema té solució
      *
      * @return True si té solució, false si no en té
      */
-    //TODO: funcio per comprovar si existeix solucio
-    // - Buscar algoritme o fer força bruta ez
-    private boolean comprovaSolucio() {return false;}
+    private boolean comprovaSolucio() {
+        return comprovaSolAux(tema, 0);
+    }
+    //“Cada node de moviment que no és teu ha de portar a una fulla mat”
 
 
     /**
