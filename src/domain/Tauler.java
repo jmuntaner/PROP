@@ -128,10 +128,14 @@ public class Tauler {
      * @return true si partida en taules
      */
     private boolean esTaules() {
-        for (Peca[] row: peces) for (Peca p: row) if (p!=null && p!=_reiBlanc && p!=_reiNegre) return false;
-        // TODO: altres casos (mat impossible: rei + cavall, rei + alfil) (?)
+        boolean found = false;
+        for (Peca[] row: peces)
+            for (Peca p: row) {
+                if (p!=null && p!=_reiBlanc && p!=_reiNegre) return false;
+            }
         return true;
     }
+    // Els casos de mat impossible (rei + peo/alfil/cavall) arriben al límit de jugades
 
     /**
      * Indica si hi ha escac o mat pel jugador indicat

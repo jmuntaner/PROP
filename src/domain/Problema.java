@@ -6,6 +6,7 @@ public class Problema {
     private int numJugades, dificultat; // dificultat = número decisions vàlides atacant / número solucions possibles
     private Tauler situacioInicial;
     private RankingProblema ranking;
+    //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
 
 //TODO: implementació i testing
 
