@@ -64,7 +64,7 @@ public class Partida {
      */
     public void moure(Color jugador, Moviment mov) {
         if (jugador != torn) throw new RuntimeException("No es el torn del jugador especificat");
-        situacioActual.mou(mov, true);
+        situacioActual.mou(mov);
         historial.add(mov);
         numMoviments++;
     }
