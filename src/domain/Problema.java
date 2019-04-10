@@ -1,68 +1,26 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class Problema {
     private String nom;
     private Color tema;
-    private int numJugades, dificultat;
+    private int numJugades, dificultat; // dificultat = número decisions vàlides atacant / número solucions possibles
     private Tauler situacioInicial;
     private RankingProblema ranking;
 
 //TODO: implementació i testing
 
     /**
-     * Calcula la dificultat del problema i actualitza el valor de l'atribut
-     */
-    private void calculaDificultat() {}
-    //TODO: implementar càlcul dificultat
-    // - Buscar criteri per fer el càlcul
-    // - Idea: numero de solucions possibles (jugades diferents que acaben en mat)
-
-    //Comprova que totes les jugades de l'oponent porten a un mat
-
-    /**
-     * Funció auxiliar per comprovar si el problema té solució
-     *  - Si torn = tema prova tots els moviments vàlids
-     *  - Sinó, comprova que tots els moviments possibles porten a un mat
-     *
-     * @param torn Color del jugador al que toca moure
-     * @param jugada Número de jugades que ha fet el jugador que ataca
-     * @return True el problema té solució
-     */
-    private boolean comprovaSolAux(Color torn, int jugada) {
-        if (jugada>numJugades) return false;
-        ArrayList<Moviment> al = situacioInicial.obteMovimentsJugador(torn);
-        for (Moviment m: al) {
-            int x = situacioInicial.mou(m);
-            if (x != 3 && x != 4) {
-                if (torn == tema) { //torn atacant
-                    if (x == 2 || comprovaSolAux(torn.getNext(),jugada)) { //existeix mat
-                        situacioInicial.mou_invers(m);
-                        return true;
-                    }
-                }
-                else { //torn defensa
-                    if (x == 2 || !comprovaSolAux(torn.getNext(),jugada+1)) { //mat defensor o branca sense mat
-                        situacioInicial.mou_invers(m);
-                        return false;
-                    }
-                }
-            }
-            situacioInicial.mou_invers(m);
-        }
-        return torn!=tema;
-    }
-
-    /**
-     * Comprova si el problema té solució
+     * Comprova si el problema té solució i, si en té, en guarda la dificultat
      *
      * @return True si té solució, false si no en té
      */
     private boolean comprovaSolucio() {
-        return comprovaSolAux(tema, 0);
+        int[] data = new int[]{0,0};
+        situacioInicial.comprovaSolAux(tema, tema, 0, numJugades, data);
+        if (data[0] == 0) return false;
+        dificultat = data[1] / data[0];
+        return true;
     }
-    //“Cada node de moviment que no és teu ha de portar a una fulla mat”
 
 
     /**
@@ -116,7 +74,7 @@ public class Problema {
      *
      * @return Dificultat
      */
-    public int getDificultat() {
+    public int getDificultat() { // Ara mateix l'escala no està clara, però x > 0;
         return dificultat;
     }
 
@@ -153,10 +111,7 @@ public class Problema {
         tema = t;
         numJugades = nj;
         situacioInicial = si;
-        boolean b = comprovaSolucio();
-        if (!b) return false;
-        calculaDificultat();
-        return true;
+        return comprovaSolucio();
     }
 }
 

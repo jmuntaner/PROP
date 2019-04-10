@@ -346,4 +346,51 @@ public class Tauler {
         return 0;
     }
 
+    //Comprova que totes les jugades de l'oponent porten a un mat
+
+    /**
+     * Funció auxiliar per comprovar si el problema té solució i retorna paràmetres per calcular la dificultat
+     *  - Si torn = tema, comprova que almenys un moviment porta a un mat.
+     *  - Sinó, comprova que tots els moviments possibles porten a un mat
+     *
+     * @param torn Color del jugador al que toca moure
+     * @param tema Jugador atacant
+     * @param jugada Número de jugades que ha fet el jugador que ataca
+     * @param numJugades Número màxim de jugades que pot fer l'atacant
+     * @return Número de solucions i nombre de decisions vàlides pel jugador atacant
+     */
+    public void comprovaSolAux(Color torn, Color tema, int jugada, int numJugades, int[] data) {
+        if (jugada>numJugades) return;
+        ArrayList<Moviment> al = obteMovimentsJugador(torn);
+        if (torn == tema) {
+            for (Moviment m: al) {
+                int x = mou(m);
+                if (x!=3 && x!=4) {
+                    data[1]++;
+                    if (x == 2) data[0]++; //final amb solució
+                    else comprovaSolAux(torn.getNext(),tema,jugada,numJugades,data);
+                }
+                mou_invers(m);
+            }
+        }
+        else{
+            int num_sols_pre = data[0]; //solucions abans de començar el recorregut
+            for (Moviment m: al) {
+                int x = mou(m);
+                if (x==2 || x==3) { //mat o taules (final sense solució)
+                    data[0] = num_sols_pre;
+                    mou_invers(m);
+                    return;
+                }
+                int num_sols_act = data[0]; //solucions durant el recorregut
+                comprovaSolAux(torn.getNext(),tema,jugada+1,numJugades,data);
+                if (num_sols_act == data[0]) { //la branca no té solució
+                    data[0] = num_sols_pre;
+                    mou_invers(m);
+                    return;
+                }
+                mou_invers(m);
+            }
+        }
+    }
 }
