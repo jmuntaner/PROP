@@ -90,12 +90,11 @@ public class Problema {
     /**
      * Getter ranking
      *
-     * @return (?)
+     * @return Ranking específic del problema
      */
     public RankingProblema getRanking() {
         return ranking;
     }
-    //TODO: Ranking (setup inicial, gestió i lectura)
 
 
     /**
@@ -111,6 +110,7 @@ public class Problema {
         tema = t;
         numJugades = nj;
         situacioInicial = si;
+        ranking = new RankingProblema();
         return comprovaSolucio();
     }
 }

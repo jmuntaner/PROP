@@ -349,7 +349,7 @@ public class Tauler {
     //Comprova que totes les jugades de l'oponent porten a un mat
 
     /**
-     * Funció auxiliar per comprovar si el problema té solució i retorna paràmetres per calcular la dificultat
+     * Funció auxiliar per comprovar si el problema té solució i cercar paràmetres per calcular la dificultat
      *  - Si torn = tema, comprova que almenys un moviment porta a un mat.
      *  - Sinó, comprova que tots els moviments possibles porten a un mat
      *
@@ -357,7 +357,7 @@ public class Tauler {
      * @param tema Jugador atacant
      * @param jugada Número de jugades que ha fet el jugador que ataca
      * @param numJugades Número màxim de jugades que pot fer l'atacant
-     * @return Número de solucions i nombre de decisions vàlides pel jugador atacant
+     * @param data Número de decisions vàlides de l'atacant i número de solucions (paràmetre de sortida)
      */
     public void comprovaSolAux(Color torn, Color tema, int jugada, int numJugades, int[] data) {
         if (jugada>numJugades) return;
