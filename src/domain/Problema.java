@@ -5,7 +5,7 @@ public class Problema {
     private Color tema;
     private int numJugades, dificultat; // dificultat = número decisions vàlides atacant / número solucions possibles
     private Tauler situacioInicial;
-    private RankingProblema ranking;
+    private Ranking<PuntuacioProblema> ranking;
 
 //TODO: implementació i testing
 
@@ -92,7 +92,7 @@ public class Problema {
      *
      * @return Ranking específic del problema
      */
-    public RankingProblema getRanking() {
+    public Ranking<PuntuacioProblema> getRanking() {
         return ranking;
     }
 
@@ -110,7 +110,7 @@ public class Problema {
         tema = t;
         numJugades = nj;
         situacioInicial = si;
-        ranking = new RankingProblema();
+        ranking = new Ranking<>();
         return comprovaSolucio();
     }
 }
