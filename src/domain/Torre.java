@@ -18,6 +18,7 @@ public class Torre extends Peca {
     public boolean esMovimentValid(boolean mata, int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
+        if(x0==x && y0==y) return false; //moviment nul
         //moviment torre
         return (x0==x) || (y0==y);
     }
