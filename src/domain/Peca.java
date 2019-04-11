@@ -60,16 +60,6 @@ public abstract class Peca {
         this.y = y;
     }
 
-    /**
-     * Calcula tots els moviments que pot realitzar la peça.
-     * Te en compte la ocupació actual del tauler, passada com a paràmetre.
-     * Varia en funció del tipus de peça
-     *
-     * @param ocupacio Matriu 8x8, indicant amb 0 casella buida, 1 fitxa blanca, 2 negra.
-     * @return Llista de tots els moviments vàlids.
-     */
-    public abstract ArrayList<Moviment> getMovimentsValids(Color[][] ocupacio);  // TODO: fora
-
 
     /**
      * Retorna el codi char correponent al tipus de peça i color
@@ -87,18 +77,4 @@ public abstract class Peca {
      * @return Vertader si es pot moure la peça a la posició indicada.
      */
     public abstract boolean esMovimentValid(boolean mata, int x, int y);
-
-    //TODO:
-    // - Implementació per defecte: crida a pot matar
-    // - Override a peó
-
-    /**
-     * Indica si la peça es pot moure a la posició indicada
-     * Només segons el tipus de peça
-     *
-     * @param x Fila on es vol moure la peça
-     * @param y Columna on es vol moure la peça
-     * @return Vertader si el moviment es vàlid
-     */
-    public abstract boolean potMatar(int x, int y);
 }
