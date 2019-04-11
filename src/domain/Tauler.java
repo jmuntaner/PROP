@@ -81,7 +81,8 @@ public class Tauler {
     }
 
     /**
-     * Indica si la posició actual del tauler és mat pel jugador indicat
+     * Indica si el rei estarà en escac després d'1 jugada qualsevol del rival
+     * Això permet detectar situacions de mat i de rei ofegat
      *
      * @param b Color pel que es vol comprovar si hi ha mat
      * @return true si hi ha mat
@@ -105,20 +106,19 @@ public class Tauler {
 
     /**
      * Indica si la posició pos pertany a "l'estrella" de posicions que amenacen centre
-     * El cas centre == pos es considera d'amenaça
+     * El cas centre == pos no es considera d'amenaça
      *
      * @param centre Posició de la peça amenaçada
      * @param pos Posició a comprovar si amenaça
      * @return true si la posició pos amenaça centre
      */
     private boolean esPosicioAmenaca(Pair<Integer,Integer> centre, Pair<Integer,Integer> pos) {
-        int cx = centre.getKey();
-        int cy = centre.getValue();
-        int px = pos.getKey();
-        int py = pos.getValue();
-        if (cx-px == 0 || cy-py == 0) return true; //moviment horitzontal
-        else if (Math.abs(cx-px) == Math.abs(cy-py)) return true; //moviment vertical
-        else if ((Math.abs(cx-px) == 2 && Math.abs(cy-py) == 1) || (Math.abs(cx-px) == 1 && Math.abs(cy-py) == 2)) return true; //cavalls
+        int incx = centre.getKey() - pos.getKey();
+        int incy = centre.getValue() - pos.getValue();
+        if (incx == 0 && incy == 0) return false; //centre == pos
+        else if (incx == 0 || incy == 0) return true; //moviment horitzontal o vertical
+        else if (Math.abs(incx) == Math.abs(incy)) return true; //moviment diagonal
+        else if ((Math.abs(incx) == 2 && Math.abs(incy) == 1) || (Math.abs(incx) == 1 && Math.abs(incy) == 2)) return true; //cavalls
         return false;
     }
 
@@ -128,7 +128,6 @@ public class Tauler {
      * @return true si partida en taules
      */
     private boolean esTaules() {
-        boolean found = false;
         for (Peca[] row: peces)
             for (Peca p: row) {
                 if (p!=null && p!=_reiBlanc && p!=_reiNegre) return false;

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/drivers/drivers.iml" filepath="$PROJECT_DIR$/drivers/drivers.iml" />
       <module fileurl="file://$PROJECT_DIR$/prop-qp19.iml" filepath="$PROJECT_DIR$/prop-qp19.iml" />
     </modules>
   </component>
