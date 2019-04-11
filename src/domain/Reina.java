@@ -41,6 +41,11 @@ public class Reina extends Peca {
     }
 
     @Override
+    public boolean esMovimentValid(boolean mata, int x, int y) {
+        return potMatar(x, y);
+    }
+
+    /*@Override
     public boolean esMovimentValid(Color[][] ocupacio, int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
@@ -53,7 +58,7 @@ public class Reina extends Peca {
             if((x0!=x || y0!=y) && ocupacio[x0][y0]!=null) return false;
         }
         return(ocupacio[x0][y0]!=this.getColor());
-    }
+    }*/
 
     @Override
     public boolean potMatar(int x, int y) {

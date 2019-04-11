@@ -33,6 +33,12 @@ public class Cavall extends Peca {
     }
 
     @Override
+    public boolean esMovimentValid(boolean mata, int x, int y) {
+        return potMatar(x, y);
+    }
+
+    /*
+    @Override
     public boolean esMovimentValid(Color[][] ocupacio, int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
@@ -40,7 +46,7 @@ public class Cavall extends Peca {
         int sy = Math.abs(y - y0);
         return (((sx == 1 && sy == 2) || (sx == 2 && sy == 1)) && ocupacio[x][y]!=this.getColor());
     }
-
+*/
     @Override
     public boolean potMatar(int x, int y) {
         int x0 = this.getPosicio().getKey();

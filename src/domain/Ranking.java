@@ -5,7 +5,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 
 public class Ranking<T extends Puntuacio<T>> {
-    private ArrayList<Pair<String, T>> ranking;
+    private final ArrayList<Pair<String, T>> ranking;
 
     Ranking() {
         ranking = new ArrayList<>();

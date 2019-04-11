@@ -41,6 +41,12 @@ public class Alfil extends Peca {
     }
 
     @Override
+    public boolean esMovimentValid(boolean mata, int x, int y) {
+        return potMatar(x, y);
+    }
+
+    /*
+    @Override
     public boolean esMovimentValid(Color[][] ocupacio, int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
@@ -54,7 +60,7 @@ public class Alfil extends Peca {
         }
         return(ocupacio[x0][y0]!=this.getColor());
     }
-
+*/
     @Override
     public boolean potMatar(int x, int y) {
         int x0 = this.getPosicio().getKey();

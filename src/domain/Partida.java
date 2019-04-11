@@ -8,6 +8,7 @@ public class Partida {
     private Color torn;
     private Problema prob;
     private Tauler situacioActual;
+    private final EstadistiquesPartida estadistiques;
 
     /**
      * Crea la partida associada a un problema.
@@ -20,6 +21,7 @@ public class Partida {
         situacioActual = prob.getSituacioInicial();
         historial = new ArrayList<>();
         numMoviments = 0;
+        estadistiques = new EstadistiquesPartida();
     }
 
     /**
@@ -80,6 +82,16 @@ public class Partida {
         return situacioActual.getCasella(x, y);
     }
 
+    /**
+     * Retorna tots els moviments possibles per una posició concreta
+     *
+     * @param x Coordenada x de la posició de la peça
+     * @param y Coordenada y de la posició de la peça
+     * @return Llista de moviments vàlids si hi ha una peça, null si no n'hi ha
+     */
+    public ArrayList<Moviment> obteMovimentsPosicio(int x, int y) {
+        return situacioActual.obteMovimentsPeca(x, y);
+    }
     /**
      * Retorna les estadístiques de la partida.
      * @return Estadístiques de la partida.

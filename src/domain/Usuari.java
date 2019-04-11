@@ -7,11 +7,11 @@ import java.util.Set;
 
 public class Usuari {
     private String nom, hashPassword;
-    private int id;
-    private Set<Integer> problemesSuperats;
-    private EstadistiquesJugador estadistiques;
+    private final int id;
+    private final Set<Integer> problemesSuperats;
+    private final EstadistiquesJugador estadistiques;
 
-    Usuari(int id, String nom, String contrasenya) {
+    public Usuari(int id, String nom, String contrasenya) {
         this.id = id;
         this.hashPassword = hashPass(contrasenya);
         this.nom = nom;

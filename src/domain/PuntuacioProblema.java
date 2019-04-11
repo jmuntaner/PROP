@@ -1,8 +1,8 @@
 package domain;
 
 public class PuntuacioProblema implements Puntuacio<PuntuacioProblema> {
-    private int jugades;
-    private long temps;
+    private final int jugades;
+    private final long temps;
 
     PuntuacioProblema(EstadistiquesPartida estadistiques, Color color) {
         temps = estadistiques.getTemps(color);

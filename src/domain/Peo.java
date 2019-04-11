@@ -44,7 +44,7 @@ public class Peo extends Peca {
         return movs;
     }
 
-    @Override
+    /*@Override
     public boolean esMovimentValid(Color[][] ocupacio, int x, int y){
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
@@ -57,7 +57,7 @@ public class Peo extends Peca {
         boolean menja = (y - y0 == inc && sx == 1) && ocupacio[x][y]!=this.getColor() && ocupacio[x][y]!=null;
         return (avancaUn || menja || (avancaDos && ocupacio[x][y]==null && ocupacio[x][y-inc]==null));
     }
-
+*/
     @Override
     public boolean potMatar(int x, int y) { // TODO: modificar
         int x0 = this.getPosicio().getKey();
@@ -72,4 +72,9 @@ public class Peo extends Peca {
 
     @Override
     public char toChar(){return 'P';}
+
+    @Override
+    public boolean esMovimentValid(boolean mata, int x, int y) {
+        return false; //TODO
+    }
 }
