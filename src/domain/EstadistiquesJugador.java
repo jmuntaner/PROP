@@ -1,4 +1,4 @@
 package domain;
 
-class EstadistiquesJugador {
+public class EstadistiquesJugador {
 }

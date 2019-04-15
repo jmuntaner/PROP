@@ -8,7 +8,7 @@ public class Problema {
     private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
 
-//TODO: implementació i testing
+//TODO: testing
 
     /**
      * Comprova si el problema té solució i, si en té, en guarda la dificultat

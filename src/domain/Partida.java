@@ -15,7 +15,7 @@ public class Partida {
      *
      * @param p Problema sobre el que s'inicia la partida
      */
-    Partida(Problema p) {
+    public Partida(Problema p) {
         prob = p;
         torn = p.getTema();
         situacioActual = prob.getSituacioInicial();

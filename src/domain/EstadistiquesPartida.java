@@ -1,6 +1,6 @@
 package domain;
 
-class EstadistiquesPartida {
+public class EstadistiquesPartida {
     private Color tornActual;
     private boolean tornEnCurs;
 
@@ -10,7 +10,7 @@ class EstadistiquesPartida {
     /**
      * Creadora per defecte.
      */
-    EstadistiquesPartida() {
+    public EstadistiquesPartida() {
         jugadesNegre = 0;
         jugadesBlanc = 0;
         tempsBlanc = 0;
@@ -26,7 +26,7 @@ class EstadistiquesPartida {
      * @param tempsB   Temps jugat pel jugador blanc.
      * @param tempsN   Temps jugat pel jugador negre.
      */
-    EstadistiquesPartida(int jugadesB, int jugadesN, long tempsB, long tempsN) {
+    public EstadistiquesPartida(int jugadesB, int jugadesN, long tempsB, long tempsN) {
         jugadesNegre = jugadesN;
         jugadesBlanc = jugadesB;
         tempsNegre = tempsN;
