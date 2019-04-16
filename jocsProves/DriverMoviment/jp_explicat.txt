@@ -1,0 +1,41 @@
+JOCS DE PROVA PER A LA CLASSE MOVIMENT
+
+- Objecte de la prova: provar que funcionen els mètodes de la classe Moviment
+
+- Altres elements integrats: classe Peca, classe Rei, classe Color
+
+- Drivers: DriverMoviment
+
+- Fitxers de dades necessaris: -
+
+- Valors estudiats: caixa blanca (coneixem els casos on pot fallar)
+    - Test constructor parametritzat + getters (tots):
+        Creacio de moviment vàlid
+            > 0 0 1 1
+        Posicio inicial fora del tauler
+            > 0 4 -5 7
+        Posicio final fora del tauler
+            > 9 6 3 2
+        Moviment nul
+            > 1 3 1 3
+    - Test getter i setter posicio final:
+        Posicio valida
+            > 0 2
+        Posicio fora del tauler
+            > 3 10
+        Moviment nul (el moviment comença arbitrariament a 0,0)
+            > 0 0
+    - Test getter i setter peca moguda:
+        Rei blanc
+            > 3 5 1
+        Rei negre
+            > 4 3 0
+    - Test getter i setter peca morta:
+        Peca en posicio valida (la peça es un rei blanc)
+            > 0 3 0 3
+        Peca fora de la posicio final
+            > 3 6 4 4
+
+- Efectes estudiats: -
+
+- Operativa: executar i seguir instruccions
