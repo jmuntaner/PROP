@@ -32,16 +32,22 @@ public class DriverUsuari extends GenericDriver {
         switch (option) {
             case 1:
                 testConstructor();
+                break;
             case 2:
                 testCheckPass();
+                break;
             case 3:
                 testGetId();
+                break;
             case 4:
                 testSetNom();
+                break;
             case 5:
                 testSetPass();
+                break;
             case 6:
                 testSuperaProblema();
+                break;
             default:
                 System.out.println("Test no valid");
         }
