@@ -1,5 +1,6 @@
 package domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Partida {
@@ -56,6 +57,37 @@ public class Partida {
         historial.clear();
         numMoviments = 0;
         situacioActual = prob.getSituacioInicial();
+    }
+
+    /**
+     *
+     * @param jugador el jugador de qui volem els moviments possibles
+     * @return la llista de moviments possibles per a un determinat jugador
+     */
+    public ArrayList<Moviment> obteMovimentsJugador(Color jugador) {
+        //TODO:
+        return null;
+    }
+
+    /**
+     * Executa un moviment.
+     *
+     * @param mov     Moviment a realitzar.
+     */
+    public int mou(Moviment mov) {
+        //TODO:
+        this.torn = torn.getNext();
+        return 0;
+    }
+
+    /**
+     * Reverteix un moviment
+     *
+     * @param mov Moviment a revertir
+     */
+    public void mou_revers(Moviment mov) {
+        //TODO:
+        this.torn = torn.getNext();
     }
 
     /**

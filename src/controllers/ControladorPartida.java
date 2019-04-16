@@ -78,7 +78,7 @@ public class ControladorPartida {
     void calcular_moviment(int profunditat) {
         Color torn = partida.getTorn();
         Moviment mov = null;
-        ArrayList<Moviment> movs_pos = this.partida.obteMovimentsJugador();
+        ArrayList<Moviment> movs_pos = this.partida.obteMovimentsJugador(torn);
         int bestMove;
         int codi;
         int ret;
@@ -127,7 +127,7 @@ public class ControladorPartida {
         if(profunditat==0) {
             //TODO: associar-ho amb l'heurística
         }
-        ArrayList<Moviment> movs_pos = this.partida.obteMovimentsJugador();
+        ArrayList<Moviment> movs_pos = this.partida.obteMovimentsJugador(this.partida.getTorn());
         int bestMove;
         int c;
         if(esJugadorMaximal) {
