@@ -90,7 +90,29 @@ public class FenTranslator {
      * @return String FEN representant la partida demanada.
      */
     public static String generaFen(Tauler t, Color inicial) {
-        // TODO: Cal esperar a que peça tingui implementat getChar()
-        return null;
+        StringBuilder sb = new StringBuilder();
+        int espais = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                char p = t.getCasella(i, j);
+                if (p == '-') espais++;
+                else {
+                    if (espais > 0) {
+                        sb.append(espais);
+                        espais = 0;
+                    }
+                    sb.append(p);
+                }
+            }
+            if (espais > 0) {
+                sb.append(espais);
+                espais = 0;
+            }
+            if (i != 7) sb.append("/");
+        }
+        if (inicial == Color.BLANC) sb.append(" w");
+        else sb.append(" b");
+        sb.append(" - - 0 1");
+        return sb.toString();
     }
 }
