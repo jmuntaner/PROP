@@ -29,6 +29,7 @@ public class FenTranslator {
                 } else {
                     // Afegeix peça al tauler
                     taula[x][y] = char2Peca(act, x, y);
+                    y++;
                 }
             }
         }
@@ -42,7 +43,7 @@ public class FenTranslator {
      * @return Color del jugador que comença movent.
      */
     public static Color getColor(String fen) {
-        char colorInicial = fen.charAt(fen.length() - 8); // 'w' or 'b'
+        char colorInicial = fen.charAt(fen.length() - 9); // 'w' or 'b'
         if (colorInicial == 'w') return Color.BLANC;
         else if (colorInicial == 'b') return Color.NEGRE;
         else throw new RuntimeException("Color invalid a FEN.");
@@ -56,7 +57,7 @@ public class FenTranslator {
      * @param y Columna de la peça
      * @return Peça representada pel caràcter.
      */
-    private static Peca char2Peca(char c, int x, int y) {
+    public static Peca char2Peca(char c, int x, int y) {
         Color color;
         if (c < 'a') {
             color = Color.BLANC;
@@ -78,7 +79,7 @@ public class FenTranslator {
             case 'P':
                 return new Peo(x, y, color);
             default:
-                throw new RuntimeException("Tipus de peça desconegut al FEN.");
+                throw new RuntimeException(String.format("Tipus de peça desconegut al FEN: '%c'.", c));
         }
     }
 
