@@ -170,6 +170,7 @@ public class DriverMoviment {
                     }
                     break;
                 case 99:
+                    System.out.println("Fi tests");
                     fi = true;
                     break;
                 default:
