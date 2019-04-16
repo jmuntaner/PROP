@@ -27,15 +27,24 @@ JOCS DE PROVA PER A LA CLASSE MOVIMENT
             > 0 0
     - Test getter i setter peca moguda:
         Rei blanc
-            > 3 5 1
+            > 3 5 true
         Rei negre
-            > 4 3 0
+            > 4 3 false
+        Moviment nul
+            > 0 2 true
     - Test getter i setter peca morta:
-        Peca en posicio valida (la peça es un rei blanc)
-            > 0 3 0 3
-        Peca fora de la posicio final
-            > 3 6 4 4
+        Rei blanc
+            > 0 2 true
+        Rei negre
+            > 0 2 false
+        Eliminar peça (peça null)
+            > -1 1 true
+        Posicio incorrecta
+            > 3 4 false
 
 - Efectes estudiats: -
 
-- Operativa: executar i seguir instruccions
+- Operativa:
+    java drivers.DriverMoviment -q < JocsProva/JPMovimentIn.txt > JocsProva/out.txt
+    diff JPMovimentOut.txt out.txt
+        -> Si l'output es buit, el test es correcte
