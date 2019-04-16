@@ -16,9 +16,13 @@ public class DriverTauler {
 
     public static void testObteMovimentsJugador() {}
 
-    public static void testObteMovimentsPeca();
+    public static void testObteMovimentsPeca() {}
 
+    public static void testGetCasella() {}
 
+    public static void testFinalEntradaTauler() {}
+
+    public static void testComprovaSolAux() {}
 
     public static void main(String [] args) {
         System.out.println("Driver de tauler");
