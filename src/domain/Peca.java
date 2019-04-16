@@ -16,6 +16,7 @@ public abstract class Peca {
      * @param color Color de la peça
      */
     public Peca(int x, int y, Color color) {
+        if (x<0 || x>7 || y<0 || y>7) throw new RuntimeException("Posició fora del tauler");
         this.x = x;
         this.y = y;
         this.color = color;

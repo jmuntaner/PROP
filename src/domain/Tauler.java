@@ -186,7 +186,6 @@ public class Tauler {
 
         if (k != null) { //si mor alguna peça
             mov.setPecaMorta(k);
-            k.setPosicio(null);
         }
     }
 
@@ -254,7 +253,7 @@ public class Tauler {
         Peca k = mov.getPecaMorta();
 
         peces[x2][y2] = k; //pot ser null;
-        if (k != null) k.setPosicio(pf);
+        if (k != null) k.setPosicio(pf); //potser és redundant pq la peça queda amb l'ultima posicio que tenia
     }
 
     /**

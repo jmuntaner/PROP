@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 
 public class Rei extends Peca {
-    Rei(int x, int y, Color color) {
+    public Rei(int x, int y, Color color) {
         super(x, y, color);
     }
 

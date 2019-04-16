@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 
 public class Torre extends Peca {
-    Torre(int x, int y, Color color) {
+    public Torre(int x, int y, Color color) {
         super(x, y, color);
     }
 

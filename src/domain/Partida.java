@@ -99,4 +99,5 @@ public class Partida {
     public EstadistiquesPartida getEstadistiques() {
         return null;
     }
+    //TODO: retornar estadistiques
 }

@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 
 public class Alfil extends Peca {
-    Alfil(int x, int y, Color color) {
+    public Alfil(int x, int y, Color color) {
         super(x, y, color);
     }
 

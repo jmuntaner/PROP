@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 
 public class Cavall extends Peca {
-    Cavall(int x, int y, Color color) {
+    public Cavall(int x, int y, Color color) {
         super(x, y, color);
     }
 

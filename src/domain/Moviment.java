@@ -18,7 +18,9 @@ public class Moviment {
      * @param p peça moguda
      */
     public Moviment(Peca p, Integer fx, Integer fy) {
+        if (fx<0 || fy<0 || fx>7 || fy>7) throw new RuntimeException("Posició final fora del tauler");
         posIni = p.getPosicio(); // per assegurar coherència de posicions
+        if (posIni.getKey()==fx && posIni.getValue()==fy) throw new RuntimeException("Moviment nul");
         posFinal = new Pair<>(fx,fy);
         this.p = p;
     }
@@ -29,15 +31,6 @@ public class Moviment {
      */
     public Pair<Integer, Integer> getPosIni() {
         return posIni;
-    }
-
-    /**
-     * Setter posició inicial
-     * @param x x posició inicial
-     * @param y y posició inicial
-     */
-    public void setPosIni(Integer x, Integer y) {
-        posIni = new Pair<>(x,y);
     }
 
     /**
@@ -54,7 +47,10 @@ public class Moviment {
      * @param y y posició final
      */
     public void setPosFinal(Integer x, Integer y) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) throw new RuntimeException("Posició fora del tauler");
+        if (posIni!=null && posIni.getKey()==x && posIni.getValue()==y) throw new RuntimeException("Moviment nul");
         posFinal = new Pair<>(x,y);
+        k = null;
     }
 
     /**
@@ -71,21 +67,22 @@ public class Moviment {
      */
     public void setPecaMoguda(Peca p) {
         this.p = p;
+        posIni = p.getPosicio();
     }
 
     /**
      * Getter peça morta
      * @return peça morta
      */
-    public Peca getPecaMorta() {
-        return k;
-    }
+    public Peca getPecaMorta() { return k; }
 
     /**
      * Setter peca morta
+     * Aquesta posició ha de ser igual a la posició final del moviment
      * @param k peça morta
      */
     public void setPecaMorta(Peca k) {
+        if (!posFinal.equals(k.getPosicio())) throw new RuntimeException("Posició de peça morta incorrecta");
         this.k = k;
     }
 }
