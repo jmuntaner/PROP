@@ -6,14 +6,11 @@ abstract class GenericDriver {
     final Scanner scan;
     private final String myname;
     String[] opcionsMenu;
-    int okTests, totalTests;
-    boolean silent;
+    private boolean silent;
 
     GenericDriver(String[] args) {
         scan = new Scanner(System.in);  // Create a Scanner object
         opcionsMenu = new String[]{"-"};
-        okTests = 0;
-        totalTests = 0;
         silent = false;
         myname = this.getClass().getSimpleName();
         if (args.length == 1) {
@@ -23,17 +20,19 @@ abstract class GenericDriver {
         }
     }
 
-    int menu() {
-        System.out.println();
-        System.out.println(myname);
-        System.out.println("Tria una opció:");
-        int index = 1;
-        for (String opcio : opcionsMenu) {
-            System.out.printf(" %d: %s\r\n", index, opcio);
-            index++;
+    private int menu() {
+        if (!silent) {
+            System.out.println();
+            System.out.println(myname);
+            System.out.println("Tria una opció:");
+            int index = 1;
+            for (String opcio : opcionsMenu) {
+                System.out.printf(" %d: %s\r\n", index, opcio);
+                index++;
+            }
+            System.out.println("99: Sortir");
+            System.out.print("Opció triada: ");
         }
-        System.out.println("99: Sortir");
-        System.out.print("Opció triada: ");
         int opcio = scan.nextInt();
         scan.nextLine(); // Acaba de llegir la linea del int per a deixar net
 
@@ -45,39 +44,27 @@ abstract class GenericDriver {
         return opcio;
     }
 
-    void println(String text) {
+    void optPrintln(String text) {
         if (!silent) System.out.println(text);
     }
 
-    void println(int text) {
-        if (!silent) System.out.println(text);
-    }
-
-    void print(String text) {
+    void optPrint(String text) {
         if (!silent) System.out.print(text);
     }
 
-    void printf(String format, Object... args) {
-        print(String.format(format, args));
+    void optPrintf(String format, Object... args) {
+        optPrint(String.format(format, args));
     }
 
-    abstract boolean runTest(int option);
+    abstract void runTest(int option);
 
     void runLoop() {
-        boolean end = false;
-        while (!end) {
+        while (true) {
             int opt = menu();
-            if (opt == 99) end = true;
-            else {
-                totalTests++;
-                if (runTest(opt)) {
-                    okTests++;
-                    println("Test correcte.");
-                } else {
-                    System.out.printf("Test %d incorrecte.\r\n", opt);
-                }
-            }
+            if (opt == 99) return;
+
+            runTest(opt);
+
         }
-        System.out.printf("%d tests executats, %d correctes", totalTests, okTests);
     }
 }

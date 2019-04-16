@@ -24,77 +24,76 @@ public class DriverUsuari extends GenericDriver {
     }
 
     @Override
-    boolean runTest(int option) {
+    void runTest(int option) {
+        if (option != 1 && u == null) {
+            System.out.println("ERROR: USER NULL");
+            return;
+        }
         switch (option) {
             case 1:
-                return testConstructor();
+                testConstructor();
             case 2:
-                return testCheckPass();
+                testCheckPass();
             case 3:
-                return testGetId();
+                testGetId();
             case 4:
-                return testSetNom();
+                testSetNom();
             case 5:
-                return testSetPass();
+                testSetPass();
             case 6:
-                return testSuperaProblema();
+                testSuperaProblema();
             default:
                 System.out.println("Test no valid");
-                return false;
         }
     }
 
-    public boolean testConstructor() {
-        print("Id: ");
+    public void testConstructor() {
+        optPrint("Id: ");
         int id = scan.nextInt();
         scan.nextLine();
-        print("Nom: ");
+        optPrint("Nom: ");
         String nom = scan.nextLine();
-        print("Contrasenya: ");
+        optPrint("Contrasenya: ");
         String pass = scan.nextLine();
         u = new Usuari(id, nom, pass);
-        printf("Creat: Id: %d, Nom: %s\r\n", u.getId(), u.getNom());
-        return true;
+        System.out.printf("Creat: Id: %d, Nom: %s\r\n", u.getId(), u.getNom());
     }
 
-    public boolean testCheckPass() {
-        if (u == null) return false;
-        print("Contrasenya: ");
+    public void testCheckPass() {
+        optPrint("Contrasenya: ");
         String pass = scan.nextLine();
-        return u.checkPass(pass);
+        System.out.println(u.checkPass(pass));
     }
 
-    public boolean testGetId() {
-        if (u == null) return false;
-        println(u.getId());
-        return true;
+    public void testGetId() {
+        System.out.println();
+        System.out.println(u.getId());
     }
 
-    public boolean testSetNom() {
-        print("Nom nou: ");
+    public void testSetNom() {
+        optPrint("Nom nou: ");
         String nom = scan.nextLine();
         u.setNom(nom);
-        return u.getNom().equals(nom);
+        System.out.println(u.getNom());
     }
 
-    public boolean testSetPass() {
-        print("Contrasenya: ");
+    public void testSetPass() {
+        optPrint("Contrasenya: ");
         String pass = scan.nextLine();
         u.setPass(pass);
-        return u.checkPass(pass);
+        System.out.println(u.checkPass(pass));
     }
 
-    public boolean testSuperaProblema() {
-        print("Problema a superar: ");
+    public void testSuperaProblema() {
+        optPrint("Problema a superar: ");
         int id = scan.nextInt();
         scan.nextLine();
         u.superaProblema(id);
         Set<Integer> s = u.getProblemesSuperats();
 
-        if (!s.contains(id)) {
-            System.out.println("Error: El problema no està a problemesSuperats");
-            return false;
+        optPrintln("Problemes superats");
+        for (int idp : s) {
+            System.out.println(idp);
         }
-        return true;
     }
 }
