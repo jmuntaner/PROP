@@ -1,15 +1,6 @@
 package drivers;
 
-import domain.Tauler;
-import domain.Peca;
-import domain.Rei;
-import domain.Reina;
-import domain.Alfil;
-import domain.Torre;
-import domain.Cavall;
-import domain.Peo;
-import domain.Color;
-import domain.Moviment;
+import domain.*;
 
 //TODO: repassar tests després d'afegir comprovació de rei duplicat a creadora i afegir/treure peça
 public class DriverTauler extends GenericDriver{
@@ -225,7 +216,7 @@ public class DriverTauler extends GenericDriver{
     }
 
     public void testMouInvers() { //cal haver fet testMou() immediatament abans
-        t.mou_invers(m);
+        t.mouInvers(m);
         optPrintln("Tauler resultant: ");
         printTauler();
     }

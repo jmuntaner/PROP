@@ -1,6 +1,5 @@
 package domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Partida {
@@ -9,7 +8,6 @@ public class Partida {
     private Color torn;
     private Problema prob;
     private Tauler situacioActual;
-    private final EstadistiquesPartida estadistiques;
 
     /**
      * Crea la partida associada a un problema.
@@ -22,11 +20,11 @@ public class Partida {
         situacioActual = prob.getSituacioInicial();
         historial = new ArrayList<>();
         numMoviments = 0;
-        estadistiques = new EstadistiquesPartida();
     }
 
     /**
      * Indica el numero de moviments realitzats.
+     *
      * @return El numero de moviments realitzats.
      */
     public int getNumMoviments() {
@@ -35,6 +33,7 @@ public class Partida {
 
     /**
      * Retorna l'historial de moviments
+     *
      * @return Llista dels moviments realitzats.
      */
     public ArrayList<Moviment> getHistorial() {
@@ -57,37 +56,6 @@ public class Partida {
         historial.clear();
         numMoviments = 0;
         situacioActual = prob.getSituacioInicial();
-    }
-
-    /**
-     *
-     * @param jugador el jugador de qui volem els moviments possibles
-     * @return la llista de moviments possibles per a un determinat jugador
-     */
-    public ArrayList<Moviment> obteMovimentsJugador(Color jugador) {
-        //TODO:
-        return null;
-    }
-
-    /**
-     * Executa un moviment.
-     *
-     * @param mov     Moviment a realitzar.
-     */
-    public int mou(Moviment mov) {
-        //TODO:
-        this.torn = torn.getNext();
-        return 0;
-    }
-
-    /**
-     * Reverteix un moviment
-     *
-     * @param mov Moviment a revertir
-     */
-    public void mou_revers(Moviment mov) {
-        //TODO:
-        this.torn = torn.getNext();
     }
 
     /**
@@ -124,12 +92,8 @@ public class Partida {
     public ArrayList<Moviment> obteMovimentsPosicio(int x, int y) {
         return situacioActual.obteMovimentsPeca(x, y);
     }
-    /**
-     * Retorna les estadístiques de la partida.
-     * @return Estadístiques de la partida.
-     */
-    public EstadistiquesPartida getEstadistiques() {
-        return null;
+
+    public Tauler getSituacioActual() {
+        return situacioActual;
     }
-    //TODO: retornar estadistiques
 }

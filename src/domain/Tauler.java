@@ -100,7 +100,7 @@ public class Tauler {
             if (esPosicioAmenaca(posRei, m.getPosFinal())) {
                 executaMoviment(m);
                 boolean esc = esEscac(b);
-                mou_invers(m);
+                mouInvers(m);
                 if (!esc) return false;
             }
         }
@@ -254,7 +254,7 @@ public class Tauler {
      *
      * @param mov Moviment que és vol executar a la inversa
      */
-    public void mou_invers(Moviment mov) {
+    public void mouInvers(Moviment mov) {
         Pair<Integer, Integer> pi = mov.getPosIni();
         int x = pi.getKey();
         int y = pi.getValue();
@@ -388,7 +388,7 @@ public class Tauler {
                     if (x == 2) data[0]++; //final amb solució
                     else comprovaSolAux(torn.getNext(), tema, jugada, numJugades, data);
                 }
-                mou_invers(m);
+                mouInvers(m);
             }
         } else {
             int num_sols_pre = data[0]; //solucions abans de començar el recorregut
@@ -396,17 +396,17 @@ public class Tauler {
                 int x = mou(m);
                 if (x == 2 || x == 3) { //mat o taules (final sense solució)
                     data[0] = num_sols_pre;
-                    mou_invers(m);
+                    mouInvers(m);
                     return;
                 }
                 int num_sols_act = data[0]; //solucions durant el recorregut
                 comprovaSolAux(torn.getNext(), tema, jugada + 1, numJugades, data);
                 if (num_sols_act == data[0]) { //la branca no té solució
                     data[0] = num_sols_pre;
-                    mou_invers(m);
+                    mouInvers(m);
                     return;
                 }
-                mou_invers(m);
+                mouInvers(m);
             }
         }
     }
