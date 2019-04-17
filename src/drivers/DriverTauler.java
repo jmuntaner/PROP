@@ -11,7 +11,9 @@ import domain.Peo;
 import domain.Color;
 import domain.Moviment;
 
-//TODO: repassar tests després d'afegir comprovació de rei duplicat a creadora i afegir/treure peça
+import java.util.ArrayList;
+import javafx.util.Pair;
+
 public class DriverTauler extends GenericDriver{
     private Tauler t;
     private Moviment m;
@@ -140,6 +142,27 @@ public class DriverTauler extends GenericDriver{
         }
     }
 
+    private static void printMoviments(ArrayList<Moviment> movs) {
+        if (movs == null) {
+            System.out.println("No hi ha peça en la posicio demanada");
+            return;
+        }
+        else if (movs.size()==0) {
+            System.out.println("No hi ha moviments possibles");
+            return;
+        }
+        for (Moviment mv: movs) {
+            Pair<Integer,Integer> pi = mv.getPosIni();
+            Pair<Integer,Integer> pf = mv.getPosFinal();
+            char cp = mv.getPecaMoguda().toChar();
+            Peca k = mv.getPecaMorta();
+            char ck;
+            if (k==null) ck = '-';
+            else ck = k.toChar();
+            System.out.printf("%d %d %d %d %c %c\n",pi.getKey(),pi.getValue(),pf.getKey(),pf.getValue(),cp,ck);
+        }
+    }
+
     private boolean comprovaReis() {
         if (t == null) {
             System.out.println("Crea un tauler");
@@ -167,8 +190,6 @@ public class DriverTauler extends GenericDriver{
 
     }
 
-
-
     public void testConstructor() {
         t = new Tauler();
         optPrintln("Tauler buit: ");
@@ -176,18 +197,28 @@ public class DriverTauler extends GenericDriver{
     }
 
     public void testConstructor2() {
-        optPrint("Introdueix un tauler (amb almenys els dos reis): ");
+        optPrint("Introdueix un tauler: ");
         Peca[][] p = readTauler();
-        t = new Tauler(p);
-        optPrintln("Tauler introduït: ");
-        printTauler();
+        try {
+            t = new Tauler(p);
+            optPrintln("Tauler introduït: ");
+            printTauler();
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void testAfegirPeca() {
         optPrint("Introdueix una peça (x y codi): ");
         Peca p = readPeca();
-        t.afegirPeca(p);
-        printTauler();
+        try {
+            t.afegirPeca(p);
+            printTauler();
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void testTreurePeca() {
@@ -218,21 +249,45 @@ public class DriverTauler extends GenericDriver{
         }
         Peca p = getPeca(t.getCasella(xi,yi),xi,yi);
         m = new Moviment(p,xf,yf);
-        t.mou(m);
+        int res = t.mou(m);
+        optPrint("Codi resultat: ");
+        System.out.printf("%d\n", res);
         optPrintln("Tauler resultant: ");
         printTauler();
         lastTestMou = true;
     }
 
-    public void testMouInvers() { //cal haver fet testMou() immediatament abans
+    public void testMouInvers() { //cal haver fet testMou() immediatament abans -> NO FA MOVIMENT
         t.mou_invers(m);
+        ArrayList<Moviment> al = new ArrayList<>();
+        al.add(m);
+        printMoviments(al);
         optPrintln("Tauler resultant: ");
         printTauler();
     }
 
-    public void testObteMovimentsJugador() {}
+    public void testObteMovimentsJugador() { //NO IMPRIMEIX RES
+        optPrint("Introdueix un jugador (W/B): ");
+        char c = scan.nextLine().charAt(0);
+        Color col;
+        if (c=='W') col = Color.BLANC;
+        else if (c=='B') col = Color.NEGRE;
+        else {
+            System.out.println("Jugador incorrecte");
+            return;
+        }
+        ArrayList<Moviment> al = t.obteMovimentsJugador(col);
+        printMoviments(al);
+    }
 
-    public void testObteMovimentsPeca() {}
+    public void testObteMovimentsPeca() {
+        optPrint("Introdueix una posicio: ");
+        int x = scan.nextInt();
+        int y = scan.nextInt();
+        scan.nextLine();
+        ArrayList<Moviment> al = t.obteMovimentsPeca(x,y);
+        printMoviments(al);
+    }
 
     //public void testGetCasella() {}
     //getCasella ja es fa servir a la resta de funcions, per tant ja queda testejat

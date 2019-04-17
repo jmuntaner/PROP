@@ -32,19 +32,23 @@ public class Tauler {
     // - El controlador ha de cridar "finalitzaEntradaTauler" un cop s'han entrat totes les peces
     // - Tant si s'entren totes de cop o una per una
     public Tauler(Peca[][] pecesInicials) {
-        peces = pecesInicials;
-        for (Peca[] row : peces) {
+        Peca rb = null;
+        Peca rn = null;
+        for (Peca[] row : pecesInicials) {
             for (Peca p : row) {
                 if (p != null) {
                     char c = p.toChar();
-                    if (c == 'K' && _reiBlanc == null)
-                        _reiBlanc = p; //Es lleig però garantir-ho amb un instanceof ho es mes
+                    if (c == 'K' && rb == null)
+                        rb = p; //Es lleig però garantir-ho amb un instanceof ho es mes
                     else if (c == 'K') throw new RuntimeException("Rei blanc duplicat");
-                    else if (c == 'k' && _reiNegre == null) _reiNegre = p;
+                    else if (c == 'k' && rb == null) rb = p;
                     else if (c == 'k') throw new RuntimeException("Rei negre duplicat");
                 }
             }
         }
+        peces = pecesInicials;
+        _reiBlanc = rb;
+        _reiNegre = rn;
     }
 
 
@@ -205,13 +209,18 @@ public class Tauler {
      *
      * @param p Peça a afegir
      */
+    //TODO: substituir rei
     public void afegirPeca(Peca p) {
         Pair<Integer, Integer> pos = p.getPosicio();
         char c = p.toChar();
         if (c=='K' && _reiBlanc==null) _reiBlanc = p;
         else if (c=='K' && !pos.equals(_reiBlanc.getPosicio())) throw new RuntimeException("Rei blanc duplicat");
-        else if (c=='k' && _reiNegre==null) _reiNegre = p;
+        else if (c!='K' && _reiBlanc!=null && pos.equals(_reiBlanc.getPosicio())) _reiBlanc = null;
+
+        if (c=='k' && _reiNegre==null) _reiNegre = p;
         else if (c=='k' && !pos.equals(_reiNegre.getPosicio())) throw new RuntimeException("Rei negre duplicat");
+        else if (c!='k' && _reiNegre!=null && pos.equals(_reiNegre.getPosicio())) _reiNegre = null;
+
         int x = pos.getKey();
         int y = pos.getValue();
         peces[x][y] = p;
@@ -226,10 +235,12 @@ public class Tauler {
      */
     public void treurePeca(int x, int y) {
         if (x<0 || y<0 || x>=SIZE || y>=SIZE) throw new RuntimeException("Posicio fora del tauler");
-        char c = peces[x][y].toChar();
-        if (c=='K') _reiBlanc = null;
-        else if (c=='k') _reiNegre = null;
-        peces[x][y] = null;
+        if (peces[x][y]!=null) {
+            char c = peces[x][y].toChar();
+            if (c == 'K') _reiBlanc = null;
+            else if (c == 'k') _reiNegre = null;
+            peces[x][y] = null;
+        }
     }
 
 
