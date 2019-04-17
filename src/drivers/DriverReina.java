@@ -2,6 +2,7 @@ package drivers;
 
 import domain.Reina;
 import domain.Color;
+import javafx.util.Pair;
 
 
 public class DriverReina extends GenericDriver {
@@ -12,7 +13,11 @@ public class DriverReina extends GenericDriver {
         opcionsMenu = new String[]{
                 "Crear reina",
                 "Conversio a char",
-                "Comprova moviment valid"};
+                "Comprova moviment valid",
+                "Obté color",
+                "Obté posicio",
+                "Modifica posicio 1",
+                "Modifica posicio 2"};
     }
 
     public static void main(String[] args) {
@@ -36,6 +41,18 @@ public class DriverReina extends GenericDriver {
                 break;
             case 3:
                 testEsMovimentValid();
+                break;
+            case 4:
+                testGetColor();
+                break;
+            case 5:
+                testGetPos();
+                break;
+            case 6:
+                testSetPos1();
+                break;
+            case 7:
+                testSetPos2();
                 break;
             default:
                 System.out.println("Test no valid");
@@ -83,5 +100,34 @@ public class DriverReina extends GenericDriver {
         int y = scan.nextInt();
         boolean res = r.esMovimentValid(mata, x, y);
         System.out.println(res);
+    }
+
+    public void testGetColor() {
+        System.out.println();
+        String s = r.getColor()==Color.BLANC?"Blanc":"Negre";
+        System.out.println(s);
+    }
+
+    public void testGetPos() {
+        System.out.println();
+        System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
+    }
+
+    public void testSetPos1() {
+        optPrint("x: ");
+        int x = scan.nextInt();
+        optPrint("y: ");
+        int y = scan.nextInt();
+        r.setPosicio(new Pair<>(x, y));
+        System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
+    }
+
+    public void testSetPos2() {
+        optPrint("x: ");
+        int x = scan.nextInt();
+        optPrint("y: ");
+        int y = scan.nextInt();
+        r.setPosicio(x, y);
+        System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
     }
 }
