@@ -70,4 +70,82 @@ public class ControladorPartida {
         ranking.afegeixPuntuacio(usuari, punts);
         return estadistiques;
     }
+
+    /**
+     * Mou el millor per a la maquina en qüestió
+     * @param profunditat profunditat maxima d'exploracio de l'arbre
+     */
+    void calcular_moviment(int profunditat) {
+        Color torn = partida.getTorn();
+        Moviment mov = null;
+        ArrayList<Moviment> movs_pos = this.partida.obteMovimentsJugador(torn);
+        int bestMove;
+        int codi;
+        int ret;
+        if(torn==Color.BLANC) {
+            bestMove = -9999;
+            for(Moviment m : movs_pos) {
+                codi = this.partida.mou(m);
+                ret = minimax(profunditat,false, codi);
+                if(ret > bestMove) {
+                    mov = m;
+                    bestMove = ret;
+                }
+                this.partida.mou_revers(m);
+            }
+        }
+        else if(torn==Color.NEGRE) {
+            bestMove = 9999;
+            for(Moviment m : movs_pos) {
+                codi = this.partida.mou(m);
+                ret = minimax(profunditat-1,false, codi);
+                if(ret < bestMove) {
+                    mov = m;
+                    bestMove = ret;
+                }
+                this.partida.mou_revers(m);
+            }
+        }
+        this.partida.moure(torn, mov);
+    }
+
+    /**
+     * Calcula el minimax de cada posicio
+     * @return Millor moviment
+     */
+    private int minimax(int profunditat, boolean esJugadorMaximal, int codi) {
+        //mat retornem millor resultat
+        if(codi == 2) {
+            if(esJugadorMaximal) return 9999;
+            else return -9999;
+        }
+        //escacs mal resultat: sabem que podem fer mat
+        if(codi == 3) {
+            if(esJugadorMaximal) return -9999;
+            else return 9999;
+        }
+        if(profunditat==0) {
+            //TODO: associar-ho amb l'heurística
+        }
+        ArrayList<Moviment> movs_pos = this.partida.obteMovimentsJugador(this.partida.getTorn());
+        int bestMove;
+        int c;
+        if(esJugadorMaximal) {
+            bestMove = -9999;
+            for(Moviment m : movs_pos) {
+                c = this.partida.mou(m);
+                bestMove = Math.max(minimax(profunditat-1,false, c), bestMove);
+                this.partida.mou_revers(m);
+            }
+        }
+        else {
+            bestMove = 9999;
+            for(Moviment m : movs_pos) {
+                c = this.partida.mou(m);
+                bestMove = Math.min(minimax(profunditat-1,true, c), bestMove);
+                this.partida.mou_revers(m);
+            }
+        }
+        return bestMove;
+    }
 }

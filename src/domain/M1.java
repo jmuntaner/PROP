@@ -2,5 +2,7 @@ package domain;
 
 public class M1 extends Maquina {
     @Override
-    public int heuristica(char[] llistaPeces) {return 0;}
+    public int heuristica(Tauler posicio, Color torn) {
+        return 0;
+    }
 }
