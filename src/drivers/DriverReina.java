@@ -60,13 +60,13 @@ public class DriverReina extends GenericDriver {
     }
 
     public void testConstructor() {
+        optPrint("Color: ");
+        String color = scan.nextLine();
         optPrint("x: ");
         int x = scan.nextInt();
         scan.nextLine();
         optPrint("y: ");
         int y = scan.nextInt();
-        optPrint("Color: ");
-        String color = scan.nextLine();
         Color c;
         if(color.equals("BLANC")) c = Color.BLANC;
         else if(color.equals("NEGRE")) c = Color.NEGRE;

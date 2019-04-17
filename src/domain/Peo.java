@@ -18,13 +18,13 @@ public class Peo extends Peca {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
         if(x0==x && y0==y) return false; //moviment nul
-        int sx = Math.abs(x - x0);
+        int sy = Math.abs(y - y0);
         int inc;
         if(this.getColor()==Color.BLANC) inc = -1;
         else inc = 1; //negre
-        boolean avancaDos = (y-y0 == 2*inc && sx == 0 && (y0 == 6 && this.getColor()==Color.BLANC || y0 == 1 && this.getColor()==Color.NEGRE)); //y0 == 3.5-2.5*inc seria una condicio mes curta pero sembla arbitraria
-        boolean avancaUn = (y - y0 == inc && sx == 0);
-        boolean menja = (y - y0 == inc && sx == 1);
+        boolean avancaDos = (x - x0 == 2*inc && sy == 0 && (x0 == 6 && this.getColor()==Color.BLANC || x0 == 1 && this.getColor()==Color.NEGRE)); //y0 == 3.5-2.5*inc seria una condicio mes curta pero sembla arbitraria
+        boolean avancaUn = (x - x0 == inc && sy == 0);
+        boolean menja = (x - x0 == inc && sy == 1);
         if(mata) return menja;
         else return avancaUn || avancaDos;
     }
