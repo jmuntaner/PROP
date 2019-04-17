@@ -37,8 +37,11 @@ public class Tauler {
             for (Peca p : row) {
                 if (p != null) {
                     char c = p.toChar();
-                    if (c == 'K') _reiBlanc = p; //Es lleig però garantir-ho amb un instanceof ho es mes
-                    else if (c == 'k') _reiNegre = p;
+                    if (c == 'K' && _reiBlanc == null)
+                        _reiBlanc = p; //Es lleig però garantir-ho amb un instanceof ho es mes
+                    else if (c == 'K') throw new RuntimeException("Rei blanc duplicat");
+                    else if (c == 'k' && _reiNegre == null) _reiNegre = p;
+                    else if (c == 'k') throw new RuntimeException("Rei negre duplicat");
                 }
             }
         }
@@ -204,19 +207,29 @@ public class Tauler {
      */
     public void afegirPeca(Peca p) {
         Pair<Integer, Integer> pos = p.getPosicio();
+        char c = p.toChar();
+        if (c=='K' && _reiBlanc==null) _reiBlanc = p;
+        else if (c=='K' && !pos.equals(_reiBlanc.getPosicio())) throw new RuntimeException("Rei blanc duplicat");
+        else if (c=='k' && _reiNegre==null) _reiNegre = p;
+        else if (c=='k' && !pos.equals(_reiNegre.getPosicio())) throw new RuntimeException("Rei negre duplicat");
         int x = pos.getKey();
         int y = pos.getValue();
-        peces[x][y] = p; //Possible exception si x/y són null o estan fora del rang
+        peces[x][y] = p;
     }
 
     /**
      * Treu la peça situada a la posició x,y del tauler
+     * (És a dir, fa que la posició estigui buida independentment de si hi havia peça o no)
      *
      * @param x Coordenada x de la posició
      * @param y Coordenada y de la posició
      */
     public void treurePeca(int x, int y) {
-        peces[x][y] = null; // Possible exception si x/y son null o estan fora del rang
+        if (x<0 || y<0 || x>=SIZE || y>=SIZE) throw new RuntimeException("Posicio fora del tauler");
+        char c = peces[x][y].toChar();
+        if (c=='K') _reiBlanc = null;
+        else if (c=='k') _reiNegre = null;
+        peces[x][y] = null;
     }
 
 

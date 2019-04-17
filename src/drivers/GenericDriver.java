@@ -30,7 +30,7 @@ abstract class GenericDriver {
                 System.out.printf(" %d: %s\r\n", index, opcio);
                 index++;
             }
-            System.out.println("99: Sortir");
+            System.out.println(" 99: Sortir");
             System.out.print("Opció triada: ");
         }
         int opcio = scan.nextInt();
