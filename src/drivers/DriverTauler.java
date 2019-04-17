@@ -212,13 +212,8 @@ public class DriverTauler extends GenericDriver{
     public void testAfegirPeca() {
         optPrint("Introdueix una peça (x y codi): ");
         Peca p = readPeca();
-        try {
-            t.afegirPeca(p);
-            printTauler();
-        }
-        catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        t.afegirPeca(p);
+        printTauler();
     }
 
     public void testTreurePeca() {
@@ -249,16 +244,14 @@ public class DriverTauler extends GenericDriver{
         }
         Peca p = getPeca(t.getCasella(xi,yi),xi,yi);
         m = new Moviment(p,xf,yf);
-        int res = t.mou(m);
-        optPrint("Codi resultat: ");
-        System.out.printf("%d\n", res);
+        t.mou(m);
         optPrintln("Tauler resultant: ");
         printTauler();
         lastTestMou = true;
     }
 
     public void testMouInvers() { //cal haver fet testMou() immediatament abans -> NO FA MOVIMENT
-        t.mou_invers(m);
+        t.mouInvers(m);
         ArrayList<Moviment> al = new ArrayList<>();
         al.add(m);
         printMoviments(al);
@@ -280,14 +273,7 @@ public class DriverTauler extends GenericDriver{
         printMoviments(al);
     }
 
-    public void testObteMovimentsPeca() {
-        optPrint("Introdueix una posicio: ");
-        int x = scan.nextInt();
-        int y = scan.nextInt();
-        scan.nextLine();
-        ArrayList<Moviment> al = t.obteMovimentsPeca(x,y);
-        printMoviments(al);
-    }
+    public void testObteMovimentsPeca() {}
 
     //public void testGetCasella() {}
     //getCasella ja es fa servir a la resta de funcions, per tant ja queda testejat
