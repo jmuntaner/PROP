@@ -1,29 +1,30 @@
 package drivers;
 
-import domain.Alfil;
+import domain.Peo;
 import domain.Color;
 
-public class DriverAlfil extends GenericDriver {
-    private Alfil a;
 
-    DriverAlfil(String[] args) {
+public class DriverPeo extends GenericDriver {
+    private Peo p;
+
+    DriverPeo(String[] args) {
         super(args);
         opcionsMenu = new String[]{
-                "Crear alfil",
+                "Crear peo",
                 "Conversio a char",
                 "Comprova moviment valid"};
     }
 
     public static void main(String[] args) {
-        DriverAlfil driver = new DriverAlfil(args);
+        DriverPeo driver = new DriverPeo(args);
         driver.runLoop();
         System.out.println(); //Línia en blanc entre tests
     }
 
     @Override
     void runTest(int option) {
-        if (option != 1 && a == null) {
-            System.out.println("ERROR: ALFIL NULL");
+        if (option != 1 && p == null) {
+            System.out.println("ERROR: PEO NULL");
             return;
         }
         switch (option) {
@@ -56,20 +57,20 @@ public class DriverAlfil extends GenericDriver {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        a = new Alfil(x, y, c);
-        c = a.getColor();
+        p = new Peo(x, y, c);
+        c = p.getColor();
         if(c == Color.BLANC) color = "BLANC";
         else if(c == Color.NEGRE) color = "NEGRE";
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", a.getPosicio().getKey(), a.getPosicio().getValue(), color);
+        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", p.getPosicio().getKey(), p.getPosicio().getValue(), color);
     }
 
     public void testToChar() {
         System.out.println();
-        System.out.println(a.toChar());
+        System.out.println(p.toChar());
     }
 
     public void testEsMovimentValid() {
@@ -80,7 +81,7 @@ public class DriverAlfil extends GenericDriver {
         scan.nextLine();
         optPrint("y: ");
         int y = scan.nextInt();
-        boolean res = a.esMovimentValid(mata, x, y);
+        boolean res = p.esMovimentValid(mata, x, y);
         System.out.println(res);
     }
 }
