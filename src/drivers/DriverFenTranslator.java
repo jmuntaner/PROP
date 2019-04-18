@@ -36,7 +36,7 @@ public class DriverFenTranslator extends GenericDriver {
     }
 
     void testCarregaFen() {
-        optPrint("Introdueir FEN: ");
+        optPrint("Introduir FEN: ");
         String fen = scan.nextLine();
         t = FenTranslator.generaTauler(fen);
         c = FenTranslator.getColor(fen);

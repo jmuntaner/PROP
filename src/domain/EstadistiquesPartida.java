@@ -40,6 +40,7 @@ public class EstadistiquesPartida {
      * @param jugador Jugador que juga el torn.
      */
     public void iniciaTorn(Color jugador) {
+        if (tornEnCurs) throw new RuntimeException("Torn ja iniciat");
         tornActual = jugador;
         tornEnCurs = true;
         if (jugador == Color.BLANC) jugadesBlanc++;
@@ -100,8 +101,8 @@ public class EstadistiquesPartida {
      * @return Temps mig de jugada pel jugador.
      */
     public long getTempsMitja(Color jugador) {
-        if (jugador == Color.BLANC) return tempsBlanc / jugadesBlanc;
-        else return tempsNegre / jugadesNegre;
+        if (jugador == Color.BLANC) return jugadesBlanc == 0 ? 0 : tempsBlanc / jugadesBlanc;
+        else return jugadesNegre == 0 ? 0 : tempsNegre / jugadesNegre;
     }
 
     /**
@@ -110,6 +111,7 @@ public class EstadistiquesPartida {
      * @return Temps mig de jugada de la partida.
      */
     public long getTempsMitja() {
+        if ((jugadesBlanc + jugadesNegre) == 0) return 0;
         return (tempsBlanc + tempsNegre) / (jugadesBlanc + jugadesNegre);
     }
 
