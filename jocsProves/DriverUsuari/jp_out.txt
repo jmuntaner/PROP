@@ -1,0 +1,23 @@
+Creat: Id: 1, Nom: nom
+Creat: Id: 2, Nom: alex
+true
+false
+Creat: Id: 2, Nom: alex
+true
+Creat: Id: 3, Nom: nom
+3
+Creat: Id: 999, Nom: nom
+999
+alex
+roger
+joan
+elvira
+true
+true
+true
+99
+1
+99
+1
+99
+105

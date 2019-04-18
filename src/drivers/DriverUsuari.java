@@ -72,7 +72,6 @@ public class DriverUsuari extends GenericDriver {
     }
 
     public void testGetId() {
-        System.out.println();
         System.out.println(u.getId());
     }
 
