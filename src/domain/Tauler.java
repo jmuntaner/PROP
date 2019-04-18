@@ -412,12 +412,14 @@ public class Tauler {
                     mouInvers(m);
                     return;
                 }
-                int num_sols_act = data[0]; //solucions durant el recorregut
-                comprovaSolAux(torn.getNext(), tema, jugada, numJugades, data);
-                if (num_sols_act == data[0]) { //la branca no té solució
-                    data[0] = num_sols_pre;
-                    mouInvers(m);
-                    return;
+                else if (x!=4) { // Moviment vàlid
+                    int num_sols_act = data[0]; //solucions durant el recorregut
+                    comprovaSolAux(torn.getNext(), tema, jugada, numJugades, data);
+                    if (num_sols_act == data[0]) { //la branca no té solució
+                        data[0] = num_sols_pre;
+                        mouInvers(m);
+                        return;
+                    }
                 }
                 mouInvers(m);
             }
