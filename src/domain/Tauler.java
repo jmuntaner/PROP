@@ -38,10 +38,9 @@ public class Tauler {
             for (Peca p : row) {
                 if (p != null) {
                     char c = p.toChar();
-                    if (c == 'K' && rb == null)
-                        rb = p; //Es lleig però garantir-ho amb un instanceof ho es mes
+                    if (c == 'K' && rb == null) rb = p; //Es lleig però garantir-ho amb un instanceof ho es mes
                     else if (c == 'K') throw new RuntimeException("Rei blanc duplicat");
-                    else if (c == 'k' && rb == null) rb = p;
+                    else if (c == 'k' && rn == null) rn = p;
                     else if (c == 'k') throw new RuntimeException("Rei negre duplicat");
                 }
             }
@@ -60,12 +59,11 @@ public class Tauler {
      */
     private boolean esEscac(Color b) {
         Peca objectiu;
-        if (b == BLANC) objectiu = _reiBlanc;
-        else objectiu = _reiNegre;
+        if (b == BLANC) objectiu = _reiNegre;
+        else objectiu = _reiBlanc;
         Pair<Integer, Integer> posRei = objectiu.getPosicio();
         int x = posRei.getKey();
         int y = posRei.getValue();
-
         int[][] inc = movimentsRelatius(); //increments relatius que poden amenaçar el rei
         for (int[] dir : inc) { //comprovem totes direccions
             boolean exit = false;
@@ -77,8 +75,8 @@ public class Tauler {
                 else {
                     Peca p = peces[xp][yp];
                     if (p != null) {
-                        if (p.getColor() == b) exit = true;
-                        else if (p.esMovimentValid(true, xp, yp)) return true;
+                        if (p.getColor() != b) exit = true;
+                        else if (p.esMovimentValid(true, x, y)) return true;
                     }
                 }
                 if (dir[0] * dir[1] == 2 || dir[0] * dir[1] == -2) exit = true; // posicions cavall
@@ -99,7 +97,7 @@ public class Tauler {
         Pair<Integer, Integer> posRei;
         if (b == BLANC) posRei = _reiNegre.getPosicio();
         else posRei = _reiBlanc.getPosicio();
-        ArrayList<Moviment> movs = obteMovimentsJugador(b);
+        ArrayList<Moviment> movs = obteMovimentsJugador(b.getNext());
         for (Moviment m : movs) {
             if (esPosicioAmenaca(posRei, m.getPosFinal())) {
                 executaMoviment(m);
@@ -165,7 +163,7 @@ public class Tauler {
             else return 4; // no hauria de passar però per si de cas
         }
 
-        if (b) {
+        if (!b) {
             if (e) return 1;
             else return 0;
         }
@@ -275,8 +273,8 @@ public class Tauler {
         p.setPosicio(pi);
 
         Pair<Integer, Integer> pf = mov.getPosFinal();
-        int x2 = pi.getKey();
-        int y2 = pi.getValue();
+        int x2 = pf.getKey();
+        int y2 = pf.getValue();
         Peca k = mov.getPecaMorta();
 
         peces[x2][y2] = k; //pot ser null;
@@ -309,8 +307,9 @@ public class Tauler {
      * @return Llista de moviments vàlids si hi ha una peça, null si no n'hi ha
      */
     public ArrayList<Moviment> obteMovimentsPeca(int x, int y) {
-        if (peces[x][y] == null) return null;
-        Color b = peces[x][y].getColor();
+        Peca p = peces[x][y];
+        if (p == null) return null;
+        Color b = p.getColor();
 
         ArrayList<Moviment> movs = new ArrayList<>();
         int[][] inc = movimentsRelatius();
@@ -322,17 +321,16 @@ public class Tauler {
                 int yp = y + step * dir[1];
                 if (xp < 0 || xp >= SIZE || yp < 0 || yp >= SIZE) exit = true;
                 else {
-                    Peca p = peces[xp][yp];
-                    if (p != null) {
-                        if (p.getColor() == b) exit = true;
-                        else {
-                            boolean mata = peces[xp][yp] != null;
-                            if (p.esMovimentValid(mata, xp, yp)) {
-                                Moviment m = new Moviment(p, xp, yp);
-                                if (mata) m.setPecaMorta(peces[xp][yp]);
-                                movs.add(m);
-                            }
+                    Peca k = peces[xp][yp];
+                    boolean mata = k != null;
+                    if (mata && k.getColor() == b) exit = true;
+                    else if (p.esMovimentValid(mata, xp, yp)) {
+                        Moviment m = new Moviment(p, xp, yp);
+                        if (mata) {
+                            m.setPecaMorta(k);
+                            exit = true;
                         }
+                        movs.add(m);
                     }
                 }
                 if (dir[0] * dir[1] == 2 || dir[0] * dir[1] == -2) exit = true;
@@ -369,9 +367,13 @@ public class Tauler {
     public int finalEntradaTauler(Color c) {
         if (_reiBlanc == null) return 1;
         if (_reiNegre == null) return 2;
-        if (esEscacMat(c, true) != 0) return 3;
+        //if (esEscacMat(c, true) != 0) return 3;
+        //
+        int x = esEscacMat(c,true);
+        if (x!=0) return 3;
+        //
         int aux = esEscacMat(c.getNext(), true);
-        if (aux != 0 && aux != 1) return 3; //el contrari pot esta en escac
+        if (aux != 0 && aux != 1) return 3; //el contrari pot estar fent escac
         return 0;
     }
 
@@ -386,10 +388,10 @@ public class Tauler {
      * @param tema       Jugador atacant
      * @param jugada     Número de jugades que ha fet el jugador que ataca
      * @param numJugades Número màxim de jugades que pot fer l'atacant
-     * @param data       Número de decisions vàlides de l'atacant i número de solucions (paràmetre de sortida)
+     * @param data       Número de solucions i número de decisions vàlides de l'atacant (paràmetre de sortida)
      */
     public void comprovaSolAux(Color torn, Color tema, int jugada, int numJugades, int[] data) {
-        if (jugada > numJugades) return;
+        if (jugada >= numJugades) return;
         ArrayList<Moviment> al = obteMovimentsJugador(torn);
         if (torn == tema) {
             for (Moviment m : al) {
@@ -397,7 +399,7 @@ public class Tauler {
                 if (x != 3 && x != 4) {
                     data[1]++;
                     if (x == 2) data[0]++; //final amb solució
-                    else comprovaSolAux(torn.getNext(), tema, jugada, numJugades, data);
+                    else comprovaSolAux(torn.getNext(), tema, jugada+1, numJugades, data);
                 }
                 mouInvers(m);
             }
@@ -411,7 +413,7 @@ public class Tauler {
                     return;
                 }
                 int num_sols_act = data[0]; //solucions durant el recorregut
-                comprovaSolAux(torn.getNext(), tema, jugada + 1, numJugades, data);
+                comprovaSolAux(torn.getNext(), tema, jugada, numJugades, data);
                 if (num_sols_act == data[0]) { //la branca no té solució
                     data[0] = num_sols_pre;
                     mouInvers(m);

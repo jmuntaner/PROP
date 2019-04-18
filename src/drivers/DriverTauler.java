@@ -30,7 +30,7 @@ public class DriverTauler extends GenericDriver{
                 "test mou invers",
                 "test obté moviments jugador",
                 "test obté moviments peça",
-                "test get casella (no implementat)",
+                "test get casella",
                 "test final entrada tauler",
                 "test comprova sol aux"
         };
@@ -79,8 +79,8 @@ public class DriverTauler extends GenericDriver{
                 testObteMovimentsPeca();
                 break;
             case 9:
-                //testGetCasella();
-                optPrintln("El test de getCasella ja s'inclou en la resta de tests");
+                testGetCasella();
+                //optPrintln("El test de getCasella ja s'inclou en la resta de tests");
                 break;
             case 10:
                 testFinalEntradaTauler();
@@ -142,7 +142,22 @@ public class DriverTauler extends GenericDriver{
         }
     }
 
-    private static void printMoviments(ArrayList<Moviment> movs) {
+    private void printMoviment(Moviment mv) {
+        if (mv == null) {
+            System.out.println("No hi ha moviment");
+            return;
+        }
+        Pair<Integer,Integer> pi = mv.getPosIni();
+        Pair<Integer,Integer> pf = mv.getPosFinal();
+        char cp = mv.getPecaMoguda().toChar();
+        Peca k = mv.getPecaMorta();
+        char ck;
+        if (k==null) ck = '-';
+        else ck = k.toChar();
+        System.out.printf("%d %d %d %d %c %c\n",pi.getKey(),pi.getValue(),pf.getKey(),pf.getValue(),cp,ck);
+    }
+
+    private void printMoviments(ArrayList<Moviment> movs) {
         if (movs == null) {
             System.out.println("No hi ha peça en la posicio demanada");
             return;
@@ -151,16 +166,8 @@ public class DriverTauler extends GenericDriver{
             System.out.println("No hi ha moviments possibles");
             return;
         }
-        for (Moviment mv: movs) {
-            Pair<Integer,Integer> pi = mv.getPosIni();
-            Pair<Integer,Integer> pf = mv.getPosFinal();
-            char cp = mv.getPecaMoguda().toChar();
-            Peca k = mv.getPecaMorta();
-            char ck;
-            if (k==null) ck = '-';
-            else ck = k.toChar();
-            System.out.printf("%d %d %d %d %c %c\n",pi.getKey(),pi.getValue(),pf.getKey(),pf.getValue(),cp,ck);
-        }
+        optPrintln("Moviments: ");
+        for (Moviment mv: movs) printMoviment(mv);
     }
 
     private boolean comprovaReis() {
@@ -187,7 +194,14 @@ public class DriverTauler extends GenericDriver{
         if (w&&b) return true;
         System.out.println("Falta algun rei");
         return false;
+    }
 
+    private static Moviment searchMoviment(ArrayList<Moviment> al, int x, int y) {
+        for (Moviment mov: al) {
+            Pair<Integer,Integer> p = mov.getPosFinal();
+            if (p.getKey()==x && p.getValue()==y) return mov;
+        }
+        return null;
     }
 
     public void testConstructor() {
@@ -238,13 +252,21 @@ public class DriverTauler extends GenericDriver{
         int yi = scan.nextInt();
         int xf = scan.nextInt();
         int yf = scan.nextInt();
-        if (t.getCasella(xi,yi)=='-') {
-            System.out.println("No hi ha cap peça a la casella inicial");
+        ArrayList<Moviment> al = t.obteMovimentsPeca(xi,yi);
+        if (al == null) {
+            System.out.println("No hi ha peça a la casella inicial");
             return;
         }
-        Peca p = getPeca(t.getCasella(xi,yi),xi,yi);
-        m = new Moviment(p,xf,yf);
-        t.mou(m);
+        m = searchMoviment(al,xf,yf);
+        if (m==null) {
+            System.out.println("La casella final no és un moviment vàlid");
+            return;
+        }
+        int res = t.mou(m);
+        optPrint("Moviment: ");
+        printMoviment(m);
+        optPrint("Codi resultat: ");
+        System.out.println(res);
         optPrintln("Tauler resultant: ");
         printTauler();
         lastTestMou = true;
@@ -252,14 +274,13 @@ public class DriverTauler extends GenericDriver{
 
     public void testMouInvers() { //cal haver fet testMou() immediatament abans -> NO FA MOVIMENT
         t.mouInvers(m);
-        ArrayList<Moviment> al = new ArrayList<>();
-        al.add(m);
-        printMoviments(al);
+        optPrint("Moviment: ");
+        printMoviment(m);
         optPrintln("Tauler resultant: ");
         printTauler();
     }
 
-    public void testObteMovimentsJugador() { //NO IMPRIMEIX RES
+    public void testObteMovimentsJugador() {
         optPrint("Introdueix un jugador (W/B): ");
         char c = scan.nextLine().charAt(0);
         Color col;
@@ -273,13 +294,60 @@ public class DriverTauler extends GenericDriver{
         printMoviments(al);
     }
 
-    public void testObteMovimentsPeca() {}
+    public void testObteMovimentsPeca() {
+        optPrint("Introdueix una posicio: ");
+        int x = scan.nextInt();
+        int y = scan.nextInt();
+        scan.nextLine();
+        printMoviments(t.obteMovimentsPeca(x,y));
+    }
 
-    //public void testGetCasella() {}
-    //getCasella ja es fa servir a la resta de funcions, per tant ja queda testejat
+    public void testGetCasella() {
+        optPrint("Introdueix posicio: ");
+        int x = scan.nextInt();
+        int y = scan.nextInt();
+        scan.nextLine();
+        optPrint("Casella: ");
+        System.out.println(t.getCasella(x,y));
+    }
 
-    public void testFinalEntradaTauler() {}
+    public void testFinalEntradaTauler() {
+        optPrint("Introdueix el color del jugador que comença (W/B): ");
+        char c = scan.nextLine().charAt(0);
+        Color col;
+        if (c == 'W') col = Color.BLANC;
+        else if (c=='B') col = Color.NEGRE;
+        else {
+            System.out.println("Color incorrecte");
+            return;
+        }
+        optPrint("Resultat: ");
+        System.out.println(t.finalEntradaTauler(col));
+    }
 
-    public void testComprovaSolAux() {}
-
+    public void testComprovaSolAux() {
+        int[] data = new int[]{0,0};
+        optPrint("Introdueix torn i tema (W/B), la jugada actual i el màxim de jugades: ");
+        char c1 = scan.next().charAt(0);
+        Color torn;
+        if (c1 == 'W') torn = Color.BLANC;
+        else if (c1 == 'B') torn = Color.NEGRE;
+        else {
+            System.out.println("Torn invàlid");
+            return;
+        }
+        char c2 = scan.next().charAt(0);
+        Color tema;
+        if (c2 == 'W') tema = Color.BLANC;
+        else if (c2 == 'B') tema = Color.NEGRE;
+        else {
+            System.out.println("Tema invàlid");
+            return;
+        }
+        int n = scan.nextInt();
+        int nmax = scan.nextInt();
+        t.comprovaSolAux(torn,tema,n,nmax,data);
+        optPrint("Resultat (número de solucions i decisions vàlides): ");
+        System.out.printf("%d %d\n", data[0], data[1]);
+    }
 }
