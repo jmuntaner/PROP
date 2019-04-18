@@ -1,0 +1,19 @@
+Anotacions per jocs de proves
+Entrades provisionals!!
+1
+
+---n------kn--------p---P---p----p----K----P----rp-RP--r---B--Q-
+
+
+3n1b2/8/K7/2P5/8/k7/q7/8
+---n-b----------K---------P-------------k-------q---------------
+
+
+Mat en 1:
+---r-k---q-P--b--------Q----p--p-p-------B---P--PPP------K-R----
+W W 0 1 -> ha de donar 1 solucio
+
+Mat en 2: (per provar que mat en 1 falla)
+-r-----rppp-k------pPpQp-----------pP-----------P----PPP------K-
+W W 0 1 -> ha de donar 0 solucions
+W W 0 2 -> ha de donar almenys 1 solucio
