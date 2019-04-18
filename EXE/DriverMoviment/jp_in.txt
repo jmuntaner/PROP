@@ -27,3 +27,5 @@
 4
 3 4 false
 99
+
+// L'ultim salt de linia es necessari pq no peti
