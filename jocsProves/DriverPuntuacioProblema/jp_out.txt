@@ -1,0 +1,16 @@
+2j 20s
+3j 10s
+true
+false
+2j 10s
+false
+true
+2j 50s
+true
+false
+2j 20s
+false
+false
+1j 20s
+false
+true

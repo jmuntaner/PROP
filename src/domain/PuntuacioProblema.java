@@ -13,7 +13,7 @@ public class PuntuacioProblema implements Puntuacio<PuntuacioProblema> {
     public boolean esMillor(PuntuacioProblema altre) {
         if (jugades < altre.jugades) return true;
         if (altre.jugades < jugades) return false;
-        return altre.temps >= temps;
+        return altre.temps > temps;
     }
 
     @Override
