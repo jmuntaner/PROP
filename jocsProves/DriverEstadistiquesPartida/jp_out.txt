@@ -35,3 +35,12 @@ Error: No es pot finalitzar un torn no iniciat
 1
 1
 2
+2
+3
+5
+20000
+60000
+80000
+10000
+20000
+16000

@@ -116,5 +116,28 @@ Sortida esperada:
 1
 2
 
+-----------------------------------------
+
+Test 6: Creadora amb paràmetres
+
+Verifica que la creadora amb paràmetres assigna correctament els valors i calcula les mitjanes.
+
+Entrada:
+2
+2
+3
+20000
+60000
+
+Sortida esperada:
+2
+3
+5
+20000
+60000
+80000
+10000
+20000
+16000
 
 
