@@ -56,6 +56,7 @@ public class Partida {
         historial.clear();
         numMoviments = 0;
         situacioActual = prob.getSituacioInicial();
+        torn = prob.getTema();
     }
 
     /**
@@ -63,12 +64,17 @@ public class Partida {
      *
      * @param jugador Color del jugador que executa el moviment.
      * @param mov     Moviment a realitzar.
+     * @return Estat després del moviment (escac/mat/taules)
      */
-    public void moure(Color jugador, Moviment mov) {
+    public int moure(Color jugador, Moviment mov) {
         if (jugador != torn) throw new RuntimeException("No es el torn del jugador especificat");
-        situacioActual.mou(mov);
+        if (mov.getPecaMoguda().getColor() != torn)
+            throw new RuntimeException("No es pot moure una peça de l'altre color");
+
         historial.add(mov);
-        numMoviments++;
+        if (torn == prob.getTema()) numMoviments++;
+        torn = torn.getNext();
+        return situacioActual.mou(mov);
     }
 
     /**
