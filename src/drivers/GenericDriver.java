@@ -1,5 +1,10 @@
 package drivers;
 
+import domain.Moviment;
+import domain.Peca;
+import domain.Tauler;
+import javafx.util.Pair;
+
 import java.util.Scanner;
 
 abstract class GenericDriver {
@@ -54,6 +59,29 @@ abstract class GenericDriver {
 
     void optPrintf(String format, Object... args) {
         optPrint(String.format(format, args));
+    }
+
+    static void printMoviment(Moviment mv) {
+        if (mv == null) {
+            System.out.println("No hi ha moviment");
+            return;
+        }
+        Pair<Integer, Integer> pi = mv.getPosIni();
+        Pair<Integer, Integer> pf = mv.getPosFinal();
+        char cp = mv.getPecaMoguda().toChar();
+        Peca k = mv.getPecaMorta();
+        char ck;
+        if (k == null) ck = '-';
+        else ck = k.toChar();
+        System.out.printf("%d %d %d %d %c %c\n", pi.getKey(), pi.getValue(), pf.getKey(), pf.getValue(), cp, ck);
+    }
+
+    static void printTauler(Tauler t) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++)
+                System.out.print(t.getCasella(i, j));
+            System.out.println();
+        }
     }
 
     abstract void runTest(int option);

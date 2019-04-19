@@ -27,13 +27,6 @@ public class DriverFenTranslator extends GenericDriver {
         driver.runLoop();
     }
 
-    private void printTauler() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++)
-                System.out.print(t.getCasella(i, j));
-            System.out.println();
-        }
-    }
 
     void testCarregaFen() {
         optPrint("Introduir FEN: ");
@@ -43,7 +36,7 @@ public class DriverFenTranslator extends GenericDriver {
         optPrint("Color: ");
         System.out.println(c == Color.BLANC ? "blanc" : "negre");
         optPrintln("Tauler:");
-        printTauler();
+        printTauler(t);
     }
 
     void eliminaPeca() {
@@ -52,7 +45,7 @@ public class DriverFenTranslator extends GenericDriver {
         int y = scan.nextInt();
         scan.nextLine();
         t.treurePeca(x, y);
-        printTauler();
+        printTauler(t);
     }
 
     void afegeixPeca() {
@@ -63,7 +56,7 @@ public class DriverFenTranslator extends GenericDriver {
         scan.nextLine();
         Peca p = FenTranslator.char2Peca(c, x, y);
         t.afegirPeca(p);
-        printTauler();
+        printTauler(t);
     }
 
     void testGeneraFen() {
@@ -86,7 +79,7 @@ public class DriverFenTranslator extends GenericDriver {
                 testGeneraFen();
                 break;
             case 5:
-                printTauler();
+                printTauler(t);
                 break;
             default:
                 System.out.println("Test no implementat");
