@@ -1,0 +1,78 @@
+Casos a comprovar:
+
+-> Copiar jp_in i afegir comentaris
+-> Afegir altres camps
+
+- Constructor per defecte
+X    - Veure que treu tauler buit
+
+- Constructor parametritzat
+X    - Tauler normal
+X    - Tauler amb dos reis blancs
+X    - Tauler amb dos reis negres
+
+- Afegir peça
+X    - Peça normal (blanca/negra + tipus)
+X    - Rei blanc duplicat
+X    - Rei negre duplicat
+
+- Treure peça
+X    - Peça normal
+X    - Posicio buida
+X    - Posicio fora del tauler
+
+- Mou
+X    - Moviment normal a casella buida
+X    - Moviment normal a casella amb peça
+X    - Moviment acabat en escac
+X    - Moviment acabat en mat
+    - Moviment acabat en taules
+X    - Moviment invalid per escac contrari
+
+- Mou invers
+X    - Invertir moviment sense peça morta
+X    - Invertit moviment amb peça morta
+
+- Obte moviments jugador (tauler qualsevol)
+X    - Moviments jugador blanc
+X    - Moviments jugador negre
+
+- Obte moviments peça:
+    - Moviments peo blanc normal sense matar
+    - Moviments peo negre normal sense matar
+    - Moviments peo blanc normal matant
+    - Moviments peo negre normal matant
+    - Moviments peo blanc en posicio inicial sense matar
+    - Moviments peo negre en posicio inicial sense matar
+    - Moviments peo blanc en posicio inicial matant
+    - Moviments peo negre en posicio inicial matant
+    - Moviments rei
+        > Peces: matant i sense, bloquejos amb peces del mateix color
+    - Moviments reina
+    - Moviments torre
+    - Moviments alfil
+    - Moviments cavall
+
+- Get casella
+X    - Casella amb peça negra
+X    - Casella amb peça blanca
+X    - Casella sense peça
+X    - Casella fora del tauler
+
+- Final entrada tauler
+X   - Tauler sense rei blanc
+X    - Tauler sense rei negre
+    - Tauler incorrecte per escac del jugador que comença
+    - Tauler incorrecte per mat del jugador que comença
+    - Tauler incorrecte per mat del jugador que no comença
+X    - Tauler incorrecte per taules
+
+- Comprova sol aux
+X    - Problema amb mat en 1
+X        - Comprovar que té solució amb W W 0 1
+X    - Problema amb mat en 2
+X        - Comprovar que té solució amb W W 0 2
+X        - (fer primer moviment correcte) comprovar que té solució amb B W 1 2
+X        - (fer primer moviment incorrecte) comprovar que no té solució amb B W 1 2
+X        - Comprovar que no té solució amb W W 0 1
+X    - Problema amb mat en més moviments (p.ex. 5)

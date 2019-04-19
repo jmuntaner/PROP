@@ -87,6 +87,8 @@ rnbkq---Q-----k---P-K---
 k--------Q--------K-----
 10
 W
+2 Tauler amb mat per negres
+
 
 // Sequencies constructor + prova moviments
 
