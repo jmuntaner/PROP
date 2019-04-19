@@ -349,6 +349,7 @@ public class Tauler {
      * @return Codi de la peça
      */
     public char getCasella(int x, int y) {
+        if (x<0 || x>=SIZE || y<0 || y>=SIZE) throw new RuntimeException("Posicio fora del tauler");
         Peca p = peces[x][y];
         if (p == null) return '-';
         return p.toChar();
@@ -367,11 +368,7 @@ public class Tauler {
     public int finalEntradaTauler(Color c) {
         if (_reiBlanc == null) return 1;
         if (_reiNegre == null) return 2;
-        //if (esEscacMat(c, true) != 0) return 3;
-        //
-        int x = esEscacMat(c,true);
-        if (x!=0) return 3;
-        //
+        if (esEscacMat(c, true) != 0) return 3;
         int aux = esEscacMat(c.getNext(), true);
         if (aux != 0 && aux != 1) return 3; //el contrari pot estar fent escac
         return 0;

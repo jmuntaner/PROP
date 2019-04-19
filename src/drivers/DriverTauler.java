@@ -245,7 +245,7 @@ public class DriverTauler extends GenericDriver{
 
     }
 
-    public void testMou() { //El moviment no té perquè ser vàlid (però com a mínim hi ha d'haver reis al tauler)
+    public void testMou() {
         if (!comprovaReis()) return;
         optPrint("Introdueix posicio inicial i final: ");
         int xi = scan.nextInt();
@@ -308,7 +308,12 @@ public class DriverTauler extends GenericDriver{
         int y = scan.nextInt();
         scan.nextLine();
         optPrint("Casella: ");
-        System.out.println(t.getCasella(x,y));
+        try {
+            System.out.println(t.getCasella(x, y));
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void testFinalEntradaTauler() {
