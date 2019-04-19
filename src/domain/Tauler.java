@@ -75,8 +75,8 @@ public class Tauler {
                 else {
                     Peca p = peces[xp][yp];
                     if (p != null) {
-                        if (p.getColor() != b) exit = true;
-                        else if (p.esMovimentValid(true, x, y)) return true;
+                        if (p.getColor() == b && p.esMovimentValid(true,x,y)) return true;
+                        else exit = true;
                     }
                 }
                 if (dir[0] * dir[1] == 2 || dir[0] * dir[1] == -2) exit = true; // posicions cavall
