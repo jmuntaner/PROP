@@ -1,0 +1,202 @@
+Test FenTranslator
+
+Test 1: Traducció bàsica
+
+Traducció a Tauler de l'exemple de l'enunciat i posterior reconversió a fen.
+
+Entrada:
+1           // Tradueix a Tauler
+1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1
+4           // Genera FEN
+
+Sortida esperada:
+blanc     // Color del jugador que tira
+-N-b----  // Tauler contingut al FEN
+------nr
+R-----n-
+--Ppk--r
+K--p--qR
+--------
+--N-PQ--
+B------B
+1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1  // El FEN un altre cop
+
+--------------------------------------------
+
+Test 2: Traduccions diverses
+
+Traducció de diversos taulers en FEN obtinguts de
+https://blog.problemasdeajedrez.com/search/label/problemas%20de%20mate
+
+Entrada:
+1
+5B1b/1p2rR2/8/1B4N1/K2kP3/5n1R/1N6/2Q5 w - - 0 1
+1
+2n5/5PB1/2p1NK2/5B1b/1Pp4p/P1kp1P1n/Q4p2/5N1r w - - 0 1
+1
+2R5/2N4K/2pn2B1/Nb6/5p2/B1k1p2Q/2pn4/3R4 w - - 0 1
+1
+5Nn1/p2p3r/Bn4rP/1PpkB1PR/2N1p1R1/2PP1pK1/8/3Q4 w - - 0 1
+1
+2QR3r/1q2Pb2/1bpBpp2/p6n/KNpkpN2/1P3P2/3PP3/n3r3 w - - 0 1
+
+Sortida Esperada:
+blanc
+-----B-b
+-p--rR--
+--------
+-B----N-
+K--kP---
+-----n-R
+-N------
+--Q-----
+blanc
+--n-----
+-----PB-
+--p-NK--
+-----B-b
+-Pp----p
+P-kp-P-n
+Q----p--
+-----N-r
+blanc
+--R-----
+--N----K
+--pn--B-
+Nb------
+-----p--
+B-k-p--Q
+--pn----
+---R----
+blanc
+-----Nn-
+p--p---r
+Bn----rP
+-PpkB-PR
+--N-p-R-
+--PP-pK-
+--------
+---Q----
+blanc
+--QR---r
+-q--Pb--
+-bpBpp--
+p------n
+KNpkpN--
+-P---P--
+---PP---
+n---r---
+
+-------------------------------------------------
+
+Test 3: Tauler creat manualment
+
+Traducció a FEN d'un tauler creat pas a pas
+
+Entrada
+1                           // Crea un tauler buit
+8/8/8/8/8/8/8/8 b - - 0 1
+3                           // Afegeix peça
+p
+0 0
+4                           // Mostra FEN
+3                           // repetir...
+K
+5 7
+4
+3
+q
+5 6
+4
+3
+P
+3 3
+4
+3
+P
+3 4
+4
+3
+P
+3 5
+4
+3
+P
+3 6
+4                 // Mostra el FEN final
+
+Sortida esperada:
+negre
+--------
+--------
+--------
+--------
+--------
+--------
+--------
+--------
+p-------
+--------
+--------
+--------
+--------
+--------
+--------
+--------
+p7/8/8/8/8/8/8/8 b - - 0 1
+p-------
+--------
+--------
+--------
+--------
+-------K
+--------
+--------
+p7/8/8/8/8/7K/8/8 b - - 0 1
+p-------
+--------
+--------
+--------
+--------
+------qK
+--------
+--------
+p7/8/8/8/8/6qK/8/8 b - - 0 1
+p-------
+--------
+--------
+---P----
+--------
+------qK
+--------
+--------
+p7/8/8/3P4/8/6qK/8/8 b - - 0 1
+p-------
+--------
+--------
+---PP---
+--------
+------qK
+--------
+--------
+p7/8/8/3PP3/8/6qK/8/8 b - - 0 1
+p-------
+--------
+--------
+---PPP--
+--------
+------qK
+--------
+--------
+p7/8/8/3PPP2/8/6qK/8/8 b - - 0 1
+p-------
+--------
+--------
+---PPPP-
+--------
+------qK
+--------
+--------
+p7/8/8/3PPPP1/8/6qK/8/8 b - - 0 1
+
+
