@@ -1,8 +1,8 @@
 package drivers;
 
 import domain.*;
-import javafx.util.Pair;
 
+import javafx.util.Pair;
 import java.util.ArrayList;
 
 public class DriverTauler extends GenericDriver {
@@ -30,9 +30,9 @@ public class DriverTauler extends GenericDriver {
     public static void main(String[] args) {
         DriverTauler driver = new DriverTauler(args);
         driver.runLoop();
-        System.out.println(); //Línia en blanc entre tests
     }
 
+    //Els moviments son d'una peça, així que tots tenen la mateixa posició inicial
     private static Moviment searchMoviment(ArrayList<Moviment> al, int x, int y) {
         for (Moviment mov : al) {
             Pair<Integer, Integer> p = mov.getPosFinal();
@@ -45,10 +45,12 @@ public class DriverTauler extends GenericDriver {
     void runTest(int option) {
         if (option != 1 && option != 2 && t == null) {
             System.out.println("ERROR: TAULER NULL");
+            System.out.println(); // Línia en blanc entre tests
             return;
         }
         if (option == 6 && !lastTestMou) {
             System.out.println("Per invertir moviment, fes-ne un immediatament abans");
+            System.out.println(); // Línia en blanc entre tests
             return;
         }
         lastTestMou = false;
@@ -90,6 +92,7 @@ public class DriverTauler extends GenericDriver {
             default:
                 System.out.println("Test no vàlid");
         }
+        System.out.println(); //Línia en blanc entre tests
     }
 
     private Peca getPeca(char c, int x, int y) {
@@ -192,8 +195,13 @@ public class DriverTauler extends GenericDriver {
     public void testAfegirPeca() {
         optPrint("Introdueix una peça (x y codi): ");
         Peca p = readPeca();
-        t.afegirPeca(p);
-        printTauler(t);
+        try {
+            t.afegirPeca(p);
+            printTauler(t);
+        }
+        catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void testTreurePeca() {

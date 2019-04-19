@@ -2,9 +2,11 @@ JOCS DE PROVA PER A LA CLASSE MOVIMENT
 
 - Objecte de la prova: provar que funcionen els mètodes de la classe Moviment
 
-- Altres elements integrats: classe Peca, classe Rei, classe Color
+- Altres elements integrats: classe Peca, classe Rei, enum Color
 
-- Drivers: DriverMoviment
+- Drivers: DriverMoviment (permet cridar els mètodes de Moviment i treure els resultats per pantalla)
+
+- Stubs: - (testing incremental)
 
 - Fitxers de dades necessaris: -
 

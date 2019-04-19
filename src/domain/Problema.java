@@ -3,7 +3,8 @@ package domain;
 public class Problema {
     private String nom;
     private Color tema;
-    private int numJugades, dificultat; // dificultat = número decisions vàlides atacant / número solucions possibles
+    private int numJugades, dificultat;
+    // dificultat = número decisions atacant / número solucions possibles, NUM_MAX_JUGADES <= 3
     private Tauler situacioInicial;
     private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf

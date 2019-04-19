@@ -1,8 +1,31 @@
-Casos a comprovar:
+JOCS DE PROVA PER A LA CLASSE TAULER
+-Objecte de la prova: provar que funcionen els metodes (publics) de la classe Tauler
 
--> Copiar jp_in i afegir comentaris
--> Afegir altres camps
+- Altres elements integrats: classe Moviment, classe Peça i les seves subclasses, enum Color
 
+- Drivers: DriverTauler
+    - Permet cridar els metodes de la classe moviment
+    - Permet llegir les dades i operacions de manera interactiva
+    - Permet escriure els resultats per pantalla/fitxer
+
+- Stubs: - (testing incremental)
+
+- Fitxers de dades necessaris: -
+
+- Valors estudiats: caixa blanca (intentem buscar els casos significatius del codi)
+    > Detall sobre els valors concrets al final del document
+
+- Efectes estudiats: -
+
+- Operativa:
+    - Opcio 1:
+        - Executar amb opcio -q
+        - Redirigir entrada a "jp_in.txt" i sortida a "out.txt"
+        - Comprovar que "diff out.txt jp_out.txt" no produeix sortida
+    - Opcio 2:
+        - Executar i seguir instruccions per pantalla
+
+ANNEX 1: LLISTAT CASOS A COMPROVAR PER CADA METODE
 - Constructor per defecte
     - Veure que treu tauler buit
 
@@ -66,7 +89,7 @@ Casos a comprovar:
         - Comprovar que no té solució amb W W 0 1
     - Problema amb mat en més moviments
 
-Valors utilitzats:
+ANNEX 2: VALORS UTILITZATS PER A LA PROVA
 ***********************************************************
 //Tauler buit + afegir reis duplicats + treure peces
     1 Tauler buit
@@ -130,15 +153,18 @@ Valors utilitzats:
     7 Obtenir moviments negre
     B
     5 Moviment normal a casella buida
-    (moviment de reina a posicio normal)
+    0 1 2 0
     6 Invertir moviment sense peça morta
     5 Moviment normal a casella amb peça
-    (moviment de torre a torre contraria)
+    7 0 0 0
     6 Invertir moviment amb peça morta
     5 Moviment acabat en escac
-    (moviment de reina a reina contrària)
+    7 3 0 3
     5 Moviment invalid per escac contrari
-    (Moviment random que no mati la reina que esta fent escac)
+    1 7 2 7
+    5 Moviment per evitar l'escac
+    0 4 0 3
+
 ****************************************************************
 //Moviment amb taules (si falten posicions del tauler es queden a nul)
     2
@@ -165,8 +191,14 @@ Valors utilitzats:
     K---r------r---k-Q------
     10
     B
-    10 Comprovem que per blanques es vàlid
+    10 Comprovem que per blanques es valid
     W
+    2 Tauler arbitrari, vaild pels dos
+    -N-b----------nrR-----n---Ppk--rK--N--qR------------PQ--B------B
+    10
+    W
+    10
+    B
 **************************************************************
 // Constructor + obtenir moviments d'algunes peces
     2
@@ -177,44 +209,67 @@ Valors utilitzats:
     7 4
     8 peo negre (moviment matant + moviment sense)
     3 3
-    8 peo blanc (sense moviments possibles)
-    4 7
+    8 peo negre (sense moviments possibles)
+    3 7
 *************************************************************
 // Tauler mat en 1 + comprovar solucio + moviment de mat + get caselles
-2 Tauler amb mat en 1
----r-k---q-P--b--------Q----p--p-p-------B---P--PPP------K-R----
-11 Comprova solucio
-W W 0 1
-5 Moviment de mat
-(moviment de mat)
-9 Get casella peça blanca
-(Posicio final del moviment)
-9 Get casella peça negra
-(Posicio peça negra)
-9 Get casella sense peça
-(Posicio inicial moviment)
-9 Get casella fora del tauler
--1 3
+    2 Tauler amb mat en 1
+    ---r-k---q-P--b--------Q----p--p-p-------B---P--PPP------K-R----
+    11 Comprova solucio
+    W W 0 1
+    5 Moviment de mat
+    2 7 2 3
+    9 Get casella peça blanca (posicio final del moviment)
+    2 3
+    9 Get casella peça negra (rei)
+    0 5
+    9 Get casella sense peça (posicio inicial del moviment)
+    2 7
+    9 Get casella fora del tauler
+    -1 3
 **************************************************************
-//Comprovacio mat en 2 + mat en 5
+//Comprovacio mat en 2 + mat en 3
     2 Tauler amb mat en 2
     -r-----rppp-k------pPpQp-----------pP-----------P----PPP------K-
-    11 Comprova solucio en 1 moviment
+    11 Comprova que no te solucio en 1 moviment
     W W 0 1
     11 Comprova solucio en 2 moviments
     W W 0 2
     5 Moviment que no porta a solucio
-    (moviment incorrecte)
-    11 Comprova solucio en 1 moviment
+    2 6 1 6
+    11 Comprova que no hi ha solucio en 1 moviment
     B W 1 2
-    6 (desfer moviment)
+    5 Moviment invers (no hi havia peça morta)
+    1 6 2 6
     5 Moviment que porta a solucio
     (moviment correcte)
-    11 Comprova solucio en 1 moviment
+    11 Comprova que hi ha solucio en 1 moviment
     B W 1 2
-    2 Tauler amb mat en 5
-    ---------p--k-p--------p----RP-P---Pp--P----r----r------------K-
+    2 Tauler amb mat en 3
+    r----r-kp-----Rp-p---pb---P----N--B-----P-------------PPB--n--K-
     11 Comprova solucio
-    B B 0 5
-99 Finalitza test
+    W W 0 3
+*********************************************************************
+// Comprovació problemes "dificils" de mat en 3
+    2
+    --------------------------k-------P-------N-------N---Q----K----
+    11
+    W W 0 3
+    2
+    -------k----K-pp-------N--------------------------------B-------
+    11
+    W W 0 3
+    2
+    -----------------------------K-k-----B--------P-------P-----b---
+    11
+    W W 0 3
+    2
+    ------------------K---------kP-----N-----------Q----------R-----
+    11
+    W W 0 3
+    2
+    ------------------P-Q------P---R---k--------------K-------------
+    11
+    W W 0 3
+    99 Finalitza test
 *********************************************************************

@@ -11,6 +11,7 @@ public class Tauler {
     // TODO: testing de tota la classe
 
     private static final int SIZE = 8;
+    private static final int[][] movimentsRelatius = new int[][]{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};
 
     private Peca[][] peces;
 
@@ -64,8 +65,7 @@ public class Tauler {
         Pair<Integer, Integer> posRei = objectiu.getPosicio();
         int x = posRei.getKey();
         int y = posRei.getValue();
-        int[][] inc = movimentsRelatius(); //increments relatius que poden amenaçar el rei
-        for (int[] dir : inc) { //comprovem totes direccions
+        for (int[] dir : movimentsRelatius) { //comprovem totes direccions
             boolean exit = false;
             int step = 1;
             while (!exit) {
@@ -197,10 +197,6 @@ public class Tauler {
         }
     }
 
-    private int[][] movimentsRelatius() {
-        return new int[][]{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};
-    }
-
     /**
      * Afegeix una peça al tauler
      * La posició és la de la peça
@@ -312,8 +308,7 @@ public class Tauler {
         Color b = p.getColor();
 
         ArrayList<Moviment> movs = new ArrayList<>();
-        int[][] inc = movimentsRelatius();
-        for (int[] dir : inc) {
+        for (int[] dir : movimentsRelatius) {
             boolean exit = false;
             int step = 1;
             while (!exit) {
@@ -374,7 +369,12 @@ public class Tauler {
         return 0;
     }
 
-    //Comprova que totes les jugades de l'oponent porten a un mat
+    // Comprova que totes les jugades de l'oponent porten a un mat
+    // Comprova que almenys una jugada de l'atacant porta a un mat
+    // http://www.human-competitive.org/sites/default/files/gpsearch.pdf
+    // Límit de jugades: 3 (5 es inviable per numero de nodes, 4 no ho sembla però a la pràctica triga massa)
+    // Execució problema mat en 4 aprox 15 minuts (2:12 si no es busca el número de solucions)
+    // Es calcula el nombre de decisions de l'atacant pq crear l'arbre sencer per saber la mida és massa costós
 
     /**
      * Funció auxiliar per comprovar si el problema té solució i cercar paràmetres per calcular la dificultat
@@ -385,18 +385,26 @@ public class Tauler {
      * @param tema       Jugador atacant
      * @param jugada     Número de jugades que ha fet el jugador que ataca
      * @param numJugades Número màxim de jugades que pot fer l'atacant
-     * @param data       Número de solucions i número de decisions vàlides de l'atacant (paràmetre de sortida)
+     * @param data       Número de solucions i número de decisions de l'atacant (paràmetre de sortida)
      */
     public void comprovaSolAux(Color torn, Color tema, int jugada, int numJugades, int[] data) {
         if (jugada >= numJugades) return;
         ArrayList<Moviment> al = obteMovimentsJugador(torn);
         if (torn == tema) {
+            data[1] += al.size();
             for (Moviment m : al) {
                 int x = mou(m);
                 if (x != 3 && x != 4) {
-                    data[1]++;
+                    //data[1]++;
                     if (x == 2) data[0]++; //final amb solució
-                    else comprovaSolAux(torn.getNext(), tema, jugada+1, numJugades, data);
+                    else {
+                        //int sols = data[0];
+                        comprovaSolAux(torn.getNext(), tema, jugada+1, numJugades, data);
+                        /*if (data[0]>sols) {
+                            mouInvers(m);
+                            return; //ha trobat una solucio
+                        }*/
+                    }
                 }
                 mouInvers(m);
             }

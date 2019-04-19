@@ -422,7 +422,7 @@ P-Kp----
 k-------
 ----N---
 
-No hi ha peÃ§a en la posicio demanada
+No hi ha peça en la posicio demanada
 
 7 4 6 6 N -
 7 4 5 5 N -

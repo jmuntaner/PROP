@@ -53,15 +53,17 @@ W
 7
 B
 5
-(moviment de reina a posicio normal)
+0 1 2 0
 6
 5
-(moviment de torre a torre contraria)
+7 0 0 0
 6
 5
-(moviment de reina a reina contrària)
+7 3 0 3
 5
-(Moviment random que no mati la reina que esta fent escac)
+1 7 2 7
+5
+0 4 0 3
 2
 Kq--k---
 5
@@ -85,6 +87,12 @@ B
 10
 W
 2
+-N-b----------nrR-----n---Ppk--rK--N--qR------------PQ--B------B
+10
+W
+10
+B
+2
 ----------pQ---rP-Kp-------p--pp--P----P-p-n---pk-----------N---
 8
 0 0
@@ -93,19 +101,19 @@ W
 8
 3 3
 8
-4 7
-2 Tauler amb mat en 1
+3 7
+2
 ---r-k---q-P--b--------Q----p--p-p-------B---P--PPP------K-R----
 11
 W W 0 1
-5 Moviment de mat
-(moviment de mat)
+5
+2 7 2 3
 9
-(Posicio final del moviment)
+2 3
 9
-(Posicio peça negra)
+0 5
 9
-(Posicio inicial moviment)
+2 7
 9
 -1 3
 2
@@ -115,16 +123,37 @@ W W 0 1
 11
 W W 0 2
 5
-(moviment incorrecte)
+2 6 1 6
 11
 B W 1 2
-6 (desfer moviment)
 5
-(moviment correcte)
+1 6 2 6
+5
+2 6 1 5
 11
 B W 1 2
 2
----------p--k-p--------p----RP-P---Pp--P----r----r------------K-
+r----r-kp-----Rp-p---pb---P----N--B-----P-------------PPB--n--K-
 11
-B B 0 5
+W W 0 3
+2
+--------------------------k-------P-------N-------N---Q----K----
+11
+W W 0 3
+2
+-------k----K-pp-------N--------------------------------B-------
+11
+W W 0 3
+2
+-----------------------------K-k-----B--------P-------P-----b---
+11
+W W 0 3
+2
+------------------K---------kP-----N-----------Q----------R-----
+11
+W W 0 3
+2
+------------------P-Q------P---R---k--------------K-------------
+11
+W W 0 3
 99
