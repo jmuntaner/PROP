@@ -80,13 +80,13 @@ public class ControladorPartida {
         Color torn = partida.getTorn();
         Tauler t = partida.getSituacioActual();
         Moviment mov = null;
-        ArrayList<Moviment> movs_pos = t.obteMovimentsJugador(torn);
+        ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
         int bestMove;
         int codi;
         int ret;
         if (torn == Color.BLANC) {
             bestMove = -9999;
-            for (Moviment m : movs_pos) {
+            for (Moviment m : movPos) {
                 codi = t.mou(m);
                 ret = minimax(t, profunditat, false, codi);
                 if (ret > bestMove) {
@@ -97,7 +97,7 @@ public class ControladorPartida {
             }
         } else if (torn == Color.NEGRE) {
             bestMove = 9999;
-            for (Moviment m : movs_pos) {
+            for (Moviment m : movPos) {
                 codi = t.mou(m);
                 ret = minimax(t, profunditat - 1, false, codi);
                 if (ret < bestMove) {
@@ -113,7 +113,10 @@ public class ControladorPartida {
     /**
      * Calcula el minimax de cada posicio
      *
-     * @return Millor moviment
+     * @param profunditat profunditat maxima d'exploracio de l'arbre
+     * @param esJugadorMaximal Indica si es el jugador maximal (en aquest cas les blanques)
+     * @param codi Codi retornat al fer l'ultim moviment
+     * @return Valor de la branca explorada
      */
     private int minimax(Tauler t, int profunditat, boolean esJugadorMaximal, int codi) {
         //mat retornem millor resultat
@@ -129,19 +132,19 @@ public class ControladorPartida {
         if (profunditat == 0) {
             //TODO: associar-ho amb l'heurística
         }
-        ArrayList<Moviment> movs_pos = t.obteMovimentsJugador(this.partida.getTorn());
+        ArrayList<Moviment> movPos = t.obteMovimentsJugador(this.partida.getTorn());
         int bestMove;
         int c;
         if (esJugadorMaximal) {
             bestMove = -9999;
-            for (Moviment m : movs_pos) {
+            for (Moviment m : movPos) {
                 c = t.mou(m);
                 bestMove = Math.max(minimax(t, profunditat - 1, false, c), bestMove);
                 t.mouInvers(m);
             }
         } else {
             bestMove = 9999;
-            for (Moviment m : movs_pos) {
+            for (Moviment m : movPos) {
                 c = t.mou(m);
                 bestMove = Math.min(minimax(t, profunditat - 1, true, c), bestMove);
                 t.mouInvers(m);
