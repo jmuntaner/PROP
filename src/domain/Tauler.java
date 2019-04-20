@@ -149,7 +149,7 @@ public class Tauler {
      * 4: situació invàlida
      *
      * @param c Jugador
-     * @param b Si false, comprova només escac/taules; si true, comprova escac/mat/taules
+     * @param b Si false, comprova només escac/taules(nomes reis); si true, comprova escac/mat/taules(nomes reis o rei ofegat)
      * @return Retorna un enter segons el codi
      */
     private int esEscacMat(Color c, boolean b) {
@@ -165,12 +165,16 @@ public class Tauler {
             else return 0;
         }
 
-        boolean m = esMat(c);
+        boolean m = esMat(c); //Hi ha mat = el rei no es pot moure
         if (m) {
             if (e) return 2;
-            else return 3;
+            else { //Comprovar rei ofegat (mirar si hi ha algun moviment possible a part dels del rei)
+                Peca r = c==BLANC ? _reiNegre : _reiBlanc;
+                Pair<Integer,Integer> p = r.getPosicio();
+                if (obteMovimentsJugador(c.getNext()).size() == obteMovimentsPeca(p.getKey(),p.getValue()).size()) return 3;
+                else return 0; //no hi ha escac ni tauler -> moviment vàlid
+            }
         }
-
         if (e) return 1; //no hi ha mat ni taules
         return 0;
     }

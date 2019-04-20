@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+//TODO:
+// - Operativa (per exemple, especificar que la funcionalitat de comprovar solucio es fa quan afegeixes un problema)
+// - HvH, HvM, MvM
 public class DriverJugar {
     private static final String[] menuPrincipal = new String[]{"Menu principal", "Gestionar problemes", "Jugar", "Sortir"};
     private static final String[] menuGestio = new String[]{"Gestió de problemes", "Llista", "Afegir", "Eliminar", "Tornar"};
@@ -85,6 +88,10 @@ public class DriverJugar {
                 mode = 1;
                 break;
             case 2:
+                if (problemes.size()==0) {
+                    System.out.println("Cal almenys un problema per poder jugar");
+                    return;
+                }
                 mode = 2;
                 break;
             case 3:
@@ -256,6 +263,7 @@ public class DriverJugar {
             }
         }
         System.out.println();
+        System.out.println("Prem Enter per continuar");
         scan.nextLine();
     }
 
@@ -274,7 +282,8 @@ public class DriverJugar {
             System.out.println("Problema afegit correctament.");
         } else System.out.println("Error: El problema no te solució.");
 
-
+        System.out.println();
+        System.out.println("Prem Enter per continuar");
         scan.nextLine();
     }
 
@@ -282,6 +291,8 @@ public class DriverJugar {
         System.out.println();
         if (problemes.isEmpty()) {
             System.out.println("No hi ha cap problema a eliminar.");
+            System.out.println();
+            System.out.println("Prem Enter per continuar");
             scan.nextLine();
             return;
         }
@@ -300,6 +311,8 @@ public class DriverJugar {
         }
         problemes.remove(el - 1);
         System.out.println("Problema eliminat correctament.");
+        System.out.println();
+        System.out.println("Prem Enter per continuar");
         scan.nextLine();
     }
 
