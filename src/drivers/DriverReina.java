@@ -101,13 +101,11 @@ public class DriverReina extends GenericDriver {
     }
 
     public void testGetColor() {
-        System.out.println();
         String s = r.getColor()==Color.BLANC?"Blanc":"Negre";
         System.out.println(s);
     }
 
     public void testGetPos() {
-        System.out.println();
         System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
     }
 
