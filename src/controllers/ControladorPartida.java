@@ -130,7 +130,7 @@ public class ControladorPartida {
             else return 9999;
         }
         if (profunditat == 0) {
-            //TODO: associar-ho amb l'heurística
+            return 0; //provisional
         }
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(this.partida.getTorn());
         int bestMove;

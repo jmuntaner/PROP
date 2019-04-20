@@ -89,7 +89,7 @@ true  // A l'alfil no li afecta aquest parametre per tant wlog usarem true.
 0
 3     // Opcio 3
 true  // A l'alfil no li afecta aquest parametre per tant wlog usarem true.
-4     // moviment sense patro (no valid)
+4     // no moviment (no valid)
 4
 
 
