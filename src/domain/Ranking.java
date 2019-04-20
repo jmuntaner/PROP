@@ -36,6 +36,9 @@ public class Ranking<T extends Puntuacio<T>> {
                 return;
             }
         }
+        //Afegir usuari al final (si arriba aquí o bé és l'últim o bé el ranking està buit)
+        ranking.add(new Pair<>(nom,punts));
+
     }
 
     public int posicioUsuari(Usuari usuari) {
@@ -51,7 +54,6 @@ public class Ranking<T extends Puntuacio<T>> {
 
     public ArrayList<Pair<String, String>> getLlistaRanking(int n) {
         ArrayList<Pair<String, String>> result = new ArrayList<>();
-
         for (int i = 0; i < min(n, ranking.size()); ++i) {
             Pair<String, T> row = ranking.get(i);
             result.add(new Pair<>(row.getKey(), row.getValue().representa()));

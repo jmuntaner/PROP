@@ -19,7 +19,6 @@ public class DriverProblema extends GenericDriver {
                 "Test get dificultat",
                 "Test get situació inicial",
                 "Test get ranking",
-                "Test init problema",
                 "Test init problema"
         };
     }
@@ -121,7 +120,7 @@ public class DriverProblema extends GenericDriver {
     public void testInitProblema() {
         optPrint("Nombre de jugades seguit de FEN: ");
         int nj = scan.nextInt();
-        String fen = scan.nextLine();
+        String fen = scan.nextLine().trim();
         Tauler t = FenTranslator.generaTauler(fen);
         Color c = FenTranslator.getColor(fen);
         try {
