@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import static domain.Color.BLANC;
 
 public class Tauler {
-
-    // TODO: testing de tota la classe
-
     private static final int SIZE = 8;
     private static final int[][] movimentsRelatius = new int[][]{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};
 
@@ -203,7 +200,6 @@ public class Tauler {
      *
      * @param p Peça a afegir
      */
-    //TODO: substituir rei
     public void afegirPeca(Peca p) {
         Pair<Integer, Integer> pos = p.getPosicio();
         char c = p.toChar();

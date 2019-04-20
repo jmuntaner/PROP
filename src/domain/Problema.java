@@ -1,10 +1,14 @@
 package domain;
 
+import com.sun.xml.internal.bind.v2.model.runtime.RuntimeReferencePropertyInfo;
+
 public class Problema {
+    private static final int NMAX = 3;
+
     private String nom;
     private Color tema;
     private int numJugades, dificultat;
-    // dificultat = número decisions atacant / número solucions possibles, NUM_MAX_JUGADES <= 3
+    // dificultat = número decisions atacant / número solucions possibles
     private Tauler situacioInicial;
     private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
@@ -109,6 +113,7 @@ public class Problema {
      * @return True si la inicialització s'ha completat amb èxit, false si no (problema sense solució)
      */
     public boolean initProblema(Color t, int nj, Tauler si) {
+        if (nj > NMAX) throw new RuntimeException("Numero de jugades superior al maxim");
         tema = t;
         numJugades = nj;
         situacioInicial = si;
@@ -124,4 +129,5 @@ public class Problema {
 // - En cas de guardar, CtrlProblema ha de comprovar si el problema repeticions, si s'introdueix/modifica:
 // -    -> Nom
 // -    -> Tema + numJugades + situacióInicial
+// - El ranking el gestiona directament el controlador
 
