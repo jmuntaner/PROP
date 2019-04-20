@@ -1,0 +1,101 @@
+Tests classe Rei:
+
+Test 1: Creacio d'un rei
+
+Comprova que la creadora de la classe rei funcioni correctament.
+
+Entrada:
+
+1     // Opcio 1, crear rei
+BLANC // Color
+3     // x
+4     // y
+1     // Opcio 1, crear rei
+NEGRE // Color
+6     // x
+7     // y
+1     // Opcio 1, crear rei
+BLAU // Color
+0     // x
+4     // y
+
+Sortida Esperada:
+Creat: x: 3, y: 4 Color: BLANC
+Creat: x: 6, y: 7 Color: NEGRE
+ERROR: COLOR NO VALID
+
+-----------------------------------------------------
+
+Test 2: Comprovacio de la conversio a char.
+
+Comprova que la conversio a char de rei funciona correctament. Provarem amb un rei de cada color.
+
+Entrada:
+1     // Opció 1, crear rei blanc
+BLANC // Color
+3     // x
+4     // y
+2     // Opcio 2, conversio a char
+1     // Opcio 1, crear rei negre
+NEGRE // Color
+6     // x
+7     // y
+2     // Opcio 2, conversio a char
+
+Sortida esperada:
+Creat: x: 3, y: 4 Color: BLANC
+K
+Creat: x: 6, y: 7 Color: NEGRE
+k
+-------------------------------------------------------
+
+Test 3: esMovimentValid
+
+Comprova que la funcio de esMovimentValid retorna true pels moviments d'un rei i false per als que no son propis d'un rei.
+Provarem diferents moviments en horitzontal, verticl, diagonal y altres.
+
+Entrada:
+1     // Crearem un rei al mig del tauler i provarem les caselles del voltant, i algunes de lluny.
+BLANC // El color es irrellevant per als moviments d'un rei, wlog, usem BLANC.
+3
+4
+3     // Opcio 3, comprova moviment valid
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+3
+5     // moviment horitzontal d'una unitat (valid)
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+3
+6     // moviment horitzontal de mes d'una unitat (no valid)
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+4     // moviment vertical d'una unitat (valid)
+4
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+1     // moviment vertical de més d'una unitat (no valid)
+4
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+4     // moviment diagonal d'una unitat (valid)
+5
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+6     // moviment diagonal de més d'una unitat (no valid)
+7
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+0
+7     // moviment sense patro (no valid)
+
+
+Sortida esperada:
+
+Creat: x: 3, y: 4 Color: BLANC
+true
+false
+true
+false
+true
+false
+false
