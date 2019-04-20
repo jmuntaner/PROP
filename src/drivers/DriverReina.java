@@ -23,7 +23,6 @@ public class DriverReina extends GenericDriver {
     public static void main(String[] args) {
         DriverReina driver = new DriverReina(args);
         driver.runLoop();
-        System.out.println(); //Línia en blanc entre tests
     }
 
     @Override
@@ -86,7 +85,6 @@ public class DriverReina extends GenericDriver {
     }
 
     public void testToChar() {
-        System.out.println();
         System.out.println(r.toChar());
     }
 

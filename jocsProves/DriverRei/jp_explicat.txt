@@ -52,7 +52,7 @@ k
 Test 3: esMovimentValid
 
 Comprova que la funcio de esMovimentValid retorna true pels moviments d'un rei i false per als que no son propis d'un rei.
-Provarem diferents moviments en horitzontal, verticl, diagonal y altres.
+Provarem diferents moviments en horitzontal, vertical, diagonal i altres.
 
 Entrada:
 1     // Crearem un rei al mig del tauler i provarem les caselles del voltant, i algunes de lluny.
@@ -61,12 +61,12 @@ BLANC // El color es irrellevant per als moviments d'un rei, wlog, usem BLANC.
 4
 3     // Opcio 3, comprova moviment valid
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-3
-5     // moviment horitzontal d'una unitat (valid)
+3     // moviment horitzontal d'una unitat (valid)
+5
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-3
-6     // moviment horitzontal de mes d'una unitat (no valid)
+3     // moviment horitzontal de mes d'una unitat (no valid)
+6
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
 4     // moviment vertical d'una unitat (valid)
@@ -85,8 +85,12 @@ true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
 7
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-0
-7     // moviment sense patro (no valid)
+0     // moviment sense patro (no valid)
+7
+3     // Opcio 3
+true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+3     // no moviment (no valid)
+4
 
 
 Sortida esperada:
@@ -97,5 +101,6 @@ false
 true
 false
 true
+false
 false
 false

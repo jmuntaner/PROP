@@ -18,7 +18,6 @@ public class DriverPeo extends GenericDriver {
     public static void main(String[] args) {
         DriverPeo driver = new DriverPeo(args);
         driver.runLoop();
-        System.out.println(); //Línia en blanc entre tests
     }
 
     @Override
@@ -69,7 +68,6 @@ public class DriverPeo extends GenericDriver {
     }
 
     public void testToChar() {
-        System.out.println();
         System.out.println(p.toChar());
     }
 

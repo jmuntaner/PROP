@@ -17,7 +17,6 @@ public class DriverAlfil extends GenericDriver {
     public static void main(String[] args) {
         DriverAlfil driver = new DriverAlfil(args);
         driver.runLoop();
-        System.out.println(); //Línia en blanc entre tests
     }
 
     @Override
@@ -68,7 +67,6 @@ public class DriverAlfil extends GenericDriver {
     }
 
     public void testToChar() {
-        System.out.println();
         System.out.println(a.toChar());
     }
 
