@@ -11,6 +11,10 @@ public class Ranking<T extends Puntuacio<T>> {
         ranking = new ArrayList<>();
     }
 
+    private static int min(int a, int b) {
+        return a < b ? a : b;
+    }
+
     public void afegeixPuntuacio(Usuari usuari, T punts) {
         String nom = usuari.getNom();
         //Busquem si un usuari ja te una puntuació millor
@@ -48,7 +52,7 @@ public class Ranking<T extends Puntuacio<T>> {
     public ArrayList<Pair<String, String>> getLlistaRanking(int n) {
         ArrayList<Pair<String, String>> result = new ArrayList<>();
 
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < min(n, ranking.size()); ++i) {
             Pair<String, T> row = ranking.get(i);
             result.add(new Pair<>(row.getKey(), row.getValue().representa()));
         }
