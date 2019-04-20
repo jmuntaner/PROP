@@ -1,6 +1,7 @@
 package drivers;
 
 import domain.*;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,6 +62,19 @@ public class DriverJugar {
             System.out.printf("|%d. %s%s|\r\n", i, menu[i], new String(espi));
         }
         System.out.println(barra);
+    }
+
+    private void printTauler(Tauler t) {
+        System.out.println("  0 1 2 3 4 5 6 7");
+        for (int i = 0; i < 8; i++) {
+            System.out.print(i);
+            for (int j = 0; j < 8; j++) {
+                System.out.print(" ");
+                System.out.print(t.getCasella(i, j));
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     private void execMenuPrincipal() {
@@ -142,7 +156,7 @@ public class DriverJugar {
             else valid = true;
 
         }
-        return problemes.get(el);
+        return problemes.get(el - 1);
     }
 
     private void partidaMM() {
@@ -159,6 +173,27 @@ public class DriverJugar {
         System.out.println("Encara no es pot jugar.");
     }
 
+    private boolean processResultMou(int result) {
+        switch (result) {
+            case 0:
+                System.out.println("Moviment realitzat");
+                return false;
+            case 1:
+                System.out.println("Escac!");
+                return false;
+            case 2:
+                System.out.println("Escac Mat!");
+                return true;
+            case 3:
+            case 4:
+                System.out.println("Taules!");
+                return true;
+            default:
+                System.out.printf("WARNING: Codi de resultat %d desconegut", result);
+                return false;
+        }
+    }
+
     private void partidaHH() {
         System.out.print("Nom del jugador atacant: ");
         String nom1 = scan.nextLine();
@@ -166,7 +201,48 @@ public class DriverJugar {
         String nom2 = scan.nextLine();
         Problema prob = seleccioProblema();
         Partida p = new Partida(prob);
-        System.out.println("Encara no es pot jugar.");
+
+        Color tema = prob.getTema();
+        int maxMovs = prob.getNumJugades();
+        boolean fi = false;
+        int result = -1;
+        while (!fi) {
+            printTauler(p.getSituacioActual());
+            System.out.printf("Torn de %s (%s):\r\n",
+                    tema == p.getTorn() ? nom1 : nom2,
+                    p.getTorn() == Color.BLANC ? "blanques" : "negres");
+            System.out.print("Peça a moure (x y): ");
+            int xo = scan.nextInt();
+            int yo = scan.nextInt();
+            scan.nextLine();
+            if (p.getAtPosicio(xo, yo) == '-') System.out.printf("No hi a cap peça a la posició.");
+            else if (Character.isUpperCase(p.getAtPosicio(xo, yo)) != (p.getTorn() == Color.BLANC))
+                System.out.println("Error: la peça no es del teu color.");
+            else {
+                ArrayList<Moviment> movs = p.obteMovimentsPosicio(xo, yo);
+                if (!movs.isEmpty()) {
+                    for (int i = 0; i < movs.size(); i++) {
+                        Moviment m = movs.get(i);
+                        Pair<Integer, Integer> fin = m.getPosFinal();
+                        System.out.printf("%d. %d,%d\r\n", i + 1, fin.getKey(), fin.getValue());
+                    }
+                    int index = lecturaInt("Selecciona un moviment: ");
+                    Moviment mov = movs.get(index - 1);
+                    result = p.moure(p.getTorn(), mov);
+                    fi = processResultMou(result);
+                } else System.out.println("No hi ha moviments possibles");
+            }
+
+            if (p.getNumMoviments() >= maxMovs) fi = true;
+        }
+        System.out.println();
+        System.out.println("Partida finalitzada");
+        if (result == 2) {
+            System.out.print("El guanyador es: ");
+            if (p.getTorn() == prob.getTema()) System.out.println(nom2);
+            else System.out.println(nom1);
+        } else if (p.getNumMoviments() >= maxMovs) System.out.println("S'ha arribat al limit de moviments.");
+        scan.nextLine();
     }
 
     private void llistaProblemes() {
@@ -179,6 +255,7 @@ public class DriverJugar {
                 System.out.printf("%d. %s\r\n", i++, p.getNom());
             }
         }
+        System.out.println();
         scan.nextLine();
     }
 
@@ -192,10 +269,12 @@ public class DriverJugar {
         String fen = scan.nextLine();
         Tauler t = FenTranslator.generaTauler(fen);
         Color c = FenTranslator.getColor(fen);
-        p.initProblema(c, nj, t);
+        if (p.initProblema(c, nj, t)) {
+            problemes.add(p);
+            System.out.println("Problema afegit correctament.");
+        } else System.out.println("Error: El problema no te solució.");
 
-        problemes.add(p);
-        System.out.println("Problema afegit correctament.");
+
         scan.nextLine();
     }
 
