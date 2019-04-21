@@ -170,7 +170,34 @@ public class DriverJugar {
     private void partidaMM() {
         Problema prob = seleccioProblema();
         Partida p = new Partida(prob);
-        System.out.println("Encara no es pot jugar.");
+        //System.out.println("Encara no es pot jugar.");
+        M1 maquina = new M1();
+
+        Color tema = prob.getTema();
+        int maxMovs = prob.getNumJugades();
+        boolean fi = false;
+        int result = -1;
+        while (!fi) {
+            printTauler(p.getSituacioActual());
+            System.out.printf("Torn de la màquina (%s)\n", p.getTorn()==Color.BLANC ? "blanques" : "negres");
+            Moviment m = maquina.calcularMoviment(2*(maxMovs-p.getNumMoviments())-1, p.getSituacioActual(),p.getTorn(),tema);
+            result = p.moure(p.getTorn(),m);
+            fi = processResultMou(result);
+
+            if (p.getNumMoviments()>=maxMovs) fi = true;
+        }
+        System.out.println();
+        System.out.println("Partida finalitzada");
+        System.out.printf("\nSituació final: \n");
+        printTauler(p.getSituacioActual());
+        System.out.println();
+        if (result == 2) {
+            System.out.print("El guanyador es: ");
+            if (p.getTorn() == prob.getTema()) System.out.println("jugador2 (M1)");
+            else System.out.println("jugador1 (M1)");
+        }
+        else if (p.getNumMoviments() >= maxMovs) System.out.println("S'ha arribat al maxim de moviments");
+        scan.nextLine();
     }
 
     private void partidaHM() {
@@ -181,6 +208,7 @@ public class DriverJugar {
         //System.out.println("Encara no es pot jugar.");
         //
         //Inicialitzacions necessaries per la maquina
+        M1 maquina = new M1();
         //
 
         Color tema = prob.getTema();
@@ -218,6 +246,10 @@ public class DriverJugar {
             }
             else {
                 //juga màquina
+                System.out.printf("Torn de la màquina (%s)\n", p.getTorn()==Color.BLANC ? "blanques" : "negres");
+                Moviment m = maquina.calcularMoviment(2*(maxMovs-p.getNumMoviments())-1,p.getSituacioActual(),p.getTorn(),tema);
+                result = p.moure(p.getTorn(),m);
+                fi = processResultMou(result);
                 torn = true;
             }
 
@@ -225,6 +257,9 @@ public class DriverJugar {
         }
         System.out.println();
         System.out.println("Partida finalitzada");
+        System.out.printf("\nSituació final: \n");
+        printTauler(p.getSituacioActual());
+        System.out.println();
         if (result == 2) {
             System.out.print("El guanyador es: ");
             if (p.getTorn() == prob.getTema()) System.out.println("jugador2 (M1)");
@@ -300,6 +335,9 @@ public class DriverJugar {
         }
         System.out.println();
         System.out.println("Partida finalitzada");
+        System.out.printf("\nSituació final: \n");
+        printTauler(p.getSituacioActual());
+        System.out.println();
         if (result == 2) {
             System.out.print("El guanyador es: ");
             if (p.getTorn() == prob.getTema()) System.out.println(nom2);
