@@ -192,9 +192,11 @@ public class DriverJugar {
                 System.out.println("Escac Mat!");
                 return true;
             case 3:
-            case 4:
                 System.out.println("Taules!");
                 return true;
+            case 4:
+                System.out.println("Moviment invalid");
+                return false;
             default:
                 System.out.printf("WARNING: Codi de resultat %d desconegut", result);
                 return false;

@@ -91,6 +91,9 @@ public class Tauler {
      * @return true si hi ha mat
      */
     private boolean esMat(Color b) {
+        if (obteMovimentsJugador(b.getNext()).size()==0) return true;
+        return false;
+        /*
         Pair<Integer, Integer> posRei;
         if (b == BLANC) posRei = _reiNegre.getPosicio();
         else posRei = _reiBlanc.getPosicio();
@@ -104,6 +107,7 @@ public class Tauler {
             }
         }
         return true;
+        */
     }
 
 
@@ -249,8 +253,8 @@ public class Tauler {
     public int mou(Moviment mov) {
         executaMoviment(mov);
         Peca p = mov.getPecaMoguda();
-        int x = esEscacMat(p.getColor().getNext(), false);
-        if (x == 1 || x == 2 || x == 4) return 4; //taules es moviment vàlid
+        //int x = esEscacMat(p.getColor().getNext(), false);
+        //if (x == 1 || x == 2 || x == 4) return 4; //taules es moviment vàlid
         return esEscacMat(p.getColor(), true);
     }
 
@@ -325,7 +329,10 @@ public class Tauler {
                             m.setPecaMorta(k);
                             exit = true;
                         }
-                        movs.add(m);
+                        //Comprovem si fa que hi hagi escac contrari
+                        executaMoviment(m);
+                        if (!esEscac(b.getNext())) movs.add(m);
+                        mouInvers(m);
                     }
                 }
                 if (dir[0] * dir[1] == 2 || dir[0] * dir[1] == -2) exit = true;

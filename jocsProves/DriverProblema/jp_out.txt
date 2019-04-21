@@ -7,7 +7,7 @@ Inicialitzacio incorrecta: problema sense solucio
 Inicialitzacio correcta
 BLANC
 2
-1333
+1332
 --------
 ------K-
 -p-B-RB-

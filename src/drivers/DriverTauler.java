@@ -139,7 +139,7 @@ public class DriverTauler extends GenericDriver {
 
     private void printMoviments(ArrayList<Moviment> movs) {
         if (movs == null) {
-            System.out.println("No hi ha peça en la posicio demanada");
+            System.out.println("No hi ha peca en la posicio demanada");
             return;
         } else if (movs.size() == 0) {
             System.out.println("No hi ha moviments possibles");
@@ -232,7 +232,7 @@ public class DriverTauler extends GenericDriver {
         }
         m = searchMoviment(al, xf, yf);
         if (m == null) {
-            System.out.println("La casella final no és un moviment vàlid");
+            System.out.println("La casella final no es un moviment valid");
             return;
         }
         int res = t.mou(m);
