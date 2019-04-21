@@ -1,5 +1,6 @@
 package drivers;
 
+import controllers.ControladorPartida;
 import domain.*;
 import javafx.util.Pair;
 
@@ -177,7 +178,60 @@ public class DriverJugar {
         String nom = scan.nextLine();
         Problema prob = seleccioProblema();
         Partida p = new Partida(prob);
-        System.out.println("Encara no es pot jugar.");
+        //System.out.println("Encara no es pot jugar.");
+        //
+        //Inicialitzacions necessaries per la maquina
+        //
+
+        Color tema = prob.getTema();
+        int maxMovs = prob.getNumJugades();
+        boolean fi = false;
+        boolean torn = true; //torn de l'humà
+        int result = -1;
+        while (!fi) {
+            printTauler(p.getSituacioActual());
+            if (torn) {
+                System.out.printf("Torn del jugador: %s (%s)\n", nom, p.getTorn()==Color.BLANC ? "blanques" : "negres");
+                System.out.print("Peça a moure (x y): ");
+                int xo = scan.nextInt();
+                int yo = scan.nextInt();
+                scan.nextLine();
+                if (p.getAtPosicio(xo,yo) == '-') System.out.printf("No hi ha cap peça a la posició.");
+                else if (Character.isUpperCase(p.getAtPosicio(xo,yo)) != (p.getTorn() == Color.BLANC))
+                    System.out.println("Error: la peça no es del teu color.");
+                else {
+                    ArrayList<Moviment> movs = p.obteMovimentsPosicio(xo,yo);
+                    if (!movs.isEmpty()) {
+                        for (int i=0; i<movs.size(); i++) {
+                            Moviment m = movs.get(i);
+                            Pair<Integer,Integer> fin = m.getPosFinal();
+                            System.out.printf("%d. %d,%d\r\n",i+1,fin.getKey(),fin.getValue());
+                        }
+                        int index = lecturaInt("Selecciona un moviment: ");
+                        Moviment mov = movs.get(index-1);
+                        result = p.moure(p.getTorn(), mov);
+                        fi = processResultMou(result);
+                        torn = false;
+                    }
+                    else System.out.println("No hi ha moviments possibles");
+                }
+            }
+            else {
+                //juga màquina
+                torn = true;
+            }
+
+            if (p.getNumMoviments() >= maxMovs) fi = true;
+        }
+        System.out.println();
+        System.out.println("Partida finalitzada");
+        if (result == 2) {
+            System.out.print("El guanyador es: ");
+            if (p.getTorn() == prob.getTema()) System.out.println("jugador2 (M1)");
+            else System.out.printf("jugador1 (%s)\n", nom);
+        }
+        else if (p.getNumMoviments() >= maxMovs) System.out.println("S'ha arribat al maxim de moviments");
+        scan.nextLine();
     }
 
     private boolean processResultMou(int result) {

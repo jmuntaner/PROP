@@ -19,7 +19,7 @@ public class ControladorPartida {
      * @param usuari   L'usuari que juga el problema (ataca).
      * @param oponent  Nom de l'oponent.
      */
-    ControladorPartida(Problema problema, Usuari usuari, String oponent) {
+    public ControladorPartida(Problema problema, Usuari usuari, String oponent) {
         this.problema = problema;
         this.usuari = usuari;
         nomOponent = oponent;
@@ -76,7 +76,7 @@ public class ControladorPartida {
      *
      * @param profunditat profunditat maxima d'exploracio de l'arbre
      */
-    void calcularMoviment(int profunditat) {
+    public int calcularMoviment(int profunditat) {
         Color torn = partida.getTorn();
         Tauler t = partida.getSituacioActual();
         Moviment mov = null;
@@ -107,7 +107,7 @@ public class ControladorPartida {
                 t.mouInvers(m);
             }
         }
-        this.partida.moure(torn, mov);
+        return this.partida.moure(torn, mov);
     }
 
     /**
