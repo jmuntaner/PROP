@@ -121,10 +121,8 @@ public class DriverProblema extends GenericDriver {
         optPrint("Nombre de jugades seguit de FEN: ");
         int nj = scan.nextInt();
         String fen = scan.nextLine().trim();
-        Tauler t = FenTranslator.generaTauler(fen);
-        Color c = FenTranslator.getColor(fen);
         try {
-            boolean b = p.initProblema(c,nj,t);
+            boolean b = p.initProblema(nj,fen);
             if (b) {
                 System.out.println("Inicialitzacio correcta");
                 probInit = true;

@@ -1,15 +1,19 @@
 package domain;
 
-import com.sun.xml.internal.bind.v2.model.runtime.RuntimeReferencePropertyInfo;
+//import com.sun.xml.internal.bind.v2.model.runtime.RuntimeReferencePropertyInfo;
+//TODO:
+// - Guardar tauler com a fen
+// - Repassar testing
 
 public class Problema {
     private static final int NMAX = 3;
 
     private String nom;
-    private Color tema;
+    //private Color tema;
     private int numJugades, dificultat;
     // dificultat = número decisions atacant / número solucions possibles
-    private Tauler situacioInicial; //TODO: guardar fen?
+    //private Tauler situacioInicial;
+    private String situacioInicial; //FEN -> tauler + tema
     private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
 
@@ -22,7 +26,9 @@ public class Problema {
      */
     private boolean comprovaSolucio() {
         int[] data = new int[]{0,0};
-        situacioInicial.comprovaSolAux(tema, tema, 0, numJugades, data);
+        Color tema = FenTranslator.getColor(situacioInicial);
+        FenTranslator.generaTauler(situacioInicial).comprovaSolAux(tema,tema,0,numJugades,data);
+        //situacioInicial.comprovaSolAux(tema, tema, 0, numJugades, data);
         if (data[0] == 0) return false;
         dificultat = data[1] / data[0];
         return true;
@@ -63,7 +69,7 @@ public class Problema {
      * @return Tema
      */
     public Color getTema() {
-        return tema;
+        return FenTranslator.getColor(situacioInicial);
     }
 
     /**
@@ -90,7 +96,7 @@ public class Problema {
      * @return Tauler de situació inicial
      */
     public Tauler getSituacioInicial() {
-        return situacioInicial;
+        return FenTranslator.generaTauler(situacioInicial);
     }
 
     /**
@@ -107,14 +113,12 @@ public class Problema {
      * Inicialització (o modificació) situació inicial problema
      * Comprova si el problema té solució
      *
-     * @param t Tema
      * @param nj Número màxim de jugades
-     * @param si Situació inicial del tauler
+     * @param si Situació inicial del problema en format FEN
      * @return True si la inicialització s'ha completat amb èxit, false si no (problema sense solució)
      */
-    public boolean initProblema(Color t, int nj, Tauler si) {
+    public boolean initProblema(int nj, String si) {
         if (nj > NMAX) throw new RuntimeException("Numero de jugades superior al maxim");
-        tema = t;
         numJugades = nj;
         situacioInicial = si;
         ranking = new Ranking<>();

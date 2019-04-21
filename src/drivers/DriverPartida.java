@@ -66,14 +66,12 @@ public class DriverPartida extends GenericDriver {
     void testConstructor() {
         optPrint("FEN: ");
         String fen = scan.nextLine();
-        Tauler t = FenTranslator.generaTauler(fen);
-        Color c = FenTranslator.getColor(fen);
         optPrint("Numero de jugades: ");
         int nj = scan.nextInt();
         scan.nextLine();
 
         Problema p = new Problema("test");
-        p.initProblema(c, nj, t);
+        p.initProblema(nj, fen);
 
         mPartida = new Partida(p);
         System.out.println("Partida creada");

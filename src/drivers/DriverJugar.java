@@ -331,9 +331,7 @@ public class DriverJugar {
         int nj = lecturaInt("Numero de jugades: ");
         System.out.print("FEN: ");
         String fen = scan.nextLine();
-        Tauler t = FenTranslator.generaTauler(fen);
-        Color c = FenTranslator.getColor(fen);
-        if (p.initProblema(c, nj, t)) {
+        if (p.initProblema(nj, fen)) {
             problemes.add(p);
             System.out.println("Problema afegit correctament.");
         } else System.out.println("Error: El problema no te solució.");
