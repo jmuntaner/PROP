@@ -9,7 +9,7 @@ public class Problema {
     private Color tema;
     private int numJugades, dificultat;
     // dificultat = número decisions atacant / número solucions possibles
-    private Tauler situacioInicial;
+    private Tauler situacioInicial; //TODO: guardar fen?
     private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
 
