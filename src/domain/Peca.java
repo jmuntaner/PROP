@@ -2,8 +2,6 @@ package domain;
 
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-
 public abstract class Peca {
     private Color color;
     private int x, y;

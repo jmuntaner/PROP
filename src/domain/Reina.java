@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class Reina extends Peca {
     public Reina(int x, int y, Color color) {
         super(x, y, color);

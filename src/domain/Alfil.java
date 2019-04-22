@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class Alfil extends Peca {
     public Alfil(int x, int y, Color color) {
         super(x, y, color);

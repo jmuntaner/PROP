@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class Torre extends Peca {
     public Torre(int x, int y, Color color) {
         super(x, y, color);

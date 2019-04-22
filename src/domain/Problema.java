@@ -1,10 +1,5 @@
 package domain;
 
-//import com.sun.xml.internal.bind.v2.model.runtime.RuntimeReferencePropertyInfo;
-//TODO:
-// - Guardar tauler com a fen
-// - Repassar testing
-
 public class Problema {
     private static final int NMAX = 3;
 
@@ -16,8 +11,6 @@ public class Problema {
     private String situacioInicial; //FEN -> tauler + tema
     private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
-
-//TODO: testing
 
     /**
      * Comprova si el problema té solució i, si en té, en guarda la dificultat
