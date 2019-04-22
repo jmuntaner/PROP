@@ -228,7 +228,10 @@ public class DriverJugar {
         }
         else {
             System.out.printf("Torn de la màquina %s (%s)\n", nom, p.getTorn()==Color.BLANC ? "blanques" : "negres");
-            m = maquina.calcularMoviment(2*(prob.getNumJugades()-p.getNumMoviments())-1,p.getSituacioActual(),p.getTorn(),prob.getTema());
+            int profunditat = 2*(prob.getNumJugades()-p.getNumMoviments());
+            if (p.getTorn()==prob.getTema()) profunditat--; //pq acabi el jugador 1
+            System.out.printf("Profunditat minimax: %d\n",profunditat);
+            m = maquina.calcularMoviment(profunditat,p.getSituacioActual(),p.getTorn(),prob.getTema());
         }
         return p.moure(p.getTorn(),m);
     }

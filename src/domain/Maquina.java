@@ -3,6 +3,9 @@ package domain;
 import java.util.ArrayList;
 
 public abstract class Maquina {
+    private static final int maxVal = 9999;
+    private static final int minVal = -9999;
+
     public abstract int heuristica(Tauler posicio, Color torn);
 
     private int valor_peca(char p) {
@@ -39,7 +42,7 @@ public abstract class Maquina {
         int ret;
         //if (torn == Color.BLANC) {
         if (torn == tema) {
-            bestMove = -9999;
+            bestMove = -minVal;
             for (Moviment m : movPos) {
                 codi = t.mou(m);
                 ret = minimax(t, profunditat, false, codi, torn);
