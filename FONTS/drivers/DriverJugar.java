@@ -232,6 +232,10 @@ public class DriverJugar {
             if (p.getTorn()==prob.getTema()) profunditat--; //pq acabi el jugador 1
             System.out.printf("Profunditat minimax: %d\n",profunditat);
             m = maquina.calcularMoviment(profunditat,p.getSituacioActual(),p.getTorn(),prob.getTema());
+            if (m==null) {
+                System.out.println("No hi ha moviments possibles");
+                return 4;
+            }
         }
         return p.moure(p.getTorn(),m);
     }

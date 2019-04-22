@@ -1,0 +1,19 @@
+DOCS
+
+Documents descrits en el contingut de l'entrega.
+
+Fitxers:
+    - Descripcio_casos_us.pdf
+        Descripcio dels casos d'us.
+    - Diagrama_casos_us.pdf
+        Diagrama de casos d'us.
+    - Diagrama_classes_disseny.pdf
+        Diagrama estatic complet del model conceptual de dades en versio disseny.
+    - Relacio_classes.txt
+        Relacio de les classes implementades per cada membre del grup.
+    - EDA.txt
+        Descripcio de les estructures de dades i algorismes utilitzats per a implementar les funcionalitats principals
+
+Directoris:
+    - javadoc
+        Documentacio

@@ -1,0 +1,60 @@
+DOMAIN
+
+Codis de les classes de domini.
+
+Fitxers:
+    - Alfil
+        Subclasse de peca.
+        Te el comportament caracteristic de l'alfil.
+    - Cavall
+        Subclasse de peca.
+        Te el comportament caracteristic del cavall.
+    - Color
+        Enumeracio per distingir els colors de les peces (BLANC/NEGRE).
+    - EstadistiquesJugador
+        Estadistiques individuals de cada jugador.
+        Classe sense implementar, necessaria per al segon lliurament.
+    - EstadistiquesPartida
+        Estadistiques propies de cada partida.
+    - FenTranslator
+        Classe funcional per traduir dades en format FEN als objectes corresponents, i viceversa.
+    - M1
+        Subclasse de maquina.
+        Heuristica senzilla per a la maquina.
+    - M2
+        Subclasse de maquina.
+        Heuristica complexa per a la maquina.
+        Classe sense implementar, necessaria per al segon lliurament.
+    - Maquina (abstracta)
+        Algorismia necessaria per a calcular els moviments que realitza la maquina.
+    - Moviment
+        Posicions entre les que es realitza un moviment i peces implicades.
+    - Partida
+        Dades que defineixen una partida.
+        Estat actual de la partida.
+    - Peca (abstracta)
+        Informacio que defineix una peca en el tauler (tipus, posicio, color)
+    - Peo
+        Subclasse de peca.
+        Te el comportament caracteristic del peo.
+    - Problema
+        Informacio que defineix un problema (tauler inicial, jugador inicial, nombre de jugades maxim, dificultat)
+        Comprova que un problema amb aquestes caracteristiques tingui solucio.
+    - Puntuacio (interface)
+        Permet establir un sistema de puntuacions a partir de diferents dades.
+    - PuntuacioProblema
+        Implementa puntuacio.
+        La puntuacio es composa del nombre de moviments realitzats i el temps que ha durat una partida
+    - Ranking
+        Llista ordenada d'usuaris en funcio de la seva puntuacio
+    - Rei
+        Subclasse de peca.
+        Te el comportament caracteristic del rei.
+    - Reina
+        Subclasse de peca.
+        Te el comportament caracteristic de la reina.
+    - Tauler
+        Posicio del tauler, segons les peces que el conformen i les seves posicions.
+        Permet trobar situacions d'escac, mat i taules.
+    - Usuari
+        Informacio de login i estadistiques propies de cada usuari.

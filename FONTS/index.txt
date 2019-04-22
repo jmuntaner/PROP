@@ -1,0 +1,11 @@
+FONTS
+
+Classes implementades pel grup fins al moment (incloent-hi drivers).
+
+Directoris:
+    - Controllers
+        Controladors (qualsevol fitxer dins aquest directori es provisional).
+    - Domain
+        Codis de les classes de domini
+    - Drivers
+        Codis de tots els drivers utilitzats

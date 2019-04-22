@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Maquina {
     private static final int maxVal = 9999;
@@ -28,45 +29,48 @@ public abstract class Maquina {
     }
 
     /**
-     * Mou el millor per a la maquina en qüestió
+     * Cerca el millor moviment per a la maquina
      *
      * @param profunditat profunditat maxima d'exploracio de l'arbre
      * @param t Situacio actual del tauler
      * @param torn Color que ha de moure
      * @param tema Color que mou primer
-     * @return Moviment que realitza la màquina
+     * @return Moviment que realitza la màquina (null si no n'hi ha cap possible)
      */
     public Moviment calcularMoviment(int profunditat, Tauler t, Color torn, Color tema) {
         //Color torn = partida.getTorn();
         //Tauler t = partida.getSituacioActual();
-        Moviment mov = null;
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
+        if (movPos.isEmpty()) return null;
+        Moviment mov = null;
         int bestMove;
         int codi;
         int ret;
         //if (torn == Color.BLANC) {
         if (torn == tema) {
-            bestMove = -minVal;
+            bestMove = minVal;
             for (Moviment m : movPos) {
                 codi = t.mou(m);
-                ret = minimax(t, profunditat, false, codi, torn);
+                ret = minimax(t, profunditat-1, false, codi, torn.getNext());
                 if (ret > bestMove) {
                     mov = m;
                     bestMove = ret;
                 }
+                else if (ret == bestMove && new Random().nextBoolean()) mov = m; //Si son iguals, tria aleatoriament
                 t.mouInvers(m);
             }
         }
         //else if (torn == Color.NEGRE) {
         else {
-            bestMove = 9999;
+            bestMove = maxVal;
             for (Moviment m : movPos) {
                 codi = t.mou(m);
-                ret = minimax(t, profunditat - 1, false, codi, torn);
+                ret = minimax(t, profunditat - 1, true, codi, torn.getNext());
                 if (ret < bestMove) {
                     mov = m;
                     bestMove = ret;
                 }
+                else if (ret == bestMove && new Random().nextBoolean()) mov = m;
                 t.mouInvers(m);
             }
         }
@@ -78,23 +82,21 @@ public abstract class Maquina {
      * Calcula el minimax de cada posicio
      *
      * @param profunditat profunditat maxima d'exploracio de l'arbre
-     * @param esJugadorMaximal Indica si es el jugador maximal (en aquest cas les blanques)
+     * @param esJugadorMaximal Indica si el jugador que ha de moure es l'atacant (true si ho es)
      * @param codi Codi retornat al fer l'ultim moviment
-     * @param torn Color que ha de moure
+     * @param torn Color del jugador que ha de moure
      * @return Valor de la branca explorada
      */
     private int minimax(Tauler t, int profunditat, boolean esJugadorMaximal, int codi, Color torn) {
-        //mat retornem millor resultat
-        if (codi == 2) {
-            if (esJugadorMaximal) return 9999;
-            else return -9999;
+        if (codi == 2) { //mat retornem millor resultat (mat de l'ultim jugador que ha mogut!!)
+            if (!esJugadorMaximal) return maxVal;
+            else return minVal;
         }
-        //escacs mal resultat: sabem que podem fer mat
-        if (codi == 3) {
-            if (esJugadorMaximal) return -9999;
-            else return 9999;
+        else if (codi == 3) { //taules mal resultat: sabem que podem fer mat
+            if (!esJugadorMaximal) return minVal;
+            else return maxVal;
         }
-        if (profunditat == 0) {
+        else if (profunditat == 0) {
             return 0; //provisional
         }
         //ArrayList<Moviment> movPos = t.obteMovimentsJugador(this.partida.getTorn());
@@ -102,14 +104,14 @@ public abstract class Maquina {
         int bestMove;
         int c;
         if (esJugadorMaximal) {
-            bestMove = -9999;
+            bestMove = minVal;
             for (Moviment m : movPos) {
                 c = t.mou(m);
                 bestMove = Math.max(minimax(t, profunditat - 1, false, c, torn.getNext()), bestMove);
                 t.mouInvers(m);
             }
         } else {
-            bestMove = 9999;
+            bestMove = maxVal;
             for (Moviment m : movPos) {
                 c = t.mou(m);
                 bestMove = Math.min(minimax(t, profunditat - 1, true, c, torn.getNext()), bestMove);

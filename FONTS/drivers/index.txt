@@ -1,0 +1,36 @@
+DRIVERS
+
+Codis de tots els drivers utilitzats.
+
+    - DriverAlfil
+        Driver per a provar la classe Alfil
+    - DriverCavall
+        Driver per a provar la classe Cavall
+    - DriverEstadistiquesPartida
+        Driver per a provar la classe EstadistiquesPartida
+    - DriverFenTranslator
+        Driver per a provar la classe FenTranslator
+    - DriverJugar
+        Driver per a provar les funcionalitats de jugar partides (HvH, HvM i MvM) i de comprovar si els problemes tenen solucio
+    - DriverMoviment
+        Driver per a provar la classe Moviment
+    - DriverPartida
+        Driver per a provar la classe Partida
+    - DriverPeo
+        Driver per a provar la classe Peo
+    - DriverProblema
+        Driver per a provar la classe Problema
+    - DriverPuntuacioProblema
+        Driver per a provar la classe PuntuacioProblema
+    - DriverRei
+        Driver per a provar la classe Rei
+    - DriverReina
+        Driver per a provar la classe Reina (i els metodes propis de la superclasse Peca)
+    - DriverTauler
+        Driver per a provar la classe Tauler
+    - DriverTorre
+        Driver per a provar la classe Torre
+    - DriverUsuari
+        Driver per a provar la classe Usuari
+    - GenericDriver
+        Utilitats compartides per tots els drivers

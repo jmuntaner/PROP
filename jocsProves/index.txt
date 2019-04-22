@@ -1,0 +1,18 @@
+JOCSPROVES
+
+Jocs de proves utilitzats per als tests.
+
+Cada directori conte els jocs de proves per al driver corresponents.
+
+Fitxers (de cada directori):
+    - jp_in.txt
+        Dades d'entrada
+    - jp_out.txt
+        Sortida esperada
+    - jp_explicat.txt
+        Explicacio dels joc de proves (objecte de la prova, valors estudiats...)
+
+Operativa:
+    - Compilar el projecte executant l'script makeJars.sh
+    - Els drivers compilats es troben en format .jar a la carpeta EXE
+    - Seguir les instruccions exposades al fitxer jp_explicat.txt de cada driver
