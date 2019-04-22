@@ -236,6 +236,7 @@ public class DriverJugar {
                 System.out.println("No hi ha moviments possibles");
                 return 4;
             }
+            else System.out.printf("Moviment: %d %d -> %d %d\n", m.getPosIni().getKey(),m.getPosIni().getValue(),m.getPosFinal().getKey(),m.getPosFinal().getValue());
         }
         return p.moure(p.getTorn(),m);
     }
