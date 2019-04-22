@@ -1,0 +1,25 @@
+RELACIO DE CLASSES IMPLEMENTADES PER CADA MEMBRE DEL GRUP
+    - Alex:
+        - FenTranslator
+        - Partida
+        - Usuari
+        - Ranking
+        - Puntuacio
+        - PuntuacioProblema
+        - Color
+        - EstadistiquesPartida
+    - Joan:
+        - Peca
+        - Rei
+        - Reina
+        - Alfil
+        - Torre
+        - Cavall
+        - Peo
+        - Maquina
+        - M1
+        - M2
+    - Roger:
+        - Moviment
+        - Tauler
+        - Problema

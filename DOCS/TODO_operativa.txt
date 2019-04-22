@@ -1,0 +1,6 @@
+OPERATIVA PER:
+ - Executar driverJugar
+    - Utilitzar funcionalitats principals dins el driver (com jugar partida i com comprovar solucio)
+ - Executar tests
+    - Execucio interactiva
+    - Passar tests (opcio -q, fitxers entrada...)

@@ -1,0 +1,3 @@
+EDA
+
+Breu descripcio de les estructures de dades i algoritmes utilitzats per a implementar les funcionalitats principals.
