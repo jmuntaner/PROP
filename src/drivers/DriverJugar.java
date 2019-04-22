@@ -19,11 +19,13 @@ public class DriverJugar {
     private boolean end = false;
     private Scanner scan;
     private ArrayList<Problema> problemes;
+    private M1 maquina;
 
     private DriverJugar() {
         mode = 0;
         scan = new Scanner(System.in);  // Create a Scanner object
         problemes = new ArrayList<>();
+        maquina = new M1();
     }
 
     public static void main(String[] args) {
@@ -133,13 +135,13 @@ public class DriverJugar {
         int option = lecturaInt("Opció triada: ");
         switch (option) {
             case 1:
-                partidaHH();
+                jugarPartida(true,true);
                 break;
             case 2:
-                partidaHM();
+                jugarPartida(true,false);
                 break;
             case 3:
-                partidaMM();
+                jugarPartida(false,false);
                 break;
             case 4:
                 mode = 0;
@@ -167,108 +169,6 @@ public class DriverJugar {
         return problemes.get(el - 1);
     }
 
-    private void partidaMM() {
-        Problema prob = seleccioProblema();
-        Partida p = new Partida(prob);
-        //System.out.println("Encara no es pot jugar.");
-        M1 maquina = new M1();
-
-        Color tema = prob.getTema();
-        int maxMovs = prob.getNumJugades();
-        boolean fi = false;
-        int result = -1;
-        while (!fi) {
-            printTauler(p.getSituacioActual());
-            System.out.printf("Torn de la màquina (%s)\n", p.getTorn()==Color.BLANC ? "blanques" : "negres");
-            Moviment m = maquina.calcularMoviment(2*(maxMovs-p.getNumMoviments())-1, p.getSituacioActual(),p.getTorn(),tema);
-            result = p.moure(p.getTorn(),m);
-            fi = processResultMou(result);
-
-            if (p.getNumMoviments()>=maxMovs) fi = true;
-        }
-        System.out.println();
-        System.out.println("Partida finalitzada");
-        System.out.printf("\nSituació final: \n");
-        printTauler(p.getSituacioActual());
-        System.out.println();
-        if (result == 2) {
-            System.out.print("El guanyador es: ");
-            if (p.getTorn() == prob.getTema()) System.out.println("jugador2 (M1)");
-            else System.out.println("jugador1 (M1)");
-        }
-        else if (p.getNumMoviments() >= maxMovs) System.out.println("S'ha arribat al maxim de moviments");
-        scan.nextLine();
-    }
-
-    private void partidaHM() {
-        System.out.print("Nom del jugador: ");
-        String nom = scan.nextLine();
-        Problema prob = seleccioProblema();
-        Partida p = new Partida(prob);
-        //System.out.println("Encara no es pot jugar.");
-        //
-        //Inicialitzacions necessaries per la maquina
-        M1 maquina = new M1();
-        //
-
-        Color tema = prob.getTema();
-        int maxMovs = prob.getNumJugades();
-        boolean fi = false;
-        boolean torn = true; //torn de l'humà
-        int result = -1;
-        while (!fi) {
-            printTauler(p.getSituacioActual());
-            if (torn) {
-                System.out.printf("Torn del jugador: %s (%s)\n", nom, p.getTorn()==Color.BLANC ? "blanques" : "negres");
-                System.out.print("Peça a moure (x y): ");
-                int xo = scan.nextInt();
-                int yo = scan.nextInt();
-                scan.nextLine();
-                if (p.getAtPosicio(xo,yo) == '-') System.out.printf("No hi ha cap peça a la posició.");
-                else if (Character.isUpperCase(p.getAtPosicio(xo,yo)) != (p.getTorn() == Color.BLANC))
-                    System.out.println("Error: la peça no es del teu color.");
-                else {
-                    ArrayList<Moviment> movs = p.obteMovimentsPosicio(xo,yo);
-                    if (!movs.isEmpty()) {
-                        for (int i=0; i<movs.size(); i++) {
-                            Moviment m = movs.get(i);
-                            Pair<Integer,Integer> fin = m.getPosFinal();
-                            System.out.printf("%d. %d,%d\r\n",i+1,fin.getKey(),fin.getValue());
-                        }
-                        int index = lecturaInt("Selecciona un moviment: ");
-                        Moviment mov = movs.get(index-1);
-                        result = p.moure(p.getTorn(), mov);
-                        fi = processResultMou(result);
-                        torn = false;
-                    }
-                    else System.out.println("No hi ha moviments possibles");
-                }
-            }
-            else {
-                //juga màquina
-                System.out.printf("Torn de la màquina (%s)\n", p.getTorn()==Color.BLANC ? "blanques" : "negres");
-                Moviment m = maquina.calcularMoviment(2*(maxMovs-p.getNumMoviments())-1,p.getSituacioActual(),p.getTorn(),tema);
-                result = p.moure(p.getTorn(),m);
-                fi = processResultMou(result);
-                torn = true;
-            }
-
-            if (p.getNumMoviments() >= maxMovs) fi = true;
-        }
-        System.out.println();
-        System.out.println("Partida finalitzada");
-        System.out.printf("\nSituació final: \n");
-        printTauler(p.getSituacioActual());
-        System.out.println();
-        if (result == 2) {
-            System.out.print("El guanyador es: ");
-            if (p.getTorn() == prob.getTema()) System.out.println("jugador2 (M1)");
-            else System.out.printf("jugador1 (%s)\n", nom);
-        }
-        else if (p.getNumMoviments() >= maxMovs) System.out.println("S'ha arribat al maxim de moviments");
-        scan.nextLine();
-    }
-
     private boolean processResultMou(int result) {
         switch (result) {
             case 0:
@@ -292,57 +192,89 @@ public class DriverJugar {
         }
     }
 
-    private void partidaHH() {
-        System.out.print("Nom del jugador atacant: ");
-        String nom1 = scan.nextLine();
-        System.out.print("Nom del jugador defensor: ");
-        String nom2 = scan.nextLine();
-        Problema prob = seleccioProblema();
-        Partida p = new Partida(prob);
 
-        Color tema = prob.getTema();
-        int maxMovs = prob.getNumJugades();
-        boolean fi = false;
-        int result = -1;
-        while (!fi) {
-            printTauler(p.getSituacioActual());
-            System.out.printf("Torn de %s (%s):\r\n",
-                    tema == p.getTorn() ? nom1 : nom2,
-                    p.getTorn() == Color.BLANC ? "blanques" : "negres");
+    private int makeMoviment(Partida p, Problema prob, boolean b, String nom) {
+        Moviment m;
+        if (b) {
+            System.out.printf("Torn del jugador: %s (%s)\n", nom, p.getTorn()==Color.BLANC ? "blanques" : "negres");
             System.out.print("Peça a moure (x y): ");
             int xo = scan.nextInt();
             int yo = scan.nextInt();
             scan.nextLine();
-            if (p.getAtPosicio(xo, yo) == '-') System.out.printf("No hi a cap peça a la posició.");
-            else if (Character.isUpperCase(p.getAtPosicio(xo, yo)) != (p.getTorn() == Color.BLANC))
-                System.out.println("Error: la peça no es del teu color.");
+            if (p.getAtPosicio(xo,yo) == '-') {
+                System.out.printf("No hi ha cap peça a la posició.");
+                return 4;
+            }
+            else if (Character.isUpperCase(p.getAtPosicio(xo,yo)) != (p.getTorn() == Color.BLANC)) {
+                System.out.println("Error: la peça no es del teu color");
+                return 4;
+            }
             else {
-                ArrayList<Moviment> movs = p.obteMovimentsPosicio(xo, yo);
+                ArrayList<Moviment> movs = p.obteMovimentsPosicio(xo,yo);
                 if (!movs.isEmpty()) {
-                    for (int i = 0; i < movs.size(); i++) {
-                        Moviment m = movs.get(i);
-                        Pair<Integer, Integer> fin = m.getPosFinal();
-                        System.out.printf("%d. %d,%d\r\n", i + 1, fin.getKey(), fin.getValue());
+                    for (int i=0; i<movs.size();i++) {
+                        Moviment mov = movs.get(i);
+                        Pair<Integer,Integer> fin = mov.getPosFinal();
+                        System.out.printf("%d. %d,%d\r\n",i+1,fin.getKey(),fin.getValue());
                     }
                     int index = lecturaInt("Selecciona un moviment: ");
-                    Moviment mov = movs.get(index - 1);
-                    result = p.moure(p.getTorn(), mov);
-                    fi = processResultMou(result);
-                } else System.out.println("No hi ha moviments possibles");
+                    m = movs.get(index-1);
+                }
+                else {
+                    System.out.println("No hi ha moviments possibles");
+                    return 4;
+                }
             }
+        }
+        else {
+            System.out.printf("Torn de la màquina %s (%s)\n", nom, p.getTorn()==Color.BLANC ? "blanques" : "negres");
+            m = maquina.calcularMoviment(2*(prob.getNumJugades()-p.getNumMoviments())-1,p.getSituacioActual(),p.getTorn(),prob.getTema());
+        }
+        return p.moure(p.getTorn(),m);
+    }
+
+    //j1/j2: true = huma, false = maquina
+    private void jugarPartida(boolean j1, boolean j2) {
+        String nom1 = "M1";
+        String nom2 = "M1";
+        if (j1) {
+            System.out.print("Nom del jugador atacant: ");
+            nom1 = scan.nextLine();
+            if (j2) {
+                System.out.print("Nom del jugador defensor: ");
+                nom2 = scan.nextLine();
+            }
+        }
+        Problema prob = seleccioProblema();
+        Partida p = new Partida(prob);
+        Color tema = prob.getTema();
+        int maxMovs = prob.getNumJugades();
+        boolean fi = false;
+        int result = -1;
+        while(!fi) {
+            printTauler(p.getSituacioActual());
+            if (p.getTorn()==tema) result = makeMoviment(p,prob,j1,nom1);
+            else result = makeMoviment(p,prob,j2,nom2);
+            fi = processResultMou(result);
 
             if (p.getNumMoviments() >= maxMovs) fi = true;
         }
         System.out.println();
         System.out.println("Partida finalitzada");
-        System.out.printf("\nSituació final: \n");
+        System.out.printf("\nSituacio final: \n");
         printTauler(p.getSituacioActual());
         System.out.println();
         if (result == 2) {
             System.out.print("El guanyador es: ");
-            if (p.getTorn() == prob.getTema()) System.out.println(nom2);
-            else System.out.println(nom1);
-        } else if (p.getNumMoviments() >= maxMovs) System.out.println("S'ha arribat al limit de moviments.");
+            if (p.getTorn()==tema) System.out.printf("jugador2 (%s, %s)\n", nom2, j2 ? "humà" : "màquina");
+            else System.out.printf("jugador1 (%s, %s)\n", nom1, j1 ? "humà" : "màquina");
+        }
+        else if (p.getNumMoviments() >= maxMovs) {
+            System.out.println("S'ha arribat al màxim de moviments");
+            System.out.printf("Victòria del jugador2 (%s, %s)\n", nom2, j2 ? "humà" : "màquina");
+        }
+        System.out.println();
+        System.out.println("Prem ENTER per sortir");
         scan.nextLine();
     }
 
