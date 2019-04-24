@@ -72,7 +72,7 @@ public class Tauler {
                 else {
                     Peca p = peces[xp][yp];
                     if (p != null) {
-                        if (p.getColor() == b && p.esMovimentValid(true,x,y)) return true;
+                        if (p.getColor() == b && p.esMovimentValid(true, x, y)) return true;
                         else exit = true;
                     }
                 }
@@ -91,7 +91,7 @@ public class Tauler {
      * @return true si hi ha mat
      */
     private boolean esMat(Color b) {
-        if (obteMovimentsJugador(b.getNext()).size()==0) return true;
+        if (obteMovimentsJugador(b.getNext()).size() == 0) return true;
         return false;
         /*
         Pair<Integer, Integer> posRei;
@@ -173,9 +173,10 @@ public class Tauler {
         if (m) {
             if (e) return 2;
             else { //Comprovar rei ofegat (mirar si hi ha algun moviment possible a part dels del rei)
-                Peca r = c==BLANC ? _reiNegre : _reiBlanc;
-                Pair<Integer,Integer> p = r.getPosicio();
-                if (obteMovimentsJugador(c.getNext()).size() == obteMovimentsPeca(p.getKey(),p.getValue()).size()) return 3;
+                Peca r = c == BLANC ? _reiNegre : _reiBlanc;
+                Pair<Integer, Integer> p = r.getPosicio();
+                if (obteMovimentsJugador(c.getNext()).size() == obteMovimentsPeca(p.getKey(), p.getValue()).size())
+                    return 3;
                 else return 0; //no hi ha escac ni tauler -> moviment vàlid
             }
         }
@@ -211,13 +212,13 @@ public class Tauler {
     public void afegirPeca(Peca p) {
         Pair<Integer, Integer> pos = p.getPosicio();
         char c = p.toChar();
-        if (c=='K' && _reiBlanc==null) _reiBlanc = p;
-        else if (c=='K' && !pos.equals(_reiBlanc.getPosicio())) throw new RuntimeException("Rei blanc duplicat");
-        else if (c!='K' && _reiBlanc!=null && pos.equals(_reiBlanc.getPosicio())) _reiBlanc = null;
+        if (c == 'K' && _reiBlanc == null) _reiBlanc = p;
+        else if (c == 'K' && !pos.equals(_reiBlanc.getPosicio())) throw new RuntimeException("Rei blanc duplicat");
+        else if (c != 'K' && _reiBlanc != null && pos.equals(_reiBlanc.getPosicio())) _reiBlanc = null;
 
-        if (c=='k' && _reiNegre==null) _reiNegre = p;
-        else if (c=='k' && !pos.equals(_reiNegre.getPosicio())) throw new RuntimeException("Rei negre duplicat");
-        else if (c!='k' && _reiNegre!=null && pos.equals(_reiNegre.getPosicio())) _reiNegre = null;
+        if (c == 'k' && _reiNegre == null) _reiNegre = p;
+        else if (c == 'k' && !pos.equals(_reiNegre.getPosicio())) throw new RuntimeException("Rei negre duplicat");
+        else if (c != 'k' && _reiNegre != null && pos.equals(_reiNegre.getPosicio())) _reiNegre = null;
 
         int x = pos.getKey();
         int y = pos.getValue();
@@ -232,8 +233,8 @@ public class Tauler {
      * @param y Coordenada y de la posició
      */
     public void treurePeca(int x, int y) {
-        if (x<0 || y<0 || x>=SIZE || y>=SIZE) throw new RuntimeException("Posicio fora del tauler");
-        if (peces[x][y]!=null) {
+        if (x < 0 || y < 0 || x >= SIZE || y >= SIZE) throw new RuntimeException("Posicio fora del tauler");
+        if (peces[x][y] != null) {
             char c = peces[x][y].toChar();
             if (c == 'K') _reiBlanc = null;
             else if (c == 'k') _reiNegre = null;
@@ -351,7 +352,7 @@ public class Tauler {
      * @return Codi de la peça
      */
     public char getCasella(int x, int y) {
-        if (x<0 || x>=SIZE || y<0 || y>=SIZE) throw new RuntimeException("Posicio fora del tauler");
+        if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) throw new RuntimeException("Posicio fora del tauler");
         Peca p = peces[x][y];
         if (p == null) return '-';
         return p.toChar();
@@ -406,7 +407,7 @@ public class Tauler {
                     if (x == 2) data[0]++; //final amb solució
                     else {
                         //int sols = data[0];
-                        comprovaSolAux(torn.getNext(), tema, jugada+1, numJugades, data);
+                        comprovaSolAux(torn.getNext(), tema, jugada + 1, numJugades, data);
                         /*if (data[0]>sols) {
                             mouInvers(m);
                             return; //ha trobat una solucio
@@ -423,8 +424,7 @@ public class Tauler {
                     data[0] = num_sols_pre;
                     mouInvers(m);
                     return;
-                }
-                else if (x!=4) { // Moviment vàlid
+                } else if (x != 4) { // Moviment vàlid
                     int num_sols_act = data[0]; //solucions durant el recorregut
                     comprovaSolAux(torn.getNext(), tema, jugada, numJugades, data);
                     if (num_sols_act == data[0]) { //la branca no té solució

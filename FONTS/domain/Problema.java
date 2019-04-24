@@ -18,9 +18,9 @@ public class Problema {
      * @return True si té solució, false si no en té
      */
     private boolean comprovaSolucio() {
-        int[] data = new int[]{0,0};
+        int[] data = new int[]{0, 0};
         Color tema = FenTranslator.getColor(situacioInicial);
-        FenTranslator.generaTauler(situacioInicial).comprovaSolAux(tema,tema,0,numJugades,data);
+        FenTranslator.generaTauler(situacioInicial).comprovaSolAux(tema, tema, 0, numJugades, data);
         //situacioInicial.comprovaSolAux(tema, tema, 0, numJugades, data);
         if (data[0] == 0) return false;
         dificultat = data[1] / data[0];

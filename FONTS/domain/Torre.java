@@ -8,7 +8,7 @@ public class Torre extends Peca {
     @Override
     public char toChar() {
         Color c = this.getColor();
-        if(c == Color.NEGRE) return 'r';
+        if (c == Color.NEGRE) return 'r';
         else return 'R';
     }
 
@@ -16,9 +16,9 @@ public class Torre extends Peca {
     public boolean esMovimentValid(boolean mata, int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
-        if(x0==x && y0==y) return false; //moviment nul
+        if (x0 == x && y0 == y) return false; //moviment nul
         //moviment torre
-        return (x0==x) || (y0==y);
+        return (x0 == x) || (y0 == y);
     }
 
 }

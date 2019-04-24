@@ -8,7 +8,7 @@ public class Reina extends Peca {
     @Override
     public char toChar() {
         Color c = this.getColor();
-        if(c == Color.NEGRE) return 'q';
+        if (c == Color.NEGRE) return 'q';
         else return 'Q';
     }
 
@@ -16,8 +16,8 @@ public class Reina extends Peca {
     public boolean esMovimentValid(boolean mata, int x, int y) {
         int x0 = this.getPosicio().getKey();
         int y0 = this.getPosicio().getValue();
-        if(x0==x && y0==y) return false; //moviment nul
+        if (x0 == x && y0 == y) return false; //moviment nul
         //moviment diagonal o de torre
-        return (Math.abs(x - x0) == Math.abs(y - y0)) || ((x0==x) || (y0==y));
+        return (Math.abs(x - x0) == Math.abs(y - y0)) || ((x0 == x) || (y0 == y));
     }
 }

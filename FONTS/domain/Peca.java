@@ -14,7 +14,7 @@ public abstract class Peca {
      * @param color Color de la peça
      */
     public Peca(int x, int y, Color color) {
-        if (x<0 || x>7 || y<0 || y>7) throw new RuntimeException("Posicio fora del tauler");
+        if (x < 0 || x > 7 || y < 0 || y > 7) throw new RuntimeException("Posicio fora del tauler");
         this.x = x;
         this.y = y;
         this.color = color;
@@ -32,6 +32,7 @@ public abstract class Peca {
 
     /**
      * Retorna la posició actual de la peça.
+     *
      * @return Pair amb la posició actual de la peça.
      */
     public Pair<Integer, Integer> getPosicio() {
@@ -62,6 +63,7 @@ public abstract class Peca {
 
     /**
      * Retorna el codi char correponent al tipus de peça i color
+     *
      * @return char codi
      */
     public abstract char toChar();
@@ -70,9 +72,9 @@ public abstract class Peca {
      * Indica si la peça es pot moure a la posició indicada.
      * Ho comprova segons el tipus de peça i segons si hi ha peces entremig
      *
-     * @param mata     Indica si la peça mata o no
-     * @param x        Fila a on es vol moure la peça.
-     * @param y        Columna a on es vol moure la peça.
+     * @param mata Indica si la peça mata o no
+     * @param x    Fila a on es vol moure la peça.
+     * @param y    Columna a on es vol moure la peça.
      * @return Vertader si es pot moure la peça a la posició indicada.
      */
     public abstract boolean esMovimentValid(boolean mata, int x, int y);

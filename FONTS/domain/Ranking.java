@@ -37,7 +37,7 @@ public class Ranking<T extends Puntuacio<T>> {
             }
         }
         //Afegir usuari al final (si arriba aquí o bé és l'últim o bé el ranking està buit)
-        ranking.add(new Pair<>(nom,punts));
+        ranking.add(new Pair<>(nom, punts));
 
     }
 
