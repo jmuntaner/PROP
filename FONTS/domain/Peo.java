@@ -1,6 +1,13 @@
 package domain;
 
 public class Peo extends Peca {
+    /**
+     * Creadora de peó
+     *
+     * @param x     Fila a la que es troba la peça.
+     * @param y     Columna a la que es troba la peça.
+     * @param color Color de la peça
+     */
     public Peo(int x, int y, Color color) {
         super(x, y, color);
     }

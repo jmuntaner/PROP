@@ -1,6 +1,14 @@
 package domain;
 
 public class Reina extends Peca {
+
+    /**
+     * Creadora de reina
+     *
+     * @param x     Fila a la que es troba la peça.
+     * @param y     Columna a la que es troba la peça.
+     * @param color Color de la peça
+     */
     public Reina(int x, int y, Color color) {
         super(x, y, color);
     }

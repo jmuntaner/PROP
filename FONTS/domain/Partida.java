@@ -99,6 +99,12 @@ public class Partida {
         return situacioActual.obteMovimentsPeca(x, y);
     }
 
+
+    /**
+     *  Getter de la situació actual
+     *
+     * @return Tauler amb la posició en què es troba la partida
+     */
     public Tauler getSituacioActual() {
         return situacioActual;
     }

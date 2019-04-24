@@ -7,12 +7,34 @@ public abstract class Maquina {
     private static final int maxVal = 9999;
     private static final int minVal = -9999;
 
+
+    /**
+     * Heurística per als nodes del minimax.
+     *
+     * @param posicio Situacio del tauler corresponent al node
+     * @param esJugadorMaximal Indica si el jugador que ha de moure es el maximal
+     * @param codi Codi de l'últim moviment realitzat
+     * @param torn Indica quin jugador ha de fer el següent moviment
+     * @return Valor del node
+     */
     public abstract int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn);
 
+
+    /**
+     * Getter de maxVal
+     *
+     * @return Valor de maxVal
+     */
     public static int getMaxVal() {
         return maxVal;
     }
 
+
+    /**
+     * Getter minVal
+     *
+     * @return valor de minVal
+     */
     public static int getMinVal() {
         return minVal;
     }

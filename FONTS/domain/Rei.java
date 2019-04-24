@@ -1,6 +1,13 @@
 package domain;
 
 public class Rei extends Peca {
+    /**
+     * Creadora de rei
+     *
+     * @param x     Fila a la que es troba la peça.
+     * @param y     Columna a la que es troba la peça.
+     * @param color Color de la peça
+     */
     public Rei(int x, int y, Color color) {
         super(x, y, color);
     }

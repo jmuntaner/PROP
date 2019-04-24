@@ -182,6 +182,11 @@ public class Tauler {
         return 0;
     }
 
+    /**
+     * Modifica la posició del tauler seguint un moviment
+     *
+     * @param mov Moviment que es vol realitzar
+     */
     private void executaMoviment(Moviment mov) {
         Pair<Integer, Integer> pi = mov.getPosIni();
         int xi = pi.getKey();

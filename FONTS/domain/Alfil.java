@@ -1,6 +1,14 @@
 package domain;
 
 public class Alfil extends Peca {
+
+    /**
+     * Creadora d'alfil
+     *
+     * @param x     Fila a la que es troba la peça.
+     * @param y     Columna a la que es troba la peça.
+     * @param color Color de la peça
+     */
     public Alfil(int x, int y, Color color) {
         super(x, y, color);
     }

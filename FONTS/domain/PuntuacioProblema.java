@@ -4,6 +4,13 @@ public class PuntuacioProblema implements Puntuacio<PuntuacioProblema> {
     private final int jugades;
     private final long temps;
 
+
+    /**
+     * Creadora de puntuació associada a un problema
+     *
+     * @param estadistiques Estadístiques de la partida
+     * @param color Tema del problema
+     */
     public PuntuacioProblema(EstadistiquesPartida estadistiques, Color color) {
         temps = estadistiques.getTemps(color);
         jugades = estadistiques.getJugades(color);
