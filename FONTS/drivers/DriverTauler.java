@@ -1,8 +1,8 @@
 package drivers;
 
 import domain.*;
-
 import javafx.util.Pair;
+
 import java.util.ArrayList;
 
 public class DriverTauler extends GenericDriver {
@@ -198,8 +198,7 @@ public class DriverTauler extends GenericDriver {
         try {
             t.afegirPeca(p);
             printTauler(t);
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }

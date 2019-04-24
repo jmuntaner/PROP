@@ -1,7 +1,7 @@
 package drivers;
 
-import domain.Reina;
 import domain.Color;
+import domain.Reina;
 import javafx.util.Pair;
 
 
@@ -67,16 +67,16 @@ public class DriverReina extends GenericDriver {
         optPrint("y: ");
         int y = scan.nextInt();
         Color c;
-        if(color.equals("BLANC")) c = Color.BLANC;
-        else if(color.equals("NEGRE")) c = Color.NEGRE;
+        if (color.equals("BLANC")) c = Color.BLANC;
+        else if (color.equals("NEGRE")) c = Color.NEGRE;
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
         r = new Reina(x, y, c);
         c = r.getColor();
-        if(c == Color.BLANC) color = "BLANC";
-        else if(c == Color.NEGRE) color = "NEGRE";
+        if (c == Color.BLANC) color = "BLANC";
+        else if (c == Color.NEGRE) color = "NEGRE";
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
@@ -101,7 +101,7 @@ public class DriverReina extends GenericDriver {
     }
 
     public void testGetColor() {
-        String s = r.getColor()==Color.BLANC?"Blanc":"Negre";
+        String s = r.getColor() == Color.BLANC ? "Blanc" : "Negre";
         System.out.println(s);
     }
 

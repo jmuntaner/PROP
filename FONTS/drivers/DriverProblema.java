@@ -1,16 +1,15 @@
 package drivers;
 
 import domain.*;
-
 import javafx.util.Pair;
 
 public class DriverProblema extends GenericDriver {
     private Problema p;
     boolean probInit;
 
-    DriverProblema(String [] args) {
+    DriverProblema(String[] args) {
         super(args);
-        opcionsMenu = new String [] {
+        opcionsMenu = new String[]{
                 "Test constructor",
                 "Test get nom",
                 "Test set nom",
@@ -23,22 +22,21 @@ public class DriverProblema extends GenericDriver {
         };
     }
 
-    public static void main (String [] args) {
+    public static void main(String[] args) {
         DriverProblema driver = new DriverProblema(args);
         driver.runLoop();
     }
 
     @Override
     void runTest(int option) {
-        if (option!=1 && p==null) {
+        if (option != 1 && p == null) {
             System.out.println("ERROR: PROBLEMA NULL");
             return;
-        }
-        else if (!probInit && option>=4 && option <=8){
+        } else if (!probInit && option >= 4 && option <= 8) {
             System.out.println("Cal inicialitzar el problema");
             return;
         }
-        switch(option) {
+        switch (option) {
             case 1:
                 testConstructor();
                 break;
@@ -109,12 +107,12 @@ public class DriverProblema extends GenericDriver {
 
     public void testGetRanking() {
         Ranking<PuntuacioProblema> r = p.getRanking();
-        Usuari u = new Usuari(1, "IdTest","Pass");
+        Usuari u = new Usuari(1, "IdTest", "Pass");
         EstadistiquesPartida e = new EstadistiquesPartida();
         PuntuacioProblema pp = new PuntuacioProblema(e, Color.BLANC);
-        r.afegeixPuntuacio(u,pp);
-        Pair<String,String> data = r.getLlistaRanking(1).get(0);
-        System.out.printf("%s %s\n", data.getKey(),data.getValue());
+        r.afegeixPuntuacio(u, pp);
+        Pair<String, String> data = r.getLlistaRanking(1).get(0);
+        System.out.printf("%s %s\n", data.getKey(), data.getValue());
     }
 
     public void testInitProblema() {
@@ -122,14 +120,12 @@ public class DriverProblema extends GenericDriver {
         int nj = scan.nextInt();
         String fen = scan.nextLine().trim();
         try {
-            boolean b = p.initProblema(nj,fen);
+            boolean b = p.initProblema(nj, fen);
             if (b) {
                 System.out.println("Inicialitzacio correcta");
                 probInit = true;
-            }
-            else System.out.println("Inicialitzacio incorrecta: problema sense solucio");
-        }
-        catch (RuntimeException e) {
+            } else System.out.println("Inicialitzacio incorrecta: problema sense solucio");
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }

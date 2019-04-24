@@ -1,18 +1,17 @@
 package drivers;
 
+import domain.Color;
 import domain.Moviment;
 import domain.Peca;
 import domain.Rei;
-import domain.Color;
-
 import javafx.util.Pair;
 
 public class DriverMoviment extends GenericDriver {
     private Moviment m;
 
-    DriverMoviment(String [] args) {
+    DriverMoviment(String[] args) {
         super(args);
-        opcionsMenu = new String [] {
+        opcionsMenu = new String[]{
                 "Test constructor",
                 "Test posició final",
                 "Test peça moguda",
@@ -20,14 +19,14 @@ public class DriverMoviment extends GenericDriver {
         };
     }
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         DriverMoviment driver = new DriverMoviment(args);
         driver.runLoop();
     }
 
     @Override
     void runTest(int option) {
-        if (option!=1 && m==null) {
+        if (option != 1 && m == null) {
             System.out.println("ERROR: MOVIMENT NULL");
             return;
         }
@@ -57,14 +56,13 @@ public class DriverMoviment extends GenericDriver {
         int yf = scan.nextInt();
         scan.nextLine();
         try {
-            Peca r = new Rei(xi,yi,Color.BLANC);
-            m = new Moviment(r,xf,yf);
-            Pair<Integer,Integer> pi = m.getPosIni();
-            Pair<Integer,Integer> pf = m.getPosFinal();
+            Peca r = new Rei(xi, yi, Color.BLANC);
+            m = new Moviment(r, xf, yf);
+            Pair<Integer, Integer> pi = m.getPosIni();
+            Pair<Integer, Integer> pf = m.getPosFinal();
             Peca p = m.getPecaMoguda();
-            System.out.printf("%d %d %d %d %c\n", pi.getKey(), pi.getValue(), pf.getKey(),pf.getValue(),p.toChar());
-        }
-        catch (RuntimeException e) {
+            System.out.printf("%d %d %d %d %c\n", pi.getKey(), pi.getValue(), pf.getKey(), pf.getValue(), p.toChar());
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -75,11 +73,10 @@ public class DriverMoviment extends GenericDriver {
         int yf = scan.nextInt();
         scan.nextLine();
         try {
-            m.setPosFinal(xf,yf);
-            Pair<Integer,Integer> p = m.getPosFinal();
+            m.setPosFinal(xf, yf);
+            Pair<Integer, Integer> p = m.getPosFinal();
             System.out.printf("%d %d\n", p.getKey(), p.getValue());
-        }
-        catch(RuntimeException e){
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -97,10 +94,9 @@ public class DriverMoviment extends GenericDriver {
             Peca r = new Rei(xp, yp, c);
             m.setPecaMoguda(r);
             Peca p = m.getPecaMoguda();
-            Pair<Integer,Integer> pi = m.getPosIni();
+            Pair<Integer, Integer> pi = m.getPosIni();
             System.out.printf("%d %d %c\n", pi.getKey(), pi.getValue(), p.toChar());
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -116,17 +112,16 @@ public class DriverMoviment extends GenericDriver {
         if (b) c = Color.BLANC;
         else c = Color.NEGRE;
         Peca r = null;
-        if (!null_piece) r = new Rei(xp,yp,c);
+        if (!null_piece) r = new Rei(xp, yp, c);
         try {
             m.setPecaMorta(r);
             Peca p = m.getPecaMorta();
-            if (r==null) System.out.println("null");
+            if (r == null) System.out.println("null");
             else {
                 Pair<Integer, Integer> pf = m.getPosFinal();
                 System.out.printf("%d %d %c\n", pf.getKey(), pf.getValue(), p.toChar());
             }
-        }
-        catch (RuntimeException e){
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }

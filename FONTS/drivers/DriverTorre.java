@@ -1,7 +1,7 @@
 package drivers;
 
-import domain.Torre;
 import domain.Color;
+import domain.Torre;
 
 
 public class DriverTorre extends GenericDriver {
@@ -50,16 +50,16 @@ public class DriverTorre extends GenericDriver {
         optPrint("y: ");
         int y = scan.nextInt();
         Color c;
-        if(color.equals("BLANC")) c = Color.BLANC;
-        else if(color.equals("NEGRE")) c = Color.NEGRE;
+        if (color.equals("BLANC")) c = Color.BLANC;
+        else if (color.equals("NEGRE")) c = Color.NEGRE;
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
         t = new Torre(x, y, c);
         c = t.getColor();
-        if(c == Color.BLANC) color = "BLANC";
-        else if(c == Color.NEGRE) color = "NEGRE";
+        if (c == Color.BLANC) color = "BLANC";
+        else if (c == Color.NEGRE) color = "NEGRE";
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;

@@ -1,7 +1,7 @@
 package drivers;
 
-import domain.Peo;
 import domain.Color;
+import domain.Peo;
 
 
 public class DriverPeo extends GenericDriver {
@@ -50,16 +50,16 @@ public class DriverPeo extends GenericDriver {
         optPrint("y: ");
         int y = scan.nextInt();
         Color c;
-        if(color.equals("BLANC")) c = Color.BLANC;
-        else if(color.equals("NEGRE")) c = Color.NEGRE;
+        if (color.equals("BLANC")) c = Color.BLANC;
+        else if (color.equals("NEGRE")) c = Color.NEGRE;
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
         p = new Peo(x, y, c);
         c = p.getColor();
-        if(c == Color.BLANC) color = "BLANC";
-        else if(c == Color.NEGRE) color = "NEGRE";
+        if (c == Color.BLANC) color = "BLANC";
+        else if (c == Color.NEGRE) color = "NEGRE";
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;

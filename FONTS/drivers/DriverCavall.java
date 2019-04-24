@@ -50,16 +50,16 @@ public class DriverCavall extends GenericDriver {
         optPrint("y: ");
         int y = scan.nextInt();
         Color c;
-        if(color.equals("BLANC")) c = Color.BLANC;
-        else if(color.equals("NEGRE")) c = Color.NEGRE;
+        if (color.equals("BLANC")) c = Color.BLANC;
+        else if (color.equals("NEGRE")) c = Color.NEGRE;
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
         k = new Cavall(x, y, c);
         c = k.getColor();
-        if(c == Color.BLANC) color = "BLANC";
-        else if(c == Color.NEGRE) color = "NEGRE";
+        if (c == Color.BLANC) color = "BLANC";
+        else if (c == Color.NEGRE) color = "NEGRE";
         else {
             System.out.println("ERROR: COLOR NO VALID");
             return;
