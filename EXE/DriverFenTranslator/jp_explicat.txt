@@ -1,8 +1,8 @@
 Test FenTranslator
 
-Test 1: Traducció bàsica
+Test 1: Traduccio basica
 
-Traducció a Tauler de l'exemple de l'enunciat i posterior reconversió a fen.
+Traduccio a Tauler de l'exemple de l'enunciat i posterior reconversio a fen.
 
 Entrada:
 1           // Tradueix a Tauler
@@ -25,7 +25,7 @@ B------B
 
 Test 2: Traduccions diverses
 
-Traducció de diversos taulers en FEN obtinguts de
+Traduccio de diversos taulers en FEN obtinguts de
 https://blog.problemasdeajedrez.com/search/label/problemas%20de%20mate
 
 Entrada:
@@ -91,7 +91,7 @@ n---r---
 
 Test 3: Tauler creat manualment
 
-Traducció a FEN d'un tauler creat pas a pas
+Traduccio a FEN d'un tauler creat pas a pas
 
 Entrada
 1                           // Crea un tauler buit

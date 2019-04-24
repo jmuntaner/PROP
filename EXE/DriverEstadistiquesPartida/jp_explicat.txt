@@ -3,14 +3,14 @@ Tests EstadistiquesPartida
  /----------------------------------------------------------------------------\
 | IMPORTANT:                                                                   |
 | Hi ha una part de la classe (control de temps de jugada) que no hem          |
-| pogut provar amb aquest joc de proves, ja que dependria del temps d'execució |
-| de les proves, retornant valors diferents cada execució                      |
+| pogut provar amb aquest joc de proves, ja que dependria del temps d'execucio |
+| de les proves, retornant valors diferents cada execucio                      |
  \----------------------------------------------------------------------------/
 
 
 Test 1:
 
-Verificació de que la creadora buida inicialitza tots els valors a 0.
+Verificacio de que la creadora buida inicialitza tots els valors a 0.
 
 Entrada:
 1
@@ -22,9 +22,9 @@ Sortida esperada:
 0  // Temps Blanc
 0  // Temps Negre
 0  // Temps Total
-0  // temps mitjà blanc
-0  // temps mitjà negre
-0  // temps mitjà total
+0  // temps mitja blanc
+0  // temps mitja negre
+0  // temps mitja total
 
 ----------------------------------------------------
 Test 2:
@@ -43,7 +43,7 @@ Sortida esperada
 ------------------------------------------------------
 Test 3:
 
-Es llença excepció si s'inicia jugada quan ja hi ha una iniciada.
+Es llença excepcio si s'inicia jugada quan ja hi ha una iniciada.
 
 Entrada:
 3
@@ -62,7 +62,7 @@ Error: Torn ja iniciat
 1
 -----------------------------------------------------
 
-Test 4: Es llença excepció al finalitzar torn de color oposat
+Test 4: Es llença excepcio al finalitzar torn de color oposat
 
 Entrada:
 4
@@ -118,9 +118,9 @@ Sortida esperada:
 
 -----------------------------------------
 
-Test 6: Creadora amb paràmetres
+Test 6: Creadora amb parametres
 
-Verifica que la creadora amb paràmetres assigna correctament els valors i calcula les mitjanes.
+Verifica que la creadora amb parametres assigna correctament els valors i calcula les mitjanes.
 
 Entrada:
 2

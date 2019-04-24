@@ -31,7 +31,7 @@ Test 2: Comprovacio de la conversio a char.
 Comprova que la conversio a char de cavall funciona correctament. Provarem amb un cavall de cada color.
 
 Entrada:
-1     // Opció 1, crear cavall blanc
+1     // Opcio 1, crear cavall blanc
 BLANC // Color
 0     // x
 7     // y
@@ -73,7 +73,7 @@ true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
 4
 3     // Opcio 3
 true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
-1     // moviment vertical de més d'una unitat (no valid)
+1     // moviment vertical de mes d'una unitat (no valid)
 4
 3     // Opcio 3
 true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
@@ -81,7 +81,7 @@ true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
 5
 3     // Opcio 3
 true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
-0     // moviment diagonal de més d'una unitat (no valid)
+0     // moviment diagonal de mes d'una unitat (no valid)
 0
 3     // Opcio 3
 true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.

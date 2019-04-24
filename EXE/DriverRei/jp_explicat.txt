@@ -31,7 +31,7 @@ Test 2: Comprovacio de la conversio a char.
 Comprova que la conversio a char de rei funciona correctament. Provarem amb un rei de cada color.
 
 Entrada:
-1     // Opció 1, crear rei blanc
+1     // Opcio 1, crear rei blanc
 BLANC // Color
 3     // x
 4     // y
@@ -73,7 +73,7 @@ true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
 4
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-1     // moviment vertical de més d'una unitat (no valid)
+1     // moviment vertical de mes d'una unitat (no valid)
 4
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
@@ -81,7 +81,7 @@ true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
 5
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-6     // moviment diagonal de més d'una unitat (no valid)
+6     // moviment diagonal de mes d'una unitat (no valid)
 7
 3     // Opcio 3
 true  // Al rei no li afecta aquest parametre per tant wlog usarem true.

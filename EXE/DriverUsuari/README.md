@@ -2,7 +2,7 @@
 
 ## Operativa
 
-### Execució interactiva:
+### Execucio interactiva:
 
 ```sh
 
@@ -12,7 +12,7 @@ java -jar DriverUsuari.jar
 
 Es presenta un menu amb opcions per a utilitzar les diferents parts de la classe.
 
-### Excució jocs de proves:
+### Excucio jocs de proves:
 
 ```sh
 

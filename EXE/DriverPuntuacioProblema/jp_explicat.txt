@@ -4,11 +4,11 @@ Test 1:
 A millor que B en jugades
 
 Entrada:
-1      // Puntuació A: 2 jugades, 20 segons
+1      // Puntuacio A: 2 jugades, 20 segons
 2
 20000
 b
-2      // Puntuació B: 3 jugades, 10 segons
+2      // Puntuacio B: 3 jugades, 10 segons
 3
 10000
 n
@@ -16,10 +16,10 @@ n
 4   // Test B>A
 
 Sortida esperada:
-2j 20s    // Puntuació A
-3j 10s    // Puntuació B
-true      // A és millor puntuació que B
-false     // B no és millor que A
+2j 20s    // Puntuacio A
+3j 10s    // Puntuacio B
+true      // A es millor puntuacio que B
+false     // B no es millor que A
 
 ---------------------------------------------------------
 
@@ -27,7 +27,7 @@ Test 2:
 Empat en jugades entre A i B, B millor temps
 
 Entrada:
-2     // Modificació de la puntuació B per a tenir les mateixes jugades que l'A
+2     // Modificacio de la puntuacio B per a tenir les mateixes jugades que l'A
 2
 10000
 b
@@ -46,7 +46,7 @@ Test 3:
 Empat en jugades entre A i B, A millor temps
 
 Entrada:
-2     // Modificació de la puntuació B per a tenir temps 50s
+2     // Modificacio de la puntuacio B per a tenir temps 50s
 2
 50000
 b
@@ -55,7 +55,7 @@ b
 
 Sortida esperada:
 2j 50s
-true   // A és millor
+true   // A es millor
 false
 
 ---------------------------------------------------------
@@ -64,7 +64,7 @@ Test 4:
 Empat total
 
 Entrada:
-2     // Modificació de la puntuació B per a tenir el mateix temps que l'A
+2     // Modificacio de la puntuacio B per a tenir el mateix temps que l'A
 2
 20000
 b
@@ -73,15 +73,15 @@ b
 
 Sortida esperada:
 2j 20s
-false  // Empat, a la classificació es considerarà millor la més antiga
+false  // Empat, a la classificacio es considerara millor la mes antiga
 false
 
 ---------------------------------------------------------
 
 Test 5:
-Puntuació B amb menys jugades
+Puntuacio B amb menys jugades
 Entrada:
-2     // Modificació de la puntuació B per a tenir menys jugades que l'A
+2     // Modificacio de la puntuacio B per a tenir menys jugades que l'A
 1
 20000
 b

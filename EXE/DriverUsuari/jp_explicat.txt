@@ -1,16 +1,16 @@
 Tests classe Usuari:
 
-Test 1: Creació d'un usuari
+Test 1: Creacio d'un usuari
 
 Comprova que la creadora de la classe usuari funcioni correctament.
 
 Entrada:
 
-1     // Opció 1, crear usuari
+1     // Opcio 1, crear usuari
 1     // Id
 nom   // Nom de l'usuari ("nom")
 5487  // Contrasenya
-1     // Opció 1, crear usuari
+1     // Opcio 1, crear usuari
 2     // Id
 alex  // Nom de l'usuari ("alex")
 1234  // Contrasenya
@@ -21,21 +21,21 @@ Creat: Id: 2, Nom: alex
 
 -----------------------------------------------------
 
-Test 2: Comprovació de contrasenya
+Test 2: Comprovacio de contrasenya
 
 Comprova que la classe usuari pot generar i comparar correctament els hashes de contrasenya.
 Te en compte que la contrasenya de l'ultim usuari creat es 1234.
 
 Entrada:
-2       // Opció 2, Comprovar contrasenya
+2       // Opcio 2, Comprovar contrasenya
 1234    // Contrasenya a comprovar
-2       // Opció 2, Comprovar contrasenya
+2       // Opcio 2, Comprovar contrasenya
 patata  // Contrasenya a comprovar
-1       // Creació d'un nou usuari amb contrasenya "patata"
+1       // Creacio d'un nou usuari amb contrasenya "patata"
 2
 alex
 patata
-2       // Opció 2, Comprovar contrasenya
+2       // Opcio 2, Comprovar contrasenya
 patata  // Contrasenya a comprovar
 Sortida esperada:
 true    // Coincideixen
@@ -47,16 +47,16 @@ true    // Coincideixen
 Test 3: getID
 
 Entrada:
-1     // Creació d'un usuari amb id = 3
+1     // Creacio d'un usuari amb id = 3
 3
 nom
 1234
-3     // Obtenció de la Id
-1     // Creació d'un usuari amb id = 999
+3     // Obtencio de la Id
+1     // Creacio d'un usuari amb id = 999
 999
 nom
 1234
-3     // Obtenció de la Id
+3     // Obtencio de la Id
 
 Sortida esperada:
 3                         // Id del primer usuari
@@ -65,18 +65,18 @@ Creat: Id: 999, Nom: nom  // Nou usuari creat
 
 -------------------------------------------------
 
-Test 4: Modificació de nom
+Test 4: Modificacio de nom
 
 Comprova que el nom de l'usuari es pot modificar correctament.
 
 Entrada:
-4      // Modificació de nom a alex
+4      // Modificacio de nom a alex
 alex
-4      // Modificació de nom a roger
+4      // Modificacio de nom a roger
 roger
-4      // Modificació de nom a joan
+4      // Modificacio de nom a joan
 joan
-4      // Modificació de nom a elvira
+4      // Modificacio de nom a elvira
 elvira
 
 Sortida esperada:
@@ -87,7 +87,7 @@ elvira
 
 -------------------------------------------------
 
-Test 5: Modificació de contrasenya
+Test 5: Modificacio de contrasenya
 
 Comprova que la contrasenya de l'usuari es pot modificar correctament.
 
@@ -97,16 +97,16 @@ ahduae
 5
 _
 5
-contrasenyaextremadamentllargaambsimbolsunicode´`áà👌️👌️👌️esperoquenopeti
+contrasenyaextremadamentllargaambsimbolsunicode´`áa👌️👌️👌️esperoquenopeti
 
 Sortida esperada:
-true  // La contrassenya es modifica correctament i la comprovació (checkPass) és correcta
-true  // Ídem
-true  // Ídem
+true  // La contrassenya es modifica correctament i la comprovacio (checkPass) es correcta
+true  // Idem
+true  // Idem
 
 -------------------------------------------------
 
-Test 6: Superació de problemes
+Test 6: Superacio de problemes
 
 Comprova que l'usuari pot superar problemes correctament.
 
@@ -119,9 +119,9 @@ Entrada:
 105
 
 Sortida esperada:
-99 // Problemes superats després de la 1a inserció
-1  // Problemes superats després de la 2a inserció
+99 // Problemes superats despres de la 1a insercio
+1  // Problemes superats despres de la 2a insercio
 99
-1  // Problemes superats després de la 3a inserció
+1  // Problemes superats despres de la 3a insercio
 99
 105

@@ -163,7 +163,7 @@ x: 5 y: 3
 
 Test 6: setter posicio 1
 
-Comprovarem que el setter 1 de posicio funciona, provarem canviant tres cops la posició d'una peca.
+Comprovarem que el setter 1 de posicio funciona, provarem canviant tres cops la posicio d'una peca.
 
 Entrada:
 1     // Opcio 1, crear reina
@@ -196,7 +196,7 @@ x: 1 y: 2
 
 Test 7: setter posicio 2
 
-Comprovarem que el setter 2 de posicio funciona, provarem canviant tres cops la posició d'una peca.
+Comprovarem que el setter 2 de posicio funciona, provarem canviant tres cops la posicio d'una peca.
 
 Entrada:
 1     // Opcio 1, crear reina

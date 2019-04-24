@@ -81,13 +81,13 @@ ANNEX 1: LLISTAT CASOS A COMPROVAR PER CADA METODE
 
 - Comprova sol aux
     - Problema amb mat en 1
-        - Comprovar que té solució amb W W 0 1
+        - Comprovar que te solucio amb W W 0 1
     - Problema amb mat en 2
-        - Comprovar que té solució amb W W 0 2
-        - (fer primer moviment correcte) comprovar que té solució amb B W 1 2
-        - (fer primer moviment incorrecte) comprovar que no té solució amb B W 1 2
-        - Comprovar que no té solució amb W W 0 1
-    - Problema amb mat en més moviments
+        - Comprovar que te solucio amb W W 0 2
+        - (fer primer moviment correcte) comprovar que te solucio amb B W 1 2
+        - (fer primer moviment incorrecte) comprovar que no te solucio amb B W 1 2
+        - Comprovar que no te solucio amb W W 0 1
+    - Problema amb mat en mes moviments
 
 ANNEX 2: VALORS UTILITZATS PER A LA PROVA
 ***********************************************************
@@ -250,7 +250,7 @@ ANNEX 2: VALORS UTILITZATS PER A LA PROVA
     11 Comprova solucio
     W W 0 3
 *********************************************************************
-// Comprovació problemes "dificils" de mat en 3
+// Comprovacio problemes "dificils" de mat en 3
     2
     --------------------------k-------P-------N-------N---Q----K----
     11

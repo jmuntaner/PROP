@@ -12,7 +12,7 @@ JOCS DE PROVA PER A LA CLASSE MOVIMENT
 
 - Valors estudiats: caixa blanca (coneixem els casos on pot fallar)
     - Test constructor parametritzat + getters (tots):
-        Creacio de moviment vàlid
+        Creacio de moviment valid
             > 0 0 1 1
         Posicio inicial fora del tauler
             > 0 4 -5 7

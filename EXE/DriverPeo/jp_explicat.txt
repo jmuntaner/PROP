@@ -31,7 +31,7 @@ Test 2: Comprovacio de la conversio a char.
 Comprova que la conversio a char de peo funciona correctament. Provarem amb un peo de cada color.
 
 Entrada:
-1     // Opció 1, crear peo blanc
+1     // Opcio 1, crear peo blanc
 BLANC // Color
 0     // x
 7     // y
@@ -97,7 +97,7 @@ true  // Matant
 4
 3     // Opcio 3
 true
-5     // moviment sense patro (tampoc de peó) (no valid)
+5     // moviment sense patro (tampoc de peo) (no valid)
 0
 3     // Opcio 3
 true
@@ -145,7 +145,7 @@ true  // Matant
 4
 3     // Opcio 3
 true
-5     // moviment sense patro (tampoc de peó) (no valid)
+5     // moviment sense patro (tampoc de peo) (no valid)
 0
 1     // Opcio 1: crearem un Peo central per comprovar que no avanca dos
 NEGRE

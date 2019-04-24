@@ -8,11 +8,10 @@ java -jar DriverCavall.jar
 
 ```
 
-Excució jocs de proves:
+Excucio jocs de proves:
 
 ```sh
 
 java -jar DriverCavall.jar -q < jp_in.txt > sortida.txt
 
 ```
-
