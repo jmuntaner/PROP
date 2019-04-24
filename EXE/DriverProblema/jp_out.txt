@@ -1,0 +1,19 @@
+Problema creat: nom = Problema_test
+Problema_test
+Nom registrat: Problema_test2
+Problema_test2
+Numero de jugades superior al maxim
+Inicialitzacio incorrecta: problema sense solucio
+Inicialitzacio correcta
+BLANC
+2
+1332
+--------
+------K-
+-p-B-RB-
+--------
+--Q-----
+--n-kP-N
+---b----
+----n---
+IdTest 0j 0s

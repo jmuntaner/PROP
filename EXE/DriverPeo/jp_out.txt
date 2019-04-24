@@ -1,0 +1,33 @@
+Creat: x: 0, y: 0, Color: BLANC
+Creat: x: 2, y: 7, Color: NEGRE
+ERROR: COLOR NO VALID
+Creat: x: 0, y: 7, Color: BLANC
+P
+Creat: x: 7, y: 0, Color: NEGRE
+p
+Creat: x: 6, y: 4, Color: BLANC
+true
+false
+true
+false
+false
+true
+false
+true
+false
+false
+false
+Creat: x: 1, y: 4, Color: NEGRE
+true
+false
+true
+false
+false
+true
+false
+true
+false
+false
+Creat: x: 4, y: 4, Color: NEGRE
+false
+true

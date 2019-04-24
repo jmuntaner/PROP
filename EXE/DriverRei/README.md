@@ -8,7 +8,7 @@ java -jar DriverRei.jar
 
 ```
 
-Execució jocs de proves:
+Excució jocs de proves:
 
 ```sh
 

@@ -16,9 +16,9 @@ java -jar DNAME.jar -q < jp_in.txt > sortida.txt\n
 \`\`\`\n"
 
 
-for f in src/drivers/Driver*.java; do
+for f in FONTS/drivers/Driver*.java; do
 	# Creació del jar
-	name="$(echo "$f" | sed 's/src\/drivers\/\([^.]*\).*/\1/')";
+	name="$(echo "$f" | sed 's/FONTS\/drivers\/\([^.]*\).*/\1/')";
 	echo -e "${BASEMANIFEST}${name}\n" > manifest.mf;
 	jardir="EXE/${name}/";
 	mkdir "$jardir";

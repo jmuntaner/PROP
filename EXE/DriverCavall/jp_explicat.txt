@@ -1,0 +1,146 @@
+Tests classe Cavall:
+
+Test 1: Creacio d'un cavall
+
+Comprova que la creadora de la classe cavall funcioni correctament.
+
+Entrada:
+
+1     // Opcio 1, crear cavall
+BLANC // Color
+0     // x
+0     // y
+1     // Opcio 1, crear cavall
+NEGRE // Color
+2     // x
+7     // y
+1     // Opcio 1, crear cavall
+BLAU // Color
+0     // x
+4     // y
+
+Sortida Esperada:
+Creat: x: 0, y: 0 Color: BLANC
+Creat: x: 2, y: 7 Color: NEGRE
+ERROR: COLOR NO VALID
+
+-----------------------------------------------------
+
+Test 2: Comprovacio de la conversio a char.
+
+Comprova que la conversio a char de cavall funciona correctament. Provarem amb un cavall de cada color.
+
+Entrada:
+1     // Opció 1, crear cavall blanc
+BLANC // Color
+0     // x
+7     // y
+2     // Opcio 2, conversio a char
+1     // Opcio 1, crear cavall negre
+NEGRE // Color
+7     // x
+0     // y
+2     // Opcio 2, conversio a char
+
+Sortida esperada:
+Creat: x: 0, y: 7 Color: BLANC
+N
+Creat: x: 7, y: 0 Color: NEGRE
+n
+-------------------------------------------------------
+
+Test 3: esMovimentValid
+
+Comprova que la funcio de esMovimentValid retorna true pels moviments d'un cavall false per als que no son propis d'un cavall.
+Provarem diferents moviments en horitzontal, vertical, diagonal, de cavall i altres.
+
+Entrada:
+1     // Crearem un cavall al mig del tauler i provarem les caselles del voltant, i algunes de lluny.
+BLANC // El color es irrellevant per als moviments d'un cavall, wlog, usem BLANC.
+4
+4
+3     // Opcio 3, comprova moviment valid
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+4     // moviment horitzontal d'una unitat (no valid)
+5
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+4     // moviment horitzontal de mes d'una unitat (no valid)
+0
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+5     // moviment vertical d'una unitat (no valid)
+4
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+1     // moviment vertical de més d'una unitat (no valid)
+4
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+5     // moviment diagonal d'una unitat (no valid)
+5
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+0     // moviment diagonal de més d'una unitat (no valid)
+0
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+5     // moviment de cavall (valid)
+6
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+6     // moviment de cavall (valid)
+5
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+3     // moviment de cavall (valid)
+6
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+6     // moviment de cavall (valid)
+3
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+5     // moviment de cavall (valid)
+2
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+2     // moviment de cavall (valid)
+5
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+2     // moviment de cavall (valid)
+3
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+3    // moviment de cavall (valid)
+2
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+6     // moviment sense patro (tampoc de cavall) (no valid)
+0
+3     // Opcio 3
+true  // Al cavall no li afecta aquest parametre per tant wlog usarem true.
+4     // no moviment (no valid)
+4
+
+
+Sortida esperada:
+
+Creat: x: 4, y: 4 Color: BLANC
+false
+false
+false
+false
+false
+false
+true
+true
+true
+true
+true
+true
+true
+true
+false
+false

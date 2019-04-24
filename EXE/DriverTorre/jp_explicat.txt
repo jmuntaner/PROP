@@ -1,101 +1,106 @@
-Tests classe Rei:
+Tests classe Torre:
 
-Test 1: Creacio d'un rei
+Test 1: Creacio d'una torre.
 
-Comprova que la creadora de la classe rei funcioni correctament.
+Comprova que la creadora de la classe torre funcioni correctament.
 
 Entrada:
 
-1     // Opcio 1, crear rei
+1     // Opcio 1, crear torre
 BLANC // Color
-3     // x
-4     // y
-1     // Opcio 1, crear rei
-NEGRE // Color
-6     // x
+2     // x
 7     // y
-1     // Opcio 1, crear rei
-BLAU // Color
+1     // Opcio 1, crear torre
+NEGRE // Color
 0     // x
-4     // y
+5     // y
+1     // Opcio 1, crear torre
+BLAU // Color
+6     // x
+3     // y
 
 Sortida Esperada:
-Creat: x: 3, y: 4 Color: BLANC
-Creat: x: 6, y: 7 Color: NEGRE
+Creat: x: 2, y: 7 Color: BLANC
+Creat: x: 0, y: 5 Color: NEGRE
 ERROR: COLOR NO VALID
 
 -----------------------------------------------------
 
 Test 2: Comprovacio de la conversio a char.
 
-Comprova que la conversio a char de rei funciona correctament. Provarem amb un rei de cada color.
+Comprova que la conversio a char de torre funciona correctament. Provarem amb una torre de cada color.
 
 Entrada:
-1     // Opció 1, crear rei blanc
+1     // Opció 1, crear torre blanca
 BLANC // Color
-3     // x
-4     // y
+1     // x
+2     // y
 2     // Opcio 2, conversio a char
-1     // Opcio 1, crear rei negre
+1     // Opcio 1, crear torre negra
 NEGRE // Color
-6     // x
-7     // y
+5     // x
+5     // y
 2     // Opcio 2, conversio a char
 
 Sortida esperada:
-Creat: x: 3, y: 4 Color: BLANC
-K
-Creat: x: 6, y: 7 Color: NEGRE
-k
+Creat: x: 1, y: 2 Color: BLANC
+R
+Creat: x: 5, y: 5 Color: NEGRE
+r
 -------------------------------------------------------
 
 Test 3: esMovimentValid
 
-Comprova que la funcio de esMovimentValid retorna true pels moviments d'un rei i false per als que no son propis d'un rei.
-Provarem diferents moviments en horitzontal, verticl, diagonal y altres.
+Comprova que la funcio de esMovimentValid retorna true pels moviments d'una torre i false per als que no son propis d'una torre.
+Provarem diferents moviments en horitzontal, vertical, diagonal i altres.
 
 Entrada:
-1     // Crearem un rei al mig del tauler i provarem les caselles del voltant, i algunes de lluny.
-BLANC // El color es irrellevant per als moviments d'un rei, wlog, usem BLANC.
+1     // Crearem una torre al mig del tauler i provarem les caselles del voltant, i algunes de lluny.
+BLANC // El color es irrellevant per als moviments d'una torre, wlog, usem BLANC.
 3
 4
 3     // Opcio 3, comprova moviment valid
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-3
-5     // moviment horitzontal d'una unitat (valid)
+true  // Al torre no li afecta aquest parametre per tant wlog usarem true.
+3     // moviment horitzontal d'una unitat (valid)
+5
 3     // Opcio 3
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-3
-6     // moviment horitzontal de mes d'una unitat (no valid)
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
+3     // moviment horitzontal de mes d'una unitat (valid)
+0
 3     // Opcio 3
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
 4     // moviment vertical d'una unitat (valid)
 4
 3     // Opcio 3
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-1     // moviment vertical de més d'una unitat (no valid)
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
+7     // moviment vertical de més d'una unitat (valid)
 4
 3     // Opcio 3
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-4     // moviment diagonal d'una unitat (valid)
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
+4     // moviment diagonal d'una unitat (no valid)
 5
 3     // Opcio 3
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-6     // moviment diagonal de més d'una unitat (no valid)
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
+0     // moviment diagonal de més d'una unitat (no valid)
+1
+3     // Opcio 3
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
+0     // moviment sense patro (no valid)
 7
 3     // Opcio 3
-true  // Al rei no li afecta aquest parametre per tant wlog usarem true.
-0
-7     // moviment sense patro (no valid)
+true  // A la torre no li afecta aquest parametre per tant wlog usarem true.
+3     // no moviment (no valid)
+4
 
 
 Sortida esperada:
 
 Creat: x: 3, y: 4 Color: BLANC
 true
-false
+true
+true
 true
 false
-true
+false
 false
 false
