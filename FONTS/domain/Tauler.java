@@ -91,8 +91,7 @@ public class Tauler {
      * @return true si hi ha mat
      */
     private boolean esMat(Color b) {
-        if (obteMovimentsJugador(b.getNext()).size() == 0) return true;
-        return false;
+        return obteMovimentsJugador(b.getNext()).size() == 0;
         /*
         Pair<Integer, Integer> posRei;
         if (b == BLANC) posRei = _reiNegre.getPosicio();
@@ -125,9 +124,8 @@ public class Tauler {
         if (incx == 0 && incy == 0) return false; //centre == pos
         else if (incx == 0 || incy == 0) return true; //moviment horitzontal o vertical
         else if (Math.abs(incx) == Math.abs(incy)) return true; //moviment diagonal
-        else if ((Math.abs(incx) == 2 && Math.abs(incy) == 1) || (Math.abs(incx) == 1 && Math.abs(incy) == 2))
-            return true; //cavalls
-        return false;
+        else
+            return (Math.abs(incx) == 2 && Math.abs(incy) == 1) || (Math.abs(incx) == 1 && Math.abs(incy) == 2); //cavalls
     }
 
     /**

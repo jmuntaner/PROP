@@ -1,6 +1,9 @@
 package drivers;
 
-import domain.*;
+import domain.Color;
+import domain.Moviment;
+import domain.Partida;
+import domain.Problema;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
