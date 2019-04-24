@@ -26,7 +26,7 @@ for f in FONTS/drivers/Driver*.java; do
 	$cmd;
 
 	# Creació de README
-	echo -e "${BASICREADME//DNAME/$name}" > "${jardir}README.md";
+	#echo -e "${BASICREADME//DNAME/$name}" > "${jardir}README.md";
 	
 	### Jocs de proves
 
@@ -49,7 +49,7 @@ for f in FONTS/drivers/Driver*.java; do
                 touch "$jpex";
         fi
 	# Copia els jocs de proves
-	cp -r "${jpdir}." "${jardir}";
+	#cp -r "${jpdir}." "${jardir}";
 done
 # Borra el manifest temporal
 rm manifest.mf;
