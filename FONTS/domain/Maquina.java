@@ -4,18 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Maquina {
-    private static final int maxVal = 9999;
-    private static final int minVal = -9999;
+    static final int maxVal = 9999;
+    static final int minVal = -9999;
 
     public abstract int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn);
 
-    public static int getMaxVal() {
-        return maxVal;
-    }
-
-    public static int getMinVal() {
-        return minVal;
-    }
 
     /**
      * Cerca el millor moviment per a la maquina
