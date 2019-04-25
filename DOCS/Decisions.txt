@@ -38,6 +38,15 @@ Llista de decisions que s'han pres de les parts obertes de l'enunciat:
     - Els resultats no tenen perque reflexar la dificultat real del problema, pero tal i com es diu a [ref 2], aquesta
       es dificil de trobar fins i tot per a persones experimentades.
 
+- Estadistiques
+    - Per construir el ranking dels problemes, utilitzem un sistema de puntuacions basat en el nombre de jugades en que
+      es resol el problema, i el temps que consumeix l'atacant durant la partida.
+
+- Classe Pair
+    - Per conveniencia (per exemple a l'hora de tractar amb posicions), utilitzem l'estructura de dades Pair.
+    - Com que a l'OpenSDK no hi ha la llibreria javafx, d'on treiem aquesta classe, hem copiat el codi font de la classe
+      a una package propi d'utilitats.
+
 ANNEX: LLISTA DE REFERENCIES
 (Els [ref i] al text citen la referencia [i]).
 
