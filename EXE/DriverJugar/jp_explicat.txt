@@ -1,9 +1,0 @@
-Permet provar les funcionalitats de jugar partides i de comprovar si els problemes tenen solucio
-
-Permet viatjar entre dos menus:
-    - Menu gestio problemes
-        Permet veure la llista de problemes afegits i afegir o treure problemes.
-        A l'hora d'afegir un problema es comprova si aquest te solucio.
-    - Menu de jugar
-        Permet fer partides HvH, HvM i MvM.
-        Permet escollir el problema per jugar d'entre la llista de problemes.

@@ -1,0 +1,11 @@
+Tests realitzats amb junit
+
+Arxius:
+   test.jar: Jar que conté les classes del domini i la classe de test de M1
+
+
+Operativa:
+
+Per a executar els tests, executar:
+
+java -cp ../junit-4.12.jar:../hamcrest-2.1.jar:test.jar org.junit.runner.JUnitCore test.domain.M1Test

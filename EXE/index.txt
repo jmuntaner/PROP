@@ -33,6 +33,8 @@ Directoris:
         Conte els fitxers necessaris per a provar la classe Torre
     - DriverUsuari
         Conte els fitxers necessaris per a provar la classe Usuari
+    - testJunit
+        Conte els fitxers necessaris per a executar els tests realitzats amb JUnit
 
 Comentaris:
     Les instruccions per executar i dur a terme els tests es troben als fitxers index.txt i jp_explicat.txt de cada carpeta.

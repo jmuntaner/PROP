@@ -1,13 +1,14 @@
 DriverJugar
 
-Driver de les funcionalitats principals del primer lliurament
+DriverJugar
+
+Executable i jocs de proves per a provar les funcionalitats principals que demana l’enunciat
+(comprovar si un problema te solucio i jugar partides HvH, HvM i MvM, on H vol dir jugador
+ huma i M, la maquina amb l’algoritme basic).
 
 Fitxers:
     - DriverJugar.jar:  Executable amb del driver.
-    - jp_in:            Entrada del joc de proves.
-    - jp_out:           Sortida del joc de proves.
-    - jp_explicat.txt:  Explicacio de les entrades de jp_in.txt i les seves sortides esperades.
-    - README.md         Markdown amb l'operativa
+    - exemple.txt:            Entrada del joc de proves.
 
 Operativa:
   Execucio interactiva:
@@ -18,10 +19,5 @@ Operativa:
 
   Execucio jocs de proves:
 
-      java -jar DriverJugar.jar -q < jp_in.txt > sortida.txt
-
-    Per a comprovar la validesa del resultat, executar:
-
-      diff sortida.txt jp_out.txt
 
 
