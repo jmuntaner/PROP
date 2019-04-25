@@ -3,6 +3,8 @@ JOCSPROVES
 Jocs de proves utilitzats per als tests.
 
 Cada directori conte els jocs de proves per al driver corresponents.
+Aquests jocs de proves son, en principi, els mateixos que els que es troben al directori EXE.
+En cas de discrepancies, els del directori EXE son els que prevalen.
 
 Fitxers (de cada directori):
     - jp_in.txt
@@ -14,5 +16,7 @@ Fitxers (de cada directori):
 
 Operativa:
     - Compilar el projecte executant l'script makeJars.sh
+        Aixo esborra la carpeta EXE i tots els fitxers que conte.
+        Compila els codis de FONTS i copia els jocs de proves a les carpetes corresponents.
     - Els drivers compilats es troben en format .jar a la carpeta EXE
     - Seguir les instruccions exposades al fitxer jp_explicat.txt de cada driver

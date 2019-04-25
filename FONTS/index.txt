@@ -4,8 +4,12 @@ Classes implementades pel grup fins al moment (incloent-hi drivers).
 
 Directoris:
     - Controllers
-        Controladors (qualsevol fitxer dins aquest directori es provisional).
+        Controladors (qualsevol fitxer dins aquest directori es provisional)
     - Domain
         Codis de les classes de domini
     - Drivers
         Codis de tots els drivers utilitzats
+    - Utils:
+        Codis externs usats (en concret, codi de la classe Pair).
+    - Test.domain
+        Codi de la classe de test (JUnit) per a la maquina M1

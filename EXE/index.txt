@@ -1,0 +1,38 @@
+EXE
+
+Fitxers executables, juntament amb els seus jocs de prova.
+
+Directoris:
+    - DriverAlfil
+        Conte els fitxers necessaris per a provar la classe Alfil
+    - DriverCavall
+        Conte els fitxers necessaris per a provar la classe Cavall
+    - DriverEstadadistiquesPartida
+        Conte els fitxers necessaris per a provar la classe EstadistiquesPartida
+    - DriverFenTranslator
+        Conte els fitxers necessaris per a provar la classe FenTranslator
+    - DriverJugar
+        Conte els fitxers necessaris per a provar les funcionalitats principals que demana l'enunciat
+    - DriverMoviment
+        Conte els fitxers necessaris per a provar la classe Moviment
+    - DriverPartida
+        Conte els fitxers necessaris per a provar la classe Partida
+    - DriverPeo
+        Conte els fitxers necessaris per a provar la classe Peo
+    - DriverProblema
+        Conte els fitxers necessaris per a provar la classe Problema
+    - DriverPuntuacioProblema
+        Conte els fitxers necessaris per a provar la classe PuntuacioProblema
+    - DriverRei
+        Conte els fitxers necessaris per a provar la classe Rei
+    - DriverReina
+        Conte els fitxers necessaris per a provar la classe Reina i la seva superclasse Peca
+    - DriverTauler
+        Conte els fitxers necessaris per a provar la classe Tauler
+    - DriverTorre
+        Conte els fitxers necessaris per a provar la classe Torre
+    - DriverUsuari
+        Conte els fitxers necessaris per a provar la classe Usuari
+
+Comentaris:
+    Les instruccions per executar i dur a terme els tests es troben als fitxers index.txt i jp_explicat.txt de cada carpeta.

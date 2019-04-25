@@ -18,7 +18,6 @@ RELACIO DE CLASSES IMPLEMENTADES PER CADA MEMBRE DEL GRUP
         - Peo
         - Maquina
         - M1
-        - M2
     - Roger:
         - Moviment
         - Tauler

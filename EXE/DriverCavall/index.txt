@@ -1,9 +1,9 @@
-DriverFenTranslator
+DriverCavall
 
-Executable i jocs de proves per a provar la classe FenTranslator
+Executable i jocs de proves per a provar la classe Cavall
 
 Fitxers:
-    - DriverFenTranslator.jar:  Executable del driver de FenTranslator.
+    - DriverCavall.jar:  Executable del driver de Cavall.
     - jp_in:            Entrada del joc de proves.
     - jp_out:           Sortida esperada del joc de proves.
     - jp_explicat.txt:  Descripcio dels jocs de proves.
@@ -12,13 +12,13 @@ Fitxers:
 Operativa:
   - Execucio interactiva:
 
-      java -jar DriverFenTranslator.jar
+      java -jar DriverCavall.jar
 
     Es presenta un menu amb opcions per a utilitzar les diferents parts de la classe.
 
   - Execucio jocs de proves:
 
-      java -jar DriverFenTranslator.jar -q < jp_in.txt > sortida.txt
+      java -jar DriverCavall.jar -q < jp_in.txt > sortida.txt
 
     Per a comprovar la validesa del resultat, executar:
 
