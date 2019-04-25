@@ -4,7 +4,7 @@ Breu descripcio de les estructures de dades i algoritmes utilitzats per a implem
 __________________
 ------------------
 
-Algorismes utilitzats: Minimax amb podes alfa-beta (recursiu), exploracio DFS (recursiu i iteratiu).
+Algorismes utilitzats: Minimax amb podes alfa-beta (recursiu), exploracio DFS (recursiu i iteratiu) i el SHA1.
 
 ______
 
@@ -76,6 +76,19 @@ moviment possible, si troba mat, suma 1 a data[0] (nombre de mats) i si no segue
 Quan es el torn del defensor, comprova que el mat es inevitable, es a dir que qualsevol moviment porti igualment al mat.
 Aixo ho fa tallant l'execucio de qualsevol branca que contingui un moviment posible que sigui mat del defensor o un
 moviment que al continuar la cerca no troba el mat de l'atacant (comprovant si data[0] varia entre crides successives).
+
+______
+
+
+A la classe Usuari a l'hora de guardar les contrasenyes, guardem el hash SHA1 de la mateixa, per seguretat. L'algorisme
+SHA1 es un funcio hash criptografica que agafa un input i produeix un valor hash de 20 bytes. Aixi no ens cal guardar la
+contrasenya de l'usuari i nomes guardem el hash, si volem comprovar que una contrasenya introduida es correcta simplement
+comparem els hashes. La idea de usar el valor hash es que es practicament impossible a partir del hash trobar la contrasenya
+original i per tant tot i que un atacant conseguis el hash seria molt dificil robar la contrasenya.
+
+L'algorisme SHA1 esta implementat a la llibreria de Java java.security.MessageDigest, nosaltres simplement a la funcio
+hashPass cridem al MessageDigest (amb parametre SHA1) que ens retorna el hash de la contrasenya en bytes[] i el passem
+a String.
 
 _____________________
 ---------------------
