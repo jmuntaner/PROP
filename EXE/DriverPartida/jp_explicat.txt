@@ -36,7 +36,221 @@ Valors i Efectes estudiats
   Hem utilitzat la metodologia de caixa gris, generant entrades que comproven
    els casos generals i els casos limit, monitoritzant que es llencin excepcions en cas necessari. 
    
+Test 1: Creació de partida
+Verifica que la inicialització de Partida funciona correctament
 
+Entrada:
+1   // 1: Crear partida
+1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1  // FEN de la partida
+2   // Numero de jugades de la partida
+2   //  2: Obté torn
+4   //  4: Obté historial
+5   //  5: Obté número de moviments
+7   //  7: Mostra tauler
+
+Sortida esperada:
+Partida creada  // La partida es crea correctament
+blanc           // Primer torn: jugador blanc
+0               // No hi ha jugades
+                // Historial buit
+-N-b----        // Estat inicial del tauler
+------nr
+R-----n-
+--Ppk--r
+K--p--qR
+--------
+--N-PQ--
+B------B
+
+------------------------------------------
+
+Test 2: Moviment no final
+(Reutilitza la partida creada al test anterior)
+Realitza un moviment correcte que no porta a mat ni escac ni taules
+verifica que l'historial, numero de moviments i torn s'actualitzen correctament
+
+Entrada:
+6    // realitzar moviment
+b    // Mouen blanques
+6 2  // Moure cavall a (6,2)
+3    // Moviment 3 (matar peo)
+4    // Obtenir historial
+5    // Obtenir numero de moviments 
+2    // Obtenir torn
+
+Sortida esperada:
+-N-b----  // Estat inicial del tauler
+------nr
+R-----n-
+--Ppk--r
+K--p--qR
+--------
+--N-PQ--
+B------B
+1: 7,4    // Moviments possibles
+2: 5,4
+3: 4,3
+4: 4,1
+5: 5,0
+0    // No hi ha ni escac, ni mat, ni taules
+6 2 4 3 N p // Historial (cavall blanc a 6,2 menja peo negre a 4,3)
+1           // 1 moviment realitzat
+negre       // El torn ha estat modificat correctament
+
+---------------------------------------------
+
+Test 3: Excepcio torn incorrecte
+
+Verifica que la excepcio de torn incorrecte es llencada.
+
+Entrada:
+6    // Moure 
+b   // Moviment del jugador blanc (Es el torn del negre)
+0 3 // Alfil negre
+1   // Moviment 1
+
+Sortida esperada:
+-N-b----  // Situacio actual
+------nr
+R-----n-
+--Ppk--r
+K--N--qR
+--------
+----PQ--
+B------B
+1: 1,4   // Moviments possibles
+2: 2,5
+3: 3,6
+4: 4,7
+5: 1,2
+6: 2,1
+7: 3,0
+Error: No es el torn del jugador especificat // Excepcio
+
+..............................
+Test 4: Excepcio color oposat
+
+Verifica que apareix l'excepcio quan s'intenta moure una fitxa del color oposat.
+
+Entrada:
+6    // Moure 
+n   // Moviment del jugador negre
+0 1 // Cavall blanc
+1   // Moviment 1
+
+Sortida esperada:
+-N-b----   // Estat del tauler
+------nr
+R-----n-
+--Ppk--r
+K--N--qR
+--------
+----PQ--
+B------B
+1: 2,2     // Moviments possibles
+2: 1,3
+Error: No es pot moure una peça de l'altre color   // Excepcio
+
+----------------------------------------------
+
+Test 5: Moviment final
+
+Verifica que es mostra el mat quan finalitza la partida
+
+Entrada
+6    // Moviment de negre, per a poder finalitzar la partida amb blanc
+n    // Moviment del jugador blanc (Es el torn del negre)
+0 3  // Alfil negre
+1    // Moviment 1
+6    // Iniciar moviment
+b    // Torn blanc
+0 1  // Moure cavall a 0,1
+1    // Moviment 1
+
+Sortida esperada:
+-N-b---- // estat del tauler
+------nr
+R-----n-
+--Ppk--r
+K--N--qR
+--------
+----PQ--
+B------B
+1: 1,4    // Moviments possibles
+2: 2,5
+3: 3,6
+4: 4,7
+5: 1,2
+6: 2,1
+7: 3,0
+0          // No hi ha mat ni escac ni taules
+-N------   // Estat del tauler
+----b-nr
+R-----n-
+--Ppk--r
+K--N--qR
+--------
+----PQ--
+B------B
+1: 2,2   // Moviments possibles pel cavall
+2: 1,3
+2        //  ESCAC MAT
+
+-------------------------------
+Test 6: Partida amb taules
+
+Verifica que la deteccio de taules funciona correctament
+
+Entrada:
+1  // Creació de nova partida amb taules
+kQ3K2/8/8/8/8/8/8/8 b - - 0 1 // fen simple amb taules en un moviment
+2    // Mida 2 (indiferent)
+6    // Realitzar moviments
+n    // Torn negre
+0 0  // Moure rei negre
+1    // Moviment 1 (menjar reina blanca)
+
+Sortida esperada:
+Partida creada 
+kQ---K--       // Situacio inicial
+--------
+--------
+--------
+--------
+--------
+--------
+--------
+1: 0,1     // Moviments possibles
+3          // Taules
+
+-------------------------------
+Test 6: Partida amb Escac
+
+Verifica que la deteccio de Escac funciona correctament
+
+Entrada:
+1   // 1: Crear partida
+1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1  // FEN de la partida
+2   // Numero de jugades de la partida
+6    // Iniciar moviment
+b    // Torn blanc
+0 1  // Moure cavall a 0,1
+2    // Moviment 2
+
+Sortida esperada:
+Partida creada
+-N-b----       // Estat inicial
+------nr
+R-----n-
+--Ppk--r
+K--p--qR
+--------
+--N-PQ--
+B------B
+1: 2,2       // moviments disponibles
+2: 1,3
+1            // ESCAC
+----------
    1: Crea partida
  2: Obté torn
  3: Obté peça a pos
