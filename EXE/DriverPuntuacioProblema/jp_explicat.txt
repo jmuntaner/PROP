@@ -21,11 +21,11 @@ Objecte de la prova:
 
 Altres elements integrats a la prova
 
-  Cap.
+  EstadistiquesPartida.
 
 Drivers
 
-  DriverUsuari: permet fer crides als metodes de la classe Usuari utilitzant la linea de comandes.
+  DriverPuntuacioProblema: permet fer crides als metodes de la classe PuntuacioProblema utilitzant la linea de comandes.
 
 Stubs
 

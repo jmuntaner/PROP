@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #rm -rf EXE/*;
-CPATH="-C out/production/prop-qp19" 
-DOMAIN="${CPATH} domain ${CPATH} drivers/GenericDriver.class";
+CPATH="-C out" 
+DOMAIN="${CPATH} domain ${CPATH} drivers/GenericDriver.class ${CPATH} utils";
 BASEJAR="jar cfm"; 
 BASEMANIFEST="Manifest-version: 1.0\nMain-Class: drivers.";
 BASICREADME="# DNAME\n
