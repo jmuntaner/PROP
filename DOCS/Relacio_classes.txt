@@ -10,7 +10,7 @@ RELACIO DE CLASSES IMPLEMENTADES PER CADA MEMBRE DEL GRUP
         - EstadistiquesPartida
         - DriverEstadistiquesPartida
         - DriverFenTranslator
-        - DriverJugar
+        - DriverJugar (1/2)
         - DriverPartida
         - DriverPuntuacioProblema
         - DriverUsuari
@@ -39,3 +39,4 @@ RELACIO DE CLASSES IMPLEMENTADES PER CADA MEMBRE DEL GRUP
         - DriverMoviment
         - DriverProblema
         - DriverTauler
+        - DriverJugar (1/2)
