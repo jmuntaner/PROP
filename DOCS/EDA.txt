@@ -80,15 +80,16 @@ moviment que al continuar la cerca no troba el mat de l'atacant (comprovant si d
 ______
 
 
-A la classe Usuari a l'hora de guardar les contrasenyes, guardem el hash SHA1 de la mateixa, per seguretat. L'algorisme
-SHA1 es un funcio hash criptografica que agafa un input i produeix un valor hash de 20 bytes. Aixi no ens cal guardar la
-contrasenya de l'usuari i nomes guardem el hash, si volem comprovar que una contrasenya introduida es correcta simplement
-comparem els hashes. La idea de usar el valor hash es que es practicament impossible a partir del hash trobar la contrasenya
-original i per tant tot i que un atacant conseguis el hash seria molt dificil robar la contrasenya.
+A la classe Usuari a l'hora de guardar les contrassenyes, guardem el hash SHA1 de la mateixa. L'algorisme SHA1 es un
+funcio hash criptografica que agafa un input i produeix un valor hash de 20 bytes. Aixi no ens cal guardar la contrasenya
+de l'usuari i nomes guardem el hash, d'aquesta manera, si volem comprovar que una contrasenya introduida es correcta
+simplement comparem els hashes i no ens cal saber la contrasenya original. La idea d'usar el valor hash es que es
+practicament impossible a partir del hash trobar la contrasenya original i per tant tot i que un atacant conseguis el
+hash seria molt dificil robar la contrasenya.
 
 L'algorisme SHA1 esta implementat a la llibreria de Java java.security.MessageDigest, nosaltres simplement a la funcio
-hashPass cridem al MessageDigest (amb parametre SHA1) que ens retorna el hash de la contrasenya en bytes[] i el passem
-a String.
+hashPass cridem al MessageDigest (amb parametre SHA1) que ens retorna el hash de la contrasenya en bytes[] i finalment
+el passem a String.
 
 _____________________
 ---------------------
