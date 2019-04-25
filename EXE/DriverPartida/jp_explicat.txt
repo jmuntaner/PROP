@@ -36,16 +36,16 @@ Valors i Efectes estudiats
   Hem utilitzat la metodologia de caixa gris, generant entrades que comproven
    els casos generals i els casos limit, monitoritzant que es llencin excepcions en cas necessari. 
    
-Test 1: Creació de partida
-Verifica que la inicialització de Partida funciona correctament
+Test 1: Creacio de partida
+Verifica que la inicialitzacio de Partida funciona correctament
 
 Entrada:
 1   // 1: Crear partida
 1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1  // FEN de la partida
 2   // Numero de jugades de la partida
-2   //  2: Obté torn
-4   //  4: Obté historial
-5   //  5: Obté número de moviments
+2   //  2: Obte torn
+4   //  4: Obte historial
+5   //  5: Obte numero de moviments
 7   //  7: Mostra tauler
 
 Sortida esperada:
@@ -202,7 +202,7 @@ Test 6: Partida amb taules
 Verifica que la deteccio de taules funciona correctament
 
 Entrada:
-1  // Creació de nova partida amb taules
+1  // Creacio de nova partida amb taules
 kQ3K2/8/8/8/8/8/8/8 b - - 0 1 // fen simple amb taules en un moviment
 2    // Mida 2 (indiferent)
 6    // Realitzar moviments
@@ -252,10 +252,10 @@ B------B
 1            // ESCAC
 ----------
    1: Crea partida
- 2: Obté torn
- 3: Obté peça a pos
- 4: Obté historial
- 5: Obté número de moviments
+ 2: Obte torn
+ 3: Obte peça a pos
+ 4: Obte historial
+ 5: Obte numero de moviments
  6: Mou peça
  7: Mostra tauler
  8: Reinicia partida

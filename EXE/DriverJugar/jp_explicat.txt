@@ -1,0 +1,53 @@
+JOCS DE PROVA PER A LES FUNCIONALITATS PRINCIPALS
+
+Objecte de la prova:
+
+provar que es poden realitzar les funcionalitats principals, que son comprovar si un problema te solucio i
+jugar partida entre dos jugadors humans, entre dos jugadors governats per l’algoritme basic de la maquina,
+i entre un jugador de cada, sent l’huma l’atacant.
+
+Altres elements integrats:
+classe Problema, classe M1, classe Tauler, classe Moviment, classe Partida, enum Color
+
+Drivers:
+DriverTauler (permet dur a terme les accions necessaries per a provar que es puguin realitzar les
+funcionalitats principals usant les classes del model)
+
+Stubs:
+  -
+
+Fitxers de dades necessaris:
+  -
+
+Valors estudiats:
+  (veure annex)
+Efectes estudiats:
+ comprovacio de que els problemes tenen solucio i realitzacio de partides en aquests problemes.
+
+Operativa:
+  (veure fitxer index.txt)
+
+ANNEX
+Els valors usats corresponen a diferents problemes, caracteritzats pel nombre de jugades i el FEN
+de la seva situacio inicial. Per a cada problema, s’ha introduit per veure que tenia solucio i s’han 
+jugat diverses partides en les diferents modalitats, comprovant que en MvM sempre guanyava el jugador 1,
+i que en les altres els moviments correctes sempre portaven al mat, i que pels incorrectes la partida
+acabava de la manera desitjada.
+
+Problemes en 2 jugades (amb solucio)
+1rb4r/pkPp3p/1b1P3n/1Q6/N3Pp2/8/P1P3PP/7K w - - 0 1
+5rkr/pp2Rp2/1b1p1Pb1/3P2Q1/2n3P1/2p5/P4P2/4R1K1 w - - 0 1
+1r1kr3/Nbppn1pp/1b6/8/6Q1/3B1P2/Pq3P1P/3RR1K1 w - - 0 1
+3q2r1/4n2k/p1p1rBpp/PpPpPp2/1P3P1Q/2P3R1/7P/1R5K w - - 0 1
+r2qk2r/pb4pp/1n2Pb2/2B2Q2/p1p5/2P5/2B2PPP/RN2R1K1 w - - 0 1
+6k1/pp4p1/2p5/2bp4/8/P5Pb/1P3rrP/2BRRN1K b - - 0 1
+8/6K1/1p1B1RB1/8/2Q5/2n1kP1N/3b4/4n3 w - - 0 1
+1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1
+
+Problemes en 1 jugades (sense solucio)
+rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1
+
+Problemes en 3 jugades (amb solucio)
+ r2n1rk1/1ppb2pp/1p1p4/3Ppq1n/2B3P1/2P4P/PP1N1P1K/R2Q1RN1 b - - 0 1
+rr3k2/pppq1pN1/1b1p1BnQ/1b2p1N1/4P3/2PP3P/PP3PP1/R4RK1 w - - 0 1
+

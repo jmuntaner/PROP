@@ -1,7 +1,7 @@
 Tests realitzats amb junit
 
 Arxius:
-   test.jar: Jar que conté les classes del domini i la classe de test de M1
+   test.jar: Jar que conte les classes del domini i la classe de test de M1
 
 
 Operativa:
