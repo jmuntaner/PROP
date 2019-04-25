@@ -1,0 +1,4 @@
+Per a compilar el codi cal executar l'arxiu compilar.sh. Es crearà una carpeta "out"
+on es trobaràn els .class seguint l'estructura 'package', igual que a FONTS.
+
+Per a generar els .jar de EXE, executar makeJars.sh després d'haver generat la carpeta "out" amb compilar.sh.
