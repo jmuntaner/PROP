@@ -1,6 +1,6 @@
 package domain;
 
-import javafx.util.Pair;
+import utils.Pair;
 
 import java.util.ArrayList;
 

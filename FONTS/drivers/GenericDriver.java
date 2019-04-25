@@ -3,7 +3,7 @@ package drivers;
 import domain.Moviment;
 import domain.Peca;
 import domain.Tauler;
-import javafx.util.Pair;
+import utils.Pair;
 
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
 package test.domain;
 
 import domain.*;
-import javafx.util.Pair;
+import utils.Pair;
 import org.junit.Test;
 
 import static domain.Color.BLANC;

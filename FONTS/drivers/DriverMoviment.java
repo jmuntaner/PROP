@@ -4,7 +4,7 @@ import domain.Color;
 import domain.Moviment;
 import domain.Peca;
 import domain.Rei;
-import javafx.util.Pair;
+import utils.Pair;
 
 public class DriverMoviment extends GenericDriver {
     private Moviment m;

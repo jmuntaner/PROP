@@ -1,6 +1,6 @@
 package domain;
 
-import javafx.util.Pair;
+import utils.Pair;
 
 public class Moviment {
     private Pair<Integer, Integer> posIni, posFinal;

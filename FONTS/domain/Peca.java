@@ -1,6 +1,6 @@
 package domain;
 
-import javafx.util.Pair;
+import utils.Pair;
 
 public abstract class Peca {
     private Color color;

@@ -1,7 +1,7 @@
 package drivers;
 
 import domain.*;
-import javafx.util.Pair;
+import utils.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -4,7 +4,7 @@ import domain.Color;
 import domain.Moviment;
 import domain.Partida;
 import domain.Problema;
-import javafx.util.Pair;
+import utils.Pair;
 
 import java.util.ArrayList;
 

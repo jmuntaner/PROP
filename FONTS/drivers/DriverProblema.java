@@ -1,7 +1,7 @@
 package drivers;
 
 import domain.*;
-import javafx.util.Pair;
+import utils.Pair;
 
 public class DriverProblema extends GenericDriver {
     private Problema p;

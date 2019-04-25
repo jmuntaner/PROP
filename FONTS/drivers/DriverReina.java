@@ -2,7 +2,7 @@ package drivers;
 
 import domain.Color;
 import domain.Reina;
-import javafx.util.Pair;
+import utils.Pair;
 
 
 public class DriverReina extends GenericDriver {
