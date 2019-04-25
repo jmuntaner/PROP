@@ -13,6 +13,9 @@ Fitxers:
         Relacio de les classes implementades per cada membre del grup.
     - EDA.txt
         Descripcio de les estructures de dades i algorismes utilitzats per a implementar les funcionalitats principals
+    - Decisions.txt
+        Llista de decisions que s'han pres de les parts obertes de l'enunciat
+
 
 Directoris:
     - javadoc

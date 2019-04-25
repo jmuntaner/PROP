@@ -2,9 +2,10 @@ EDA
 
 Breu descripcio de les estructures de dades i algoritmes utilitzats per a implementar les funcionalitats principals.
 
-Algorismes utilitzats: Minimax amb podes alfa-beta, exploració DFS d'un arbre.
+Algorismes utilitzats: Minimax amb podes alfa-beta, exploracio DFS d'un arbre. Ambdos recursius.
 
-A la classe Maquina, hem usat l'algorisme de minimax amb podes alfa-beta per a calcular el seguent moviment de la maquina.
+Respecte a la primera funcionalitat principal demanada s'ha usat l'algorisme de minimax amb podes alfa-beta per a
+calcular el seguent moviment de la maquina.
 
 L'aplicacio de l'algorisme de minimax a aquest problema concret (calcular la seguent jugada a un problema d'escacs) es
 obvia ja que els escacs son un joc amb adversari (dos jugadors) i d'informacio perfecte, cas que s'adequa perfectament als
@@ -32,13 +33,11 @@ La idea de les podes alfa-beta es que l'algorisme mante dos valors, alfa i beta,
 que el jugador maximal pot assolir i el maxim valor que el jugador minimal te assegurat assolir, respectivament. Si en
 algun moment de l'exploracio l'alfa supera la beta, el jugador maximal pot descartar aquest node i la branca que el descendeix.
 
-A la M1 tenim una heuristica molt simple, que retorna el pitjor valor possible en cas de que l'ultima jugada feta sigui mat
 
 
-
-A la classe Tauler hem implementat la funcio comprovaSolAux per comprovar que el problema te solucio i obtenir alguns
-parametres (numero de decisions de l'atacant i numero de solucions trobades) per a calcular la dificultat del problema
-posteriorment.
+Per a la segona funcionalitat principal demanada, a la classe Tauler hem implementat la funcio comprovaSolAux per comprovar
+que el problema te solucio i obtenir alguns parametres (numero de decisions de l'atacant i numero de solucions trobades)
+per a calcular la dificultat del problema posteriorment.
 
 Procedim recorrent l'arbre de moviments possibles mitjançant una exploració en profunditat (DFS).
 
