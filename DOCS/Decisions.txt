@@ -1,15 +1,47 @@
-Decisions
+DECISIONS
 
 Llista de decisions que s'han pres de les parts obertes de l'enunciat:
 
+- Funcionalitats opcionals (de cara a la segona entrega, pero que afecten al model):
+    - Registre i logins d'usuaris amb id i contrassenya,desada de manera segura (usant SHA1).
+    - Reset i finalitzacio manual de partides
+    - Historial de moviments
+    - Ranking general
 
--Nombre de moviments maxims: hem establit un maxim de 3 moviments per als problemes perque si no a l'hora de comprovar
-que te solucio es tarda massa: execució problema mat en 4 aprox 15 minuts (2:12 si no es busca el número de solucions).
+- Entrada dels problemes per part de l'usuari
+    - Hi haura dues maneres d'introduir problemes (o millor dit, els taulers inicials)
+        - Grafica (es a dir, especificant les peces una per una)
+        - Escrita (introduint el FEN de la situacio inicial del problema)
 
--Permetre registre i login d'usuari amb id i contrassenya que guardem de manera segura (usant SHA1).
+- Limit de jugades i peces
+    - No hem marcat limit de peces, ja que no te una gran implicacio en el rendiment de l'algoritme.
+    - El nombre de jugades de l'atacant esta limitat a 3, basant-nos en dos arguments:
+        - Segons [ref 1], la mida de l'arbre per a 3 jugades es de 50k nodes, mentre que per 4 es de 138k i per 5 de 1.6M
+        - A la practica, els problemes de 3 jugades els comprovem en alguns segons, en els casos mes lents que hem provat
+          Algun de 4 ha trigat uns 15 minuts, i nomes l'hem pogut reduir fins els 2m 20s aplicant millores que impedien el
+          calcul de la dificultat, i que no milloraven els casos pitjors.
 
--
+- Algorisme basic: minimax amb podes alfa-beta.
+    - Seguint [ref 3] vam decidir aplicar a l'algoritme basic de la M1, que en essencia es un minimax, l'optimitzacio de
+      podes alfa-beta, per questions de rendiment. Aquesta millora s'ha implementat amb l'algoritme descrit a [ref 4].
+    - L'algoritme de la M2 usara heuristiques mes complexes.
 
--
+- Dificultat
+    - La dificultat es calcula aproximadament com:
+        nombre de decisions valides que pot prendre l'atacant / nombre de solucions
+      Sent la primera el nombre de branques que corresponen a moviments del jugador blanc (notar que no mes es aproximat,
+      ja que no son totes donat que no es recorre l'arbre sencer).
+      Per la seva part, el nombre de solucions son el nombre de fulles de l'arbre que donen l'atacant com a guanyador.
+    - Ens hem basat en l'exposat a [ref 2], segons el qual les caracteristiques propies dels escacs (com ara el nombre
+      de peces o les seves posicions) no son tant importants a l'hora de trobar la dificultat d'un problema, sino que el
+      que afecta mes es la forma de l'arbre.
+    - Els resultats no tenen perque reflexar la dificultat real del problema, pero tal i com es diu a [ref 2], aquesta
+      es dificil de trobar fins i tot per a persones experimentades.
 
--
+ANNEX: LLISTA DE REFERENCIES
+(Els [ref i] al text citen la referencia [i]).
+
+[1] http://www.human-competitive.org/sites/default/files/gpsearch.pdf
+[2] http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
+[3] https://medium.freecodecamp.org/simple-chess-ai-step-by-step-1d55a9266977
+[4] https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
