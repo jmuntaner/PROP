@@ -4,7 +4,7 @@ JOCS DE PROVA PER A LA CLASSE TAULER
 - Altres elements integrats: classe Moviment, classe Peça i les seves subclasses, enum Color
 
 - Drivers: DriverTauler
-    - Permet cridar els metodes de la classe moviment
+    - Permet cridar els metodes de la classe tauler
     - Permet llegir les dades i operacions de manera interactiva
     - Permet escriure els resultats per pantalla/fitxer
 

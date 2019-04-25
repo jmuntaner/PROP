@@ -364,7 +364,7 @@ public class Tauler {
     /**
      * Indica si el tauler és vàlid com a situació inicial
      * 0: Correcte
-     * 1: Incorrecte per falta del reig blanc
+     * 1: Incorrecte per falta del rei blanc
      * 2: Incorrecte per falta del rei negre
      * 3: Incorrecte per escac del jugador que comença / mat / taules
      *
