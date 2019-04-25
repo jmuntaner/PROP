@@ -1,3 +1,15 @@
 Decisions
 
 Llista de decisions que s'han pres de les parts obertes de l'enunciat:
+
+
+-Nombre de moviments maxims: hem establit un maxim de 3 moviments per als problemes perque si no a l'hora de comprovar
+que te solucio es tarda massa: execució problema mat en 4 aprox 15 minuts (2:12 si no es busca el número de solucions).
+
+-Permetre registre i login d'usuari amb id i contrassenya que guardem de manera segura (usant SHA1).
+
+-
+
+-
+
+-
