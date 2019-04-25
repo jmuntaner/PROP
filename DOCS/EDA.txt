@@ -1,0 +1,74 @@
+EDA
+
+Breu descripcio de les estructures de dades i algoritmes utilitzats per a implementar les funcionalitats principals.
+
+Algorismes utilitzats: Minimax amb podes alfa-beta, exploració DFS d'un arbre.
+
+A la classe Maquina, hem usat l'algorisme de minimax amb podes alfa-beta per a calcular el seguent moviment de la maquina.
+
+L'aplicacio de l'algorisme de minimax a aquest problema concret (calcular la seguent jugada a un problema d'escacs) es
+obvia ja que els escacs son un joc amb adversari (dos jugadors) i d'informacio perfecte, cas que s'adequa perfectament als
+requisits del minimax.
+
+La idea de l'algorisme es buscar el millor moviment suposant que el contrincant escollira el pitjor per a tu.
+
+D'aquesta manera els passos de l'algorisme son:
+
+1. Generar l'arbre: es generen tots els nodes fins a arribar a un node terminal (o haver assolit la maxima profunditat)
+
+2. Assignar un valor als nodes terminals
+
+3. Propagar els valors cap els nodes superiors, triant major o menor d'entre els fills segons el node sigui del jugador
+maximal o no (nodes alternats).
+
+4. Escollir la jugada mirant els valors del nivell superior
+
+El problema de l'algorisme del minimax tal qual es que el pas 1 acostuma a ser massa complex, particularment en el cas
+dels escacs es impossible generar tot l'arbre de possibles moviments, per evitar aquesta complexitat hem introduit al nostre
+algorisme podes alfa-beta que te com a objectiu descartar nodes que ja sabem que no son bons i per tant reduir el tamany
+de l'arbre de cerca.
+
+La idea de les podes alfa-beta es que l'algorisme mante dos valors, alfa i beta, que representen el valor minim que sabem
+que el jugador maximal pot assolir i el maxim valor que el jugador minimal te assegurat assolir, respectivament. Si en
+algun moment de l'exploracio l'alfa supera la beta, el jugador maximal pot descartar aquest node i la branca que el descendeix.
+
+A la M1 tenim una heuristica molt simple, que retorna el pitjor valor possible en cas de que l'ultima jugada feta sigui mat
+
+
+
+A la classe Tauler hem implementat la funcio comprovaSolAux per comprovar que el problema te solucio i obtenir alguns
+parametres (numero de decisions de l'atacant i numero de solucions trobades) per a calcular la dificultat del problema
+posteriorment.
+
+Procedim recorrent l'arbre de moviments possibles mitjançant una exploració en profunditat (DFS).
+
+Quan es el torn de l'atacant afegeix a data[1] (decisions de l'atacant) el nombre de jugades possibles i per a cada
+moviment possible, si troba mat, suma 1 a data[0] (nombre de mats) i si no segueix la cerca amb els moviments del contrari.
+
+Quan es el torn del defensor, comprova que el mat es inevitable, es a dir que qualsevol moviment porti igualment al mat.
+Aixo ho fa tallant l'execucio de qualsevol branca que contingui un moviment posible que sigui mat del defensor o un
+moviment que al continuar la cerca no troba el mat de l'atacant (comprovant si data[0] varia entre crides successives).
+
+--------------------------------------------
+
+Estructures de dades:
+
+Hem usat les seguents estructures de dades: Arrays, ArrayList i Set.
+
+
+Un Array es objecte contenidor que guarda un nombre fixe d'elements i te un tamany fixe (es a dir estatic). Usem Arrays
+a les seguents classes:
+Tauler: Array d'Arrays de Peca (8x8) representa el tauler,
+        Array d'Arrays de ints (16x2) (static) per representar els moviments relatius
+
+
+Un ArrayList representa un array pero es un objecte de tamany variable (es a dir dinamic) i es una interficie d'un tipus
+(i.e ArrayList<T>). Usem ArrayList a les seguents classes:
+Ranking: Usem ArrayList<Pair<String, T>> per representar un ranking
+Partida: Usem un ArrayList<Moviment> per a representar l'historial de moviments de la partida.
+Tauler:  Usem un ArrayList<Moviment> per a retornar els moviments possibles per a una peca i per a un jugador.
+
+
+Un Set es una colleccio que no conte elements duplicats. Formalment, un set no conte cap parella d'elements e1, e2 tal
+que e1.equals(e2) i com a molt un element nul. Aquesta interficie modela un conjunt matematic. L'usem a les seguents classes:
+Usuari: Usem Set<Integer> per a representar el conjunt de problemes superats per un usuari.
