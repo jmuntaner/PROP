@@ -1,4 +1,18 @@
-Tests classe Cavall:
+JOCS DE PROVA PER A LA CLASSE CAVALL
+
+- Objecte de la prova: provar que funcionen els metodes de la classe Cavall
+
+- Altres elements integrats: enum Color
+
+- Drivers: DriverCavall
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
 Test 1: Creacio d'un cavall
 

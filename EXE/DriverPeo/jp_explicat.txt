@@ -1,4 +1,18 @@
-Tests classe Peo:
+JOCS DE PROVA PER A LA CLASSE PEO
+
+- Objecte de la prova: provar que funcionen els metodes de la classe Peo
+
+- Altres elements integrats: enum Color
+
+- Drivers: DriverPeo
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
 Test 1: Creacio d'un peo
 

@@ -1,4 +1,18 @@
-Tests classe Alfil:
+JOCS DE PROVA PER A LA CLASSE ALFIL
+
+- Objecte de la prova: provar que funcionen els metodes de la classe Alfil
+
+- Altres elements integrats: enum Color
+
+- Drivers: DriverAlfil
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
 Test 1: Creacio d'un alfil
 

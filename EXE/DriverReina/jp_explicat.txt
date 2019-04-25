@@ -1,4 +1,18 @@
-Tests classe Reina:
+JOCS DE PROVA PER A LA CLASSE REINA I PECA
+
+- Objecte de la prova: provar que funcionen els metodes de la classe Reina i la seva superclasse Peca
+
+- Altres elements integrats: enum Color
+
+- Drivers: DriverReina
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
 Test 1: Creacio d'una reina
 

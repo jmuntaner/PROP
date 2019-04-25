@@ -1,5 +1,5 @@
 JOCS DE PROVA PER A LA CLASSE TAULER
--Objecte de la prova: provar que funcionen els metodes (publics) de la classe Tauler
+- Objecte de la prova: provar que funcionen els metodes (publics) de la classe Tauler
 
 - Altres elements integrats: classe Moviment, classe Peça i les seves subclasses, enum Color
 

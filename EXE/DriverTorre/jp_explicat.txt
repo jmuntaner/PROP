@@ -1,4 +1,18 @@
-Tests classe Torre:
+JOCS DE PROVA PER A LA CLASSE TORRE
+
+- Objecte de la prova: provar que funcionen els metodes de la classe Torre
+
+- Altres elements integrats: enum Color
+
+- Drivers: DriverTorre
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
 Test 1: Creacio d'una torre.
 

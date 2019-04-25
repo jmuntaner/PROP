@@ -40,4 +40,4 @@ JOCS DE PROVA PER A LA CLASSE MOVIMENT
 
 - Efectes estudiats: -
 
-- Operativa: executar i seguir instruccions
+- Operativa: (veure fitxer index.txt)

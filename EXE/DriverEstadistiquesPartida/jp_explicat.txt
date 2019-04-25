@@ -1,4 +1,18 @@
-Tests EstadistiquesPartida
+JOCS DE PROVA PER A LA CLASSE ESTADISTIQUESPARTIDA
+
+- Objecte de la prova: provar que funcionen els metodes de la classe EstadistiquesPartida
+
+- Altres elements integrats: enum Color
+
+- Drivers: DriverEstadistiquesPartida
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
  /----------------------------------------------------------------------------\
 | IMPORTANT:                                                                   |
@@ -6,7 +20,6 @@ Tests EstadistiquesPartida
 | pogut provar amb aquest joc de proves, ja que dependria del temps d'execucio |
 | de les proves, retornant valors diferents cada execucio                      |
  \----------------------------------------------------------------------------/
-
 
 Test 1:
 

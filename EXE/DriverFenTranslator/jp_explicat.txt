@@ -1,4 +1,18 @@
-Test FenTranslator
+JOCS DE PROVA PER A LA CLASSE FENTRANSLATOR
+
+- Objecte de la prova: provar que funcionen els metodes de la classe FenTranslator
+
+- Altres elements integrats: enum Color, classe Peca, classe Tauler
+
+- Drivers: DriverFenTranslator
+
+- Stubs: -
+
+- Efectes estudiats: -
+
+- Operativa: (veure fitxer index.txt)
+
+- Valors estudiats:
 
 Test 1: Traduccio basica
 

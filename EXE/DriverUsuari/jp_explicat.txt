@@ -1,3 +1,4 @@
+JOCS DE PROVA PER A LA CLASSE USUARI
 Operativa:
   Execucio interactiva:
 
@@ -33,7 +34,7 @@ Valors i Efectes estudiats
 
   Hem utilitzat la metodologia de caixa gris, generant entrades que comproven
    els casos generals i els casos limit, monitoritzant que es llencin excepcions en cas necessari. 
-   Mes informacio sobre els tests concreats a l'arxiu jp_explicat.txt.
+
 
 Test 1: Creacio d'un usuari
 

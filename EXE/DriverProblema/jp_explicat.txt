@@ -32,7 +32,7 @@ JOCS DE PROVA PER A LA CLASSE PROBLEMA
 
 - Efectes estudiats: comprovacio de si els problemes tenen solucio
 
-- Operativa:
+- Operativa: (veure fitxer index.txt)
     - Execucio interactiva: executar driver i seguir instruccions per pantalla
     - Execucio amb fitxers d'i/o:
         - Executar driver amb opcio -q
