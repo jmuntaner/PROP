@@ -1,7 +1,7 @@
-DriverUsuari
+DriverPartida
 
 Arxius:
-DriverUsuari.jar:  Executable amb del driver.
+DriverPartida.jar:  Executable amb del driver.
 jp_in:             Entrada del joc de proves.
 jp_out:            Sortida del joc de proves.
 jp_explicat.txt:   Explicacio de les entrades de jp_in.txt i les seves sortides esperades.
@@ -9,13 +9,13 @@ jp_explicat.txt:   Explicacio de les entrades de jp_in.txt i les seves sortides 
 Operativa:
   Execucio interactiva:
 
-      java -jar DriverUsuari.jar
+      java -jar DriverPartida.jar
 
     Es presenta un menu amb opcions per a utilitzar les diferents parts de la classe.
 
   Excucio jocs de proves:
 
-      java -jar DriverUsuari.jar -q < jp_in.txt > sortida.txt
+      java -jar DriverPartida.jar -q < jp_in.txt > sortida.txt
 
     Per a comprobar la validesa del resultat, executar:
 
