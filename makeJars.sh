@@ -28,7 +28,7 @@ for f in FONTS/drivers/Driver*.java; do
 done
 # Crea JAR junit
 # Crea el directori si no existeix
-if [ ! -d "EXE/TestJunit/test.jar" ]; then
+if [ ! -d "EXE/TestJunit" ]; then
 	mkdir "EXE/TestJunit";
 fi
 echo -e "${BASEMANIFEST}${name}\n" > manifest.mf;
