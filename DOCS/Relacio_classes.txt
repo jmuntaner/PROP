@@ -8,6 +8,14 @@ RELACIO DE CLASSES IMPLEMENTADES PER CADA MEMBRE DEL GRUP
         - PuntuacioProblema
         - Color
         - EstadistiquesPartida
+        - DriverEstadistiquesPartida
+        - DriverFenTranslator
+        - DriverJugar
+        - DriverPartida
+        - DriverPuntuacioProblema
+        - DriverUsuari
+        - GenericDriver
+        - M1Test (JUnit)
     - Joan:
         - Peca
         - Rei
@@ -18,7 +26,16 @@ RELACIO DE CLASSES IMPLEMENTADES PER CADA MEMBRE DEL GRUP
         - Peo
         - Maquina
         - M1
+        - DriverAlfil
+        - DriverCavall
+        - DriverPeo
+        - DriverRei
+        - DriverReina
+        - DriverTorre
     - Roger:
         - Moviment
         - Tauler
         - Problema
+        - DriverMoviment
+        - DriverProblema
+        - DriverTauler
