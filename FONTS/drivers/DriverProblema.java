@@ -112,7 +112,7 @@ public class DriverProblema extends GenericDriver {
         PuntuacioProblema pp = new PuntuacioProblema(e, Color.BLANC);
         r.afegeixPuntuacio(u, pp);
         Pair<String, String> data = r.getLlistaRanking(1).get(0);
-        System.out.printf("%s %s\n", data.getKey(), data.getValue());
+        System.out.printf("%s %s\n", data.first(), data.second());
     }
 
     public void testInitProblema() {

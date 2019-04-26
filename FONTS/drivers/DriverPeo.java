@@ -64,7 +64,7 @@ public class DriverPeo extends GenericDriver {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", p.getPosicio().getKey(), p.getPosicio().getValue(), color);
+        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", p.getPosicio().first(), p.getPosicio().second(), color);
     }
 
     public void testToChar() {

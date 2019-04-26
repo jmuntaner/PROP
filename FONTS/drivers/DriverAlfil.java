@@ -63,7 +63,7 @@ public class DriverAlfil extends GenericDriver {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", a.getPosicio().getKey(), a.getPosicio().getValue(), color);
+        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", a.getPosicio().first(), a.getPosicio().second(), color);
     }
 
     public void testToChar() {

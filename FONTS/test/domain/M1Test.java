@@ -1,8 +1,8 @@
 package test.domain;
 
 import domain.*;
-import utils.Pair;
 import org.junit.Test;
+import utils.Pair;
 
 import static domain.Color.BLANC;
 import static org.junit.Assert.assertEquals;
@@ -11,10 +11,10 @@ public class M1Test {
     private void verificaMoviment(Moviment m, int xi, int yi, int xf, int yf) {
         Pair<Integer, Integer> ini = m.getPosIni();
         Pair<Integer, Integer> fin = m.getPosFinal();
-        assertEquals(xi, ini.getKey(), 0);
-        assertEquals(yi, ini.getValue(), 0);
-        assertEquals(xf, fin.getKey(), 0);
-        assertEquals(yf, fin.getValue(), 0);
+        assertEquals(xi, ini.first(), 0);
+        assertEquals(yi, ini.second(), 0);
+        assertEquals(xf, fin.first(), 0);
+        assertEquals(yf, fin.second(), 0);
     }
 
     private void jugaPartida(int n, String fen) {

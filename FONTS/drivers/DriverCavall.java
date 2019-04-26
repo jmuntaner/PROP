@@ -64,7 +64,7 @@ public class DriverCavall extends GenericDriver {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", k.getPosicio().getKey(), k.getPosicio().getValue(), color);
+        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", k.getPosicio().first(), k.getPosicio().second(), color);
     }
 
     public void testToChar() {

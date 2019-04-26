@@ -45,8 +45,8 @@ public abstract class Peca {
      * @param pos Pair amb la posició de la peça
      */
     public void setPosicio(Pair<Integer, Integer> pos) {
-        this.x = pos.getKey();
-        this.y = pos.getValue();
+        this.x = pos.first();
+        this.y = pos.second();
     }
 
     /**

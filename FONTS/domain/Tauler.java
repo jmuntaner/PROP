@@ -60,8 +60,8 @@ public class Tauler {
         if (b == BLANC) objectiu = _reiNegre;
         else objectiu = _reiBlanc;
         Pair<Integer, Integer> posRei = objectiu.getPosicio();
-        int x = posRei.getKey();
-        int y = posRei.getValue();
+        int x = posRei.first();
+        int y = posRei.second();
         for (int[] dir : movimentsRelatius) { //comprovem totes direccions
             boolean exit = false;
             int step = 1;
@@ -119,8 +119,8 @@ public class Tauler {
      * @return true si la posició pos amenaça centre
      */
     private boolean esPosicioAmenaca(Pair<Integer, Integer> centre, Pair<Integer, Integer> pos) {
-        int incx = centre.getKey() - pos.getKey();
-        int incy = centre.getValue() - pos.getValue();
+        int incx = centre.first() - pos.first();
+        int incy = centre.second() - pos.second();
         if (incx == 0 && incy == 0) return false; //centre == pos
         else if (incx == 0 || incy == 0) return true; //moviment horitzontal o vertical
         else if (Math.abs(incx) == Math.abs(incy)) return true; //moviment diagonal
@@ -173,7 +173,7 @@ public class Tauler {
             else { //Comprovar rei ofegat (mirar si hi ha algun moviment possible a part dels del rei)
                 Peca r = c == BLANC ? _reiNegre : _reiBlanc;
                 Pair<Integer, Integer> p = r.getPosicio();
-                if (obteMovimentsJugador(c.getNext()).size() == obteMovimentsPeca(p.getKey(), p.getValue()).size())
+                if (obteMovimentsJugador(c.getNext()).size() == obteMovimentsPeca(p.first(), p.second()).size())
                     return 3;
                 else return 0; //no hi ha escac ni tauler -> moviment vàlid
             }
@@ -189,11 +189,11 @@ public class Tauler {
      */
     private void executaMoviment(Moviment mov) {
         Pair<Integer, Integer> pi = mov.getPosIni();
-        int xi = pi.getKey();
-        int yi = pi.getValue();
+        int xi = pi.first();
+        int yi = pi.second();
         Pair<Integer, Integer> pf = mov.getPosFinal();
-        int xf = pf.getKey();
-        int yf = pf.getValue();
+        int xf = pf.first();
+        int yf = pf.second();
         Peca p = peces[xi][yi];
         Peca k = peces[xf][yf];
 
@@ -223,8 +223,8 @@ public class Tauler {
         else if (c == 'k' && !pos.equals(_reiNegre.getPosicio())) throw new RuntimeException("Rei negre duplicat");
         else if (c != 'k' && _reiNegre != null && pos.equals(_reiNegre.getPosicio())) _reiNegre = null;
 
-        int x = pos.getKey();
-        int y = pos.getValue();
+        int x = pos.first();
+        int y = pos.second();
         peces[x][y] = p;
     }
 
@@ -269,16 +269,16 @@ public class Tauler {
      */
     public void mouInvers(Moviment mov) {
         Pair<Integer, Integer> pi = mov.getPosIni();
-        int x = pi.getKey();
-        int y = pi.getValue();
+        int x = pi.first();
+        int y = pi.second();
         Peca p = mov.getPecaMoguda();
 
         peces[x][y] = p;
         p.setPosicio(pi);
 
         Pair<Integer, Integer> pf = mov.getPosFinal();
-        int x2 = pf.getKey();
-        int y2 = pf.getValue();
+        int x2 = pf.first();
+        int y2 = pf.second();
         Peca k = mov.getPecaMorta();
 
         peces[x2][y2] = k; //pot ser null;
@@ -297,7 +297,7 @@ public class Tauler {
             for (Peca p : f) {
                 if (p != null && p.getColor() == jugador) {
                     Pair<Integer, Integer> pos = p.getPosicio();
-                    al.addAll(obteMovimentsPeca(pos.getKey(), pos.getValue()));
+                    al.addAll(obteMovimentsPeca(pos.first(), pos.second()));
                 }
             }
         return al;
