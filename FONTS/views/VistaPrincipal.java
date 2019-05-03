@@ -18,6 +18,7 @@ public class VistaPrincipal {
         initNomPrograma();
         initBotoJugar();
         initBotoGestio();
+        initTauler();
 
     }
 
@@ -68,6 +69,16 @@ public class VistaPrincipal {
         gbc.gridx = 0;
         gbc.gridy = 2;
         panelContinguts.add(botoGestio, gbc);
+
+    }
+
+    private void initTauler() {
+        VistaTauler vt = new VistaTauler();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panelContinguts.add(vt, gbc);
 
     }
 
