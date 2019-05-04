@@ -21,8 +21,8 @@ public class Peo extends Peca {
 
     @Override
     public boolean esMovimentValid(boolean mata, int x, int y) {
-        int x0 = this.getPosicio().getKey();
-        int y0 = this.getPosicio().getValue();
+        int x0 = this.getPosicio().first();
+        int y0 = this.getPosicio().second();
         if (x0 == x && y0 == y) return false; //moviment nul
         int sy = Math.abs(y - y0);
         int inc;

@@ -17,7 +17,9 @@ public class Pair<K,V> implements Serializable{
      * Gets the key for this pair.
      * @return key for this pair
      */
-    public K getKey() { return key; }
+    public K first() {
+        return key;
+    }
 
     /**
      * Value of this this <code>Pair</code>.
@@ -28,7 +30,9 @@ public class Pair<K,V> implements Serializable{
      * Gets the value for this pair.
      * @return value for this pair
      */
-    public V getValue() { return value; }
+    public V second() {
+        return value;
+    }
 
     /**
      * Creates a new pair

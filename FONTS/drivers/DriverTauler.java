@@ -36,7 +36,7 @@ public class DriverTauler extends GenericDriver {
     private static Moviment searchMoviment(ArrayList<Moviment> al, int x, int y) {
         for (Moviment mov : al) {
             Pair<Integer, Integer> p = mov.getPosFinal();
-            if (p.getKey() == x && p.getValue() == y) return mov;
+            if (p.first() == x && p.second() == y) return mov;
         }
         return null;
     }

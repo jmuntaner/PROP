@@ -22,8 +22,8 @@ public class Alfil extends Peca {
 
     @Override
     public boolean esMovimentValid(boolean mata, int x, int y) {
-        int x0 = this.getPosicio().getKey();
-        int y0 = this.getPosicio().getValue();
+        int x0 = this.getPosicio().first();
+        int y0 = this.getPosicio().second();
         if (x0 == x && y0 == y) return false; //moviment nul
         //moviment diagonal
         return Math.abs(x - x0) == Math.abs(y - y0);

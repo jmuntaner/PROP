@@ -16,7 +16,7 @@ public class Moviment {
     public Moviment(Peca p, Integer fx, Integer fy) {
         if (fx < 0 || fy < 0 || fx > 7 || fy > 7) throw new RuntimeException("Posicio fora del tauler");
         Pair<Integer, Integer> aux = p.getPosicio(); //no modifica el moviment si hi ha excepcio
-        if (aux.getKey() == fx && aux.getValue() == fy) throw new RuntimeException("Moviment nul");
+        if (aux.first() == fx && aux.second() == fy) throw new RuntimeException("Moviment nul");
         posIni = aux;
         posFinal = new Pair<>(fx, fy);
         this.p = p;
@@ -48,7 +48,7 @@ public class Moviment {
      */
     public void setPosFinal(Integer x, Integer y) {
         if (x < 0 || x > 7 || y < 0 || y > 7) throw new RuntimeException("Posicio fora del tauler");
-        if (posIni.getKey() == x && posIni.getValue() == y) throw new RuntimeException("Moviment nul");
+        if (posIni.first() == x && posIni.second() == y) throw new RuntimeException("Moviment nul");
         posFinal = new Pair<>(x, y);
         k = null;
     }

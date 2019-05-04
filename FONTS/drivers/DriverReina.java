@@ -81,7 +81,7 @@ public class DriverReina extends GenericDriver {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", r.getPosicio().getKey(), r.getPosicio().getValue(), color);
+        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", r.getPosicio().first(), r.getPosicio().second(), color);
     }
 
     public void testToChar() {
@@ -106,7 +106,7 @@ public class DriverReina extends GenericDriver {
     }
 
     public void testGetPos() {
-        System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
+        System.out.println("x: " + r.getPosicio().first() + " y: " + r.getPosicio().second());
     }
 
     public void testSetPos1() {
@@ -115,7 +115,7 @@ public class DriverReina extends GenericDriver {
         optPrint("y: ");
         int y = scan.nextInt();
         r.setPosicio(new Pair<>(x, y));
-        System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
+        System.out.println("x: " + r.getPosicio().first() + " y: " + r.getPosicio().second());
     }
 
     public void testSetPos2() {
@@ -124,6 +124,6 @@ public class DriverReina extends GenericDriver {
         optPrint("y: ");
         int y = scan.nextInt();
         r.setPosicio(x, y);
-        System.out.println("x: " + r.getPosicio().getKey() + " y: " + r.getPosicio().getValue());
+        System.out.println("x: " + r.getPosicio().first() + " y: " + r.getPosicio().second());
     }
 }

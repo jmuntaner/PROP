@@ -212,7 +212,7 @@ public class DriverJugar {
                     for (int i = 0; i < movs.size(); i++) {
                         Moviment mov = movs.get(i);
                         Pair<Integer, Integer> fin = mov.getPosFinal();
-                        System.out.printf("%d. %d,%d\r\n", i + 1, fin.getKey(), fin.getValue());
+                        System.out.printf("%d. %d,%d\r\n", i + 1, fin.first(), fin.second());
                     }
                     int index = lecturaInt("Selecciona un moviment: ");
                     m = movs.get(index - 1);
@@ -231,7 +231,7 @@ public class DriverJugar {
                 System.out.println("No hi ha moviments possibles");
                 return 4;
             } else
-                System.out.printf("Moviment: %d %d -> %d %d\n", m.getPosIni().getKey(), m.getPosIni().getValue(), m.getPosFinal().getKey(), m.getPosFinal().getValue());
+                System.out.printf("Moviment: %d %d -> %d %d\n", m.getPosIni().first(), m.getPosIni().second(), m.getPosFinal().first(), m.getPosFinal().second());
         }
         return p.moure(p.getTorn(), m);
     }

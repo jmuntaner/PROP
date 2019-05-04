@@ -64,7 +64,7 @@ public class DriverTorre extends GenericDriver {
             System.out.println("ERROR: COLOR NO VALID");
             return;
         }
-        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", t.getPosicio().getKey(), t.getPosicio().getValue(), color);
+        System.out.printf("Creat: x: %d, y: %d, Color: %s\n", t.getPosicio().first(), t.getPosicio().second(), color);
     }
 
     public void testToChar() {

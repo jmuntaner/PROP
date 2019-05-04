@@ -73,7 +73,7 @@ abstract class GenericDriver {
         char ck;
         if (k == null) ck = '-';
         else ck = k.toChar();
-        System.out.printf("%d %d %d %d %c %c\n", pi.getKey(), pi.getValue(), pf.getKey(), pf.getValue(), cp, ck);
+        System.out.printf("%d %d %d %d %c %c\n", pi.first(), pi.second(), pf.first(), pf.second(), cp, ck);
     }
 
     static void printTauler(Tauler t) {

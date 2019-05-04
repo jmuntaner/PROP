@@ -39,18 +39,18 @@ public class Ranking<T extends Puntuacio<T>> {
         //Busquem si un usuari ja te una puntuació millor
         Pair<String, T> trobat = null;
         for (Pair<String, T> row : ranking) {
-            if (row.getKey().equals(usuari.getNom())) {
+            if (row.first().equals(usuari.getNom())) {
                 trobat = row;
                 break;
             }
         }
         if (trobat != null) {
-            if (trobat.getValue().esMillor(punts)) return;
+            if (trobat.second().esMillor(punts)) return;
             ranking.remove(trobat);
         }
         // Insertem la nova puntuació on toca
         for (int i = 0; i < ranking.size(); ++i) {
-            if (punts.esMillor(ranking.get(i).getValue())) {
+            if (punts.esMillor(ranking.get(i).second())) {
                 ranking.add(i, new Pair<>(nom, punts));
                 return;
             }
@@ -69,7 +69,7 @@ public class Ranking<T extends Puntuacio<T>> {
     public int posicioUsuari(Usuari usuari) {
         int pos = 1;
         for (Pair<String, T> row : ranking) {
-            if (row.getKey().equals(usuari.getNom())) {
+            if (row.first().equals(usuari.getNom())) {
                 return pos;
             }
             pos++;
@@ -88,7 +88,7 @@ public class Ranking<T extends Puntuacio<T>> {
         ArrayList<Pair<String, String>> result = new ArrayList<>();
         for (int i = 0; i < min(n, ranking.size()); ++i) {
             Pair<String, T> row = ranking.get(i);
-            result.add(new Pair<>(row.getKey(), row.getValue().representa()));
+            result.add(new Pair<>(row.first(), row.second().representa()));
         }
         return result;
     }
@@ -102,8 +102,8 @@ public class Ranking<T extends Puntuacio<T>> {
      */
     public String puntuacioUsuari(Usuari usuari) {
         for (Pair<String, T> row : ranking) {
-            if (row.getKey().equals(usuari.getNom())) {
-                return row.getValue().representa();
+            if (row.first().equals(usuari.getNom())) {
+                return row.second().representa();
             }
         }
         return null;

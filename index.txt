@@ -9,11 +9,10 @@ Fitxers:
         Script per compilar el projecte
     - descripcio_grup.txt
         Noms i adreces de correu dels integrants del grup
-    - junit-4.12.jar
-        Llibreria JUnit per a fer els unit tests
     - makeJars.sh
-        Script per esborrar la carpeta EXE i compilar la carpeta FONTS (genera els executables a EXE).
-        Copia els fitxers dins les carpetes de jocsProves als subdirectoris generats homonims.
+        Script per a generar els .jar de tots els drivers i el test JUnit a la carpeta EXE.
+    - INSTRUCCIONS_COMPILAR.txt
+        Instruccions sobre com compilar el projecte.
 
 Directoris:
     - DOCS
@@ -22,5 +21,4 @@ Directoris:
         Executables (drivers que permeten provar les classes i les funcionalitats) i jocs de proves corresponents
     - FONTS
         Codis del projecte
-    - jocsProves
-        Jocs de proves per als diferents drivers
+    

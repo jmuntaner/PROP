@@ -127,7 +127,7 @@ public class DriverPartida extends GenericDriver {
         for (int i = 0; i < movs.size(); i++) {
 
             Pair<Integer, Integer> end = movs.get(i).getPosFinal();
-            System.out.printf("%d: %d,%d\r\n", i + 1, end.getKey(), end.getValue());
+            System.out.printf("%d: %d,%d\r\n", i + 1, end.first(), end.second());
         }
         optPrint("Moviment a realitzar: ");
         int mov = scan.nextInt() - 1;
