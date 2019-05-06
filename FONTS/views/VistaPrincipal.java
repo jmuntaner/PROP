@@ -6,26 +6,25 @@ import java.awt.*;
 public class VistaPrincipal {
     private CtrlPresentacion mCp;
     private JFrame frameVista;
-    private JPanel panelContinguts;
-    private JLabel nomPrograma;
-    private JButton botoJugar, botoGestio;
+    private VistaMenuPrincipal panelMenuPrincipal;
+    private VistaJugar panelJugar;
+    private JPanel contentPane;
 
     public VistaPrincipal(CtrlPresentacion cp) {
         mCp = cp;
 
         initFrameVista();
-        initPanel();
-        initNomPrograma();
-        initBotoJugar();
-        initBotoGestio();
-        initTauler();
+        initMenuPrincipal();
+        initJugar();
+        addPanels();
 
+        mostraMenuPrincipal();
     }
 
     private void initFrameVista() {
         frameVista = new JFrame("Vista Principal");
-        // Mida fixa
-        frameVista.setMinimumSize(new Dimension(700, 400));
+        // Mida inicial
+        frameVista.setMinimumSize(new Dimension(800, 500));
         frameVista.setPreferredSize(frameVista.getMinimumSize());
         frameVista.setResizable(true);
 
@@ -33,54 +32,31 @@ public class VistaPrincipal {
         frameVista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void initPanel() {
-        panelContinguts = new JPanel();
-        panelContinguts.setLayout(new GridBagLayout());
-        JPanel contentPane = (JPanel) frameVista.getContentPane();
-        contentPane.add(panelContinguts);
-
+    private void initMenuPrincipal() {
+        panelMenuPrincipal = new VistaMenuPrincipal(this);
     }
 
-    private void initNomPrograma() {
-        nomPrograma = new JLabel();
-        nomPrograma.setText("Increible programa d'escacs");
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panelContinguts.add(nomPrograma, gbc);
+    private void initJugar() {
+        panelJugar = new VistaJugar(this);
     }
 
-    private void initBotoJugar() {
-        botoJugar = new JButton("Jugar");
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panelContinguts.add(botoJugar, gbc);
-
+    private void addPanels() {
+        contentPane = (JPanel) frameVista.getContentPane();
+        contentPane.setLayout(new CardLayout());
+        contentPane.add(panelMenuPrincipal, "menu");
+        contentPane.add(panelJugar, "jugar");
     }
 
-    private void initBotoGestio() {
-        botoGestio = new JButton("Gestio");
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panelContinguts.add(botoGestio, gbc);
-
+    void mostraJugar() {
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "jugar");
     }
 
-    private void initTauler() {
-        VistaTauler vt = new VistaTauler();
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panelContinguts.add(vt, gbc);
-
+    void mostraMenuPrincipal() {
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "menu");
     }
+
 
     public void ferVisible() {
         frameVista.pack();
