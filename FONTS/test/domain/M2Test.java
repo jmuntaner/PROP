@@ -7,7 +7,7 @@ import utils.Pair;
 import static domain.Color.BLANC;
 import static org.junit.Assert.assertEquals;
 
-public class M1Test {
+public class M2Test {
     private void verificaMoviment(Moviment m, int xi, int yi, int xf, int yf) {
         Pair<Integer, Integer> ini = m.getPosIni();
         Pair<Integer, Integer> fin = m.getPosFinal();
@@ -20,7 +20,7 @@ public class M1Test {
     private void jugaPartida(int n, String fen) {
         Tauler t = FenTranslator.generaTauler(fen);
         Color ataca = FenTranslator.getColor(fen);
-        M1 m = new M1();
+        M2 m = new M2();
 
         int lastres = -1;
         Color torn = ataca;
@@ -39,7 +39,7 @@ public class M1Test {
         // Problemes amb resultats fixes i verificats:
         // Problema de l'enunciat, profunditat = 2
         Tauler t = FenTranslator.generaTauler("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1");
-        M1 m = new M1();
+        M2 m = new M2();
         Moviment mov = m.calcularMoviment(3, t, BLANC, BLANC);
         verificaMoviment(mov, 6, 2, 4, 3);
         assertEquals(0, t.mou(mov), 0);
@@ -61,7 +61,7 @@ public class M1Test {
     public void testProblemes2() {
         // Problemes extra (només es valida que es faci mat com a màxim en N jugades)
         // Problemes de mat en 2 (http://wtharvey.com/m8n2.txt)
-        // jugaPartida(2, "1rb4r/pkPp3p/1b1P3n/1Q6/N3Pp2/8/P1P3PP/7K w - - 0 1"); solucio no valida (coronar)
+        //jugaPartida(2, "1rb4r/pkPp3p/1b1P3n/1Q6/N3Pp2/8/P1P3PP/7K w - - 0 1"); solucio coronar no valid
         jugaPartida(2, "5rkr/pp2Rp2/1b1p1Pb1/3P2Q1/2n3P1/2p5/P4P2/4R1K1 w - - 0 1");
         jugaPartida(2, "1r1kr3/Nbppn1pp/1b6/8/6Q1/3B1P2/Pq3P1P/3RR1K1 w - - 0 1");
         jugaPartida(2, "3q2r1/4n2k/p1p1rBpp/PpPpPp2/1P3P1Q/2P3R1/7P/1R5K w - - 0 1");
