@@ -6,16 +6,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 class VistaCasella extends JPanel {
-    private static final Color BLACK = new Color(0, 0, 0);
-    private static final Color WHITE = new Color(255, 255, 255);
+    private static final Color BLACK = new Color(125, 135, 150);
+    private static final Color WHITE = new Color(232, 235, 239);
     private static final Color HOVER = new Color(100, 100, 100);
 
     private int x, y;
     private char peca;
+    private JLabel labelPeca;
+    private VistaTauler vt;
 
-    VistaCasella(int x, int y) {
+    VistaCasella(VistaTauler vt, int x, int y) {
         super();
         this.x = x;
+        this.y = y;
+        this.vt = vt;
         this.peca = '-';
         //add(new JButton(" "));
         Color c;
@@ -40,14 +44,29 @@ class VistaCasella extends JPanel {
                 setBackground(c);
             }
         });
+        initImage();
+
     }
 
     void setPeca(char peca) {
         this.peca = peca;
+        updateImatge();
+    }
+
+    void updateImatge() {
+        labelPeca.setIcon(vt.getFicha(this.peca));
+    }
+
+
+    private void initImage() {
+        labelPeca = new JLabel();
+        updateImatge();
+        add(labelPeca);
     }
 
     void borraPeca() {
         this.peca = '-';
+        updateImatge();
     }
 
 
