@@ -32,8 +32,10 @@ public abstract class Maquina {
         bestMove = torn == tema ? minVal : maxVal;
         for (Moviment m : movPos) { //primera "iteracio" del minimax
             codi = t.mou(m);
-            ret = minimax(t, profunditat - 1, minVal, maxVal, false, codi, torn.getNext());
-            if (ret == bestMove && new Random().nextBoolean()) mov = m; //Si son iguals, tria aleatoriament
+            // torn != tema, defensor, minimitzem
+            // torn == tema, atacant,  maximitzem
+            ret = minimax(t, profunditat - 1, minVal, maxVal, torn != tema, codi, torn.getNext());
+            if (ret == bestMove && (new Random().nextBoolean() || mov == null)) mov = m; //Si son iguals, tria aleatoriament
             else if ((torn == tema && ret > bestMove) || (torn != tema && ret < bestMove)) {
                 mov = m;
                 bestMove = ret;

@@ -6,9 +6,8 @@ public class M1 extends Maquina {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
             else return minVal;
-        } else if (codi == 3) { //taules
-            if (esJugadorMaximal) return maxVal;
-            else return minVal;
+        } else if (codi == 3) { //taules, atacant perd, defensor guanya.
+            return minVal;
         }
         return 0;
     }
