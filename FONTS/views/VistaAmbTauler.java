@@ -65,7 +65,7 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         add(panelBotons, gbc);
     }
 
-    private JPanel getPanelBotons() {
+    JPanel getPanelBotons() {
         JButton enrere = new JButton("Tornar");
         enrere.addActionListener(e -> vp.mostraMenuPrincipal());
         JPanel panelBotons = new JPanel();
@@ -92,6 +92,14 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
 
     void setPos(int x, int y, char peca) {
         tauler.setFitxa(x, y, peca);
+    }
+
+    char getPos(int x, int y) {
+        return tauler.getFitxa(x, y);
+    }
+
+    void borraPos(int x, int y) {
+        tauler.borraFitxa(x, y);
     }
 
     @Override

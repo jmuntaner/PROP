@@ -1,14 +1,11 @@
 package views;
 
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 
 public class VistaTauler extends JPanel {
@@ -86,20 +83,14 @@ public class VistaTauler extends JPanel {
         empty = new ImageIcon(new BufferedImage(lado, lado, BufferedImage.TYPE_INT_ARGB));
         for (int i = 0; i < llistaFitxes.length(); i++) {
             char ficha = llistaFitxes.charAt(i);
-            try {
-                // Source: https://marcelk.net/chess/pieces/
-                BufferedImage orig = ImageIO.read(new File("res/piezas/" + ficha + ".png"));
-                fitxes[i] = new ImageIcon(orig.getScaledInstance(lado, lado, Image.SCALE_SMOOTH));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            fitxes[i] = Utils.getIconPeca(ficha, lado);
         }
         for (VistaCasella[] f : caselles)
             for (VistaCasella vc : f)
                 if (vc != null) vc.updateImatge();
     }
 
-    ImageIcon getFicha(char type) {
+    ImageIcon getIconFitxa(char type) {
         int index = llistaFitxes.indexOf(type);
         if (index != -1) {
             return fitxes[index];
@@ -108,6 +99,14 @@ public class VistaTauler extends JPanel {
 
     void setFitxa(int x, int y, char fitxa) {
         caselles[x][y].setPeca(fitxa);
+    }
+
+    void borraFitxa(int x, int y) {
+        caselles[x][y].borraPeca();
+    }
+
+    char getFitxa(int x, int y) {
+        return caselles[x][y].getPeca();
     }
 
     interface TaulerListener {

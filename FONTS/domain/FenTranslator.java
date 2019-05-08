@@ -1,15 +1,22 @@
 package domain;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FenTranslator {
     private static final int SIZE = 8;
-
+    private static final Pattern FEN_CHECK = Pattern.compile("([KQBRNPkqbrnp1-8]+\\/){7}[KQBRNPkqbrnp1-8]+ [wb] - - 0 1");
     /**
      * Converteix una string en notació FEN a un objecte Tauler.
      *
      * @param fen String que representa l'estat d'una partida en FEN.
      * @return Tauler equivalent al FEN entrat.
      */
-    public static Tauler generaTauler(String fen) {
+    public static Tauler generaTauler(String fen) throws RuntimeException {
+        // Validacio Inicial fen
+        Matcher matcher = FEN_CHECK.matcher(fen);
+        if (!matcher.find()) throw new RuntimeException("Sintaxi FEN invalida.");
+
         Peca[][] taula = new Peca[SIZE][SIZE];
         String peces = fen.substring(0, fen.length() - 10); // borra " w - - 0 1"
         char act;
@@ -20,6 +27,7 @@ public class FenTranslator {
             act = peces.charAt(i);
             if (act == '/') {
                 // Salt de fila
+                if (y != 8) throw new RuntimeException("Falten peces al FEN");
                 x++;
                 y = 0;
             } else {
@@ -33,6 +41,7 @@ public class FenTranslator {
                 }
             }
         }
+        if (y != 8) throw new RuntimeException("Falten peces al FEN");
         return new Tauler(taula);
     }
 

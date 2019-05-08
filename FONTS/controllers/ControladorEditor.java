@@ -23,8 +23,18 @@ public class ControladorEditor {
         t.afegirPeca(p);
     }
 
-    public void carregaFen(String fen) {
-        t = FenTranslator.generaTauler(fen);
+    public void eliminaPeca(int x, int y) {
+        t.treurePeca(x, y);
+    }
+
+    public boolean carregaFen(String fen) {
+        try {
+            t = FenTranslator.generaTauler(fen);
+            colorInicial = FenTranslator.getColor(fen);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
     public String getFen() {

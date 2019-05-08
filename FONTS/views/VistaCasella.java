@@ -92,8 +92,12 @@ class VistaCasella extends JPanel {
         updateImatge();
     }
 
+    char getPeca() {
+        return this.peca;
+    }
+
     void updateImatge() {
-        labelPeca.setIcon(vt.getFicha(this.peca));
+        labelPeca.setIcon(vt.getIconFitxa(this.peca));
     }
 
 
