@@ -3,15 +3,13 @@ package views;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class VistaMenuPrincipal extends JPanel {
     private JLabel nomPrograma;
-    private JButton botoJugar, botoGestio;
+    private JButton botoJugar, botoGestio, botoSortir;
     private VistaPrincipal vp;
 
     VistaMenuPrincipal(VistaPrincipal vp) {
@@ -22,6 +20,7 @@ public class VistaMenuPrincipal extends JPanel {
         initNomPrograma();
         initBotoJugar();
         initBotoGestio();
+        initBotoSortir();
         initGlues();
     }
 
@@ -33,6 +32,8 @@ public class VistaMenuPrincipal extends JPanel {
         gbc.weighty = 0.1;
         add(Box.createGlue(), gbc);
         gbc.gridy = 5;
+        add(Box.createGlue(), gbc);
+        gbc.gridy = 7;
         gbc.weighty = 1;
         add(Box.createGlue(), gbc);
     }
@@ -57,13 +58,7 @@ public class VistaMenuPrincipal extends JPanel {
 
     private void initBotoJugar() {
         botoJugar = new JButton("Jugar");
-        botoJugar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                vp.mostraJugar();
-            }
-        });
+        botoJugar.addActionListener(e -> vp.mostraJugar());
         botoJugar.setPreferredSize(new Dimension(140, 28));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -77,11 +72,26 @@ public class VistaMenuPrincipal extends JPanel {
     private void initBotoGestio() {
         botoGestio = new JButton("Gestio");
         botoGestio.setPreferredSize(new Dimension(140, 28));
+        botoGestio.addActionListener(e -> vp.mostraEditar());
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 4;
         add(botoGestio, gbc);
+
+    }
+
+    private void initBotoSortir() {
+        botoSortir = new JButton("Sortir");
+        botoSortir.setPreferredSize(new Dimension(140, 28));
+        botoSortir.addActionListener(e -> System.exit(0));
+
+        // Add to grid
+        GridBagConstraints gbc = new GridBagConstraints();
+        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        add(botoSortir, gbc);
     }
 
 

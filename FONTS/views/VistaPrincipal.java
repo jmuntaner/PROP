@@ -8,6 +8,7 @@ public class VistaPrincipal {
     private JFrame frameVista;
     private VistaMenuPrincipal panelMenuPrincipal;
     private VistaJugar panelJugar;
+    private VistaEditor panelEditor;
     private JPanel contentPane;
 
     public VistaPrincipal(CtrlPresentacion cp) {
@@ -16,6 +17,7 @@ public class VistaPrincipal {
         initFrameVista();
         initMenuPrincipal();
         initJugar();
+        initEditor();
         addPanels();
 
         mostraMenuPrincipal();
@@ -40,16 +42,26 @@ public class VistaPrincipal {
         panelJugar = new VistaJugar(this);
     }
 
+    private void initEditor() {
+        panelEditor = new VistaEditor(this, mCp.getEditor());
+    }
+
     private void addPanels() {
         contentPane = (JPanel) frameVista.getContentPane();
         contentPane.setLayout(new CardLayout());
         contentPane.add(panelMenuPrincipal, "menu");
         contentPane.add(panelJugar, "jugar");
+        contentPane.add(panelEditor, "editar");
     }
 
     void mostraJugar() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "jugar");
+    }
+
+    void mostraEditar() {
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "editar");
     }
 
     void mostraMenuPrincipal() {

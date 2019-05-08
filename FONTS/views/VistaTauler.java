@@ -12,11 +12,20 @@ import java.io.IOException;
 
 
 public class VistaTauler extends JPanel {
+    private TaulerListener tl;
 
     private static final String llistaFitxes = "KQRNBPkqrnbp";
     ImageIcon empty;
     private ImageIcon[] fitxes;
     private VistaCasella[][] caselles;
+
+    VistaTauler(TaulerListener taulerListener) {
+        this();
+        tl = taulerListener;
+        for (VistaCasella[] f : caselles)
+            for (VistaCasella vc : f)
+                if (vc != null) vc.setInteractable(true);
+    }
 
     VistaTauler() {
         super();
@@ -49,14 +58,10 @@ public class VistaTauler extends JPanel {
                 generaImatges();
             }
         });
+    }
 
-        // Algunes fitxes
-        setFitxa(1, 1, 'k');
-        setFitxa(2, 3, 'q');
-        setFitxa(6, 5, 'K');
-        setFitxa(7, 3, 'Q');
-        setFitxa(4, 4, 'P');
-        setFitxa(5, 2, 'B');
+    void clica(int x, int y) {
+        if (tl != null) tl.clicPeca(x, y);
     }
 
     @Override
@@ -103,5 +108,9 @@ public class VistaTauler extends JPanel {
 
     void setFitxa(int x, int y, char fitxa) {
         caselles[x][y].setPeca(fitxa);
+    }
+
+    interface TaulerListener {
+        void clicPeca(int x, int y);
     }
 }
