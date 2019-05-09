@@ -11,7 +11,9 @@ class VistaEditor extends VistaAmbTauler {
     private JTextField fenTextField;
     private ControladorEditor ce;
     private char actual;
-    private JToggleButton buttonBlanc, buttonNegre;
+    private JToggleButton buttonBlanc, buttonNegre, buttonReiB, buttonReiN;
+    private boolean hasReiBlanc, hasReiNegre;
+    private ButtonGroup bgPeces;
 
     VistaEditor(VistaPrincipal vp, ControladorEditor ce) {
         super(vp);
@@ -19,11 +21,8 @@ class VistaEditor extends VistaAmbTauler {
         actual = '-';
 
         // Init peces
-        for (int y = 0; y < 8; y++)
-            for (int x = 0; x < 8; x++) {
-                setPos(x, y, ce.getCasella(x, y));
-            }
         initDisplays();
+        reloadTauler();
     }
 
     @Override
@@ -62,12 +61,13 @@ class VistaEditor extends VistaAmbTauler {
         panelColors.add(buttonNegre);
         panelSeleccio.add(panelColors, gbc);
 
-        // Peces Blanques
+        // Peces
 
         gbc.gridx = 0;
         gbc.gridwidth = 2;
         JPanel panelB = new JPanel();
-        ButtonGroup bg = new ButtonGroup();
+        bgPeces = new ButtonGroup();
+
         for (int i = 0; i < PECES.length(); i++) {
 
             char c = PECES.charAt(i);
@@ -76,8 +76,10 @@ class VistaEditor extends VistaAmbTauler {
                 actual = c;
                 b.setSelected(true);
             });
+            if (c == 'K') buttonReiB = b;
+            else if (c == 'k') buttonReiN = b;
             panelB.add(b);
-            bg.add(b);
+            bgPeces.add(b);
             if (i % 3 == 2) {
                 gbc.gridy++;
                 panelSeleccio.add(panelB, gbc);
@@ -98,10 +100,7 @@ class VistaEditor extends VistaAmbTauler {
         fenTextField.setText(ce.getFen());
         fenTextField.addActionListener(e -> {
             if (ce.carregaFen(fenTextField.getText())) {
-                for (int y = 0; y < 8; y++)
-                    for (int x = 0; x < 8; x++) {
-                        setPos(x, y, ce.getCasella(x, y));
-                    }
+                reloadTauler();
                 if (ce.getColorInicial()) buttonBlanc.setSelected(true);
                 else buttonNegre.setSelected(true);
             } else {
@@ -114,18 +113,67 @@ class VistaEditor extends VistaAmbTauler {
         });
     }
 
+    private void reloadTauler() {
+        hasReiBlanc = false;
+        hasReiNegre = false;
+        for (int y = 0; y < 8; y++)
+            for (int x = 0; x < 8; x++) {
+                char c = ce.getCasella(x, y);
+                if (c == 'K') {
+                    hasReiBlanc = true;
+                    updateBotonsRei();
+                } else if (c == 'k') {
+                    hasReiNegre = true;
+                    updateBotonsRei();
+                }
+                setPos(x, y, c);
+            }
+
+    }
+
+    void updateBotonsRei() {
+        if (hasReiBlanc) {
+            bgPeces.clearSelection();
+            buttonReiB.setEnabled(false);
+            actual = '-';
+        } else buttonReiB.setEnabled(true);
+
+        if (hasReiNegre) {
+            bgPeces.clearSelection();
+            buttonReiN.setEnabled(false);
+            actual = '-';
+        } else buttonReiN.setEnabled(true);
+    }
+
     private void updateFenLabel() {
         fenTextField.setText(ce.getFen());
     }
 
     @Override
     public void clicPeca(int x, int y) {
-        if (getPos(x, y) != '-') {
+        char prev = getPos(x, y);
+        if (prev != '-') {
+            if (prev == 'K') {
+                hasReiBlanc = false;
+                updateBotonsRei();
+            } else if (prev == 'k') {
+                hasReiNegre = false;
+                updateBotonsRei();
+            }
             ce.eliminaPeca(x, y);
             borraPos(x, y);
+
         } else if (actual != '-') {
             ce.afegeixPeca(x, y, actual);
-            setPos(x, y, ce.getCasella(x, y));
+            char c = ce.getCasella(x, y);
+            setPos(x, y, c);
+            if (c == 'K') {
+                hasReiBlanc = true;
+                updateBotonsRei();
+            } else if (c == 'k') {
+                hasReiNegre = true;
+                updateBotonsRei();
+            }
         }
         updateFenLabel();
     }
