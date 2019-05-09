@@ -29,25 +29,18 @@ public class VistaTauler extends JPanel {
         caselles = new VistaCasella[8][8];
         fitxes = new ImageIcon[llistaFitxes.length()];
 
-        setLayout(new GridBagLayout());
+        setLayout(new GridLayout(8, 8));
 
         generaImatges();
         System.out.println("Fichas generadas");
 
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weighty = 1;
-        gbc.weightx = 1;
-        gbc.fill = GridBagConstraints.BOTH;
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
                 VistaCasella vc = new VistaCasella(this, i, j);
                 caselles[i][j] = vc;
-                gbc.gridx = j;
-                gbc.gridy = i;
-                add(vc, gbc);
+                add(vc);
             }
-        setBorder(BorderFactory.createStrokeBorder(new BasicStroke(5.0f)));
+        setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 5));
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
