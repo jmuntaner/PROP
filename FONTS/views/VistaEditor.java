@@ -3,6 +3,7 @@ package views;
 import controllers.ControladorEditor;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 class VistaEditor extends VistaAmbTauler {
@@ -34,11 +35,9 @@ class VistaEditor extends VistaAmbTauler {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Selecció de color
-        panelSeleccio.add(new JLabel("Color inicial:"), gbc);
-        gbc.gridx = 1;
         JPanel panelColors = new JPanel();
         ButtonGroup colorBg = new ButtonGroup();
         buttonBlanc = new JToggleButton("Blanc");
@@ -59,13 +58,14 @@ class VistaEditor extends VistaAmbTauler {
 
         panelColors.add(buttonBlanc);
         panelColors.add(buttonNegre);
+        panelColors.setBorder(BorderFactory.createTitledBorder("Color inicial"));
         panelSeleccio.add(panelColors, gbc);
 
         // Peces
-
-        gbc.gridx = 0;
-        gbc.gridwidth = 2;
-        JPanel panelB = new JPanel();
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridy++;
+        JPanel panelPeces = new JPanel();
+        panelPeces.setLayout(new GridLayout(4, 3, 4, 4));
         bgPeces = new ButtonGroup();
 
         for (int i = 0; i < PECES.length(); i++) {
@@ -78,14 +78,13 @@ class VistaEditor extends VistaAmbTauler {
             });
             if (c == 'K') buttonReiB = b;
             else if (c == 'k') buttonReiN = b;
-            panelB.add(b);
+            panelPeces.add(b);
             bgPeces.add(b);
-            if (i % 3 == 2) {
-                gbc.gridy++;
-                panelSeleccio.add(panelB, gbc);
-                if (i < (PECES.length() - 1)) panelB = new JPanel();
-            }
         }
+        panelPeces.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Peces"),
+                new EmptyBorder(8, 8, 8, 8)));
+        panelSeleccio.add(panelPeces, gbc);
 
         //End gap
         gbc.gridx = 0;
