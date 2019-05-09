@@ -19,9 +19,7 @@ public class VistaTauler extends JPanel {
     VistaTauler(TaulerListener taulerListener) {
         this();
         tl = taulerListener;
-        for (VistaCasella[] f : caselles)
-            for (VistaCasella vc : f)
-                if (vc != null) vc.setInteractable(true);
+        setInteractable(true);
     }
 
     VistaTauler() {
@@ -100,6 +98,13 @@ public class VistaTauler extends JPanel {
 
     char getFitxa(int x, int y) {
         return caselles[x][y].getPeca();
+    }
+
+
+    void setInteractable(boolean interactable) {
+        for (VistaCasella[] f : caselles)
+            for (VistaCasella vc : f)
+                if (vc != null) vc.setInteractable(interactable);
     }
 
     interface TaulerListener {

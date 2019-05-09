@@ -5,16 +5,23 @@ import controllers.ControladorEditor;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.Enumeration;
 
 class VistaEditor extends VistaAmbTauler {
     private static final String PECES = "KQBRNPkqbrnp";
     private static final int SIZE_ICON = 30;
+    private static final int JUGADES_MAX = 3;
+    private static final int JUGADES_MIN = 1;
+
     private JTextField fenTextField;
-    private ControladorEditor ce;
-    private char actual;
     private JToggleButton buttonBlanc, buttonNegre, buttonReiB, buttonReiN;
-    private boolean hasReiBlanc, hasReiNegre;
     private ButtonGroup bgPeces;
+    private JSlider sliderNjugades;
+
+    private char actual;
+    private boolean hasReiBlanc, hasReiNegre;
+
+    private ControladorEditor ce;
 
     VistaEditor(VistaPrincipal vp, ControladorEditor ce) {
         super(vp);
@@ -86,6 +93,20 @@ class VistaEditor extends VistaAmbTauler {
                 new EmptyBorder(8, 8, 8, 8)));
         panelSeleccio.add(panelPeces, gbc);
 
+
+        // Selector numero de jugades
+        gbc.gridy++;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        sliderNjugades = new JSlider(JSlider.HORIZONTAL, JUGADES_MIN, JUGADES_MAX, ce.getNumJugades());
+        sliderNjugades.setMajorTickSpacing(1);
+        sliderNjugades.setMinorTickSpacing(1);
+        sliderNjugades.setPaintLabels(true);
+        sliderNjugades.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Nombre de jugades"),
+                new EmptyBorder(8, 8, 8, 8)));
+        sliderNjugades.addChangeListener(e -> ce.setNumJugades(sliderNjugades.getValue()));
+        panelSeleccio.add(sliderNjugades, gbc);
+
         //End gap
         gbc.gridx = 0;
         gbc.gridy++;
@@ -94,8 +115,8 @@ class VistaEditor extends VistaAmbTauler {
         return panelSeleccio;
     }
 
-    private void initFenLabel() {
-        fenTextField = new JTextField(54);
+    private void initFenTextField() {
+        fenTextField = new JTextField();
         fenTextField.setText(ce.getFen());
         fenTextField.addActionListener(e -> {
             if (ce.carregaFen(fenTextField.getText())) {
@@ -130,7 +151,7 @@ class VistaEditor extends VistaAmbTauler {
 
     }
 
-    void updateBotonsRei() {
+    private void updateBotonsRei() {
         if (hasReiBlanc) {
             bgPeces.clearSelection();
             buttonReiB.setEnabled(false);
@@ -180,18 +201,92 @@ class VistaEditor extends VistaAmbTauler {
     @Override
     JPanel getPanelBotons() {
         // Init class vars
-        initFenLabel();
+        initFenTextField();
 
-        JPanel panelBotons = new JPanel();
+        JPanel panelBotons = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.insets = new Insets(4, 4, 0, 0);
 
         JButton enrere = new JButton("Tornar");
         enrere.addActionListener(e -> vp.mostraMenuPrincipal());
-        panelBotons.add(enrere);
+        panelBotons.add(enrere, gbc);
 
-        panelBotons.add(new JLabel("Fen:"));
-        panelBotons.add(fenTextField);
+        gbc.gridx++;
+        JButton guardar = new JButton("Guardar");
+        guardar.addActionListener(e -> guardarTauler());
+        panelBotons.add(guardar, gbc);
+
+        gbc.gridx++;
+        panelBotons.add(new JLabel("Fen:"), gbc);
+
+        gbc.gridx++;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 4, 0, 4);
+        panelBotons.add(fenTextField, gbc);
 
 
         return panelBotons;
+    }
+
+    private void guardarTauler() {
+        if (!(hasReiBlanc && hasReiNegre)) {
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                    "Hi ha menys de dos reis presents al tauler.",
+                    "Tauler invalid",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        setGlobalEnabled(false);
+        new Thread(() -> {
+            try {
+                int res = ce.guardaProblema();
+                switch (res) {
+                    case 0:
+                        break;
+                    case 1:
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                                "La situació de les peces no és una situació inicial vàlida.",
+                                "Tauler invalid",
+                                JOptionPane.WARNING_MESSAGE);
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                                "No es pot resoldre el problema en les jugades especificades.",
+                                "Tauler invalid",
+                                JOptionPane.WARNING_MESSAGE);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                                "Error desconegut.",
+                                "Tauler invalid",
+                                JOptionPane.WARNING_MESSAGE);
+                }
+
+            } catch (Exception e) {
+            }
+            // Runs inside of the Swing UI thread
+            SwingUtilities.invokeLater(() -> setGlobalEnabled(true));
+
+        }).
+
+                start();
+
+    }
+
+    private void setGlobalEnabled(boolean en) {
+        bgPeces.clearSelection();
+        actual = '-';
+        Enumeration<AbstractButton> eb = bgPeces.getElements();
+        while (eb.hasMoreElements()) {
+            AbstractButton b = eb.nextElement();
+            b.setEnabled(en);
+        }
+        buttonNegre.setEnabled(en);
+        buttonBlanc.setEnabled(en);
+        setInteractable(en);
+        sliderNjugades.setEnabled(en);
     }
 }

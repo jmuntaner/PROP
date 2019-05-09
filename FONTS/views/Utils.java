@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Utils {
-    public static ImageIcon getIconPeca(char c, int size) {
+class Utils {
+    static ImageIcon getIconPeca(char c, int size) {
         // Source: https://marcelk.net/chess/pieces/
         BufferedImage orig = null;
         try {

@@ -62,6 +62,7 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         gbc.gridwidth = 4;
         gbc.weightx = 1;
         gbc.anchor = LINE_START;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         add(panelBotons, gbc);
     }
 
@@ -100,6 +101,10 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
 
     void borraPos(int x, int y) {
         tauler.borraFitxa(x, y);
+    }
+
+    void setInteractable(boolean interactable) {
+        tauler.setInteractable(interactable);
     }
 
     @Override
