@@ -9,7 +9,7 @@ public class Usuari {
     private String nom, hashPassword;
     private final int id;
     private final Set<Integer> problemesSuperats;
-    private final EstadistiquesJugador estadistiques;
+    private final transient EstadistiquesJugador estadistiques; //TODO: remove transient
 
     public Usuari(int id, String nom, String contrasenya) {
         this.id = id;

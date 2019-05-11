@@ -1,6 +1,8 @@
 package domain;
 
-public class Problema {
+import java.io.Serializable;
+
+public class Problema implements Serializable{
     private static final int NMAX = 3;
 
     private String nom;
@@ -9,7 +11,7 @@ public class Problema {
     // dificultat = número decisions atacant / número solucions possibles
     //private Tauler situacioInicial;
     private String situacioInicial; //FEN -> tauler + tema
-    private Ranking<PuntuacioProblema> ranking;
+    private transient Ranking<PuntuacioProblema> ranking; //TODO: remove transient
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
 
     /**

@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-//TODO:
-// - Operativa (per exemple, especificar que la funcionalitat de comprovar solucio es fa quan afegeixes un problema)
-// - HvH, HvM, MvM
 public class DriverJugar {
     private static final String[] menuPrincipal = new String[]{"Menu principal", "Gestionar problemes", "Jugar", "Sortir"};
     private static final String[] menuGestio = new String[]{"Gestió de problemes", "Llista", "Afegir", "Eliminar", "Tornar"};
