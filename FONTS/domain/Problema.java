@@ -119,6 +119,15 @@ public class Problema implements Serializable{
         ranking = new Ranking<>();
         return comprovaSolucio();
     }
+
+    /**
+     * Getter FEN
+     *
+     * @return El FEN del problema
+     */
+    public String getFen() {
+        return situacioInicial;
+    }
 }
 
 //TODO: usage classe

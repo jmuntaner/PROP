@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class FenTranslator {
     private static final int SIZE = 8;
-    private static final Pattern FEN_CHECK = Pattern.compile("([KQBRNPkqbrnp1-8]+\\/){7}[KQBRNPkqbrnp1-8]+ [wb] - - 0 1");
+    private static final Pattern FEN_CHECK = Pattern.compile("([KQBRNPkqbrnp1-8]+\\/){7}[KQBRNPkqbrnp1-8]+ [wb] - - [01] [01]");
     /**
      * Converteix una string en notació FEN a un objecte Tauler.
      *

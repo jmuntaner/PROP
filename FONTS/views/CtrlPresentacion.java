@@ -1,6 +1,7 @@
 package views;
 
 import controllers.ControladorEditor;
+import controllers.ControladorLlistaProblemes;
 import controllers.ControladorPrincipal;
 
 public class CtrlPresentacion {
@@ -18,8 +19,16 @@ public class CtrlPresentacion {
         vp.ferVisible();
     }
 
-    ControladorEditor getEditor() {
+    ControladorEditor getCEditor() {
         return cp.getControladorEditor();
+    }
+
+    ControladorLlistaProblemes getCLlista() {
+        return cp.getControladorLlistaProblemes();
+    }
+
+    ControladorPrincipal getPrincipal() {
+        return cp;
     }
 
 

@@ -9,6 +9,7 @@ public class VistaPrincipal {
     private VistaMenuPrincipal panelMenuPrincipal;
     private VistaJugar panelJugar;
     private VistaEditor panelEditor;
+    private VistaLlistaProblemes panelLlistaProblemes;
     private JPanel contentPane;
 
     public VistaPrincipal(CtrlPresentacion cp) {
@@ -18,6 +19,7 @@ public class VistaPrincipal {
         initMenuPrincipal();
         initJugar();
         initEditor();
+        initLlistaProblemes();
         addPanels();
 
         mostraMenuPrincipal();
@@ -43,7 +45,11 @@ public class VistaPrincipal {
     }
 
     private void initEditor() {
-        panelEditor = new VistaEditor(this, mCp.getEditor());
+        panelEditor = new VistaEditor(this, mCp.getCEditor());
+    }
+
+    private void initLlistaProblemes() {
+        panelLlistaProblemes = new VistaLlistaProblemes(this, mCp.getCLlista());
     }
 
     private void addPanels() {
@@ -52,6 +58,7 @@ public class VistaPrincipal {
         contentPane.add(panelMenuPrincipal, "menu");
         contentPane.add(panelJugar, "jugar");
         contentPane.add(panelEditor, "editar");
+        contentPane.add(panelLlistaProblemes, "llistaProbs");
     }
 
     void mostraJugar() {
@@ -60,6 +67,7 @@ public class VistaPrincipal {
     }
 
     void mostraEditar() {
+        panelEditor.actualitza();
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "editar");
     }
@@ -67,6 +75,27 @@ public class VistaPrincipal {
     void mostraMenuPrincipal() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "menu");
+    }
+
+    void mostraLlistaProblemes() {
+        panelLlistaProblemes.update();
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+
+        cl.show(contentPane, "llistaProbs");
+    }
+
+    void editaProblema(int index) {
+        mCp.getCEditor().carregaProblema(index);
+        mostraEditar();
+    }
+
+    void creaProblema() {
+        mCp.getCEditor().creaProblema();
+        mostraEditar();
+    }
+
+    void jugaProblema(int index) {
+        System.out.println("Jugant i tal...");
     }
 
 

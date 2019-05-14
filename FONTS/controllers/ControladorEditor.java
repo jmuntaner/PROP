@@ -5,18 +5,47 @@ import domain.*;
 public class ControladorEditor {
     private Tauler t;
     private Color colorInicial;
-    private int numJugades;
+    private int numJugades, idProblema;
+    private boolean esNou;
 
     private ControladorPrincipal cp;
 
     ControladorEditor(ControladorPrincipal controladorPrincipal) {
-        t = new Tauler();
-        colorInicial = Color.BLANC;
-        numJugades = 1;
-
+        creaProblema();
         cp = controladorPrincipal;
     }
 
+    /**
+     * Inicialitza les dades d'un nou problema.
+     */
+    public void creaProblema() {
+        t = new Tauler();
+        esNou = true;
+        numJugades = 1;
+        colorInicial = Color.BLANC;
+    }
+
+    /**
+     * Carrega un problema de la base de dades per a edició.
+     *
+     * @param index Identificador del problema a editar.
+     */
+    public void carregaProblema(int index) {
+        Problema p = cp.getProblema(index);
+        t = p.getSituacioInicial();
+        esNou = false;
+        idProblema = index;
+        numJugades = p.getNumJugades();
+        colorInicial = p.getTema();
+    }
+
+    /**
+     * Obté la representació de la peça d'una casella.
+     *
+     * @param x Posició X de la peça.
+     * @param y Posició Y de la peça.
+     * @return Representació de la peça segons el format FEN.
+     */
     public char getCasella(int x, int y) {
         return t.getCasella(x, y);
     }
@@ -73,7 +102,8 @@ public class ControladorEditor {
                         (colorInicial == Color.BLANC ? "blanques" : "negres"));
         if (!p.initProblema(numJugades, getFen()))
             return 2;
-        cp.afegeixProblema(p);
+        if (esNou) cp.afegeixProblema(p);
+        else cp.editaProblema(idProblema, p);
         return 0;
     }
 }

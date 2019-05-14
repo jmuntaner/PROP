@@ -15,7 +15,8 @@ class VistaEditor extends VistaAmbTauler {
 
     private JTextField fenTextField;
     private JToggleButton buttonBlanc, buttonNegre, buttonReiB, buttonReiN;
-    private ButtonGroup bgPeces;
+    private ButtonGroup bgPeces, colorBg;
+    ;
     private JSlider sliderNjugades;
 
     private char actual;
@@ -46,7 +47,8 @@ class VistaEditor extends VistaAmbTauler {
 
         // Selecció de color
         JPanel panelColors = new JPanel();
-        ButtonGroup colorBg = new ButtonGroup();
+
+        colorBg = new ButtonGroup();
         buttonBlanc = new JToggleButton("Blanc");
         colorBg.add(buttonBlanc);
         buttonBlanc.addActionListener(e -> {
@@ -119,7 +121,7 @@ class VistaEditor extends VistaAmbTauler {
         fenTextField = new JTextField();
         fenTextField.setText(ce.getFen());
         fenTextField.addActionListener(e -> {
-            if (ce.carregaFen(fenTextField.getText())) {
+            if (ce.carregaFen(fenTextField.getText().trim())) {
                 reloadTauler();
                 if (ce.getColorInicial()) buttonBlanc.setSelected(true);
                 else buttonNegre.setSelected(true);
@@ -210,7 +212,7 @@ class VistaEditor extends VistaAmbTauler {
         gbc.insets = new Insets(4, 4, 0, 0);
 
         JButton enrere = new JButton("Tornar");
-        enrere.addActionListener(e -> vp.mostraMenuPrincipal());
+        enrere.addActionListener(e -> vp.mostraLlistaProblemes());
         panelBotons.add(enrere, gbc);
 
         gbc.gridx++;
@@ -241,10 +243,12 @@ class VistaEditor extends VistaAmbTauler {
         }
         setGlobalEnabled(false);
         new Thread(() -> {
+            boolean correcte = false;
             try {
                 int res = ce.guardaProblema();
                 switch (res) {
                     case 0:
+                        correcte = true;
                         break;
                     case 1:
                         JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
@@ -267,8 +271,12 @@ class VistaEditor extends VistaAmbTauler {
 
             } catch (Exception e) {
             }
+            final boolean correct = correcte; // Només es poden pasar finals a la lambda.
             // Runs inside of the Swing UI thread
-            SwingUtilities.invokeLater(() -> setGlobalEnabled(true));
+            SwingUtilities.invokeLater(() -> {
+                setGlobalEnabled(true);
+                if (correct) vp.mostraLlistaProblemes();
+            });
 
         }).
 
@@ -288,5 +296,25 @@ class VistaEditor extends VistaAmbTauler {
         buttonBlanc.setEnabled(en);
         setInteractable(en);
         sliderNjugades.setEnabled(en);
+        if (en) updateBotonsRei();
+    }
+
+    private void updateColor() {
+        boolean col = ce.getColorInicial();
+        buttonBlanc.setSelected(col);
+        buttonNegre.setSelected(!col);
+    }
+
+    private void updateJugades() {
+        sliderNjugades.setValue(ce.getNumJugades());
+    }
+
+    void actualitza() {
+        setGlobalEnabled(true);
+        updateBotonsRei();
+        updateFenLabel();
+        reloadTauler();
+        updateColor();
+        updateJugades();
     }
 }

@@ -19,7 +19,7 @@ public class VistaMenuPrincipal extends JPanel {
 
         initNomPrograma();
         initBotoJugar();
-        initBotoGestio();
+        initBotoPerfil();
         initBotoSortir();
         initGlues();
     }
@@ -58,7 +58,7 @@ public class VistaMenuPrincipal extends JPanel {
 
     private void initBotoJugar() {
         botoJugar = new JButton("Jugar");
-        botoJugar.addActionListener(e -> vp.mostraJugar());
+        botoJugar.addActionListener(e -> vp.mostraLlistaProblemes());
         botoJugar.setPreferredSize(new Dimension(140, 28));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -69,10 +69,10 @@ public class VistaMenuPrincipal extends JPanel {
         add(botoJugar, gbc);
     }
 
-    private void initBotoGestio() {
-        botoGestio = new JButton("Gestio");
+    private void initBotoPerfil() {
+        botoGestio = new JButton("Perfil");
         botoGestio.setPreferredSize(new Dimension(140, 28));
-        botoGestio.addActionListener(e -> vp.mostraEditar());
+        //botoGestio.addActionListener(e -> vp.mostraEditar());
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;

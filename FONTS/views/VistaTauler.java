@@ -12,7 +12,7 @@ public class VistaTauler extends JPanel {
     private TaulerListener tl;
 
     private static final String llistaFitxes = "KQRNBPkqrnbp";
-    ImageIcon empty;
+    private ImageIcon empty;
     private ImageIcon[] fitxes;
     private VistaCasella[][] caselles;
 
