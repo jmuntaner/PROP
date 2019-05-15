@@ -157,9 +157,14 @@ class VistaLlistaProblemes extends JPanel {
      * Elimina un problema de la base de dades i reinicia el visor.
      */
     private void eliminaProblema() {
-        int id = problemes.getSelectedIndex();
-        cp.eliminaProblema(id);
-        update();
+        int input = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+                "Segur que vols eliminar el problema?", "Eliminar problema",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (input == 0) {
+            int id = problemes.getSelectedIndex();
+            cp.eliminaProblema(id);
+            update();
+        }
     }
 
     /**
