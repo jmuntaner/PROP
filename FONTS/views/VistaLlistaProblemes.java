@@ -194,6 +194,6 @@ class VistaLlistaProblemes extends JPanel {
     }
 
     private void juga() {
-        vp.jugaProblema(problemes.getSelectedIndex());
+        vp.jugaProblema(cp.iniciaPartida());
     }
 }

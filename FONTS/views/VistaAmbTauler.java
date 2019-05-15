@@ -103,6 +103,18 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         tauler.borraFitxa(x, y);
     }
 
+    void seleccionaPos(int x, int y) {
+        tauler.seleccionaPos(x, y);
+    }
+
+    void marcaPos(int x, int y) {
+        tauler.marcaPos(x, y);
+    }
+
+    void desmarcaPos(int x, int y) {
+        tauler.desmarcaPos(x, y);
+    }
+
     void setInteractable(boolean interactable) {
         tauler.setInteractable(interactable);
     }

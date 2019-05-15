@@ -1,5 +1,7 @@
 package views;
 
+import controllers.ControladorPartida;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -94,8 +96,9 @@ public class VistaPrincipal {
         mostraEditar();
     }
 
-    void jugaProblema(int index) {
-        System.out.println("Jugant i tal...");
+    void jugaProblema(ControladorPartida cPart) {
+        panelJugar.setControlador(cPart);
+        mostraJugar();
     }
 
 

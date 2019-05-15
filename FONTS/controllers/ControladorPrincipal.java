@@ -1,6 +1,7 @@
 package controllers;
 
 import domain.Problema;
+import domain.Usuari;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ public class ControladorPrincipal {
     private ArrayList<Problema> BDproblemes;
     private ControladorEditor ce;
     private ControladorLlistaProblemes cl;
+    private Usuari usuari;
 
     /**
      * Creadora per defecte.
@@ -24,6 +26,7 @@ public class ControladorPrincipal {
 
         ce = new ControladorEditor(this);
         cl = new ControladorLlistaProblemes(this);
+
     }
 
     /**
@@ -82,7 +85,24 @@ public class ControladorPrincipal {
         BDproblemes.remove(index);
     }
 
+    /**
+     * Actualitza la les dades d'un problema de la base de dades.
+     *
+     * @param index Identificador del problema a actualitzar.
+     * @param nou   Noves dades del problema.
+     */
     void editaProblema(int index, Problema nou) {
         BDproblemes.set(index, nou);
+    }
+
+    /**
+     * Inicia una partida humà vs humà
+     *
+     * @param p          Problema a jugar
+     * @param nomOponent Nom de l'oponent
+     * @return Controlador per a la nova partida.
+     */
+    ControladorPartidaHvH iniciaHvH(Problema p, String nomOponent) {
+        return new ControladorPartidaHvH(p, usuari, nomOponent);
     }
 }

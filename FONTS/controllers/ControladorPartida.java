@@ -5,28 +5,26 @@ import utils.Pair;
 
 import java.util.ArrayList;
 
-public class ControladorPartida {
+public abstract class ControladorPartida {
     private final Problema problema;
-    private final Usuari usuari;
-    private final String nomOponent;
     private final EstadistiquesPartida estadistiques;
-    private Partida partida;
+    private final Partida partida;
+    private ArrayList<Moviment> moviments;
+
 
     /**
      * Crea una partida Humà vs Humà
      *
      * @param problema El problema en el que es basarà la partida.
-     * @param usuari   L'usuari que juga el problema (ataca).
-     * @param oponent  Nom de l'oponent.
      */
-    public ControladorPartida(Problema problema, Usuari usuari, String oponent) {
+    ControladorPartida(Problema problema) {
         this.problema = problema;
-        this.usuari = usuari;
-        nomOponent = oponent;
+
         partida = new Partida(problema);
         estadistiques = new EstadistiquesPartida();
         estadistiques.iniciaTorn(partida.getTorn());
     }
+
 
     /**
      * Retorna la llista de posicions a les que es pot moure una peça.
@@ -35,9 +33,9 @@ public class ControladorPartida {
      * @param y Posició y de la peça.
      * @return Llista amb les posicions a les quals es pot moure la peça de x,y.
      */
-    ArrayList<Pair<Integer, Integer>> movimentsPossibles(int x, int y) {
+    public ArrayList<Pair<Integer, Integer>> movimentsPossibles(int x, int y) {
         ArrayList<Pair<Integer, Integer>> possibles = new ArrayList<>();
-        ArrayList<Moviment> moviments = partida.obteMovimentsPosicio(x, y);
+        moviments = partida.obteMovimentsPosicio(x, y);
         if (moviments != null) {
             for (Moviment mov : moviments) {
                 possibles.add(mov.getPosFinal());
@@ -46,18 +44,6 @@ public class ControladorPartida {
         return possibles;
     }
 
-    /**
-     * Mou una peça des de (xo, yo) fins (xf, yf) si es pot.
-     *
-     * @param xo Posició x de la peça.
-     * @param yo Posició y de la peça.
-     * @param xf Posició x a on moure.
-     * @param yf Posició y a on moure.
-     */
-    void mou(int xo, int yo, int xf, int yf) {
-        estadistiques.finalitzaTorn(partida.getTorn());
-        //TODO: Crear moviment i moure la Peça
-    }
 
     /**
      * Finalitza la partida actual, actualitzant els rankings corresponents.
@@ -67,7 +53,66 @@ public class ControladorPartida {
     EstadistiquesPartida finalitzaPartida() {
         Ranking<PuntuacioProblema> ranking = problema.getRanking();
         PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
-        ranking.afegeixPuntuacio(usuari, punts);
+        actualitzaRanking(ranking, punts);
         return estadistiques;
     }
+
+    /**
+     * Indica el torn actual
+     *
+     * @return Color que mou en el torn actual;
+     */
+    Color getColorTorn() {
+        return partida.getTorn();
+    }
+
+    /**
+     * Indica el torn actual.
+     *
+     * @return Vertader si és el torn de les blanques.
+     */
+    public boolean getTorn() {
+        return partida.getTorn() == Color.BLANC;
+    }
+
+    /**
+     * Executa el moviment indicat
+     *
+     * @param index Índex del moviment a la llista generada anteriorment.
+     */
+    public int mou(int index) {
+        Moviment m = moviments.get(index);
+        return mou(m);
+    }
+
+    /**
+     * Executa el moviment indicat
+     *
+     * @param m Moviment a executar.
+     */
+    int mou(Moviment m) {
+        Color torn = partida.getTorn();
+        int res = partida.moure(partida.getTorn(), m);
+        estadistiques.finalitzaTorn(torn);
+        estadistiques.iniciaTorn(partida.getTorn());
+        if (partida.getNumMoviments() >= problema.getNumJugades()) return -1;
+        return res;
+    }
+
+    /**
+     * Obté la representació de la peça de la posició indicada
+     *
+     * @param x Posició X de la peça
+     * @param y Posició Y de la peça
+     * @return Caràcter que representa a la peça situada a (x,y)
+     */
+    public char getPos(int x, int y) {
+        return partida.getAtPosicio(x, y);
+    }
+
+    abstract void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts);
+
+    public abstract String getNomTorn();
+
+    public abstract boolean esTornMaquina();
 }

@@ -100,6 +100,17 @@ public class VistaTauler extends JPanel {
         return caselles[x][y].getPeca();
     }
 
+    void seleccionaPos(int x, int y) {
+        caselles[x][y].setColSelected();
+    }
+
+    void marcaPos(int x, int y) {
+        caselles[x][y].setColPossible();
+    }
+
+    void desmarcaPos(int x, int y) {
+        caselles[x][y].clearCol();
+    }
 
     void setInteractable(boolean interactable) {
         for (VistaCasella[] f : caselles)

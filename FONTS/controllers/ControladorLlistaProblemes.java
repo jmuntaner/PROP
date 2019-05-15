@@ -74,4 +74,13 @@ public class ControladorLlistaProblemes {
         cp.eliminaProblema(index);
         p = null; // Acaba amb les referències al problema per a que passi el GC a netejar, que ja li toca.
     }
+
+    /**
+     * Inicia una nova partida.
+     *
+     * @return Controlador de la nova partida.
+     */
+    public ControladorPartida iniciaPartida() {
+        return cp.iniciaHvH(p, "Elvira");
+    }
 }
