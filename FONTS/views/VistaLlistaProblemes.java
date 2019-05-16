@@ -9,7 +9,7 @@ class VistaLlistaProblemes extends JPanel {
     private ControladorLlistaProblemes cp;
     private VistaPrincipal vp;
     private VistaTauler preview;
-    private JLabel labelNom;
+    private JLabel labelNom, labelDificultat, labelJugades;
     private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar;
     private JList<String> problemes;
 
@@ -93,6 +93,15 @@ class VistaLlistaProblemes extends JPanel {
         visor.add(preview, gbc_n);
 
         gbc_n.insets = new Insets(0, 4, 4, 4);
+
+        labelDificultat = new JLabel("Dificultat: -");
+        labelJugades = new JLabel("Jugades: -");
+
+        gbc_n.gridy++;
+        visor.add(labelJugades, gbc_n);
+        gbc_n.gridy++;
+        visor.add(labelDificultat, gbc_n);
+
         // Boto Jugar HvH
         gbc_n.gridy++;
         buttonJugarHvH = new JButton("Jugar HvH");
@@ -185,6 +194,9 @@ class VistaLlistaProblemes extends JPanel {
             buttonJugarHvM.setEnabled(false);
             buttonEditar.setEnabled(false);
             buttonEliminar.setEnabled(false);
+            labelNom.setText("");
+            labelDificultat.setText("Dificultat: -");
+            labelJugades.setText("Jugades: -");
             clearPreview();
         } else {
             // Seleccionat
@@ -194,6 +206,8 @@ class VistaLlistaProblemes extends JPanel {
             buttonEditar.setEnabled(true);
             buttonEliminar.setEnabled(true);
             labelNom.setText(cp.getNom());
+            labelDificultat.setText("Dificultat: " + cp.getDificultat());
+            labelJugades.setText("Jugades: " + cp.getJugades());
             updatePreview();
         }
     }

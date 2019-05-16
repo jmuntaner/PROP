@@ -66,6 +66,23 @@ public class ControladorLlistaProblemes {
     }
 
     /**
+     * Obté el número de jugades del problema seleccionat.
+     *
+     * @return Número de jugades del problema seleccionat.
+     */
+    public int getJugades() {
+        return p.getNumJugades();
+    }
+
+    /**
+     * Obté la dificultat del problema seleccionat.
+     *
+     * @return Dificultat del problema seleccionat.
+     */
+    public int getDificultat() {
+        return p.getDificultat();
+    }
+    /**
      * Elimina el problema indicat de la base de dades de problemes.
      *
      * @param index Problema a eliminar.
