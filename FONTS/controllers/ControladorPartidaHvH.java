@@ -36,6 +36,14 @@ public class ControladorPartidaHvH extends ControladorPartida {
     }
 
     @Override
+    public String getNomGuanyador() {
+        if (esLimit()) return getNomTorn();
+        if (esTaules()) return "-";
+        if (getColorTorn() == colorPrincipal) return nomB;
+        else return nomA;
+    }
+
+    @Override
     public boolean esTornMaquina() {
         return false;
     }

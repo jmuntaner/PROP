@@ -166,13 +166,9 @@ public class VistaJugar extends VistaAmbTauler {
                 labelEscac.setVisible(true);
                 break;
             case 2:
-                System.out.println("Escac Mat!");
-                break;
             case 3:
-                System.out.println("Taules!");
-                break;
             case -1:
-                System.out.println("Limit movs");
+                vp.fiPartida(cp);
                 break;
             default:
                 throw new RuntimeException("Resultat desconegut: " + res);

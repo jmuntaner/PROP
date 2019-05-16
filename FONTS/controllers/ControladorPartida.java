@@ -10,6 +10,7 @@ public abstract class ControladorPartida {
     private final EstadistiquesPartida estadistiques;
     private final Partida partida;
     private ArrayList<Moviment> moviments;
+    private boolean taules, limit;
 
 
     /**
@@ -23,6 +24,8 @@ public abstract class ControladorPartida {
         partida = new Partida(problema);
         estadistiques = new EstadistiquesPartida();
         estadistiques.iniciaTorn(partida.getTorn());
+        taules = false;
+        limit = false;
     }
 
 
@@ -95,7 +98,11 @@ public abstract class ControladorPartida {
         int res = partida.moure(partida.getTorn(), m);
         estadistiques.finalitzaTorn(torn);
         estadistiques.iniciaTorn(partida.getTorn());
-        if (res == 0 && partida.getNumMoviments() >= problema.getNumJugades()) return -1;
+        if (res == 0 && partida.getNumMoviments() >= problema.getNumJugades()) {
+            limit = true;
+            return -1;
+        }
+        if (res == 3) taules = true;
         return res;
     }
 
@@ -110,9 +117,30 @@ public abstract class ControladorPartida {
         return partida.getAtPosicio(x, y);
     }
 
+    /**
+     * Indica si la partida ha acabat per taules.
+     *
+     * @return Vertader si la partida ha acabat en taules.
+     */
+    public boolean esTaules() {
+        return taules;
+    }
+
+    /**
+     * Indica si la partida ha acabat per límit de temps.
+     *
+     * @return Vertader si la partida ha acabat per límit de temps.
+     */
+    public boolean esLimit() {
+        return limit;
+    }
+
+
     abstract void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts);
 
     public abstract String getNomTorn();
+
+    public abstract String getNomGuanyador();
 
     public abstract boolean esTornMaquina();
 }

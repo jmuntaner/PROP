@@ -12,6 +12,7 @@ public class VistaPrincipal {
     private VistaJugar panelJugar;
     private VistaEditor panelEditor;
     private VistaLlistaProblemes panelLlistaProblemes;
+    private VistaFiPartida panelResultats;
     private JPanel contentPane;
 
     public VistaPrincipal(CtrlPresentacion cp) {
@@ -22,6 +23,7 @@ public class VistaPrincipal {
         initJugar();
         initEditor();
         initLlistaProblemes();
+        initResultats();
         addPanels();
 
         mostraMenuPrincipal();
@@ -54,6 +56,10 @@ public class VistaPrincipal {
         panelLlistaProblemes = new VistaLlistaProblemes(this, mCp.getCLlista());
     }
 
+    private void initResultats() {
+        panelResultats = new VistaFiPartida(this);
+    }
+
     private void addPanels() {
         contentPane = (JPanel) frameVista.getContentPane();
         contentPane.setLayout(new CardLayout());
@@ -61,14 +67,15 @@ public class VistaPrincipal {
         contentPane.add(panelJugar, "jugar");
         contentPane.add(panelEditor, "editar");
         contentPane.add(panelLlistaProblemes, "llistaProbs");
+        contentPane.add(panelResultats, "resultats");
     }
 
-    void mostraJugar() {
+    private void mostraJugar() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "jugar");
     }
 
-    void mostraEditar() {
+    private void mostraEditar() {
         panelEditor.actualitza();
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "editar");
@@ -99,6 +106,12 @@ public class VistaPrincipal {
     void jugaProblema(ControladorPartida cPart) {
         panelJugar.setControlador(cPart);
         mostraJugar();
+    }
+
+    void fiPartida(ControladorPartida cPart) {
+        panelResultats.setControlador(cPart);
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "resultats");
     }
 
 
