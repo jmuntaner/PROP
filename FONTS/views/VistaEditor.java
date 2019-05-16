@@ -80,7 +80,7 @@ class VistaEditor extends VistaAmbTauler {
         for (int i = 0; i < PECES.length(); i++) {
 
             char c = PECES.charAt(i);
-            JToggleButton b = new JToggleButton(Utils.getIconPeca(c, SIZE_ICON));
+            JToggleButton b = new JToggleButton(Utils.rawGetIconPeca(c, SIZE_ICON));
             b.addActionListener(e -> {
                 actual = c;
                 b.setSelected(true);

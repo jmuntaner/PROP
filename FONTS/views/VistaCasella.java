@@ -50,8 +50,10 @@ class VistaCasella extends JPanel {
     }
 
     void setPeca(char peca) {
-        this.peca = peca;
-        updateImatge();
+        if (peca != this.peca) {
+            this.peca = peca;
+            updateImatge();
+        }
     }
 
     void updateImatge() {

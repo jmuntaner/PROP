@@ -76,11 +76,20 @@ public class ControladorLlistaProblemes {
     }
 
     /**
-     * Inicia una nova partida.
+     * Inicia una nova partida humà vs humà.
      *
      * @return Controlador de la nova partida.
      */
-    public ControladorPartida iniciaPartida() {
-        return cp.iniciaHvH(p, "Elvira");
+    public ControladorPartida iniciaPartidaHvH(String nomOp) {
+        return cp.iniciaHvH(p, nomOp);
+    }
+
+    /**
+     * Inicia una nova partida humà vs màquina.
+     *
+     * @return Controlador de la nova partida.
+     */
+    public ControladorPartida iniciaPartidaHvM(boolean mType, boolean ataca) {
+        return cp.iniciaHvM(p, mType, ataca);
     }
 }

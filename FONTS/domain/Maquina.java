@@ -9,6 +9,7 @@ public abstract class Maquina {
 
     public abstract int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn);
 
+    public abstract String getNom();
 
     /**
      * Cerca el millor moviment per a la maquina

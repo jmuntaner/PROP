@@ -11,4 +11,9 @@ public class M1 extends Maquina {
         }
         return 0;
     }
+
+    @Override
+    public String getNom() {
+        return "Xicu";
+    }
 }

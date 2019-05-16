@@ -40,15 +40,19 @@ public class VistaJugar extends VistaAmbTauler {
         cp = c;
         reloadTauler();
         movimentIniciat = false;
+
+        // Reinicia el timer
         iniciPartida = System.currentTimeMillis();
         iniciTorn = iniciPartida;
-        // Reinicia el timer
         if (fut != null) fut.cancel(true);
         labelTempsTorn.setText("00:00:00");
         labelTempsPatida.setText("00:00:00");
         fut = executorService.scheduleWithFixedDelay(
                 this::updateTimer, 1, 1, TimeUnit.SECONDS);
+        // Actualitza panel
         updateData();
+        labelEscac.setEnabled(false);
+        tornMaquina();
     }
 
     /**
@@ -56,9 +60,10 @@ public class VistaJugar extends VistaAmbTauler {
      */
     private void reloadTauler() {
         for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 8; j++) {
                 setPos(i, j, cp.getPos(i, j));
-
+                desmarcaPos(i, j);
+            }
     }
 
     /**
@@ -195,7 +200,7 @@ public class VistaJugar extends VistaAmbTauler {
                 iniciTorn = System.currentTimeMillis();
                 processResult(res);
                 updateData();
-
+                if (res == 0 || res == 1) tornMaquina();
             }
 
             desmarcaPos(xp, yp);
@@ -218,5 +223,26 @@ public class VistaJugar extends VistaAmbTauler {
             }
         }
 
+    }
+
+    void tornMaquina() {
+        new Thread(() -> {
+
+            boolean end = false;
+            while (!end && cp.esTornMaquina()) {
+                SwingUtilities.invokeLater(() -> setInteractable(false));
+                final int res = cp.executaMoviment();
+                if (res < 0 || res > 1) {
+                    end = true;
+                }
+                SwingUtilities.invokeLater(() -> {
+                    setInteractable(true);
+                    reloadTauler();
+                    iniciTorn = System.currentTimeMillis();
+                    processResult(res);
+                    updateData();
+                });
+            }
+        }).start();
     }
 }

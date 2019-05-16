@@ -10,7 +10,7 @@ class VistaLlistaProblemes extends JPanel {
     private VistaPrincipal vp;
     private VistaTauler preview;
     private JLabel labelNom;
-    private JButton buttonJugar, buttonEditar, buttonEliminar;
+    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar;
     private JList<String> problemes;
 
     /**
@@ -93,12 +93,19 @@ class VistaLlistaProblemes extends JPanel {
         visor.add(preview, gbc_n);
 
         gbc_n.insets = new Insets(0, 4, 4, 4);
-        // Boto Jugar
+        // Boto Jugar HvH
         gbc_n.gridy++;
-        buttonJugar = new JButton("Jugar");
-        buttonJugar.setEnabled(false);
-        buttonJugar.addActionListener(e -> juga());
-        visor.add(buttonJugar, gbc_n);
+        buttonJugarHvH = new JButton("Jugar HvH");
+        buttonJugarHvH.setEnabled(false);
+        buttonJugarHvH.addActionListener(e -> jugaHvH());
+        visor.add(buttonJugarHvH, gbc_n);
+
+        // Boto Jugar HvM
+        gbc_n.gridy++;
+        buttonJugarHvM = new JButton("Jugar HvM");
+        buttonJugarHvM.setEnabled(false);
+        buttonJugarHvM.addActionListener(e -> jugaHvM());
+        visor.add(buttonJugarHvM, gbc_n);
 
         // Boto Editar
         gbc_n.gridy++;
@@ -174,14 +181,16 @@ class VistaLlistaProblemes extends JPanel {
         int id = problemes.getSelectedIndex();
         if (id == -1) {
             // Cap seleccionat
-            buttonJugar.setEnabled(false);
+            buttonJugarHvH.setEnabled(false);
+            buttonJugarHvM.setEnabled(false);
             buttonEditar.setEnabled(false);
             buttonEliminar.setEnabled(false);
             clearPreview();
         } else {
             // Seleccionat
             cp.selectProblema(id);
-            buttonJugar.setEnabled(true);
+            buttonJugarHvH.setEnabled(true);
+            buttonJugarHvM.setEnabled(true);
             buttonEditar.setEnabled(true);
             buttonEliminar.setEnabled(true);
             labelNom.setText(cp.getNom());
@@ -193,7 +202,47 @@ class VistaLlistaProblemes extends JPanel {
         vp.editaProblema(problemes.getSelectedIndex());
     }
 
-    private void juga() {
-        vp.jugaProblema(cp.iniciaPartida());
+    private void jugaHvH() {
+        String nomOp = JOptionPane.showInputDialog(
+                JOptionPane.getFrameForComponent(this),
+                "Introdueix el nom de l'oponent:",
+                "Iniciar Partida",
+                JOptionPane.QUESTION_MESSAGE);
+        if (nomOp == null) return;
+        if (nomOp.length() == 0) {
+            JOptionPane.showMessageDialog(
+                    JOptionPane.getFrameForComponent(this),
+                    "Has d'introduir un nom",
+                    "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        } else vp.jugaProblema(cp.iniciaPartidaHvH(nomOp));
+    }
+
+    private void jugaHvM() {
+        String[] maquines = new String[]{"Xicu (M1)", "Barja (M2)"};
+        String result = (String) JOptionPane.showInputDialog(
+                null,
+                "Selecciona el teu oponent:",
+                "Iniciar Partida", JOptionPane.QUESTION_MESSAGE,
+                null,
+                maquines, maquines[0]);
+        if (result == null) return;
+        int maquina = 1;
+        if (result.equals(maquines[1])) maquina = 2;
+        Object[] options = {"Atacar",
+                "Defensar",
+                "Cancelar"};
+        int ataca = JOptionPane.showOptionDialog(null,
+                "Que vols fer, atacar o defensar?",
+                "Iniciar partida",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
+
+        if (ataca == 2) return;
+
+        vp.jugaProblema(cp.iniciaPartidaHvM(maquina == 1, ataca == 1));
     }
 }

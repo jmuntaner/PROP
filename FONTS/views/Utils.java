@@ -31,4 +31,15 @@ class Utils {
         }
         lastSize = size;
     }
+
+    static ImageIcon rawGetIconPeca(char c, int size) {
+        try {
+            // Source: https://marcelk.net/chess/pieces/
+            BufferedImage orig = ImageIO.read(new File("res/piezas/" + c + ".png"));
+            return new ImageIcon(orig.getScaledInstance(size, size, Image.SCALE_SMOOTH));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

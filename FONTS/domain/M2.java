@@ -66,4 +66,9 @@ public class M2 extends Maquina {
         }
         return v;
     }
+
+    @Override
+    public String getNom() {
+        return "Barja";
+    }
 }

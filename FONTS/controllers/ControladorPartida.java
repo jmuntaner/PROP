@@ -11,7 +11,8 @@ public abstract class ControladorPartida {
     private final Partida partida;
     private ArrayList<Moviment> moviments;
     private boolean taules, limit;
-
+    private Color colorPrincipal;
+    private String nomA, nomB;
 
     /**
      * Crea una partida Humà vs Humà
@@ -21,6 +22,7 @@ public abstract class ControladorPartida {
     ControladorPartida(Problema problema) {
         this.problema = problema;
 
+        colorPrincipal = problema.getTema();
         partida = new Partida(problema);
         estadistiques = new EstadistiquesPartida();
         estadistiques.iniciaTorn(partida.getTorn());
@@ -50,14 +52,11 @@ public abstract class ControladorPartida {
 
     /**
      * Finalitza la partida actual, actualitzant els rankings corresponents.
-     *
-     * @return Estadístiques de la partida.
      */
-    EstadistiquesPartida finalitzaPartida() {
+    void finalitzaPartida() {
         Ranking<PuntuacioProblema> ranking = problema.getRanking();
         PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
         actualitzaRanking(ranking, punts);
-        return estadistiques;
     }
 
     /**
@@ -98,7 +97,8 @@ public abstract class ControladorPartida {
         int res = partida.moure(partida.getTorn(), m);
         estadistiques.finalitzaTorn(torn);
         estadistiques.iniciaTorn(partida.getTorn());
-        if (res == 0 && partida.getNumMoviments() >= problema.getNumJugades()) {
+        actualitzaTorn();
+        if (res <= 1 && partida.getNumMoviments() >= problema.getNumJugades()) {
             limit = true;
             return -1;
         }
@@ -136,11 +136,78 @@ public abstract class ControladorPartida {
     }
 
 
+    /**
+     * Obté el nom del jugador al que toca moure.
+     *
+     * @return Nom del jugador del torn actual.
+     */
+    public String getNomTorn() {
+        if (partida.getTorn() == colorPrincipal) return nomA;
+        else return nomB;
+    }
+
+    /**
+     * Obté el nom del jugador guanyador.
+     *
+     * @return Nom del jugador guanyador, "-" en cas de taules.
+     */
+    public String getNomGuanyador() {
+        if (limit) return getNomTorn();
+        if (taules) return "-";
+        if (partida.getTorn() == colorPrincipal) return nomB;
+        else return nomA;
+    }
+
+    /**
+     * Modifica els noms dels jugadors.
+     *
+     * @param nomA Nom del jugador atacant.
+     * @param nomB Nom del jugador defensor.
+     */
+    void setNoms(String nomA, String nomB) {
+        this.nomA = nomA;
+        this.nomB = nomB;
+    }
+
+    /**
+     * Obté el tema del problema.
+     *
+     * @return Tema del poblema.
+     */
+    Color getColorPrincipal() {
+        return colorPrincipal;
+    }
+
+    /**
+     * Obté el tauler actual.
+     *
+     * @return Situació actual de la partida.
+     */
+    Tauler getTauler() {
+        return partida.getSituacioActual();
+    }
+
+    /**
+     * Actualitza la informació del ranking
+     *
+     * @param ranking Ranking a actualitzar.
+     * @param punts   Puntuació a inserir.
+     */
     abstract void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts);
 
-    public abstract String getNomTorn();
-
-    public abstract String getNomGuanyador();
-
+    /**
+     * Indica si és el torn d'una màquina.
+     * @return Vertader si és el torn d'una màquina.
+     */
     public abstract boolean esTornMaquina();
+
+    /**
+     * Actualitza l'estat intern del controlador al finalitzar un torn.
+     */
+    abstract void actualitzaTorn();
+
+    /**
+     * Executa un moviment de màquina.
+     */
+    public abstract int executaMoviment();
 }

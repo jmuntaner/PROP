@@ -1,11 +1,13 @@
 package controllers;
 
-import domain.*;
+import domain.Problema;
+import domain.PuntuacioProblema;
+import domain.Ranking;
+import domain.Usuari;
 
 public class ControladorPartidaHvH extends ControladorPartida {
     private final Usuari usuari;
-    private final String nomA, nomB;
-    private final Color colorPrincipal;
+
 
     /**
      * Crea una partida Humà vs Humà
@@ -16,11 +18,8 @@ public class ControladorPartidaHvH extends ControladorPartida {
      */
     public ControladorPartidaHvH(Problema problema, Usuari usuari, String oponent) {
         super(problema);
-        usuari = new Usuari(0, "Jugador 1", "Sauron");
         this.usuari = usuari;
-        nomA = usuari.getNom();
-        nomB = oponent;
-        colorPrincipal = problema.getTema();
+        setNoms(usuari.getNom(), oponent);
     }
 
 
@@ -29,22 +28,19 @@ public class ControladorPartidaHvH extends ControladorPartida {
         ranking.afegeixPuntuacio(usuari, punts);
     }
 
-    @Override
-    public String getNomTorn() {
-        if (getColorTorn() == colorPrincipal) return nomA;
-        else return nomB;
-    }
-
-    @Override
-    public String getNomGuanyador() {
-        if (esLimit()) return getNomTorn();
-        if (esTaules()) return "-";
-        if (getColorTorn() == colorPrincipal) return nomB;
-        else return nomA;
-    }
 
     @Override
     public boolean esTornMaquina() {
         return false;
+    }
+
+    @Override
+    void actualitzaTorn() {
+        // No cal fer res
+    }
+
+    @Override
+    public int executaMoviment() {
+        throw new RuntimeException("Un jugador humà no pot generar moviments.");
     }
 }

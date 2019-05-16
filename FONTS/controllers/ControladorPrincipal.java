@@ -1,5 +1,7 @@
 package controllers;
 
+import domain.M1;
+import domain.M2;
 import domain.Problema;
 import domain.Usuari;
 
@@ -26,7 +28,7 @@ public class ControladorPrincipal {
 
         ce = new ControladorEditor(this);
         cl = new ControladorLlistaProblemes(this);
-
+        usuari = new Usuari(0, "Sauron", "TheDarkLord");
     }
 
     /**
@@ -104,5 +106,9 @@ public class ControladorPrincipal {
      */
     ControladorPartidaHvH iniciaHvH(Problema p, String nomOponent) {
         return new ControladorPartidaHvH(p, usuari, nomOponent);
+    }
+
+    ControladorPartidaHvM iniciaHvM(Problema p, boolean mType, boolean ataca) {
+        return new ControladorPartidaHvM(p, usuari, mType ? new M2() : new M1(), ataca);
     }
 }
