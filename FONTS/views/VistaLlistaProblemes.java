@@ -80,7 +80,7 @@ class VistaLlistaProblemes extends JPanel {
         gbc_n.gridx = 0;
         gbc_n.gridy = 0;
         gbc_n.insets = new Insets(0, 0, 4, 0);
-        labelNom = new JLabel("Nom del problema llaaaaaarg");
+        labelNom = new JLabel("                                                  ");
         visor.add(labelNom, gbc_n);
 
         // Preview tauler
@@ -88,7 +88,7 @@ class VistaLlistaProblemes extends JPanel {
         gbc_n.fill = GridBagConstraints.HORIZONTAL;
         preview = new VistaTauler();
         preview.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Situació inicial"),
+                BorderFactory.createEmptyBorder(4, 4, 4, 4),
                 preview.getBorder()));
         visor.add(preview, gbc_n);
 

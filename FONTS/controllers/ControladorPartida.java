@@ -95,7 +95,7 @@ public abstract class ControladorPartida {
         int res = partida.moure(partida.getTorn(), m);
         estadistiques.finalitzaTorn(torn);
         estadistiques.iniciaTorn(partida.getTorn());
-        if (partida.getNumMoviments() >= problema.getNumJugades()) return -1;
+        if (res == 0 && partida.getNumMoviments() >= problema.getNumJugades()) return -1;
         return res;
     }
 

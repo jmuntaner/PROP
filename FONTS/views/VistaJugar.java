@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class VistaJugar extends VistaAmbTauler {
     private long iniciTorn, iniciPartida;
     private final ScheduledExecutorService executorService;
-    private JLabel labelTempsTorn, labelTempsPatida, labelTorn;
+    private JLabel labelTempsTorn, labelTempsPatida, labelTorn, labelEscac;
     private ControladorPartida cp;
     private ScheduledFuture fut;
     private boolean movimentIniciat;
@@ -102,15 +102,24 @@ public class VistaJugar extends VistaAmbTauler {
         gbc_info.gridy++;
         gbc_info.gridx = 0;
         gbc_info.gridwidth = 2;
+        gbc_info.fill = GridBagConstraints.HORIZONTAL;
         labelTorn = new JLabel("Mou - (-)");
         labelTorn.setFont(new Font(defaulltFont.getName(), Font.PLAIN, 14));
         panelInfo.add(labelTorn, gbc_info);
 
+        // Glue
         gbc_info.gridy++;
         gbc_info.weighty = 1;
         gbc_info.fill = GridBagConstraints.BOTH;
         panelInfo.add(Box.createGlue(), gbc_info);
 
+        gbc_info.gridy++;
+        gbc_info.weighty = 0;
+        gbc_info.fill = GridBagConstraints.HORIZONTAL;
+        labelEscac = new JLabel("Escac!");
+        labelEscac.setFont(new Font(defaulltFont.getName(), Font.PLAIN, 20));
+        labelEscac.setVisible(false);
+        panelInfo.add(labelEscac, gbc_info);
         // Posa un borde senzill al panel
         panelInfo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -144,6 +153,34 @@ public class VistaJugar extends VistaAmbTauler {
     }
 
     /**
+     * Realitza accions en funció del resultat del moviment
+     *
+     * @param res Resultat de l'ultim moviment
+     */
+    private void processResult(int res) {
+        switch (res) {
+            case 0:
+                labelEscac.setVisible(false);
+                break;
+            case 1:
+                labelEscac.setVisible(true);
+                break;
+            case 2:
+                System.out.println("Escac Mat!");
+                break;
+            case 3:
+                System.out.println("Taules!");
+                break;
+            case -1:
+                System.out.println("Limit movs");
+                break;
+            default:
+                throw new RuntimeException("Resultat desconegut: " + res);
+
+        }
+    }
+
+    /**
      * Gestiona els clics del tauler
      *
      * @param x Posició X clicada.
@@ -160,8 +197,9 @@ public class VistaJugar extends VistaAmbTauler {
                 setPos(xp, yp, cp.getPos(xp, yp));
                 setPos(x, y, cp.getPos(x, y));
                 iniciTorn = System.currentTimeMillis();
+                processResult(res);
                 updateData();
-                System.out.println(res);
+
             }
 
             desmarcaPos(xp, yp);

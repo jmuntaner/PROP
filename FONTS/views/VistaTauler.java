@@ -6,15 +6,20 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class VistaTauler extends JPanel {
     private TaulerListener tl;
 
-    private static final String llistaFitxes = "KQRNBPkqrnbp";
+
     private ImageIcon empty;
     private ImageIcon[] fitxes;
     private VistaCasella[][] caselles;
+    ExecutorService executor;
+    private int lastLado;
+
 
     VistaTauler(TaulerListener taulerListener) {
         this();
@@ -24,13 +29,15 @@ public class VistaTauler extends JPanel {
 
     VistaTauler() {
         super();
+        lastLado = -1;
         caselles = new VistaCasella[8][8];
-        fitxes = new ImageIcon[llistaFitxes.length()];
+        fitxes = new ImageIcon[Utils.llistaFitxes.length()];
+
+        executor = Executors.newSingleThreadExecutor();
 
         setLayout(new GridLayout(8, 8));
 
         generaImatges();
-        System.out.println("Fichas generadas");
 
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++) {
@@ -43,8 +50,9 @@ public class VistaTauler extends JPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 super.componentResized(e);
-                generaImatges();
+                if (isShowing()) generaImatges();
             }
+
         });
     }
 
@@ -69,26 +77,33 @@ public class VistaTauler extends JPanel {
     }
 
     private void generaImatges() {
-        int lado = getWidth() / 9;
-        if (lado == 0) lado = 10;
-        empty = new ImageIcon(new BufferedImage(lado, lado, BufferedImage.TYPE_INT_ARGB));
-        for (int i = 0; i < llistaFitxes.length(); i++) {
-            char ficha = llistaFitxes.charAt(i);
-            fitxes[i] = Utils.getIconPeca(ficha, lado);
-        }
-        for (VistaCasella[] f : caselles)
-            for (VistaCasella vc : f)
-                if (vc != null) vc.updateImatge();
+
+        executor.submit(() -> {
+            int lado = getWidth() * 2 / (getWidth() < 300 ? 25 : 18);
+            lastLado = lado;
+            if (lado == 0) lado = 5;
+            empty = new ImageIcon(new BufferedImage(lado, lado, BufferedImage.TYPE_INT_ARGB));
+            for (int i = 0; i < Utils.llistaFitxes.length(); i++) {
+                char ficha = Utils.llistaFitxes.charAt(i);
+                fitxes[i] = Utils.getIconPeca(ficha, lado);
+            }
+            SwingUtilities.invokeLater(() -> {
+                for (VistaCasella[] f : caselles)
+                    for (VistaCasella vc : f)
+                        if (vc != null) vc.updateImatge();
+            });
+        });
     }
 
     ImageIcon getIconFitxa(char type) {
-        int index = llistaFitxes.indexOf(type);
+        int index = Utils.llistaFitxes.indexOf(type);
         if (index != -1) {
             return fitxes[index];
         } else return empty;
     }
 
     void setFitxa(int x, int y, char fitxa) {
+        if (lastLado != getWidth() * 2 / (getWidth() < 300 ? 25 : 18)) generaImatges();
         caselles[x][y].setPeca(fitxa);
     }
 
