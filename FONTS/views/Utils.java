@@ -20,9 +20,15 @@ class Utils {
     private static void regenerate(int size) {
         BufferedImage orig;
         for (int i = 0; i < llistaFitxes.length(); i++) {
+            char c = llistaFitxes.charAt(i);
+            char color = 'b';
+            if (Character.isUpperCase(c)) {
+                c = Character.toLowerCase(c);
+                color = 'w';
+            }
             try {
                 // Source: https://marcelk.net/chess/pieces/
-                orig = ImageIO.read(new File("res/piezas/" + llistaFitxes.charAt(i) + ".png"));
+                orig = ImageIO.read(new File("res/piezas/" + c + "_" + color + ".png"));
                 lastGenerated[i] = new ImageIcon(orig.getScaledInstance(size, size, Image.SCALE_SMOOTH));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -32,10 +38,16 @@ class Utils {
         lastSize = size;
     }
 
-    static ImageIcon rawGetIconPeca(char c, int size) {
+    static ImageIcon rawGetIconPeca(char peca, int size) {
         try {
+            char c = peca;
+            char color = 'b';
+            if (Character.isUpperCase(c)) {
+                c = Character.toLowerCase(c);
+                color = 'w';
+            }
             // Source: https://marcelk.net/chess/pieces/
-            BufferedImage orig = ImageIO.read(new File("res/piezas/" + c + ".png"));
+            BufferedImage orig = ImageIO.read(new File("res/piezas/" + c + "_" + color + ".png"));
             return new ImageIcon(orig.getScaledInstance(size, size, Image.SCALE_SMOOTH));
         } catch (IOException e) {
             e.printStackTrace();
