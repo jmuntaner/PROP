@@ -3,7 +3,9 @@ package views;
 import controllers.ControladorLlistaProblemes;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
+import java.io.File;
 
 class VistaLlistaProblemes extends JPanel {
     private ControladorLlistaProblemes cp;
@@ -12,6 +14,7 @@ class VistaLlistaProblemes extends JPanel {
     private JLabel labelNom, labelDificultat, labelJugades;
     private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar;
     private JList<String> problemes;
+    private final JFileChooser fc;
 
     /**
      * Creadora per defecte.
@@ -27,6 +30,21 @@ class VistaLlistaProblemes extends JPanel {
         initFilaBotons();
         initVisor();
         initLlistaProblemes();
+        fc = new JFileChooser();
+        fc.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) return true;
+                String ext = Utils.getExtension(f);
+                return ext != null && ext.equals("fendb");
+            }
+
+            @Override
+            public String getDescription() {
+                return "Arxius de base de dades (*.fendb)";
+            }
+        });
+        fc.setAcceptAllFileFilterUsed(false);
     }
 
     /**
@@ -41,12 +59,63 @@ class VistaLlistaProblemes extends JPanel {
         buttonNou.addActionListener(e -> vp.creaProblema());
         filaBotons.add(buttonNou);
 
+        JButton buttonCarrega = new JButton("Carregar arxiu");
+        buttonCarrega.addActionListener(e -> carregarArxiu());
+        filaBotons.add(buttonCarrega);
+        JButton buttonExporta = new JButton("Exportar arxiu");
+        buttonExporta.addActionListener(e -> exportarArxiu());
+        filaBotons.add(buttonExporta);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.LINE_START;
         add(filaBotons, gbc);
+    }
+
+    /**
+     * Exporta la base de dades a un arxiu.
+     */
+    private void exportarArxiu() {
+        int ret = fc.showSaveDialog(this);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File filepre = fc.getSelectedFile();
+            String ext = Utils.getExtension(filepre);
+            if (ext == null || !ext.equals("fendb")) {
+                filepre = new File(filepre.getAbsolutePath() + ".fendb");
+            }
+            final File file = filepre;
+            new Thread(() -> {
+                cp.exportaProblemes(file);
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(this,
+                            "Problemes exportats!", "Exportació de problemes",
+                            JOptionPane.INFORMATION_MESSAGE);
+                });
+            }).start();
+        }
+    }
+
+    /**
+     * Afegeix els problemes d'un arxiu a la base de dades.
+     */
+    private void carregarArxiu() {
+
+        int ret = fc.showOpenDialog(this);
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            final File file = fc.getSelectedFile();
+            new Thread(() -> {
+                cp.carregaProblemes(file);
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(this,
+                            "Problemes carregats!", "Càrrega de problemes",
+                            JOptionPane.INFORMATION_MESSAGE);
+                });
+                update();
+
+            }).start();
+        }
     }
 
 
