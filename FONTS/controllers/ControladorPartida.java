@@ -13,6 +13,7 @@ public abstract class ControladorPartida {
     private boolean taules, limit;
     private Color colorPrincipal;
     private String nomA, nomB;
+    private int profunditat;
 
     /**
      * Crea una partida Humà vs Humà
@@ -28,6 +29,7 @@ public abstract class ControladorPartida {
         estadistiques.iniciaTorn(partida.getTorn());
         taules = false;
         limit = false;
+        profunditat = (problema.getNumJugades() * 2) - 1;
     }
 
 
@@ -98,12 +100,22 @@ public abstract class ControladorPartida {
         estadistiques.finalitzaTorn(torn);
         estadistiques.iniciaTorn(partida.getTorn());
         actualitzaTorn();
+        profunditat--;
         if (res <= 1 && partida.getNumMoviments() >= problema.getNumJugades()) {
             limit = true;
             return -1;
         }
         if (res == 3) taules = true;
         return res;
+    }
+
+    /**
+     * Obté la profunditat del minimax.
+     *
+     * @return La profunditat necessària per a executar correctament el minimax.
+     */
+    int getProfunditat() {
+        return profunditat;
     }
 
     /**

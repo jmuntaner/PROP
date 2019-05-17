@@ -257,6 +257,6 @@ class VistaLlistaProblemes extends JPanel {
 
         if (ataca == 2) return;
 
-        vp.jugaProblema(cp.iniciaPartidaHvM(maquina == 1, ataca == 1));
+        vp.jugaProblema(cp.iniciaPartidaHvM(maquina != 1, ataca == 1));
     }
 }

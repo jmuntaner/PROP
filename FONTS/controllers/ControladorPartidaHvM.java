@@ -47,7 +47,7 @@ public class ControladorPartidaHvM extends ControladorPartida {
     public int executaMoviment() {
         if (!tornMaquina) throw new RuntimeException("Un jugador humà no pot generar moviments.");
 
-        Moviment m = maquina.calcularMoviment(2, getTauler(), getColorTorn(), getColorPrincipal());
+        Moviment m = maquina.calcularMoviment(getProfunditat(), getTauler(), getColorTorn(), getColorPrincipal());
         return mou(m);
     }
 }
