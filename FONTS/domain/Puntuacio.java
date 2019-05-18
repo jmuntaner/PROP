@@ -1,6 +1,8 @@
 package domain;
 
-public interface Puntuacio<T> {
+import java.io.Serializable;
+
+public interface Puntuacio<T> extends Serializable {
 
 
     /**

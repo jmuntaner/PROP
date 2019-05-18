@@ -2,9 +2,10 @@ package domain;
 
 import utils.Pair;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ranking<T extends Puntuacio<T>> {
+public class Ranking<T extends Puntuacio<T>> implements Serializable {
     private final ArrayList<Pair<String, T>> ranking;
 
 
