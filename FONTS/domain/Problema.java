@@ -3,7 +3,7 @@ package domain;
 import java.io.Serializable;
 
 public class Problema implements Serializable{
-    private static final int NMAX = 3;
+    private static final int NMAX = 4; //4 per poder fer prova de força
 
     private String nom;
     //private Color tema;
@@ -11,7 +11,7 @@ public class Problema implements Serializable{
     // dificultat = número decisions atacant / número solucions possibles
     //private Tauler situacioInicial;
     private String situacioInicial; //FEN -> tauler + tema
-    private Ranking<PuntuacioProblema> ranking; //TODO: remove transient
+    private Ranking<PuntuacioProblema> ranking;
     //inspiració dificultat -> http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
 
     /**

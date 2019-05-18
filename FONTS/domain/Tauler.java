@@ -338,7 +338,7 @@ public class Tauler {
                         if (!esEscac(b.getNext())) movs.add(m);
                         mouInvers(m);
                     }
-                    else exit = true; //TODO: testejar que funciona despres de posar aquesta linia
+                    else exit = true;
                 }
                 if (dir[0] * dir[1] == 2 || dir[0] * dir[1] == -2) exit = true;
                 else step++;
