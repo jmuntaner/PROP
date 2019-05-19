@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.File;
 
 class VistaLlistaProblemes extends JPanel {
+
     private ControladorLlistaProblemes cp;
     private VistaPrincipal vp;
     private VistaTauler preview;
@@ -150,6 +151,9 @@ class VistaLlistaProblemes extends JPanel {
         gbc_n.gridy = 0;
         gbc_n.insets = new Insets(0, 0, 4, 0);
         labelNom = new JLabel("                                                  ");
+        final Dimension size = labelNom.getPreferredSize();
+        labelNom.setMinimumSize(size);
+        labelNom.setPreferredSize(size);
         visor.add(labelNom, gbc_n);
 
         // Preview tauler
