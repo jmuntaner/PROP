@@ -6,6 +6,16 @@ public class GestioUsuari extends GestioBases {
     private static final String rp = "data/baseUsuaris/";
     private static final String ext = ".user";
 
+    private static GestioUsuari instance = new GestioUsuari();
+
+    private GestioUsuari() {
+        super();
+    }
+
+    public static GestioUsuari getInstance() {
+        return instance;
+    }
+
     @Override
     public String getPath() {return rp;}
 

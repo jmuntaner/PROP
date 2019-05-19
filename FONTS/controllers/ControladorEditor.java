@@ -1,18 +1,24 @@
 package controllers;
 
+import data.GestioProblema;
 import domain.*;
+
+//TODO:
+// - Mirar quan s'entra idProblema -> al crear nou problema o al guardar
+// - La funcio creaProblema o la funcio guardaProblema ha de rebre la String del nom
 
 public class ControladorEditor {
     private Tauler t;
     private Color colorInicial;
-    private int numJugades, idProblema;
+    private int numJugades;
+    private String idProblema;
     private boolean esNou;
 
-    private ControladorPrincipal cp;
+    private GestioProblema gp;
 
-    ControladorEditor(ControladorPrincipal controladorPrincipal) {
+    ControladorEditor() {
         creaProblema();
-        cp = controladorPrincipal;
+        gp = GestioProblema.getInstance();
     }
 
     /**
@@ -28,13 +34,13 @@ public class ControladorEditor {
     /**
      * Carrega un problema de la base de dades per a edició.
      *
-     * @param index Identificador del problema a editar.
+     * @param nom Identificador del problema a editar.
      */
-    public void carregaProblema(int index) {
-        Problema p = cp.getProblema(index);
+    public void carregaProblema(String nom) {
+        Problema p = gp.getProblema(nom);
         t = p.getSituacioInicial();
         esNou = false;
-        idProblema = index;
+        idProblema = nom;
         numJugades = p.getNumJugades();
         colorInicial = p.getTema();
     }
@@ -92,18 +98,15 @@ public class ControladorEditor {
     /**
      * Guarda el problema a la base de dades.
      *
-     * @return 0: Correcte, 1: Escac/mat/taules, 2: no hi ha solució
+     * @return 0: Correcte, 1: Escac/mat/taules, 2: no hi ha solució, 3: nom repetit
      */
     public int guardaProblema() {
         int rt = t.finalEntradaTauler(colorInicial);
         if (rt == 3) return 1;
-        Problema p = new Problema(
-                "Mat en " + numJugades + " per les " +
-                        (colorInicial == Color.BLANC ? "blanques" : "negres"));
+        Problema p = new Problema(idProblema);
         if (!p.initProblema(numJugades, getFen()))
             return 2;
-        if (esNou) cp.afegeixProblema(p);
-        else cp.editaProblema(idProblema, p);
-        return 0;
+        if (!esNou) gp.delete(idProblema);
+        return gp.saveProblema(p) ? 0 : 3;
     }
 }

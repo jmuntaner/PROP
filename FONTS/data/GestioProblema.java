@@ -7,6 +7,16 @@ public class GestioProblema extends  GestioBases {
     private static final String ext = ".prob";
     //potser canviar '/' per File.pathSeparator
 
+    private static GestioProblema instance = new GestioProblema();
+
+    private GestioProblema() {
+        super();
+    }
+
+    public static GestioProblema getInstance() {
+        return instance;
+    }
+
     @Override
     public String getPath() {return rp;}
 

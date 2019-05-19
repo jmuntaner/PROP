@@ -1,5 +1,6 @@
 package controllers;
 
+import data.GestioProblema;
 import domain.Problema;
 import domain.Tauler;
 import data.IOFens;
@@ -15,6 +16,8 @@ public class ControladorLlistaProblemes {
     private ControladorPrincipal cp;
     private Problema p;
 
+    private GestioProblema gp;
+
     /**
      * Creadora per defecte.
      *
@@ -22,15 +25,16 @@ public class ControladorLlistaProblemes {
      */
     ControladorLlistaProblemes(ControladorPrincipal cp) {
         this.cp = cp;
+        gp = GestioProblema.getInstance();
     }
 
     /**
      * Selecciona un problema de la llista.
      *
-     * @param index Identificador del problema a seleccionar.
+     * @param nom Identificador del problema a seleccionar.
      */
-    public void selectProblema(int index) {
-        p = cp.getProblema(index);
+    public void selectProblema(String nom) {
+        p = gp.getProblema(nom);
     }
 
     /**
@@ -55,11 +59,11 @@ public class ControladorLlistaProblemes {
      * @return Array amb els noms de tots els problemes presents a la base de dades.
      */
     public String[] getNomsProblemes() {
-        int size = cp.getNumProblemes();
-        String[] noms = new String[size];
-        for (int i = 0; i < size; i++) {
-            noms[i] = cp.getProblema(i).getNom();
-        }
+        ArrayList<String> al = gp.getList();
+        int n = al.size();
+        String[] noms = new String[n];
+        for (int i=0; i<n; ++i)
+            noms[i] = al.get(i);
         return noms;
     }
 
@@ -94,10 +98,10 @@ public class ControladorLlistaProblemes {
     /**
      * Elimina el problema indicat de la base de dades de problemes.
      *
-     * @param index Problema a eliminar.
+     * @param nom Problema a eliminar.
      */
-    public void eliminaProblema(int index) {
-        cp.eliminaProblema(index);
+    public void eliminaProblema(String nom) {
+        gp.delete(nom);
         p = null; // Acaba amb les referències al problema per a que passi el GC a netejar, que ja li toca.
     }
 
@@ -125,48 +129,9 @@ public class ControladorLlistaProblemes {
      * @param f Arxiu *.fendb amb problemes.
      */
     public boolean carregaProblemes(File f) {
-        try {
-            FileReader fr = new FileReader(f);
-            List<String> problemes = new ArrayList<>();
-            int rd;
-            StringBuilder sb = new StringBuilder();
-            while ((rd = fr.read()) != -1) {
-                if (rd == '\n') {
-                    problemes.add(sb.toString());
-                    sb = new StringBuilder();
-                } else sb.append((char) rd);
-            }
-            for (String fen : problemes) {
-                if (!afegeixProblema(fen)) return false;
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        return IOFens.readFenList(f);
     }
 
-    /**
-     * Afageix un problema d'arxiu a la base de dades de problemes.
-     *
-     * @param prob String del problema a carregar
-     * @return Vertader si el problema ha estat afegit correctament
-     */
-    private boolean afegeixProblema(String prob) {
-        String fen = null;
-        int i = prob.indexOf('_');
-        if (i > 0 && i < prob.length() - 1) {
-            fen = prob.substring(i + 1);
-        }
-        if (fen == null) return false;
-        System.out.printf("ppp: '%s'\n", prob.substring(0, i));
-        int numj = Integer.parseInt(prob.substring(0, i));
-        Problema pp = new Problema(fen);
-        if (!pp.initProblema(numj, fen)) return false;
-        cp.afegeixProblema(pp);
-        return true;
-    }
 
     /**
      * Exporta la base de dades a un arxiu *.fendb.
@@ -174,21 +139,6 @@ public class ControladorLlistaProblemes {
      * @param f Arxiu *.fendb a crear.
      */
     public void exportaProblemes(File f) {
-        try {
-            FileWriter wr = new FileWriter(f);
-            int t_size = cp.getNumProblemes();
-            for (int i = 0; i < t_size; i++) {
-                Problema tmp = cp.getProblema(i);
-                wr.write(Integer.toString(tmp.getNumJugades()));
-                wr.write("_");
-                wr.write(tmp.getFen());
-                wr.write('\n');
-            }
-            wr.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+        IOFens.writeFenList(f);
     }
 }

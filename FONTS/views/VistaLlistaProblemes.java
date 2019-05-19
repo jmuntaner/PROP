@@ -250,7 +250,7 @@ class VistaLlistaProblemes extends JPanel {
                 "Segur que vols eliminar el problema?", "Eliminar problema",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (input == 0) {
-            int id = problemes.getSelectedIndex();
+            int id = problemes.getSelectedIndex(); //TODO: tot aixo ha d'anar amb strings, no amb indexs
             cp.eliminaProblema(id);
             update();
         }
