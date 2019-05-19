@@ -17,11 +17,10 @@ public class GestioProblema extends  GestioBases {
      * Desa un problema a la base de problemes
      *
      * @param p Problema a desar
+     * @return True si s'ha desat el problema, false si ja existia (nom repetit)
      */
-    public void saveProblema(Problema p) {
-        // Ara mateix si el problema esta repetit, el sobrescriu
-        // Repetit = mateix nom
-        writeObject(p.getNom(),p);
+    public boolean saveProblema(Problema p) {
+        return writeObject(p.getNom(),p);
     }
 
     /**

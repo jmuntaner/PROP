@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class GestioBases {
     /**
-     * Llegeix un element de la base de problemes
+     * Llegeix un element de la base corresponent
      * El nom ha de coincidir amb el nom del fitxer
      *
      * @param nom Nom de l'element a llegir
@@ -25,13 +25,24 @@ public abstract class GestioBases {
         }
     }
 
-    void writeObject(String nom, Object x) {
+    /**
+     * Escriu un element a la base corresponent
+     * El nom coincideix amb el nom del fitxer
+     *
+     * @param nom Nom de l'element e escriure
+     * @param x Element a escriure
+     * @return True si s'ha desat correctament, false si ja existia un fitxer amb aquest nom
+     */
+    boolean writeObject(String nom, Object x) {
         try {
+            ArrayList<String> al = getList();
+            for (String s: al) if (nom.equals(s)) return false;
             FileOutputStream f = new FileOutputStream(getPath() + nom + getExt());
             ObjectOutputStream o = new ObjectOutputStream(f);
             o.writeObject(x);
             o.close();
             f.close();
+            return true;
         }
         catch(IOException e) {
             throw new RuntimeException("Base - write: " + e.getMessage());
@@ -58,7 +69,7 @@ public abstract class GestioBases {
      * @return Llista amb els noms dels problemes
      */
     public ArrayList<String> getList() {
-        File f = new File(getPath()); //Modificar per treure la / del final?
+        File f = new File(getPath());
         File[] lf = f.listFiles();
         ArrayList<String> al = new ArrayList<>();
         for (File x: lf) al.add(x.getName());

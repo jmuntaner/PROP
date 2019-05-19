@@ -1,7 +1,5 @@
 package data;
 
-import java.util.ArrayList;
-
 import domain.Usuari;
 
 public class GestioUsuari extends GestioBases {
@@ -21,11 +19,7 @@ public class GestioUsuari extends GestioBases {
      * @return True si s'ha desat l'usuari, false si ja existia (repetit)
      */
     public boolean saveUsuari(Usuari u) {
-        ArrayList<String> al = getList();
-        String nom = u.getNom();
-        for (String s: al) if (nom.equals(s)) return false;
-        writeObject(u.getNom(), u);
-        return true;
+        return writeObject(u.getNom(), u);
     }
 
     /**

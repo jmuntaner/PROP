@@ -20,7 +20,7 @@ public class IOFens {
      *
      * @param f Arxiu on exportar els problemes
      */
-    public void writeFenList(File f) {
+    public static void writeFenList(File f) {
         try {
             GestioProblema gp = new GestioProblema();
             ArrayList<String> al = gp.getList();
@@ -46,7 +46,7 @@ public class IOFens {
      * @param prob String del problema a carregar
      * @return True si el problema ha estat afegit correctament, false si no
      */
-    private boolean afegeixProblema(String prob) {
+    private static boolean afegeixProblema(String prob) {
         String fen = null;
         int i = prob.indexOf('_');
         if (i>0 && i<prob.length()-1) fen = prob.substring(i+1);
@@ -67,7 +67,7 @@ public class IOFens {
      * @param f Fitxer d'on llegir els problemes
      * @return False si algun problema no s'ha pogut desar, true si s'han desat tots.
      */
-    public boolean readFenList(File f) {
+    public static boolean readFenList(File f) {
         try {
             FileReader fr = new FileReader(f);
             ArrayList<String> probs = new ArrayList<>();

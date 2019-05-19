@@ -2,6 +2,7 @@ package controllers;
 
 import domain.Problema;
 import domain.Tauler;
+import data.IOFens;
 
 import java.io.File;
 import java.io.FileReader;
