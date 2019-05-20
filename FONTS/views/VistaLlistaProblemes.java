@@ -250,7 +250,7 @@ class VistaLlistaProblemes extends JPanel {
                 "Segur que vols eliminar el problema?", "Eliminar problema",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (input == 0) {
-            int id = problemes.getSelectedIndex(); //TODO: tot aixo ha d'anar amb strings, no amb indexs
+            String id = problemes.getSelectedValue();
             cp.eliminaProblema(id);
             update();
         }
@@ -260,8 +260,8 @@ class VistaLlistaProblemes extends JPanel {
      * Mostra el problema seleccionat al visor.
      */
     private void selecciona() {
-        int id = problemes.getSelectedIndex();
-        if (id == -1) {
+        String id = problemes.getSelectedValue();
+        if (id == null) {
             // Cap seleccionat
             buttonJugarHvH.setEnabled(false);
             buttonJugarHvM.setEnabled(false);
@@ -286,7 +286,7 @@ class VistaLlistaProblemes extends JPanel {
     }
 
     private void edita() {
-        vp.editaProblema(problemes.getSelectedIndex());
+        vp.editaProblema(problemes.getSelectedValue());
     }
 
     private void jugaHvH() {

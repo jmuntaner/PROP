@@ -93,8 +93,8 @@ public class VistaPrincipal {
         cl.show(contentPane, "llistaProbs");
     }
 
-    void editaProblema(int index) {
-        mCp.getCEditor().carregaProblema(index);
+    void editaProblema(String nom) {
+        mCp.getCEditor().carregaProblema(nom);
         mostraEditar();
     }
 

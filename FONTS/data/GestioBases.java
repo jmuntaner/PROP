@@ -72,7 +72,11 @@ public abstract class GestioBases {
         File f = new File(getPath());
         File[] lf = f.listFiles();
         ArrayList<String> al = new ArrayList<>();
-        for (File x: lf) al.add(x.getName());
+        for (File x: lf) {
+            String s = x.getName();
+            int n = s.length()-getExt().length();
+            al.add(s.substring(0,n));
+        }
         return al;
     }
 

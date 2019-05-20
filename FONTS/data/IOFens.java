@@ -22,11 +22,13 @@ public class IOFens {
      */
     public static void writeFenList(File f) {
         try {
-            GestioProblema gp = new GestioProblema();
+            GestioProblema gp = GestioProblema.getInstance();
             ArrayList<String> al = gp.getList();
             FileWriter wr = new FileWriter(f);
             for (String s: al) {
                 Problema p = gp.getProblema(s);
+                wr.write(p.getNom());
+                wr.write("_");
                 wr.write(Integer.toString(p.getNumJugades()));
                 wr.write("_");
                 wr.write(p.getFen());
@@ -49,13 +51,17 @@ public class IOFens {
     private static boolean afegeixProblema(String prob) {
         String fen = null;
         int i = prob.indexOf('_');
-        if (i>0 && i<prob.length()-1) fen = prob.substring(i+1);
+        int j = prob.lastIndexOf('_');
+        if (i>0 && j<prob.length()-1 && i < j) fen = prob.substring(j+1);
         else return false; //if (fen==null) return false;
-        int numj = Integer.parseInt(prob.substring(0,i));
-        Problema pp = new Problema(prob);
-        if (!pp.initProblema(numj,fen)) return false;
-
-        GestioProblema gp = new GestioProblema();
+        int numj = Integer.parseInt(prob.substring(i+1,j));
+        String nom = prob.substring(0,i);
+        Problema pp = new Problema(nom);
+        if (!pp.initProblema(numj,fen)) {
+            System.out.println("false");
+            return false;
+        }
+        GestioProblema gp = GestioProblema.getInstance();
         gp.saveProblema(pp);
         return true;
     }
@@ -63,6 +69,8 @@ public class IOFens {
     /**
      * Llegeix una llista de problemes d'un fitxer .fendb i els guarda a la base de problemes
      * Si algun problema no s'ha pogut guardar, no intenta desar els següents
+     * Format de cada entrada en el .fendb: nom_numJugades_fen\n
+     * És important que hi hagi el \n, també en l'ultima línia
      *
      * @param f Fitxer d'on llegir els problemes
      * @return False si algun problema no s'ha pogut desar, true si s'han desat tots.
@@ -78,7 +86,7 @@ public class IOFens {
                     probs.add(sb.toString());
                     sb = new StringBuilder();
                 }
-                else sb.append((char) rd);
+                else if (rd!='\r') sb.append((char) rd); //Sistema anti-windows (no em peguis Alex)
             }
             for (String fen: probs)
                 if (!afegeixProblema(fen)) return false;

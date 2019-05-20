@@ -311,9 +311,10 @@ class VistaEditor extends VistaAmbTauler {
 
     void actualitza() {
         setGlobalEnabled(true);
+        reloadTauler();
         updateBotonsRei();
         updateFenLabel();
-        reloadTauler();
+        //reloadTauler();
         updateColor();
         updateJugades();
     }
