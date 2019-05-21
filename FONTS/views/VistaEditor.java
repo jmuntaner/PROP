@@ -242,6 +242,10 @@ class VistaEditor extends VistaAmbTauler {
             return;
         }
         setGlobalEnabled(false);
+        if (ce.esNou()) {
+            String nom = JOptionPane.showInputDialog(this, "Introdueix un nom pel problema");
+            ce.setIdProblema(nom);
+        }
         new Thread(() -> {
             boolean correcte = false;
             try {
@@ -251,19 +255,25 @@ class VistaEditor extends VistaAmbTauler {
                         correcte = true;
                         break;
                     case 1:
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                        JOptionPane.showMessageDialog(this,
                                 "La situació de les peces no és una situació inicial vàlida.",
                                 "Tauler invalid",
                                 JOptionPane.WARNING_MESSAGE);
                         break;
                     case 2:
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                        JOptionPane.showMessageDialog(this,
                                 "No es pot resoldre el problema en les jugades especificades.",
                                 "Tauler invalid",
                                 JOptionPane.WARNING_MESSAGE);
                         break;
+                    case 3:
+                        JOptionPane.showMessageDialog(this,
+                                "El nom està repetit.",
+                                "Nom invalid",
+                                JOptionPane.WARNING_MESSAGE);
+                        break;
                     default:
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                        JOptionPane.showMessageDialog(this,
                                 "Error desconegut.",
                                 "Tauler invalid",
                                 JOptionPane.WARNING_MESSAGE);
