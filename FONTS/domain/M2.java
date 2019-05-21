@@ -1,5 +1,8 @@
 package domain;
-//TODO: test M2
+//TODO:
+// - test M2
+// - capar profunditat
+// - ordenacio moviments
 public class M2 extends Maquina {
     private int valor_peca(char p) {
         int v = 0;

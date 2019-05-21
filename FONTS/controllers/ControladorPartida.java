@@ -79,6 +79,10 @@ public abstract class ControladorPartida {
         return partida.getTorn() == Color.BLANC;
     }
 
+    public EstadistiquesPartida getEstadistiques() {
+        return estadistiques;
+    }
+
     /**
      * Executa el moviment indicat
      *
@@ -165,7 +169,7 @@ public abstract class ControladorPartida {
      */
     public String getNomGuanyador() {
         if (limit) return getNomTorn();
-        if (taules) return "-";
+        if (taules) return "-"; //TODO: en taules guanya el defensor!
         if (partida.getTorn() == colorPrincipal) return nomB;
         else return nomA;
     }
