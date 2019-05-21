@@ -7,11 +7,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Vista amb el menú principal del programa.
+ */
 public class VistaMenuPrincipal extends JPanel {
     private JLabel nomPrograma;
     private JButton botoJugar, botoGestio, botoSortir;
     private VistaPrincipal vp;
 
+    /**
+     * Creadora per defecte
+     *
+     * @param vp Vista principal.
+     */
     VistaMenuPrincipal(VistaPrincipal vp) {
         super();
         setLayout(new GridBagLayout());
@@ -24,6 +32,9 @@ public class VistaMenuPrincipal extends JPanel {
         initGlues();
     }
 
+    /**
+     * Inicialitza les separacions entre elements del menu.
+     */
     private void initGlues() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -38,6 +49,9 @@ public class VistaMenuPrincipal extends JPanel {
         add(Box.createGlue(), gbc);
     }
 
+    /**
+     * Inicialitza la imatge amb el nom del programa.
+     */
     private void initNomPrograma() {
         try {
             BufferedImage myPicture = ImageIO.read(new File("res/logo.png"));
@@ -56,6 +70,9 @@ public class VistaMenuPrincipal extends JPanel {
         add(nomPrograma, gbc);
     }
 
+    /**
+     * Inicialitza el botó de jugar.
+     */
     private void initBotoJugar() {
         botoJugar = new JButton("Jugar");
         botoJugar.addActionListener(e -> vp.mostraLlistaProblemes());
@@ -69,6 +86,9 @@ public class VistaMenuPrincipal extends JPanel {
         add(botoJugar, gbc);
     }
 
+    /**
+     * Inicialitza el botó d'accés al perfil d'usuari.
+     */
     private void initBotoPerfil() {
         botoGestio = new JButton("Perfil");
         botoGestio.setPreferredSize(new Dimension(140, 28));
@@ -81,14 +101,15 @@ public class VistaMenuPrincipal extends JPanel {
 
     }
 
+    /**
+     * Inicialitza el botó de sortida
+     */
     private void initBotoSortir() {
         botoSortir = new JButton("Sortir");
         botoSortir.setPreferredSize(new Dimension(140, 28));
-        botoSortir.addActionListener(e -> System.exit(0));
+        botoSortir.addActionListener(e -> System.exit(0)); // No es la manera més maca, però funciona
 
-        // Add to grid
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 6;
         add(botoSortir, gbc);

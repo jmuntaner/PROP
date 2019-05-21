@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.interrupted;
 
+/**
+ * Vista de partida
+ */
 public class VistaJugar extends VistaAmbTauler {
     private long iniciTorn, iniciPartida;
     private final ScheduledExecutorService executorService;
@@ -46,6 +49,11 @@ public class VistaJugar extends VistaAmbTauler {
         return panelBotonsJugar;
     }
 
+    /**
+     * Creadora per defecte.
+     *
+     * @param vp Vista Principal.
+     */
     VistaJugar(VistaPrincipal vp) {
         super(vp);
         iniciPartida = System.currentTimeMillis();
@@ -250,6 +258,9 @@ public class VistaJugar extends VistaAmbTauler {
 
     }
 
+    /**
+     * Inicia un torn de màquina en un nou fil.
+     */
     void tornMaquina() {
         tMaquina = new Thread(() -> {
 

@@ -7,16 +7,34 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Utilitats per a la capa de presentació.
+ */
 class Utils {
     static final String llistaFitxes = "KQRNBPkqrnbp";
     private static ImageIcon[] lastGenerated = new ImageIcon[llistaFitxes.length()];
     private static int lastSize = -1;
 
+    /**
+     * Obté la imatge d'una peça.
+     * <p>
+     * Aquesta versió fa servir una cache d'imatges per a millorar la eficiència.
+     * </p>
+     *
+     * @param c    Identificador de la peça.
+     * @param size Mida de la imatge desitjada.
+     * @return Imatge de la peça en la mida especificada.
+     */
     static ImageIcon getIconPeca(char c, int size) {
         if (lastSize != size) regenerate(size);
         return lastGenerated[llistaFitxes.indexOf(c)];
     }
 
+    /**
+     * Regenera la cache d'imatges de peça.
+     *
+     * @param size Mida de les imatges.
+     */
     private static void regenerate(int size) {
         BufferedImage orig;
         for (int i = 0; i < llistaFitxes.length(); i++) {
@@ -38,6 +56,17 @@ class Utils {
         lastSize = size;
     }
 
+    /**
+     * Obté la imatge d'una peça.
+     * <p>
+     * Aquesta versió no fa servir la cache.
+     * Utilitzar-la només en casos on no es recarregui la imatge per a evitar colisions de threads.
+     * </p>
+     *
+     * @param peca Identificador de la peça.
+     * @param size Mida de la imatge desitjada.
+     * @return Imatge de la peça en la mida especificada.
+     */
     static ImageIcon rawGetIconPeca(char peca, int size) {
         try {
             char c = peca;
@@ -55,7 +84,13 @@ class Utils {
         }
     }
 
-    public static String getExtension(File f) {
+    /**
+     * Obté l'extensió d'un arxiu.
+     *
+     * @param f Arxiu.
+     * @return Extensió d el'arxiu f.
+     */
+    static String getExtension(File f) {
         String ext = null;
         String s = f.getName();
         int i = s.lastIndexOf('.');

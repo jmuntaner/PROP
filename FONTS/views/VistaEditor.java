@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Enumeration;
 
+/**
+ * Vista de l'editor de problemes
+ */
 class VistaEditor extends VistaAmbTauler {
     private static final String PECES = "KQBRNPkqbrnp";
     private static final int SIZE_ICON = 30;
@@ -16,7 +19,6 @@ class VistaEditor extends VistaAmbTauler {
     private JTextField fenTextField;
     private JToggleButton buttonBlanc, buttonNegre, buttonReiB, buttonReiN;
     private ButtonGroup bgPeces, colorBg;
-    ;
     private JSlider sliderNjugades;
 
     private char actual;
@@ -24,6 +26,12 @@ class VistaEditor extends VistaAmbTauler {
 
     private ControladorEditor ce;
 
+    /**
+     * Creadora per defecte.
+     *
+     * @param vp Vista principal.
+     * @param ce Controlador d'editor.
+     */
     VistaEditor(VistaPrincipal vp, ControladorEditor ce) {
         super(vp);
         this.ce = ce;
@@ -117,6 +125,9 @@ class VistaEditor extends VistaAmbTauler {
         return panelSeleccio;
     }
 
+    /**
+     * Inicialitza el camp de text d'introducció de fen.
+     */
     private void initFenTextField() {
         fenTextField = new JTextField();
         fenTextField.setText(ce.getFen());
@@ -135,6 +146,9 @@ class VistaEditor extends VistaAmbTauler {
         });
     }
 
+    /**
+     * Recarrega totes les posicions del tauler mostrat.
+     */
     private void reloadTauler() {
         hasReiBlanc = false;
         hasReiNegre = false;
@@ -153,6 +167,12 @@ class VistaEditor extends VistaAmbTauler {
 
     }
 
+    /**
+     * Activa o desactiva els botons de selecció de rei.
+     * <p>
+     * Desactiva el botó de cada rei si ja existeix al tauler, per tal d'evitar duplicitats.
+     * </p>
+     */
     private void updateBotonsRei() {
         if (hasReiBlanc) {
             bgPeces.clearSelection();
@@ -233,6 +253,9 @@ class VistaEditor extends VistaAmbTauler {
         return panelBotons;
     }
 
+    /**
+     * Guarda el problema en edició.
+     */
     private void guardarTauler() {
         if (!(hasReiBlanc && hasReiNegre)) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
@@ -288,12 +311,15 @@ class VistaEditor extends VistaAmbTauler {
                 if (correct) vp.mostraLlistaProblemes();
             });
 
-        }).
-
-                start();
+        }).start();
 
     }
 
+    /**
+     * Activa o desactiva tots els botons.
+     *
+     * @param en Estat d'activació.
+     */
     private void setGlobalEnabled(boolean en) {
         bgPeces.clearSelection();
         actual = '-';
@@ -309,22 +335,30 @@ class VistaEditor extends VistaAmbTauler {
         if (en) updateBotonsRei();
     }
 
+    /**
+     * Actualitza l'estat dels botons de selecció de color.
+     */
     private void updateColor() {
         boolean col = ce.getColorInicial();
         buttonBlanc.setSelected(col);
         buttonNegre.setSelected(!col);
     }
 
+    /**
+     * Actualitza el valor del slider de jugades.
+     */
     private void updateJugades() {
         sliderNjugades.setValue(ce.getNumJugades());
     }
 
+    /**
+     * Actualitza l'estat de tot l'editor
+     */
     void actualitza() {
         setGlobalEnabled(true);
         reloadTauler();
         updateBotonsRei();
         updateFenLabel();
-        //reloadTauler();
         updateColor();
         updateJugades();
     }

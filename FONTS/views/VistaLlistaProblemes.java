@@ -7,6 +7,9 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Vista de la llista de problemes.
+ */
 class VistaLlistaProblemes extends JPanel {
 
     private ControladorLlistaProblemes cp;
@@ -285,10 +288,16 @@ class VistaLlistaProblemes extends JPanel {
         }
     }
 
+    /**
+     * Inicia l'edició del problema seleccionat.
+     */
     private void edita() {
         vp.editaProblema(problemes.getSelectedValue());
     }
 
+    /**
+     * Inicia una partida Humà contra Humà.
+     */
     private void jugaHvH() {
         String nomOp = JOptionPane.showInputDialog(
                 JOptionPane.getFrameForComponent(this),
@@ -305,6 +314,9 @@ class VistaLlistaProblemes extends JPanel {
         } else vp.jugaProblema(cp.iniciaPartidaHvH(nomOp));
     }
 
+    /**
+     * Inicia una partida Humà vs Màquina
+     */
     private void jugaHvM() {
         String[] maquines = new String[]{"Xicu (M1)", "Barja (M2)"};
         String result = (String) JOptionPane.showInputDialog(

@@ -15,6 +15,7 @@ public class VistaFiPartida extends JPanel {
 
     /**
      * Creadora per defecte.
+     * @param vp Vista principal.
      */
     VistaFiPartida(VistaPrincipal vp) {
         super();

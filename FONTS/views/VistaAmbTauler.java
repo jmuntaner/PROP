@@ -5,11 +5,18 @@ import java.awt.*;
 
 import static java.awt.GridBagConstraints.LINE_START;
 
+/**
+ * Classe generica per a vistes amb panel lateral i tauler redimensionable.
+ */
 abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListener {
     VistaPrincipal vp;
     private VistaTauler tauler;
 
-
+    /**
+     * Creadora per defecte.
+     *
+     * @param vp Vista principal.
+     */
     VistaAmbTauler(VistaPrincipal vp) {
         super();
         setLayout(new GridBagLayout());
@@ -19,6 +26,9 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         initGaps();
     }
 
+    /**
+     * Inicialitza els components generics.
+     */
     void initDisplays() {
         initPanelDreta();
         initBarraSuperior();
@@ -44,6 +54,9 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         add(panelDreta, gbc);
     }
 
+    /**
+     * Inicialitza els espais entre components
+     */
     private void initGaps() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = 1;
@@ -54,6 +67,9 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         add(Box.createGlue(), gbc);
     }
 
+    /**
+     * Inicialitza la barra superior.
+     */
     private void initBarraSuperior() {
         JPanel panelBotons = getPanelBotons();
         GridBagConstraints gbc = new GridBagConstraints();
@@ -66,6 +82,11 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         add(panelBotons, gbc);
     }
 
+    /**
+     * Genera el panel de botons superior.
+     *
+     * @return Panel de botons.
+     */
     JPanel getPanelBotons() {
         JButton enrere = new JButton("Tornar");
         enrere.addActionListener(e -> vp.mostraMenuPrincipal());
@@ -74,6 +95,9 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
         return panelBotons;
     }
 
+    /**
+     * Inicialitza el tauler
+     */
     private void initTauler() {
         tauler = new VistaTauler(this);
         JPanel temp = new JPanel();
@@ -91,30 +115,73 @@ abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListen
 
     }
 
+    /**
+     * Modifica la peça d'una casella.
+     *
+     * @param x    Posició X de la casella.
+     * @param y    Posició Y de la casella.
+     * @param peca Tipus de peça a colocar.
+     */
     void setPos(int x, int y, char peca) {
         tauler.setFitxa(x, y, peca);
     }
 
+    /**
+     * Obté la peça situada a una casella.
+     *
+     * @param x Posició X de la casella.
+     * @param y Posició Y de la casella.
+     * @return El codi fen de la peça situada a (x,y). En cas d'estar buit, '-'.
+     */
     char getPos(int x, int y) {
         return tauler.getFitxa(x, y);
     }
 
+    /**
+     * Borra la peça d'una casella.
+     *
+     * @param x Posició X de la casella.
+     * @param y Posició Y de la casella.
+     */
     void borraPos(int x, int y) {
         tauler.borraFitxa(x, y);
     }
 
+    /**
+     * Marca una casella com a seleccionada.
+     *
+     * @param x Posició X de la casella.
+     * @param y Posició Y de la casella.
+     */
     void seleccionaPos(int x, int y) {
         tauler.seleccionaPos(x, y);
     }
 
+    /**
+     * Marca una casella com a possible posició de moviment.
+     *
+     * @param x Posició X de la casella.
+     * @param y Posició Y de la casella.
+     */
     void marcaPos(int x, int y) {
         tauler.marcaPos(x, y);
     }
 
+    /**
+     * Torna una casela al seu color per defecte.
+     *
+     * @param x Posició X de la casella.
+     * @param y Posició Y de la casella.
+     */
     void desmarcaPos(int x, int y) {
         tauler.desmarcaPos(x, y);
     }
 
+    /**
+     * Activa o desactiva l'interacció amb el tauler.
+     *
+     * @param interactable Estat d'interacció desitjat.
+     */
     void setInteractable(boolean interactable) {
         tauler.setInteractable(interactable);
     }
