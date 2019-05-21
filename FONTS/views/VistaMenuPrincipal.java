@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Vista amb el menú principal del programa.
  */
-public class VistaMenuPrincipal extends JPanel {
+class VistaMenuPrincipal extends JPanel {
     private JLabel nomPrograma;
     private JButton botoJugar, botoGestio, botoSortir;
     private VistaPrincipal vp;

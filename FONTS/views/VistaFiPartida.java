@@ -8,10 +8,10 @@ import java.awt.*;
 /**
  * Vista per a representar els resultats d'una partida.
  */
-public class VistaFiPartida extends JPanel {
-    ControladorPartida cp;
-    VistaPrincipal vp;
-    JLabel labelGuanyador;
+class VistaFiPartida extends JPanel {
+    private ControladorPartida cp;
+    private VistaPrincipal vp;
+    private JLabel labelGuanyador;
 
     /**
      * Creadora per defecte.
