@@ -11,6 +11,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Thread.interrupted;
+
 public class VistaJugar extends VistaAmbTauler {
     private long iniciTorn, iniciPartida;
     private final ScheduledExecutorService executorService;
@@ -20,7 +22,29 @@ public class VistaJugar extends VistaAmbTauler {
     private boolean movimentIniciat;
     private ArrayList<Pair<Integer, Integer>> movs;
     private Pair<Integer, Integer> posIni;
+    private Thread tMaquina;
 
+    @Override
+    JPanel getPanelBotons() {
+        JPanel panelBotonsJugar = new JPanel(new GridBagLayout());
+        JButton enrere = new JButton("Tornar");
+        enrere.addActionListener(e -> {
+            if (tMaquina != null) {
+                tMaquina.interrupt();
+
+            }
+            vp.mostraLlistaProblemes();
+
+        });
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.insets = new Insets(4, 4, 0, 0);
+
+        panelBotonsJugar.add(enrere, gbc);
+        return panelBotonsJugar;
+    }
 
     VistaJugar(VistaPrincipal vp) {
         super(vp);
@@ -52,6 +76,7 @@ public class VistaJugar extends VistaAmbTauler {
         // Actualitza panel
         updateData();
         labelEscac.setEnabled(false);
+        setInteractable(true);
         tornMaquina();
     }
 
@@ -226,7 +251,7 @@ public class VistaJugar extends VistaAmbTauler {
     }
 
     void tornMaquina() {
-        new Thread(() -> {
+        tMaquina = new Thread(() -> {
 
             boolean end = false;
             while (!end && cp.esTornMaquina()) {
@@ -235,14 +260,17 @@ public class VistaJugar extends VistaAmbTauler {
                 if (res < 0 || res > 1) {
                     end = true;
                 }
+                if (interrupted()) return;
                 SwingUtilities.invokeLater(() -> {
                     setInteractable(true);
                     reloadTauler();
                     iniciTorn = System.currentTimeMillis();
                     processResult(res);
                     updateData();
+                    tMaquina = null;
                 });
             }
-        }).start();
+        });
+        tMaquina.start();
     }
 }
