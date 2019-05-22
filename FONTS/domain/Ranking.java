@@ -33,7 +33,7 @@ public class Ranking<T extends Puntuacio<T>> implements Serializable {
      * Afegeix la puntuació si l'usuari no en té cap, o si és millor que la que té.
      *
      * @param usuari Usuari que ha fet la puntuació
-     * @param punts Puntuació que ha tret
+     * @param punts  Puntuació que ha tret
      */
     public void afegeixPuntuacio(Usuari usuari, T punts) {
         String nom = usuari.getNom();

@@ -16,7 +16,7 @@ class VistaLlistaProblemes extends JPanel {
     private VistaPrincipal vp;
     private VistaTauler preview;
     private JLabel labelNom, labelDificultat, labelJugades;
-    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar;
+    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar, buttonRanking;
     private JList<String> problemes;
     private final JFileChooser fc;
 
@@ -192,6 +192,13 @@ class VistaLlistaProblemes extends JPanel {
         buttonJugarHvM.addActionListener(e -> jugaHvM());
         visor.add(buttonJugarHvM, gbc_n);
 
+        // Boto ranking
+        gbc_n.gridy++;
+        buttonRanking = new JButton("Ranking");
+        buttonRanking.setEnabled(false);
+        buttonRanking.addActionListener(e -> mostraRanking());
+        visor.add(buttonRanking, gbc_n);
+
         // Boto Editar
         gbc_n.gridy++;
         buttonEditar = new JButton("Editar");
@@ -216,6 +223,13 @@ class VistaLlistaProblemes extends JPanel {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.VERTICAL;
         add(visor, gbc);
+    }
+
+    /**
+     * Mostra la vista de ranking.
+     */
+    private void mostraRanking() {
+        vp.mostraRanking(cp.getRanking());
     }
 
     /**
@@ -270,6 +284,7 @@ class VistaLlistaProblemes extends JPanel {
             buttonJugarHvM.setEnabled(false);
             buttonEditar.setEnabled(false);
             buttonEliminar.setEnabled(false);
+            buttonRanking.setEnabled(false);
             labelNom.setText("");
             labelDificultat.setText("Dificultat: -");
             labelJugades.setText("Jugades: -");
@@ -281,6 +296,7 @@ class VistaLlistaProblemes extends JPanel {
             buttonJugarHvM.setEnabled(true);
             buttonEditar.setEnabled(true);
             buttonEliminar.setEnabled(true);
+            buttonRanking.setEnabled(true);
             labelNom.setText(cp.getNom());
             labelDificultat.setText("Dificultat: " + cp.getDificultat());
             labelJugades.setText("Jugades: " + cp.getJugades());

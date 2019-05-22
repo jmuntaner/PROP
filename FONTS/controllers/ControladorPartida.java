@@ -1,5 +1,6 @@
 package controllers;
 
+import data.GestioProblema;
 import domain.*;
 import utils.Pair;
 
@@ -55,10 +56,13 @@ public abstract class ControladorPartida {
     /**
      * Finalitza la partida actual, actualitzant els rankings corresponents.
      */
-    void finalitzaPartida() {
+    public void finalitzaPartida() {
         Ranking<PuntuacioProblema> ranking = problema.getRanking();
         PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
         actualitzaRanking(ranking, punts);
+        GestioProblema ge = GestioProblema.getInstance();
+        ge.delete(problema.getNom());
+        ge.saveProblema(problema);
     }
 
     /**
@@ -204,6 +208,15 @@ public abstract class ControladorPartida {
     }
 
     /**
+     * Obté el ranking d'un problema
+     *
+     * @return
+     */
+    public ArrayList<Pair<String, String>> getRanking() {
+        return problema.getRanking().getLlistaRanking(10);
+    }
+
+    /**
      * Actualitza la informació del ranking
      *
      * @param ranking Ranking a actualitzar.
@@ -213,6 +226,7 @@ public abstract class ControladorPartida {
 
     /**
      * Indica si és el torn d'una màquina.
+     *
      * @return Vertader si és el torn d'una màquina.
      */
     public abstract boolean esTornMaquina();

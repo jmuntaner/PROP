@@ -1,9 +1,11 @@
 package views;
 
 import controllers.ControladorPartida;
+import utils.Pair;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Vista principal del programa
@@ -17,6 +19,7 @@ public class VistaPrincipal {
     private VistaLlistaProblemes panelLlistaProblemes;
     private VistaFiPartida panelResultats;
     private JPanel contentPane;
+    private VistaRankingProblema panelRanking;
 
     /**
      * Creadora per defecte
@@ -32,6 +35,8 @@ public class VistaPrincipal {
         initEditor();
         initLlistaProblemes();
         initResultats();
+        initRanking();
+
         addPanels();
 
         mostraMenuPrincipal();
@@ -87,6 +92,13 @@ public class VistaPrincipal {
     }
 
     /**
+     * Inicialitza la vista de ranking de problema.
+     */
+    private void initRanking() {
+        panelRanking = new VistaRankingProblema(this);
+    }
+
+    /**
      * Afegeix els panels de totes les vistes al CardLayout principal.
      */
     private void addPanels() {
@@ -97,6 +109,7 @@ public class VistaPrincipal {
         contentPane.add(panelEditor, "editar");
         contentPane.add(panelLlistaProblemes, "llistaProbs");
         contentPane.add(panelResultats, "resultats");
+        contentPane.add(panelRanking, "ranking");
     }
 
     /**
@@ -168,9 +181,21 @@ public class VistaPrincipal {
      * @param cPart Controlador de la partida a finalitzar.
      */
     void fiPartida(ControladorPartida cPart) {
+        cPart.finalitzaPartida();
         panelResultats.setControlador(cPart);
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "resultats");
+    }
+
+    /**
+     * Mostra un ranking a pantalla.
+     *
+     * @param ranking El ranking a mostrar
+     */
+    void mostraRanking(ArrayList<Pair<String, String>> ranking) {
+        panelRanking.setRanking(ranking);
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "ranking");
     }
 
     /**

@@ -50,6 +50,7 @@ class VistaFiPartida extends JPanel {
 
         // Botó ranking
         JButton botoRanking = new JButton("Veure ranking");
+        botoRanking.addActionListener(e -> vp.mostraRanking(cp.getRanking()));
 
         // Botó llista
         JButton botoLlista = new JButton("Llista de problemes");

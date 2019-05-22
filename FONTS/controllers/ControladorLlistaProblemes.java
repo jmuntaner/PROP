@@ -1,16 +1,13 @@
 package controllers;
 
 import data.GestioProblema;
+import data.IOFens;
 import domain.Problema;
 import domain.Tauler;
-import data.IOFens;
+import utils.Pair;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ControladorLlistaProblemes {
     private ControladorPrincipal cp;
@@ -62,7 +59,7 @@ public class ControladorLlistaProblemes {
         ArrayList<String> al = gp.getList();
         int n = al.size();
         String[] noms = new String[n];
-        for (int i=0; i<n; ++i)
+        for (int i = 0; i < n; ++i)
             noms[i] = al.get(i);
         return noms;
     }
@@ -140,5 +137,14 @@ public class ControladorLlistaProblemes {
      */
     public void exportaProblemes(File f) {
         IOFens.writeFenList(f);
+    }
+
+    /**
+     * Obté el ranking associat al problema.
+     *
+     * @return Llista amb el ranking dels 10 millors jugadors.
+     */
+    public ArrayList<Pair<String, String>> getRanking() {
+        return p.getRanking().getLlistaRanking(10);
     }
 }
