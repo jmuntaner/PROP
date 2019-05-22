@@ -3,9 +3,6 @@ package controllers;
 import data.GestioProblema;
 import domain.*;
 
-//TODO:
-// - Mirar quan s'entra idProblema -> al crear nou problema o al guardar
-// - La funcio creaProblema o la funcio guardaProblema ha de rebre la String del nom
 
 public class ControladorEditor {
     private Tauler t;

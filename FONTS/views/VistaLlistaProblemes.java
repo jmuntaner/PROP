@@ -7,13 +7,16 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Vista de la llista de problemes.
+ */
 class VistaLlistaProblemes extends JPanel {
 
     private ControladorLlistaProblemes cp;
     private VistaPrincipal vp;
     private VistaTauler preview;
     private JLabel labelNom, labelDificultat, labelJugades;
-    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar;
+    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar, buttonRanking;
     private JList<String> problemes;
     private final JFileChooser fc;
 
@@ -189,6 +192,13 @@ class VistaLlistaProblemes extends JPanel {
         buttonJugarHvM.addActionListener(e -> jugaHvM());
         visor.add(buttonJugarHvM, gbc_n);
 
+        // Boto ranking
+        gbc_n.gridy++;
+        buttonRanking = new JButton("Ranking");
+        buttonRanking.setEnabled(false);
+        buttonRanking.addActionListener(e -> mostraRanking());
+        visor.add(buttonRanking, gbc_n);
+
         // Boto Editar
         gbc_n.gridy++;
         buttonEditar = new JButton("Editar");
@@ -213,6 +223,13 @@ class VistaLlistaProblemes extends JPanel {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.VERTICAL;
         add(visor, gbc);
+    }
+
+    /**
+     * Mostra la vista de ranking.
+     */
+    private void mostraRanking() {
+        vp.mostraRanking(cp.getRanking());
     }
 
     /**
@@ -267,6 +284,7 @@ class VistaLlistaProblemes extends JPanel {
             buttonJugarHvM.setEnabled(false);
             buttonEditar.setEnabled(false);
             buttonEliminar.setEnabled(false);
+            buttonRanking.setEnabled(false);
             labelNom.setText("");
             labelDificultat.setText("Dificultat: -");
             labelJugades.setText("Jugades: -");
@@ -278,6 +296,7 @@ class VistaLlistaProblemes extends JPanel {
             buttonJugarHvM.setEnabled(true);
             buttonEditar.setEnabled(true);
             buttonEliminar.setEnabled(true);
+            buttonRanking.setEnabled(true);
             labelNom.setText(cp.getNom());
             labelDificultat.setText("Dificultat: " + cp.getDificultat());
             labelJugades.setText("Jugades: " + cp.getJugades());
@@ -285,10 +304,16 @@ class VistaLlistaProblemes extends JPanel {
         }
     }
 
+    /**
+     * Inicia l'edició del problema seleccionat.
+     */
     private void edita() {
         vp.editaProblema(problemes.getSelectedValue());
     }
 
+    /**
+     * Inicia una partida Humà contra Humà.
+     */
     private void jugaHvH() {
         String nomOp = JOptionPane.showInputDialog(
                 JOptionPane.getFrameForComponent(this),
@@ -305,6 +330,9 @@ class VistaLlistaProblemes extends JPanel {
         } else vp.jugaProblema(cp.iniciaPartidaHvH(nomOp));
     }
 
+    /**
+     * Inicia una partida Humà vs Màquina
+     */
     private void jugaHvM() {
         String[] maquines = new String[]{"Xicu (M1)", "Barja (M2)"};
         String result = (String) JOptionPane.showInputDialog(

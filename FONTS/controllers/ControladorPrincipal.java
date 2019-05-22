@@ -5,8 +5,6 @@ import domain.M2;
 import domain.Problema;
 import domain.Usuari;
 
-import java.util.ArrayList;
-
 public class ControladorPrincipal {
     private ControladorEditor ce;
     private ControladorLlistaProblemes cl;
@@ -18,7 +16,7 @@ public class ControladorPrincipal {
     public ControladorPrincipal() {
         ce = new ControladorEditor();
         cl = new ControladorLlistaProblemes(this);
-        usuari = new Usuari(0, "Sauron", "TheDarkLord");
+        usuari = new Usuari(0, "Alex", "TheDarkLord");
     }
 
     /**
