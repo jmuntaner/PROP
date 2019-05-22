@@ -32,4 +32,7 @@ public class ControladorPartidaMvM extends ControladorPartida{
         return mou(m);
     }
 
+    @Override
+    public boolean esJugadorHuma(String nom) {return false;}
+
 }

@@ -43,4 +43,7 @@ public class ControladorPartidaHvH extends ControladorPartida {
     public int executaMoviment() {
         throw new RuntimeException("Un jugador humà no pot generar moviments.");
     }
+
+    @Override
+    public boolean esJugadorHuma(String nom) {return true;}
 }

@@ -49,7 +49,7 @@ public class M2 extends Maquina {
 
     @Override
     public boolean limitProfunditat(int profunditat) {
-        return profunditat==0 || profunditat <= getProfunditatInicial()-2;
+        return profunditat==0 || profunditat <= getProfunditatInicial()-4;
         //permet nomes un moviment propi i un de l'oponent
     }
 
@@ -83,10 +83,17 @@ public class M2 extends Maquina {
 }
 
 /*
-Idea:
+Idees:
 https://stackoverflow.com/questions/9964496/alpha-beta-move-ordering
     - Alpha-beta pruning (igual que M1)
-    - Cut-off profunditat: no calcula tot el minimax, nomes un moviment de cada jugador màxim (arbitrari)
+    - Cut-off profunditat: no calcula tot el minimax
+        -> Calcula maxim dos moviments per jugador (arbitrari)
+        -> Aixi esperem tenir una avaluació decent pero no exacta
     - Heurística de peces: cada peça al tauler te un valor segons el seu tipus
+    - Heurística de posicions: cada tipus de peça te un valor diferent segons la posicio al tauler
+        -> No es massa util per una partida tan rapida
     - Move ordering: avalua els millors moviments primer
+        -> No implementat perque el minimax es poc profund i no compensa
+    - Transposition tables: comprovacio de repeticions
+        -> Igual que abans, el minimax es poc profund i hi ha poques situacions repetides
  */

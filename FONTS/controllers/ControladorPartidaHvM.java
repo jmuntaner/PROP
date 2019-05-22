@@ -50,4 +50,7 @@ public class ControladorPartidaHvM extends ControladorPartida {
         Moviment m = maquina.calcularMoviment(getProfunditat(), getTauler(), getColorTorn(), getColorPrincipal());
         return mou(m);
     }
+
+    @Override
+    public boolean esJugadorHuma(String nom){return nom.equals(usuari.getNom());}
 }

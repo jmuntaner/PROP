@@ -57,12 +57,14 @@ public abstract class ControladorPartida {
      * Finalitza la partida actual, actualitzant els rankings corresponents.
      */
     public void finalitzaPartida() {
-        Ranking<PuntuacioProblema> ranking = problema.getRanking();
-        PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
-        actualitzaRanking(ranking, punts);
-        GestioProblema ge = GestioProblema.getInstance();
-        ge.delete(problema.getNom());
-        ge.saveProblema(problema);
+        if (getNomGuanyador().equals(nomA) && esJugadorHuma(nomA)) { //només actualitza si guanya el jugador atacant (A)
+            Ranking<PuntuacioProblema> ranking = problema.getRanking();
+            PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
+            actualitzaRanking(ranking, punts);
+            GestioProblema ge = GestioProblema.getInstance();
+            ge.delete(problema.getNom());
+            ge.saveProblema(problema);
+        }
     }
 
     /**
@@ -173,7 +175,7 @@ public abstract class ControladorPartida {
      */
     public String getNomGuanyador() {
         if (limit) return getNomTorn();
-        if (taules) return "-"; //TODO: en taules guanya el defensor!
+        if (taules) return nomB; //En taules guanya el defensor!
         if (partida.getTorn() == colorPrincipal) return nomB;
         else return nomA;
     }
@@ -240,4 +242,12 @@ public abstract class ControladorPartida {
      * Executa un moviment de màquina.
      */
     public abstract int executaMoviment();
+
+    /**
+     * Indica si el jugador indicat es huma
+     *
+     * @param nom Nom del jugador
+     * @return True si el jugador es huma, false si es maquina
+     */
+    public abstract boolean esJugadorHuma(String nom);
 }
