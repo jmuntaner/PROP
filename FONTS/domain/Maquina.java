@@ -6,10 +6,40 @@ import java.util.Random;
 public abstract class Maquina {
     static final int maxVal = 9999;
     static final int minVal = -9999;
+    private int profunditatInicial;
 
+    /**
+     * Indica si s'ha arribat a la profunditat maxima del minimax
+     *
+     * @param profunditat Profunditat actual del minimax
+     * @return True si s'ha arribat a la profunditat maxima
+     */
+    public abstract boolean limitProfunditat(int profunditat);
+
+    /**
+     * Heurística de la situacio actual del tauler
+     *
+     * @param posicio Tauler actual
+     * @param esJugadorMaximal Indica si el jugador que ha de moure el següent es l'atacant
+     * @param codi Codi retornat al fer l'últim moviment
+     * @param torn Color del jugador que ha de moure
+     * @return Valor de l'heuristica per a la situacio del tauler
+     */
     public abstract int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn);
 
+    /**
+     * Getter del nom de la màquina
+     *
+     * @return Nom de la màquina
+     */
     public abstract String getNom();
+
+    /**
+     * Getter profunditat inicial
+     *
+     * @return Retorna la profunditat inicial de l'ultim minimax executat
+     */
+    public int getProfunditatInicial() {return profunditatInicial;}
 
     /**
      * Cerca el millor moviment per a la maquina
@@ -23,6 +53,7 @@ public abstract class Maquina {
     public Moviment calcularMoviment(int profunditat, Tauler t, Color torn, Color tema) {
         //Color torn = partida.getTorn();
         //Tauler t = partida.getSituacioActual();
+        profunditatInicial = profunditat;
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
         if (movPos.isEmpty()) return null;
         Moviment mov = null;
@@ -68,7 +99,7 @@ public abstract class Maquina {
         //possibles millores per M2:
         // - Heuristica segons posicio de tauler, ordenacio de moviments,... (potser cal afegir parametres a l'heuristica)
         // - Canviar funcio de node final, potser per limitar profunditat
-        if (profunditat == 0 || codi == 2 || codi == 3) { //profunditat 0 o node final
+        if (limitProfunditat(profunditat) || codi == 2 || codi == 3) { //profunditat 0 o node final
             return heuristica(t, esJugadorMaximal, codi, torn);
         }
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);

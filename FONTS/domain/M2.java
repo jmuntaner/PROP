@@ -48,6 +48,12 @@ public class M2 extends Maquina {
     }
 
     @Override
+    public boolean limitProfunditat(int profunditat) {
+        return profunditat==0 || profunditat <= getProfunditatInicial()-2;
+        //permet nomes un moviment propi i un de l'oponent
+    }
+
+    @Override
     public int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn) {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
@@ -75,3 +81,12 @@ public class M2 extends Maquina {
         return "Barja";
     }
 }
+
+/*
+Idea:
+https://stackoverflow.com/questions/9964496/alpha-beta-move-ordering
+    - Alpha-beta pruning (igual que M1)
+    - Cut-off profunditat: no calcula tot el minimax, nomes un moviment de cada jugador màxim (arbitrari)
+    - Heurística de peces: cada peça al tauler te un valor segons el seu tipus
+    - Move ordering: avalua els millors moviments primer
+ */

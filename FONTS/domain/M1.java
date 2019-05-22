@@ -2,6 +2,11 @@ package domain;
 
 public class M1 extends Maquina {
     @Override
+    public boolean limitProfunditat(int profunditat) {
+        return profunditat == 0;
+    }
+
+    @Override
     public int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn) {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
