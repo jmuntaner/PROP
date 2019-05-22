@@ -60,7 +60,7 @@ public abstract class ControladorPartida {
         if (getNomGuanyador().equals(nomA) && esJugadorHuma(nomA)) { //només actualitza si guanya el jugador atacant (A)
             Ranking<PuntuacioProblema> ranking = problema.getRanking();
             PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
-            actualitzaRanking(ranking, punts);
+            ranking.afegeixPuntuacio(getUsuari(), punts);
             GestioProblema ge = GestioProblema.getInstance();
             ge.delete(problema.getNom());
             ge.saveProblema(problema);
@@ -218,13 +218,6 @@ public abstract class ControladorPartida {
         return problema.getRanking().getLlistaRanking(10);
     }
 
-    /**
-     * Actualitza la informació del ranking
-     *
-     * @param ranking Ranking a actualitzar.
-     * @param punts   Puntuació a inserir.
-     */
-    abstract void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts);
 
     /**
      * Indica si és el torn d'una màquina.
@@ -250,4 +243,11 @@ public abstract class ControladorPartida {
      * @return True si el jugador es huma, false si es maquina
      */
     public abstract boolean esJugadorHuma(String nom);
+
+    /**
+     * Obté l'usuari que juga el problema.
+     *
+     * @return Usuari que juga el problema.
+     */
+    abstract Usuari getUsuari();
 }

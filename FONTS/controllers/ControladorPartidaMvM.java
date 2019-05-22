@@ -1,6 +1,9 @@
 package controllers;
 
-import domain.*;
+import domain.Maquina;
+import domain.Moviment;
+import domain.Problema;
+import domain.Usuari;
 
 public class ControladorPartidaMvM extends ControladorPartida{
     private Maquina atacant, defensor;
@@ -13,9 +16,6 @@ public class ControladorPartidaMvM extends ControladorPartida{
         setNoms(m1.getNom(),m2.getNom());
         torn = true;
     }
-
-    @Override
-    void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts) {}
 
     @Override
     public boolean esTornMaquina() {return true;}
@@ -35,4 +35,8 @@ public class ControladorPartidaMvM extends ControladorPartida{
     @Override
     public boolean esJugadorHuma(String nom) {return false;}
 
+    @Override
+    Usuari getUsuari() {
+        return null;
+    }
 }

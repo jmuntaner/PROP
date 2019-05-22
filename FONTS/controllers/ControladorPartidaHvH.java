@@ -1,8 +1,6 @@
 package controllers;
 
 import domain.Problema;
-import domain.PuntuacioProblema;
-import domain.Ranking;
 import domain.Usuari;
 
 public class ControladorPartidaHvH extends ControladorPartida {
@@ -22,13 +20,6 @@ public class ControladorPartidaHvH extends ControladorPartida {
         setNoms(usuari.getNom(), oponent);
     }
 
-
-    @Override
-    void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts) {
-        ranking.afegeixPuntuacio(usuari, punts);
-    }
-
-
     @Override
     public boolean esTornMaquina() {
         return false;
@@ -45,5 +36,12 @@ public class ControladorPartidaHvH extends ControladorPartida {
     }
 
     @Override
-    public boolean esJugadorHuma(String nom) {return true;}
+    public boolean esJugadorHuma(String nom) {
+        return true;
+    }
+
+    @Override
+    Usuari getUsuari() {
+        return usuari;
+    }
 }

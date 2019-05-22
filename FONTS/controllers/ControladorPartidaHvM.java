@@ -1,6 +1,9 @@
 package controllers;
 
-import domain.*;
+import domain.Maquina;
+import domain.Moviment;
+import domain.Problema;
+import domain.Usuari;
 
 public class ControladorPartidaHvM extends ControladorPartida {
     private Usuari usuari;
@@ -28,12 +31,6 @@ public class ControladorPartidaHvM extends ControladorPartida {
     }
 
     @Override
-    void actualitzaRanking(Ranking<PuntuacioProblema> ranking, PuntuacioProblema punts) {
-        ranking.afegeixPuntuacio(usuari, punts);
-    }
-
-
-    @Override
     public boolean esTornMaquina() {
         return tornMaquina;
     }
@@ -52,5 +49,12 @@ public class ControladorPartidaHvM extends ControladorPartida {
     }
 
     @Override
-    public boolean esJugadorHuma(String nom){return nom.equals(usuari.getNom());}
+    public boolean esJugadorHuma(String nom) {
+        return nom.equals(usuari.getNom());
+    }
+
+    @Override
+    Usuari getUsuari() {
+        return usuari;
+    }
 }
