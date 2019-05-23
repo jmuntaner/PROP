@@ -49,7 +49,7 @@ public class VistaNotLogged extends JPanel {
      */
     private void initBotoLogin() {
         botoLogin = new JButton("Login");
-        //botoLogin.addActionListener(e -> vp.mostraEstadistiques()); //TODO: mostrar formulari login
+        botoLogin.addActionListener(e -> vp.mostraLoginForm());
         botoLogin.setPreferredSize(new Dimension(140, 28));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -66,7 +66,7 @@ public class VistaNotLogged extends JPanel {
     private void initBotoRegister() {
         botoRegister = new JButton("Register");
         botoRegister.setPreferredSize(new Dimension(140, 28));
-        //botoRegister.addActionListener(e -> vp.mostraNotLogged()); //TODO: mostrar formulari registre
+        botoRegister.addActionListener(e -> vp.mostraRegisterForm());
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;

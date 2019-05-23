@@ -80,7 +80,7 @@ public class VistaLogged extends JPanel {
     private void initBotoLogout() {
         botoLogout = new JButton("Logout");
         botoLogout.setPreferredSize(new Dimension(140, 28));
-        botoLogout.addActionListener(e -> vp.mostraNotLogged());
+        botoLogout.addActionListener(e -> vp.mostraNotLogged()); //TODO: fer el logout efectiu
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
