@@ -18,15 +18,17 @@ public class VistaLoginForm extends JPanel {
     private JPasswordField pwd;
     private JTextField usernameIn;
     private VistaPrincipal vp;
+    private CtrlPresentacion cp;
     /**
      * Creadora per defecte
      *
      * @param vp Vista principal.
      */
-    VistaLoginForm(VistaPrincipal vp) {
+    VistaLoginForm(VistaPrincipal vp, CtrlPresentacion cp) {
         super();
         setLayout(new GridBagLayout());
         this.vp = vp;
+        this.cp = cp;
 
         placeComponents();
     }

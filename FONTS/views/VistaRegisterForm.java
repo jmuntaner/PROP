@@ -2,6 +2,7 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /*
             TITOL
@@ -19,16 +20,18 @@ public class VistaRegisterForm extends JPanel {
     private JPasswordField pwd, repwd;
     private JTextField usernameIn;
     private VistaPrincipal vp;
+    private CtrlPresentacion cp;
 
     /**
      * Creadora per defecte
      *
      * @param vp Vista principal.
      */
-    VistaRegisterForm(VistaPrincipal vp) {
+    VistaRegisterForm(VistaPrincipal vp, CtrlPresentacion cp) {
         super();
         setLayout(new GridBagLayout());
         this.vp = vp;
+        this.cp = cp;
 
         placeComponents();
     }
@@ -84,6 +87,21 @@ public class VistaRegisterForm extends JPanel {
      * Executa el registre
      */
     private void register() {
+        String usuari = usernameIn.getText().trim();
+        char[] pass = pwd.getPassword();
+        char[] confirmation = repwd.getPassword();
+        boolean match = (pass.length == confirmation.length);
+        int i = 0;
+        while(match && i < pass.length) {
+            if(pass[i]!=confirmation[i]) match = false;
+            ++i;
+        }
+        if(!match) {
+            vp.missatgeError("Les contrassenyes no coincideixen");
+            pwd.setText("");
+            repwd.setText("");
+            return;
+        }
         //TODO: registre
     }
 }
