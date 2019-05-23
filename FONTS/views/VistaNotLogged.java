@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VistaNotLogged extends JPanel {
-    private JButton botoSubmit = new JButton("Login");
-    private JButton botoTornar, botoChangeMode;
+    private JButton botoSubmit;
+    private JButton botoChangeMode;
     private VistaPrincipal vp;
-    private JLabel titol, username, password, repassword;
+    private JLabel titol, repassword;
     private JPasswordField pwd, repwd;
     private JTextField usernameIn;
     private boolean logreg = true; //true = login / false = register
@@ -22,9 +22,6 @@ public class VistaNotLogged extends JPanel {
         this.vp = vp;
 
         initForm();
-        //initBotoSubmit();
-        //initBotoTornar();
-        //initGlues();
     }
 
     /**
@@ -33,23 +30,31 @@ public class VistaNotLogged extends JPanel {
     private void initForm() {
         titol = new JLabel("Inici de sessió");
         titol.setFont(new Font("Serif", Font.BOLD, 20));
-        username = new JLabel("Usuari");
-        password = new JLabel("Contrassenya");
+        JLabel username = new JLabel("Usuari");
+        JLabel password = new JLabel("Contrassenya");
         usernameIn = new JTextField(20);
         pwd = new JPasswordField(20);
+
+        //Nova grid + external padding
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(3, 3, 3, 3);
+
+        //Tamanys preferits
         titol.setPreferredSize(new Dimension(200, 40));
         username.setPreferredSize(new Dimension(140, 28));
         usernameIn.setPreferredSize(new Dimension(250, 28));
         password.setPreferredSize(new Dimension(140, 28));
         pwd.setPreferredSize(new Dimension(250, 28));
 
+        // Titol
+
         c.gridx = 1;
         c.gridy = 0;
         c.gridwidth = 4;
         c.anchor = GridBagConstraints.CENTER;
         add(titol, c);
+
+        // Afegir formulari comu
 
         c.gridx = 0;
         c.gridy = 1;
@@ -71,20 +76,22 @@ public class VistaNotLogged extends JPanel {
         c.gridwidth = 2;
         add(pwd, c);
 
-        botoSubmit = new JButton("Login");
-        botoTornar = new JButton("Tornar");
-        botoChangeMode = new JButton("Registrar-se");
-        botoSubmit.setPreferredSize(new Dimension(140, 28));
-        botoTornar.setPreferredSize(new Dimension(140, 28));
-        botoChangeMode.setPreferredSize(new Dimension(140, 28));
-        botoTornar.addActionListener(e -> vp.mostraMenuPrincipal());
-        botoChangeMode.addActionListener(e -> canviarMode());
 
+        //Boto tornar
+
+        JButton botoTornar = new JButton("Tornar");
+        botoTornar.setPreferredSize(new Dimension(140, 28));
+        botoTornar.addActionListener(e -> vp.mostraMenuPrincipal());
         c.gridx = 0;
         c.gridy = 4;
         c.anchor = GridBagConstraints.LINE_START;
         c.gridwidth = 1;
         add(botoTornar, c);
+
+
+        // Boto submit
+        botoSubmit = new JButton("Login");
+        botoSubmit.setPreferredSize(new Dimension(140, 28));
 
         c.gridx = 2;
         c.gridy = 4;
@@ -92,43 +99,39 @@ public class VistaNotLogged extends JPanel {
         c.anchor = GridBagConstraints.LINE_END;
         add(botoSubmit, c);
 
+
+        // Botó changeMode
+
+        botoChangeMode = new JButton("Registrar-se");
+        botoChangeMode.setPreferredSize(new Dimension(140, 28));
+        botoChangeMode.addActionListener(e -> canviarMode());
+
         c.gridx = 2;
         c.gridy = 5;
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.LINE_END;
         add(botoChangeMode, c);
 
+
+        //Definició formulari extra (parts del registre)
+
         repassword = new JLabel("Confirma la pwd");
         repwd = new JPasswordField(20);
-
         repassword.setPreferredSize(new Dimension(140, 28));
         repwd.setPreferredSize(new Dimension(250, 28));
 
-        if(!logreg) {
-            titol.setText("Registre d'usuari");
-            botoChangeMode.setText("Iniciar Sesió");
-            botoSubmit.setText("Registrar");
-
-            c.gridx = 0;
-            c.gridy = 3;
-            c.gridwidth = 1;
-            add(repassword, c);
-
-            c.gridx = 1;
-            c.gridy = 3;
-            c.gridwidth = 2;
-            add(repwd, c);
-
-            botoSubmit.addActionListener(e -> register());
-        }
-        else {
-
-            botoSubmit.addActionListener(e -> login());
-        }
+        canvisVisuals();
     }
 
     private void canviarMode() {
         logreg = !logreg;
+        canvisVisuals();
+    }
+
+    /**
+     * Efectua els canvis visuals entre Iniciar Sesió i Registrar-se
+     */
+    private void canvisVisuals() {
         if(logreg) {
             botoSubmit.removeActionListener(e -> register());
             botoSubmit.addActionListener(e -> login());
@@ -159,19 +162,6 @@ public class VistaNotLogged extends JPanel {
             botoSubmit.removeActionListener(e -> login());
             botoSubmit.addActionListener(e -> register());
         }
-    }
-
-    /**
-     * Inicialitza el botó de login.
-     */
-    private void initBotoSubmit() {
-        botoSubmit.setPreferredSize(new Dimension(140, 28));
-        GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.ipadx = 50;
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(botoSubmit, gbc);
     }
 
     void clearForm() {

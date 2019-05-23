@@ -52,6 +52,7 @@ public class VistaLogged extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
         gbc.weighty = 0.3;
         add(benvinguda, gbc);
     }
