@@ -4,11 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VistaLogged extends JPanel {
-    private JButton botoEstadistiques, botoLogout, botoTornar;
-    private JLabel benvinguda;
     private VistaPrincipal vp;
     /*
-    TEXT: BENVINGUT #NOMUSUARI // (BOTÓ ESTADÍSTIQUES -> MOSTRA-ESTADÍSTIQUES) // (BOTÓ LOGOUT -> VistaPerfilSenseLogin) // TORNAR
+    TEXT: BENVINGUT #NOMUSUARI // ESTADISTIQUES // LOGOUT // TORNAR
      */
     /**
      * Creadora per defecte
@@ -21,7 +19,7 @@ public class VistaLogged extends JPanel {
         this.vp = vp;
 
         initBenvinguda();
-        initBotoEstadistiques();
+        initEstadistiques();
         initBotoLogout();
         initBotoTornar();
         initGlues();
@@ -48,7 +46,7 @@ public class VistaLogged extends JPanel {
      * Inicialitza la benvinguda i el nom de l'usuari.
      */
     private void initBenvinguda() {
-        benvinguda = new JLabel("Benvingut usuari #x"); //TODO: nom de l'usuari actual
+        JLabel benvinguda = new JLabel("Benvingut usuari #x"); //TODO: nom de l'usuari actual
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -61,39 +59,39 @@ public class VistaLogged extends JPanel {
     /**
      * Inicialitza el botó d'estadístiques
      */
-    private void initBotoEstadistiques() {
-        botoEstadistiques = new JButton("Estadistiques");
-        botoEstadistiques.addActionListener(e -> vp.mostraEstadistiques()); //mostra estadistiques somehow
-        botoEstadistiques.setPreferredSize(new Dimension(140, 28));
+    private void initEstadistiques() {
+        JTextArea estadistiques = new JTextArea("Estadistiques: " +
+                "aquest usuari es AlphaZero");
+        estadistiques.setPreferredSize(new Dimension(300, 300));
+        estadistiques.setEditable(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.ipadx = 50;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        add(botoEstadistiques, gbc);
+        add(estadistiques, gbc);
+        //TODO: ficar les estadistiques
+        //estadistiques.setText(usuari.getEstadistiques()); (no estan implementades D:)
     }
 
     /**
      * Inicialitza el botó de logout.
      */
     private void initBotoLogout() {
-        botoLogout = new JButton("Logout");
+        JButton botoLogout = new JButton("Logout");
         botoLogout.setPreferredSize(new Dimension(140, 28));
-        botoLogout.addActionListener(e -> vp.mostraNotLogged()); //TODO: fer el logout efectiu
+        botoLogout.addActionListener(e -> vp.mostraNotLogged()); //TODO: fer el logout efectiu (usuari actual -> null)
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 4;
         add(botoLogout, gbc);
-
     }
 
     /**
      * Inicialitza el botó de tornada.
      */
     private void initBotoTornar() {
-        botoTornar = new JButton("Tornar");
+        JButton botoTornar = new JButton("Tornar");
         botoTornar.setPreferredSize(new Dimension(140, 28));
         botoTornar.addActionListener(e -> vp.mostraMenuPrincipal());
 

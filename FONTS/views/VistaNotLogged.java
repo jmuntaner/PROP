@@ -3,20 +3,14 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 
-//TODO: arreglar posicionament botons
-
 public class VistaNotLogged extends JPanel {
-    private JButton botoLogin, botoRegister, botoTornar;
+    private JButton botoSubmit = new JButton("Login");
+    private JButton botoTornar, botoChangeMode;
     private VistaPrincipal vp;
-
-    //Components registre
-    private JButton botoRegistre;
-    private JLabel titol, username, password, repassword; //TODO: títol
+    private JLabel titol, username, password, repassword;
     private JPasswordField pwd, repwd;
     private JTextField usernameIn;
-    /*
-    (BOTÓ LOGIN -> FORMULARI LOGIN) // (BOTÓ REGISTRE -> FORMULARI REGISTRE) // TORNAR
-     */
+    private boolean logreg = true; //true = login / false = register
     /**
      * Creadora per defecte
      *
@@ -27,72 +21,157 @@ public class VistaNotLogged extends JPanel {
         setLayout(new GridBagLayout());
         this.vp = vp;
 
-        initBotoLogin();
-        initBotoRegister();
-        initBotoTornar();
-        initGlues();
+        initForm();
+        //initBotoSubmit();
+        //initBotoTornar();
+        //initGlues();
     }
 
     /**
-     * Inicialitza les separacions entre elements del menu.
+     * Genera el formulari de login
      */
-    private void initGlues() {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.weighty = 0.1;
-        add(Box.createGlue(), gbc);
-        gbc.gridy = 5;
-        add(Box.createGlue(), gbc);
-        gbc.gridy = 7;
-        gbc.weighty = 1;
-        add(Box.createGlue(), gbc);
+    private void initForm() {
+        titol = new JLabel("Inici de sessió");
+        titol.setFont(new Font("Serif", Font.BOLD, 20));
+        username = new JLabel("Usuari");
+        password = new JLabel("Contrassenya");
+        usernameIn = new JTextField(20);
+        pwd = new JPasswordField(20);
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(3, 3, 3, 3);
+        titol.setPreferredSize(new Dimension(200, 40));
+        username.setPreferredSize(new Dimension(140, 28));
+        usernameIn.setPreferredSize(new Dimension(250, 28));
+        password.setPreferredSize(new Dimension(140, 28));
+        pwd.setPreferredSize(new Dimension(250, 28));
+
+        c.gridx = 1;
+        c.gridy = 0;
+        c.gridwidth = 4;
+        c.anchor = GridBagConstraints.CENTER;
+        add(titol, c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        add(username, c);
+
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        add(usernameIn, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        add(password, c);
+
+        c.gridx = 1;
+        c.gridy = 2;
+        c.gridwidth = 2;
+        add(pwd, c);
+
+        botoSubmit = new JButton("Login");
+        botoTornar = new JButton("Tornar");
+        botoChangeMode = new JButton("Registrar-se");
+        botoSubmit.setPreferredSize(new Dimension(140, 28));
+        botoTornar.setPreferredSize(new Dimension(140, 28));
+        botoChangeMode.setPreferredSize(new Dimension(140, 28));
+        botoTornar.addActionListener(e -> vp.mostraMenuPrincipal());
+        botoChangeMode.addActionListener(e -> canviarMode());
+
+        c.gridx = 0;
+        c.gridy = 4;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.gridwidth = 1;
+        add(botoTornar, c);
+
+        c.gridx = 2;
+        c.gridy = 4;
+        c.gridwidth = 1;
+        c.anchor = GridBagConstraints.LINE_END;
+        add(botoSubmit, c);
+
+        c.gridx = 2;
+        c.gridy = 5;
+        c.gridwidth = 1;
+        c.anchor = GridBagConstraints.LINE_END;
+        add(botoChangeMode, c);
+
+        repassword = new JLabel("Confirma la pwd");
+        repwd = new JPasswordField(20);
+
+        repassword.setPreferredSize(new Dimension(140, 28));
+        repwd.setPreferredSize(new Dimension(250, 28));
+
+        if(!logreg) {
+            titol.setText("Registre d'usuari");
+            botoChangeMode.setText("Iniciar Sesió");
+            botoSubmit.setText("Registrar");
+
+            c.gridx = 0;
+            c.gridy = 3;
+            c.gridwidth = 1;
+            add(repassword, c);
+
+            c.gridx = 1;
+            c.gridy = 3;
+            c.gridwidth = 2;
+            add(repwd, c);
+
+            botoSubmit.addActionListener(e -> register());
+        }
+        else {
+
+            botoSubmit.addActionListener(e -> login());
+        }
+    }
+
+    private void canviarMode() {
+        logreg = !logreg;
+        if(logreg) {
+            botoSubmit.removeActionListener(e -> register());
+            botoSubmit.addActionListener(e -> login());
+            remove(repassword);
+            remove(repwd);
+            titol.setText("Iniciar Sesió");
+            botoSubmit.setText("Login");
+            botoChangeMode.setText("Registrar-se");
+        }
+        else {
+            titol.setText("Registre d'usuari");
+            botoSubmit.setText("Registrar");
+            botoChangeMode.setText("Iniciar Sesió");
+
+            GridBagConstraints c = new GridBagConstraints();
+            c.insets = new Insets(3, 3, 3, 3);
+
+            c.gridx = 0;
+            c.gridy = 3;
+            c.gridwidth = 1;
+            add(repassword, c);
+
+            c.gridx = 1;
+            c.gridy = 3;
+            c.gridwidth = 2;
+            add(repwd, c);
+
+            botoSubmit.removeActionListener(e -> login());
+            botoSubmit.addActionListener(e -> register());
+        }
     }
 
     /**
      * Inicialitza el botó de login.
      */
-    private void initBotoLogin() {
-        botoLogin = new JButton("Login");
-        //botoLogin.addActionListener(e -> vp.mostraLoginForm());
-        botoLogin.setPreferredSize(new Dimension(140, 28));
-
+    private void initBotoSubmit() {
+        botoSubmit.setPreferredSize(new Dimension(140, 28));
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         //gbc.ipadx = 50;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        add(botoLogin, gbc);
-    }
-
-    /**
-     * Inicialitza el botó d'accés al perfil d'usuari.
-     */
-    private void initBotoRegister() {
-        botoRegister = new JButton("Register");
-        botoRegister.setPreferredSize(new Dimension(140, 28));
-        //botoRegister.addActionListener(e -> vp.mostraRegisterForm());
-        GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        add(botoRegister, gbc);
-
-    }
-
-    /**
-     * Inicialitza el botó de sortida
-     */
-    private void initBotoTornar() {
-        botoTornar = new JButton("Tornar");
-        botoTornar.setPreferredSize(new Dimension(140, 28));
-        botoTornar.addActionListener(e -> vp.mostraMenuPrincipal());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        add(botoTornar, gbc);
+        add(botoSubmit, gbc);
     }
 
     void clearForm() {
@@ -101,45 +180,15 @@ public class VistaNotLogged extends JPanel {
         repwd.setText("");
     }
 
-    private void placeComponents() {
-        setLayout(null);
-
-        username = new JLabel("Usuari");
-        username.setBounds(265, 10, 80, 25);
-        add(username);
-
-        usernameIn = new JTextField(20);
-        usernameIn.setBounds(355, 10, 160, 25);
-        add(usernameIn);
-
-        password = new JLabel("Contrassenya");
-        password.setBounds(265, 40, 80, 25);
-        add(password);
-
-        pwd = new JPasswordField(20);
-        pwd.setBounds(355, 40, 160, 25);
-        add(pwd);
-
-        repassword = new JLabel("Confirma la contrassenya"); //TODO: el text se surt -> ajustar proporcions
-        repassword.setBounds(265, 70, 80, 25);
-        add(repassword);
-
-        repwd = new JPasswordField(20);
-        repwd.setBounds(355, 70, 160, 25);
-        add(repwd);
-
-        botoRegistre = new JButton("Registrar");
-        botoRegistre.setBounds(265, 110, 120, 28);
-        add(botoRegistre);
-
-        botoTornar = new JButton("Tornar");
-        botoTornar.setBounds(395, 110, 120, 28);
-        add(botoTornar);
-
-        //Assigna els listeners als botons
-
-        botoRegistre.addActionListener(e -> register());
-        botoTornar.addActionListener(e -> vp.mostraNotLogged());
+    /**
+     * Executa el login
+     */
+    private void login() {
+        String usuari = usernameIn.getText().trim();
+        char[] pass = pwd.getPassword();
+        char[] confirmation = repwd.getPassword();
+        //TODO: login
+        clearForm();
     }
 
     /**
@@ -162,5 +211,6 @@ public class VistaNotLogged extends JPanel {
             return;
         }
         //TODO: registre
+        clearForm();
     }
 }
