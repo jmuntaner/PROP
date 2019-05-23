@@ -1,11 +1,13 @@
 package views;
 
+import controllers.ControladorAnalisi;
 import controllers.ControladorLlistaProblemes;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
+import java.util.List;
 
 /**
  * Vista de la llista de problemes.
@@ -16,7 +18,7 @@ class VistaLlistaProblemes extends JPanel {
     private VistaPrincipal vp;
     private VistaTauler preview;
     private JLabel labelNom, labelDificultat, labelJugades;
-    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar, buttonRanking;
+    private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar, buttonRanking, buttonAvaluar;
     private JList<String> problemes;
     private final JFileChooser fc;
 
@@ -35,19 +37,7 @@ class VistaLlistaProblemes extends JPanel {
         initVisor();
         initLlistaProblemes();
         fc = new JFileChooser();
-        fc.setFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File f) {
-                if (f.isDirectory()) return true;
-                String ext = Utils.getExtension(f);
-                return ext != null && ext.equals("fendb");
-            }
-
-            @Override
-            public String getDescription() {
-                return "Arxius de base de dades (*.fendb)";
-            }
-        });
+        fc.setFileFilter(new FileFilterFenDB());
         fc.setAcceptAllFileFilterUsed(false);
     }
 
@@ -59,10 +49,17 @@ class VistaLlistaProblemes extends JPanel {
         JButton buttonSortir = new JButton("Tornar");
         buttonSortir.addActionListener(e -> vp.mostraMenuPrincipal());
         filaBotons.add(buttonSortir);
+
+        // Creador de problemes
         JButton buttonNou = new JButton("Crear problema");
         buttonNou.addActionListener(e -> vp.creaProblema());
         filaBotons.add(buttonNou);
 
+        buttonAvaluar = new JButton("Avaluar seleccionats");
+        buttonAvaluar.addActionListener(e -> avaluaConjunt());
+        filaBotons.add(buttonAvaluar);
+
+        // Gestió d'arxius fendb
         JButton buttonCarrega = new JButton("Carregar arxiu");
         buttonCarrega.addActionListener(e -> carregarArxiu());
         filaBotons.add(buttonCarrega);
@@ -76,6 +73,15 @@ class VistaLlistaProblemes extends JPanel {
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.LINE_START;
         add(filaBotons, gbc);
+    }
+
+    /**
+     * Inicia l'avaluació del conjunt de problemes seleccionat.
+     */
+    private void avaluaConjunt() {
+        List<String> seleccio = problemes.getSelectedValuesList();
+        ControladorAnalisi ca = cp.getAnalisi(seleccio, true, true);
+        vp.iniciaAnalisi(ca);
     }
 
     /**
@@ -359,5 +365,19 @@ class VistaLlistaProblemes extends JPanel {
         if (ataca == 2) return;
 
         vp.jugaProblema(cp.iniciaPartidaHvM(maquina != 1, ataca == 1));
+    }
+
+    private static class FileFilterFenDB extends FileFilter {
+        @Override
+        public boolean accept(File f) {
+            if (f.isDirectory()) return true;
+            String ext = Utils.getExtension(f);
+            return ext != null && ext.equals("fendb");
+        }
+
+        @Override
+        public String getDescription() {
+            return "Arxius de base de dades (*.fendb)";
+        }
     }
 }

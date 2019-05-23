@@ -1,5 +1,6 @@
 package views;
 
+import controllers.ControladorAnalisi;
 import controllers.ControladorPartida;
 import utils.Pair;
 
@@ -20,6 +21,7 @@ public class VistaPrincipal {
     private VistaFiPartida panelResultats;
     private JPanel contentPane;
     private VistaRankingProblema panelRanking;
+    private VistaAnalisiPartides panelAnalisi;
 
     /**
      * Creadora per defecte
@@ -36,6 +38,7 @@ public class VistaPrincipal {
         initLlistaProblemes();
         initResultats();
         initRanking();
+        initAnalisi();
 
         addPanels();
 
@@ -98,6 +101,10 @@ public class VistaPrincipal {
         panelRanking = new VistaRankingProblema(this);
     }
 
+    private void initAnalisi() {
+        panelAnalisi = new VistaAnalisiPartides(this);
+    }
+
     /**
      * Afegeix els panels de totes les vistes al CardLayout principal.
      */
@@ -110,6 +117,7 @@ public class VistaPrincipal {
         contentPane.add(panelLlistaProblemes, "llistaProbs");
         contentPane.add(panelResultats, "resultats");
         contentPane.add(panelRanking, "ranking");
+        contentPane.add(panelAnalisi, "analisi");
     }
 
     /**
@@ -199,6 +207,17 @@ public class VistaPrincipal {
     }
 
     /**
+     * Inicia la vista d'analisi de conjunt de problemes.
+     *
+     * @param ca Controlador per a l'analisi.
+     */
+    void iniciaAnalisi(ControladorAnalisi ca) {
+        panelAnalisi.setAnalisi(ca);
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "analisi");
+    }
+
+    /**
      * Fa visible el JFrame principal
      */
     void ferVisible() {
@@ -206,5 +225,4 @@ public class VistaPrincipal {
         frameVista.setVisible(true);
         frameVista.setEnabled(true);
     }
-
 }

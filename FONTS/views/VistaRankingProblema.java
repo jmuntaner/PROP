@@ -44,7 +44,6 @@ public class VistaRankingProblema extends JPanel {
     }
 
     void setRanking(ArrayList<Pair<String, String>> ranking) {
-        System.out.println(ranking);
         String[][] array = new String[ranking.size()][2];
         for (int i = 0; i < ranking.size(); i++) {
             Pair<String, String> p = ranking.get(i);

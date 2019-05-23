@@ -9,7 +9,7 @@ public class PuntuacioProblema implements Puntuacio<PuntuacioProblema> {
      * Creadora de puntuació associada a un problema
      *
      * @param estadistiques Estadístiques de la partida
-     * @param color Tema del problema
+     * @param color         Tema del problema
      */
     public PuntuacioProblema(EstadistiquesPartida estadistiques, Color color) {
         temps = estadistiques.getTemps(color);
@@ -25,6 +25,6 @@ public class PuntuacioProblema implements Puntuacio<PuntuacioProblema> {
 
     @Override
     public String representa() {
-        return jugades + "j " + temps / 1000 + "s";
+        return jugades + "j " + String.format("%.2f", ((double) temps) / 1000) + "s";
     }
 }

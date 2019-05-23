@@ -8,6 +8,7 @@ import utils.Pair;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorLlistaProblemes {
     private ControladorPrincipal cp;
@@ -146,5 +147,17 @@ public class ControladorLlistaProblemes {
      */
     public ArrayList<Pair<String, String>> getRanking() {
         return p.getRanking().getLlistaRanking(10);
+    }
+
+    /**
+     * Obté un controlador d'analisi de problemes.
+     *
+     * @param seleccio Llista de problemes a avaluar.
+     * @param m1       Tipus de la maquina 1.
+     * @param m2       Tipus de la maquina 2.
+     * @return Controlador d'analisi m1 vs m2 en els problemes seleccionats.
+     */
+    public ControladorAnalisi getAnalisi(List<String> seleccio, boolean m1, boolean m2) {
+        return new ControladorAnalisi(seleccio.toArray(new String[0]), m1, m2);
     }
 }
