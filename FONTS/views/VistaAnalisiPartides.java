@@ -119,7 +119,7 @@ class VistaAnalisiPartides extends JPanel {
         JButton buttonTornar = new JButton("Tornar");
         buttonTornar.addActionListener(e -> vp.mostraLlistaProblemes());
 
-        buttonIniciar = new JButton("Iniciar");
+
         buttonIniciar.addActionListener(e -> iniciaPartides());
 
 
@@ -128,8 +128,7 @@ class VistaAnalisiPartides extends JPanel {
         gbc.gridy = 0;
         gbc.insets = new Insets(0, 0, 0, 4);
         panelSuperior.add(buttonTornar, gbc);
-        gbc.gridx++;
-        panelSuperior.add(buttonIniciar, gbc);
+
         // Glues
         gbc.gridx++;
         gbc.weightx = 1;
@@ -142,6 +141,7 @@ class VistaAnalisiPartides extends JPanel {
         panelStats.setLayout(new GridBagLayout());
         panelStats.setBorder(BorderFactory.createTitledBorder("Estat"));
         labelTorn = new JLabel("Esperant inici.");
+        buttonIniciar = new JButton("Iniciar");
 
         listProblemes = new JList<>(genLlista());
         listProblemes.setSelectionModel(new DisabledItemSelectionModel());
@@ -161,11 +161,15 @@ class VistaAnalisiPartides extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panelStats.add(labelTorn, gbc);
-        gbc.gridy = 1;
+        gbc.gridy++;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 4, 4, 4);
+        panelStats.add(buttonIniciar, gbc);
+        gbc.gridy++;
         gbc.weighty = 1;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(4, 4, 4, 4);
+
         panelStats.add(spListProblemes, gbc);
     }
 
@@ -175,7 +179,7 @@ class VistaAnalisiPartides extends JPanel {
         String[] wins = ca.getWinners();
         int act = ca.getNumAct() - 1;
         for (int i = 0; i < noms.length; i++) {
-            noms[i] += ": ";
+            noms[i] += ":    ";
             if (i < act) noms[i] += wins[i];
             else if (started && i == act) noms[i] += "[Jugant]";
             else noms[i] += "[Pendent]";
@@ -207,6 +211,7 @@ class VistaAnalisiPartides extends JPanel {
             }
             SwingUtilities.invokeLater(() -> {
                 buttonIniciar.setEnabled(false);
+                buttonIniciar.setText("Executant...");
                 started = true;
             });
             do {
@@ -216,6 +221,7 @@ class VistaAnalisiPartides extends JPanel {
             SwingUtilities.invokeLater(() -> {
                 updateStats();
                 labelTorn.setText("Partides finalitzades");
+                buttonIniciar.setText("Repetir");
                 buttonIniciar.setEnabled(true);
             });
         }).start();
@@ -260,8 +266,8 @@ class VistaAnalisiPartides extends JPanel {
         labelVict[0].setText("-");
         labelVict[1].setText("-");
         labelTT[0].setText("-");
-        labelTM[1].setText("-");
-        labelTT[0].setText("-");
+        labelTM[0].setText("-");
+        labelTT[1].setText("-");
         labelTM[1].setText("-");
         listProblemes.setListData(genLlista());
         started = false;
