@@ -147,7 +147,16 @@ public class VistaAnalisiPartides extends JPanel {
         listProblemes.setSelectedIndex(0);
         listProblemes.setSelectionModel(new DisabledItemSelectionModel());
         listProblemes.setBackground(new Color(0, 0, 0, 0));
-        JScrollPane llistaProblemes = new JScrollPane(listProblemes);
+        listProblemes.setCellRenderer(new ListCellRenderer<String>() {
+            DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+
+            @Override
+            public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
+                return defaultRenderer.getListCellRendererComponent(list, value, index, started && ca.getNumAct() - 1 == index, cellHasFocus);
+            }
+        });
+
+        JScrollPane spListProblemes = new JScrollPane(listProblemes);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -158,16 +167,17 @@ public class VistaAnalisiPartides extends JPanel {
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(4, 4, 4, 4);
-        panelStats.add(llistaProblemes, gbc);
+        panelStats.add(spListProblemes, gbc);
     }
 
     private String[] genLlista() {
         if (ca == null) return new String[0];
         String[] noms = ca.getNoms();
+        String[] wins = ca.getWinners();
         int act = ca.getNumAct() - 1;
         for (int i = 0; i < noms.length; i++) {
             noms[i] += ": ";
-            if (i < act) noms[i] += "[Completat]";
+            if (i < act) noms[i] += wins[i];
             else if (started && i == act) noms[i] += "[Jugant]";
             else noms[i] += "[Pendent]";
         }
@@ -231,7 +241,6 @@ public class VistaAnalisiPartides extends JPanel {
         long meanTimeB = 0;
         if (timesA.length > 0) meanTimeA = totalTimeA / timesA.length;
         if (timesB.length > 0) meanTimeB = totalTimeB / timesB.length;
-        System.out.println(totalTimeA + " " + timesA.length + " " + meanTimeA);
 
         labelTorn.setText("Jugant partida " + n + "/" + numPartides);
         labelVict[0].setText(Integer.toString(wa));
@@ -243,6 +252,7 @@ public class VistaAnalisiPartides extends JPanel {
 
         // Update victory list
         listProblemes.setListData(genLlista());
+        listProblemes.clearSelection();
         listProblemes.setSelectedIndex(ca.getNumAct() - 1);
     }
 

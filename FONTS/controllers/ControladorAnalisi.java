@@ -55,7 +55,8 @@ public class ControladorAnalisi {
 
     public String[] getWinners() {
         String[] res = new String[wins.size()];
-        for (int i = 0; i < wins.size(); ++i) res[i] = wins.get(i) ? a.getNom() : d.getNom();
+        for (int i = 0; i < wins.size(); ++i)
+            res[i] = wins.get(i) ? ("A (" + a.getNom() + ")") : ("D (" + d.getNom() + ")");
         return res;
     }
 
