@@ -81,7 +81,7 @@ class VistaLlistaProblemes extends JPanel {
      */
     private void avaluaConjunt() {
         List<String> seleccio = problemes.getSelectedValuesList();
-        ControladorAnalisi ca = cp.getAnalisi(seleccio, true, true);
+        ControladorAnalisi ca = cp.getAnalisi(seleccio);
         vp.iniciaAnalisi(ca);
     }
 

@@ -10,8 +10,9 @@ class VistaAnalisiPartides extends JPanel {
     private ControladorAnalisi ca;
     private int numPartides;
     private JLabel labelTorn;
-    private JLabel[] labelNom, labelVict, labelTT, labelTM;
+    private JLabel[] labelVict, labelTT, labelTM;
     private JPanel[] players;
+    private JComboBox[] noms;
     private JButton buttonIniciar;
     private JPanel panelStats, panelSuperior;
     private JList<String> listProblemes;
@@ -57,7 +58,7 @@ class VistaAnalisiPartides extends JPanel {
     }
 
     private void initPlayers() {
-        labelNom = new JLabel[2];
+        noms = new JComboBox[2];
         labelVict = new JLabel[2];
         labelTT = new JLabel[2];
         labelTM = new JLabel[2];
@@ -65,9 +66,16 @@ class VistaAnalisiPartides extends JPanel {
         for (int i = 0; i < 2; i++) {
             players[i] = new JPanel();
             players[i].setLayout(new GridBagLayout());
-            labelNom[i] = new JLabel("-");
-            Font defaulltFont = labelNom[i].getFont();
-            labelNom[i].setFont(new Font(defaulltFont.getName(), Font.PLAIN, 20));
+            noms[i] = new JComboBox<String>();
+            //noinspection unchecked
+            noms[i].addItem("Xicu (M1)");
+            //noinspection unchecked
+            noms[i].addItem("Barja (M2)");
+            final int pos = i;
+            noms[i].addActionListener(e -> {
+                ca.setMaquina(pos, noms[pos].getSelectedIndex());
+            });
+
             labelVict[i] = new JLabel("0");
             labelTT[i] = new JLabel("0");
             labelTM[i] = new JLabel("0");
@@ -79,7 +87,7 @@ class VistaAnalisiPartides extends JPanel {
             gbc.gridwidth = 2;
             gbc.weightx = 1;
             gbc.insets = new Insets(0, 4, 0, 4);
-            players[i].add(labelNom[i], gbc);
+            players[i].add(noms[i], gbc);
             gbc.gridwidth = 1;
 
             gbc.gridy = 1;
@@ -212,6 +220,8 @@ class VistaAnalisiPartides extends JPanel {
             SwingUtilities.invokeLater(() -> {
                 buttonIniciar.setEnabled(false);
                 buttonIniciar.setText("Executant...");
+                noms[0].setEnabled(false);
+                noms[1].setEnabled(false);
                 started = true;
             });
             do {
@@ -223,6 +233,8 @@ class VistaAnalisiPartides extends JPanel {
                 labelTorn.setText("Partides finalitzades");
                 buttonIniciar.setText("Repetir");
                 buttonIniciar.setEnabled(true);
+                noms[0].setEnabled(true);
+                noms[1].setEnabled(true);
             });
         }).start();
     }
@@ -260,8 +272,6 @@ class VistaAnalisiPartides extends JPanel {
     }
 
     private void resetAll() {
-        labelNom[0].setText(ca.getNomM(false));
-        labelNom[1].setText(ca.getNomM(true));
         labelTorn.setText("Esperant Inici");
         labelVict[0].setText("-");
         labelVict[1].setText("-");
@@ -270,6 +280,9 @@ class VistaAnalisiPartides extends JPanel {
         labelTT[1].setText("-");
         labelTM[1].setText("-");
         listProblemes.setListData(genLlista());
+        buttonIniciar.setEnabled(true);
+        noms[0].setEnabled(true);
+        noms[1].setEnabled(true);
         started = false;
     }
 
