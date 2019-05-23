@@ -123,6 +123,9 @@ public class VistaNotLogged extends JPanel {
         canvisVisuals();
     }
 
+    /**
+     * Canvia de mode entre iniciar sessió i registrar-se
+     */
     private void canviarMode() {
         logreg = !logreg;
         canvisVisuals();
