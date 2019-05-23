@@ -18,13 +18,12 @@ class VistaEditor extends VistaAmbTauler {
 
     private JTextField fenTextField;
     private JToggleButton buttonBlanc, buttonNegre, buttonReiB, buttonReiN;
-    private ButtonGroup bgPeces, colorBg;
+    private final ControladorEditor ce;
     private JSlider sliderNjugades;
 
     private char actual;
     private boolean hasReiBlanc, hasReiNegre;
-
-    private ControladorEditor ce;
+    private ButtonGroup bgPeces;
 
     /**
      * Creadora per defecte.
@@ -56,7 +55,7 @@ class VistaEditor extends VistaAmbTauler {
         // Selecció de color
         JPanel panelColors = new JPanel();
 
-        colorBg = new ButtonGroup();
+        ButtonGroup colorBg = new ButtonGroup();
         buttonBlanc = new JToggleButton("Blanc");
         colorBg.add(buttonBlanc);
         buttonBlanc.addActionListener(e -> {
@@ -271,39 +270,37 @@ class VistaEditor extends VistaAmbTauler {
         }
         new Thread(() -> {
             boolean correcte = false;
-            try {
-                int res = ce.guardaProblema();
-                switch (res) {
-                    case 0:
-                        correcte = true;
-                        break;
-                    case 1:
-                        JOptionPane.showMessageDialog(this,
-                                "La situació de les peces no és una situació inicial vàlida.",
-                                "Tauler invalid",
-                                JOptionPane.WARNING_MESSAGE);
-                        break;
-                    case 2:
-                        JOptionPane.showMessageDialog(this,
-                                "No es pot resoldre el problema en les jugades especificades.",
-                                "Tauler invalid",
-                                JOptionPane.WARNING_MESSAGE);
-                        break;
-                    case 3:
-                        JOptionPane.showMessageDialog(this,
-                                "El nom està repetit.",
-                                "Nom invalid",
-                                JOptionPane.WARNING_MESSAGE);
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(this,
-                                "Error desconegut.",
-                                "Tauler invalid",
-                                JOptionPane.WARNING_MESSAGE);
-                }
 
-            } catch (Exception e) {
+            int res = ce.guardaProblema();
+            switch (res) {
+                case 0:
+                    correcte = true;
+                    break;
+                case 1:
+                    JOptionPane.showMessageDialog(this,
+                            "La situació de les peces no és una situació inicial vàlida.",
+                            "Tauler invalid",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                case 2:
+                    JOptionPane.showMessageDialog(this,
+                            "No es pot resoldre el problema en les jugades especificades.",
+                            "Tauler invalid",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                case 3:
+                    JOptionPane.showMessageDialog(this,
+                            "El nom està repetit.",
+                            "Nom invalid",
+                            JOptionPane.WARNING_MESSAGE);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this,
+                            "Error desconegut.",
+                            "Tauler invalid",
+                            JOptionPane.WARNING_MESSAGE);
             }
+
             final boolean correct = correcte; // Només es poden pasar finals a la lambda.
             // Runs inside of the Swing UI thread
             SwingUtilities.invokeLater(() -> {

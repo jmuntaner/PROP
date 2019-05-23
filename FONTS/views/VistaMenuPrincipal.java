@@ -12,8 +12,7 @@ import java.io.IOException;
  */
 class VistaMenuPrincipal extends JPanel {
     private JLabel nomPrograma;
-    private JButton botoJugar, botoGestio, botoSortir;
-    private VistaPrincipal vp;
+    private final VistaPrincipal vp;
 
     /**
      * Creadora per defecte
@@ -57,7 +56,7 @@ class VistaMenuPrincipal extends JPanel {
             BufferedImage myPicture = ImageIO.read(new File("res/logo.png"));
             nomPrograma = new JLabel(new ImageIcon(myPicture));
         } catch (IOException ex) {
-            System.out.println(ex);
+            System.out.println("Error de lectura del logo");
         }
 
         //nomPrograma.setText("Increible programa d'escacs");
@@ -74,7 +73,7 @@ class VistaMenuPrincipal extends JPanel {
      * Inicialitza el botó de jugar.
      */
     private void initBotoJugar() {
-        botoJugar = new JButton("Jugar");
+        JButton botoJugar = new JButton("Jugar");
         botoJugar.addActionListener(e -> vp.mostraLlistaProblemes());
         botoJugar.setPreferredSize(new Dimension(140, 28));
 
@@ -90,7 +89,7 @@ class VistaMenuPrincipal extends JPanel {
      * Inicialitza el botó d'accés al perfil d'usuari.
      */
     private void initBotoPerfil() {
-        botoGestio = new JButton("Perfil");
+        JButton botoGestio = new JButton("Perfil");
         botoGestio.setPreferredSize(new Dimension(140, 28));
         //botoGestio.addActionListener(e -> vp.mostraEditar());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -105,7 +104,7 @@ class VistaMenuPrincipal extends JPanel {
      * Inicialitza el botó de sortida
      */
     private void initBotoSortir() {
-        botoSortir = new JButton("Sortir");
+        JButton botoSortir = new JButton("Sortir");
         botoSortir.setPreferredSize(new Dimension(140, 28));
         botoSortir.addActionListener(e -> System.exit(0)); // No es la manera més maca, però funciona
 

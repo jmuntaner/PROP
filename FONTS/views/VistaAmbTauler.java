@@ -9,7 +9,7 @@ import static java.awt.GridBagConstraints.LINE_START;
  * Classe generica per a vistes amb panel lateral i tauler redimensionable.
  */
 abstract class VistaAmbTauler extends JPanel implements VistaTauler.TaulerListener {
-    VistaPrincipal vp;
+    final VistaPrincipal vp;
     private VistaTauler tauler;
 
     /**

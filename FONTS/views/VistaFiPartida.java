@@ -10,7 +10,7 @@ import java.awt.*;
  */
 class VistaFiPartida extends JPanel {
     private ControladorPartida cp;
-    private VistaPrincipal vp;
+    private final VistaPrincipal vp;
     private JLabel labelGuanyador;
 
     /**
@@ -37,7 +37,7 @@ class VistaFiPartida extends JPanel {
     /**
      * Inicialitza els textos de pantalla.
      */
-    void initLabels() {
+    private void initLabels() {
         // Títol
         JLabel labelPrincipal = new JLabel("Partida finalitzada");
         Font defaulltFont = labelPrincipal.getFont();

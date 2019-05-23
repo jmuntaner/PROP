@@ -5,8 +5,8 @@ import controllers.ControladorAnalisi;
 import javax.swing.*;
 import java.awt.*;
 
-public class VistaAnalisiPartides extends JPanel {
-    private VistaPrincipal vp;
+class VistaAnalisiPartides extends JPanel {
+    private final VistaPrincipal vp;
     private ControladorAnalisi ca;
     private int numPartides;
     private JLabel labelTorn;
@@ -144,11 +144,10 @@ public class VistaAnalisiPartides extends JPanel {
         labelTorn = new JLabel("Esperant inici.");
 
         listProblemes = new JList<>(genLlista());
-        listProblemes.setSelectedIndex(0);
         listProblemes.setSelectionModel(new DisabledItemSelectionModel());
         listProblemes.setBackground(new Color(0, 0, 0, 0));
         listProblemes.setCellRenderer(new ListCellRenderer<String>() {
-            DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+            final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
             @Override
             public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -252,11 +251,9 @@ public class VistaAnalisiPartides extends JPanel {
 
         // Update victory list
         listProblemes.setListData(genLlista());
-        listProblemes.clearSelection();
-        listProblemes.setSelectedIndex(ca.getNumAct() - 1);
     }
 
-    void resetAll() {
+    private void resetAll() {
         labelNom[0].setText(ca.getNomM(false));
         labelNom[1].setText(ca.getNomM(true));
         labelTorn.setText("Esperant Inici");

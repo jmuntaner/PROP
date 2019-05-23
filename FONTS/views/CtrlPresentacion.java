@@ -7,14 +7,14 @@ import controllers.ControladorPrincipal;
 /**
  * Controlador de la capa de presentació.
  */
-public class CtrlPresentacion {
-    private VistaPrincipal vp;
-    private ControladorPrincipal cp;
+class CtrlPresentacion {
+    private final VistaPrincipal vp;
+    private final ControladorPrincipal cp;
 
     /**
      * Creadora per defecte.
      */
-    public CtrlPresentacion() {
+    CtrlPresentacion() {
         // Conectar domini
         cp = new ControladorPrincipal();
         vp = new VistaPrincipal(this);
