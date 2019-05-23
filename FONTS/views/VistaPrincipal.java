@@ -24,6 +24,8 @@ class VistaPrincipal {
     private VistaAnalisiPartides panelAnalisi;
     private VistaLogged panelLogged;
     private VistaNotLogged panelNotLogged;
+    private VistaLoginForm panelLoginForm;
+    private VistaRegisterForm panelRegisterForm;
     private VistaEstadistiquesJugador panelEstadistiques;
 
     /**
@@ -44,6 +46,8 @@ class VistaPrincipal {
         initAnalisi();
         initLogged();
         initNotLogged();
+        initLoginForm();
+        initRegisterForm();
         initEstadistiques();
 
         addPanels();
@@ -133,6 +137,20 @@ class VistaPrincipal {
     }
 
     /**
+     * Inicialitza la vista d'estadistiques.
+     */
+    private void initLoginForm() {
+        panelLoginForm = new VistaLoginForm(this);
+    }
+
+    /**
+     * Inicialitza la vista d'estadistiques.
+     */
+    private void initRegisterForm() {
+        panelRegisterForm = new VistaRegisterForm(this);
+    }
+
+    /**
      * Afegeix els panels de totes les vistes al CardLayout principal.
      */
     private void addPanels() {
@@ -148,6 +166,8 @@ class VistaPrincipal {
         contentPane.add(panelEstadistiques, "estadistiques");
         contentPane.add(panelNotLogged, "notLogged");
         contentPane.add(panelLogged, "logged");
+        contentPane.add(panelRegisterForm, "registerForm");
+        contentPane.add(panelLoginForm, "loginForm");
     }
 
     /**
@@ -237,7 +257,7 @@ class VistaPrincipal {
     }
 
     /**
-     * Mostra un ranking a pantalla.
+     * Mostra les estadistiques a pantalla.
      */
     void mostraEstadistiques() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
@@ -245,7 +265,7 @@ class VistaPrincipal {
     }
 
     /**
-     * Mostra un ranking a pantalla.
+     * Mostra perfil Logged a pantalla.
      */
     void mostraLogged() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
@@ -253,12 +273,31 @@ class VistaPrincipal {
     }
 
     /**
-     * Mostra un ranking a pantalla.
+     * Mostra perfil NotLogged a pantalla.
      */
     void mostraNotLogged() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "notLogged");
     }
+
+    /**
+     * Mostra el formulari de iniciar sesió a la pantalla.
+     */
+    void mostraLoginForm() {
+        panelLoginForm.clearForm();
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "loginForm");
+    }
+
+    /**
+     * Mostra el formulari de registre a la pantalla.
+     */
+    void mostraRegisterForm() {
+        panelRegisterForm.clearForm();
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "registerForm");
+    }
+
 
     /**
      * Inicia la vista d'analisi de conjunt de problemes.
