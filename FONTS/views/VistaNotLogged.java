@@ -92,6 +92,7 @@ public class VistaNotLogged extends JPanel {
         // Boto submit
         botoSubmit = new JButton("Login");
         botoSubmit.setPreferredSize(new Dimension(140, 28));
+        botoSubmit.addActionListener(e -> submit());
 
         c.gridx = 2;
         c.gridy = 4;
@@ -136,8 +137,6 @@ public class VistaNotLogged extends JPanel {
      */
     private void canvisVisuals() {
         if(logreg) {
-            botoSubmit.removeActionListener(e -> register());
-            botoSubmit.addActionListener(e -> login());
             remove(repassword);
             remove(repwd);
             titol.setText("Iniciar Sesió");
@@ -161,9 +160,6 @@ public class VistaNotLogged extends JPanel {
             c.gridy = 3;
             c.gridwidth = 2;
             add(repwd, c);
-
-            botoSubmit.removeActionListener(e -> login());
-            botoSubmit.addActionListener(e -> register());
         }
     }
 
@@ -171,6 +167,11 @@ public class VistaNotLogged extends JPanel {
         usernameIn.setText("");
         pwd.setText("");
         repwd.setText("");
+    }
+
+    private void submit() {
+        if(logreg) login();
+        else register();
     }
 
     /**
