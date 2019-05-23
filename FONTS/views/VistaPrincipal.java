@@ -24,9 +24,6 @@ public class VistaPrincipal {
     private VistaAnalisiPartides panelAnalisi;
     private VistaLogged panelLogged;
     private VistaNotLogged panelNotLogged;
-    private VistaLoginForm panelLoginForm;
-    private VistaRegisterForm panelRegisterForm;
-    private VistaEstadistiquesJugador panelEstadistiques;
 
     /**
      * Creadora per defecte
@@ -46,9 +43,6 @@ public class VistaPrincipal {
         initAnalisi();
         initLogged();
         initNotLogged();
-        initLoginForm();
-        initRegisterForm();
-        initEstadistiques();
 
         addPanels();
 
@@ -130,27 +124,6 @@ public class VistaPrincipal {
     }
 
     /**
-     * Inicialitza la vista d'estadistiques.
-     */
-    private void initEstadistiques() {
-        panelEstadistiques = new VistaEstadistiquesJugador(this);
-    }
-
-    /**
-     * Inicialitza la vista d'estadistiques.
-     */
-    private void initLoginForm() {
-        panelLoginForm = new VistaLoginForm(this, mCp);
-    }
-
-    /**
-     * Inicialitza la vista d'estadistiques.
-     */
-    private void initRegisterForm() {
-        panelRegisterForm = new VistaRegisterForm(this, mCp);
-    }
-
-    /**
      * Afegeix els panels de totes les vistes al CardLayout principal.
      */
     private void addPanels() {
@@ -163,11 +136,8 @@ public class VistaPrincipal {
         contentPane.add(panelResultats, "resultats");
         contentPane.add(panelRanking, "ranking");
         contentPane.add(panelAnalisi, "analisi");
-        contentPane.add(panelEstadistiques, "estadistiques");
         contentPane.add(panelNotLogged, "notLogged");
         contentPane.add(panelLogged, "logged");
-        contentPane.add(panelRegisterForm, "registerForm");
-        contentPane.add(panelLoginForm, "loginForm");
     }
 
     /**
@@ -279,25 +249,6 @@ public class VistaPrincipal {
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "notLogged");
     }
-
-    /**
-     * Mostra el formulari de iniciar sesió a la pantalla.
-     */
-    void mostraLoginForm() {
-        panelLoginForm.clearForm();
-        CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "loginForm");
-    }
-
-    /**
-     * Mostra el formulari de registre a la pantalla.
-     */
-    void mostraRegisterForm() {
-        panelRegisterForm.clearForm();
-        CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "registerForm");
-    }
-
 
     /**
      * Inicia la vista d'analisi de conjunt de problemes.
