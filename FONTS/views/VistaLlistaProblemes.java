@@ -57,6 +57,7 @@ class VistaLlistaProblemes extends JPanel {
 
         buttonAvaluar = new JButton("Avaluar seleccionats");
         buttonAvaluar.addActionListener(e -> avaluaConjunt());
+        buttonAvaluar.setEnabled(false);
         filaBotons.add(buttonAvaluar);
 
         // Gestió d'arxius fendb
@@ -291,6 +292,7 @@ class VistaLlistaProblemes extends JPanel {
             buttonEditar.setEnabled(false);
             buttonEliminar.setEnabled(false);
             buttonRanking.setEnabled(false);
+            buttonAvaluar.setEnabled(false);
             labelNom.setText("");
             labelDificultat.setText("Dificultat: -");
             labelJugades.setText("Jugades: -");
@@ -303,6 +305,7 @@ class VistaLlistaProblemes extends JPanel {
             buttonEditar.setEnabled(true);
             buttonEliminar.setEnabled(true);
             buttonRanking.setEnabled(true);
+            buttonAvaluar.setEnabled(true);
             labelNom.setText(cp.getNom());
             labelDificultat.setText("Dificultat: " + cp.getDificultat());
             labelJugades.setText("Jugades: " + cp.getJugades());

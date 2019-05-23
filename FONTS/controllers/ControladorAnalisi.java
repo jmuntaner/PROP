@@ -96,4 +96,12 @@ public class ControladorAnalisi {
         if (maquina) return d.getNom();
         else return a.getNom();
     }
+
+    public void resetAll() {
+        wins = new ArrayList<>();
+        ep = new ArrayList<>();
+        winsA = 0;
+        winsD = 0;
+        partidaAct = 0;
+    }
 }

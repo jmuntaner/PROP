@@ -9,9 +9,13 @@ public class VistaAnalisiPartides extends JPanel {
     private VistaPrincipal vp;
     private ControladorAnalisi ca;
     private int numPartides;
-    private JLabel labelTorn, nomA, nomB, labelVictA, labelVictB, labelTTA, labelTTB, labelTMA, labelTMB;
-
-    private JPanel panelA, panelB, panelStats, panelSuperior;
+    private JLabel labelTorn;
+    private JLabel[] labelNom, labelVict, labelTT, labelTM;
+    private JPanel[] players;
+    private JButton buttonIniciar;
+    private JPanel panelStats, panelSuperior;
+    private JList<String> listProblemes;
+    private boolean started;
 
 
     /**
@@ -21,10 +25,12 @@ public class VistaAnalisiPartides extends JPanel {
      */
     VistaAnalisiPartides(VistaPrincipal vp) {
         this.vp = vp;
+        started = false;
+
         setLayout(new GridBagLayout());
 
-        initPanelA();
-        initPanelB();
+
+        initPlayers();
         initPanelStats();
         initPanelSuperior();
 
@@ -41,13 +47,69 @@ public class VistaAnalisiPartides extends JPanel {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1;
         gbc.gridwidth = 1;
-        add(panelA, gbc);
+        add(players[0], gbc);
         gbc.gridx = 1;
         add(panelStats, gbc);
         gbc.gridx = 2;
-        add(panelB, gbc);
+        add(players[1], gbc);
 
 
+    }
+
+    private void initPlayers() {
+        labelNom = new JLabel[2];
+        labelVict = new JLabel[2];
+        labelTT = new JLabel[2];
+        labelTM = new JLabel[2];
+        players = new JPanel[2];
+        for (int i = 0; i < 2; i++) {
+            players[i] = new JPanel();
+            players[i].setLayout(new GridBagLayout());
+            labelNom[i] = new JLabel("-");
+            Font defaulltFont = labelNom[i].getFont();
+            labelNom[i].setFont(new Font(defaulltFont.getName(), Font.PLAIN, 20));
+            labelVict[i] = new JLabel("0");
+            labelTT[i] = new JLabel("0");
+            labelTM[i] = new JLabel("0");
+
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 2;
+            gbc.weightx = 1;
+            gbc.insets = new Insets(0, 4, 0, 4);
+            players[i].add(labelNom[i], gbc);
+            gbc.gridwidth = 1;
+
+            gbc.gridy = 1;
+            gbc.anchor = GridBagConstraints.LINE_START;
+            players[i].add(new JLabel("Victories:"), gbc);
+            gbc.gridy++;
+            players[i].add(new JLabel("Temps total:"), gbc);
+            gbc.gridy++;
+            players[i].add(new JLabel("Temps mitjà:"), gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            gbc.anchor = GridBagConstraints.LINE_END;
+
+            players[i].add(labelVict[i], gbc);
+            gbc.gridy++;
+            players[i].add(labelTT[i], gbc);
+            gbc.gridy++;
+            players[i].add(labelTM[i], gbc);
+
+
+            // Glue
+            gbc.gridx = 0;
+            gbc.gridy++;
+            gbc.weighty = 1;
+            gbc.fill = GridBagConstraints.VERTICAL;
+            players[i].add(Box.createGlue(), gbc);
+        }
+        players[0].setBorder(BorderFactory.createTitledBorder("Atacant"));
+        players[1].setBorder(BorderFactory.createTitledBorder("Defensor"));
     }
 
     private void initPanelSuperior() {
@@ -57,7 +119,7 @@ public class VistaAnalisiPartides extends JPanel {
         JButton buttonTornar = new JButton("Tornar");
         buttonTornar.addActionListener(e -> vp.mostraLlistaProblemes());
 
-        JButton buttonIniciar = new JButton("Iniciar");
+        buttonIniciar = new JButton("Iniciar");
         buttonIniciar.addActionListener(e -> iniciaPartides());
 
 
@@ -81,88 +143,35 @@ public class VistaAnalisiPartides extends JPanel {
         panelStats.setBorder(BorderFactory.createTitledBorder("Estat"));
         labelTorn = new JLabel("Esperant inici.");
 
+        listProblemes = new JList<>(genLlista());
+        listProblemes.setSelectedIndex(0);
+        listProblemes.setSelectionModel(new DisabledItemSelectionModel());
+        listProblemes.setBackground(new Color(0, 0, 0, 0));
+        JScrollPane llistaProblemes = new JScrollPane(listProblemes);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         panelStats.add(labelTorn, gbc);
+        gbc.gridy = 1;
+        gbc.weighty = 1;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(4, 4, 4, 4);
+        panelStats.add(llistaProblemes, gbc);
     }
 
-    private void initPanelA() {
-        panelA = new JPanel();
-        panelA.setLayout(new GridBagLayout());
-        panelA.setBorder(BorderFactory.createTitledBorder("Atacant"));
-        nomA = new JLabel("-");
-        labelVictA = new JLabel("0");
-        labelTTA = new JLabel("0");
-        labelTMA = new JLabel("0");
-
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        panelA.add(nomA, gbc);
-        gbc.gridwidth = 1;
-        gbc.gridy = 1;
-        panelA.add(new JLabel("Victories:"), gbc);
-        gbc.gridx = 1;
-        panelA.add(labelVictA, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panelA.add(new JLabel("Temps total:"), gbc);
-        gbc.gridx = 1;
-        panelA.add(labelTTA, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panelA.add(new JLabel("Temps mitjà:"), gbc);
-        gbc.gridx = 1;
-        panelA.add(labelTMA, gbc);
-
-
-        // Glue
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        panelA.add(Box.createGlue(), gbc);
-    }
-
-    private void initPanelB() {
-        panelB = new JPanel();
-        panelB.setLayout(new GridBagLayout());
-        panelB.setBorder(BorderFactory.createTitledBorder("Defensor"));
-        nomB = new JLabel("-");
-        labelVictB = new JLabel("0");
-        labelTTB = new JLabel("0");
-        labelTMB = new JLabel("0");
-
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        panelB.add(nomB, gbc);
-        gbc.gridwidth = 1;
-        gbc.gridy = 1;
-        panelB.add(new JLabel("Victories:"), gbc);
-        gbc.gridx = 1;
-        panelB.add(labelVictB, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panelB.add(new JLabel("Temps total:"), gbc);
-        gbc.gridx = 1;
-        panelB.add(labelTTB, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panelB.add(new JLabel("Temps mitjà:"), gbc);
-        gbc.gridx = 1;
-        panelB.add(labelTMB, gbc);
-
-        // Glue
-        gbc.gridy++;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        panelB.add(Box.createGlue(), gbc);
+    private String[] genLlista() {
+        if (ca == null) return new String[0];
+        String[] noms = ca.getNoms();
+        int act = ca.getNumAct() - 1;
+        for (int i = 0; i < noms.length; i++) {
+            noms[i] += ": ";
+            if (i < act) noms[i] += "[Completat]";
+            else if (started && i == act) noms[i] += "[Jugant]";
+            else noms[i] += "[Pendent]";
+        }
+        return noms;
     }
 
     /**
@@ -173,29 +182,32 @@ public class VistaAnalisiPartides extends JPanel {
     void setAnalisi(ControladorAnalisi ca) {
         this.ca = ca;
         numPartides = ca.getNumProbs();
-        nomA.setText(ca.getNomM(false));
-        nomB.setText(ca.getNomM(true));
+        resetAll();
     }
+
 
     /**
      * Inicia el fil d'execució de partides.
      */
     private void iniciaPartides() {
+        resetAll();
+        ca.resetAll();
         new Thread(() -> {
             if (ca == null) {
                 throw new RuntimeException("No hi ha controlador");
             }
+            SwingUtilities.invokeLater(() -> {
+                buttonIniciar.setEnabled(false);
+                started = true;
+            });
             do {
-                System.out.println("Ronda");
-
-                SwingUtilities.invokeLater(() -> {
-
-                    updateStats();
-                });
+                SwingUtilities.invokeLater(this::updateStats);
             }
             while (ca.jugaPartida());
             SwingUtilities.invokeLater(() -> {
+                updateStats();
                 labelTorn.setText("Partides finalitzades");
+                buttonIniciar.setEnabled(true);
             });
         }).start();
     }
@@ -214,16 +226,45 @@ public class VistaAnalisiPartides extends JPanel {
         for (long t : timesB) {
             totalTimeB += t;
         }
-        long meanTimeA = timesA.length == 0 ? 0 : totalTimeA / timesA.length;
-        long meanTimeB = timesB.length == 0 ? 0 : totalTimeB / timesB.length;
 
+        long meanTimeA = 0;
+        long meanTimeB = 0;
+        if (timesA.length > 0) meanTimeA = totalTimeA / timesA.length;
+        if (timesB.length > 0) meanTimeB = totalTimeB / timesB.length;
+        System.out.println(totalTimeA + " " + timesA.length + " " + meanTimeA);
 
         labelTorn.setText("Jugant partida " + n + "/" + numPartides);
-        labelVictA.setText(String.valueOf(wa));
-        labelVictB.setText(String.valueOf(wd));
-        labelTTA.setText(String.valueOf(totalTimeA));
-        labelTMA.setText(String.valueOf(totalTimeB));
-        labelTTB.setText(String.valueOf(meanTimeA));
-        labelTMB.setText(String.valueOf(meanTimeB));
+        labelVict[0].setText(Integer.toString(wa));
+        labelVict[1].setText(Integer.toString(wd));
+        labelTT[0].setText(totalTimeA + " ms");
+        labelTM[0].setText(meanTimeA + " ms");
+        labelTT[1].setText(totalTimeB + " ms");
+        labelTM[1].setText(meanTimeB + " ms");
+
+        // Update victory list
+        listProblemes.setListData(genLlista());
+        listProblemes.setSelectedIndex(ca.getNumAct() - 1);
+    }
+
+    void resetAll() {
+        labelNom[0].setText(ca.getNomM(false));
+        labelNom[1].setText(ca.getNomM(true));
+        labelTorn.setText("Esperant Inici");
+        labelVict[0].setText("-");
+        labelVict[1].setText("-");
+        labelTT[0].setText("-");
+        labelTM[1].setText("-");
+        labelTT[0].setText("-");
+        labelTM[1].setText("-");
+        listProblemes.setListData(genLlista());
+        started = false;
+    }
+
+    private class DisabledItemSelectionModel extends DefaultListSelectionModel {
+
+        @Override
+        public void setSelectionInterval(int index0, int index1) {
+            super.setSelectionInterval(-1, -1);
+        }
     }
 }
