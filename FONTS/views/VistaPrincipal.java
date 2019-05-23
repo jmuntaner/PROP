@@ -22,6 +22,9 @@ class VistaPrincipal {
     private JPanel contentPane;
     private VistaRankingProblema panelRanking;
     private VistaAnalisiPartides panelAnalisi;
+    private VistaLogged panelLogged;
+    private VistaNotLogged panelNotLogged;
+    private VistaEstadistiquesJugador panelEstadistiques;
 
     /**
      * Creadora per defecte
@@ -39,6 +42,9 @@ class VistaPrincipal {
         initResultats();
         initRanking();
         initAnalisi();
+        initLogged();
+        initNotLogged();
+        initEstadistiques();
 
         addPanels();
 
@@ -106,6 +112,27 @@ class VistaPrincipal {
     }
 
     /**
+     * Inicialitza la vista de perfil logged.
+     */
+    private void initLogged() {
+        panelLogged = new VistaLogged(this);
+    }
+
+    /**
+     * Inicialitza la vista de perfil no logged.
+     */
+    private void initNotLogged() {
+        panelNotLogged = new VistaNotLogged(this);
+    }
+
+    /**
+     * Inicialitza la vista d'estadistiques.
+     */
+    private void initEstadistiques() {
+        panelEstadistiques = new VistaEstadistiquesJugador(this);
+    }
+
+    /**
      * Afegeix els panels de totes les vistes al CardLayout principal.
      */
     private void addPanels() {
@@ -118,6 +145,9 @@ class VistaPrincipal {
         contentPane.add(panelResultats, "resultats");
         contentPane.add(panelRanking, "ranking");
         contentPane.add(panelAnalisi, "analisi");
+        contentPane.add(panelEstadistiques, "estadistiques");
+        contentPane.add(panelNotLogged, "notLogged");
+        contentPane.add(panelLogged, "logged");
     }
 
     /**
@@ -204,6 +234,30 @@ class VistaPrincipal {
         panelRanking.setRanking(ranking);
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "ranking");
+    }
+
+    /**
+     * Mostra un ranking a pantalla.
+     */
+    void mostraEstadistiques() {
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "estadistiques");
+    }
+
+    /**
+     * Mostra un ranking a pantalla.
+     */
+    void mostraLogged() {
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "logged");
+    }
+
+    /**
+     * Mostra un ranking a pantalla.
+     */
+    void mostraNotLogged() {
+        CardLayout cl = (CardLayout) contentPane.getLayout();
+        cl.show(contentPane, "notLogged");
     }
 
     /**
