@@ -140,14 +140,14 @@ class VistaPrincipal {
      * Inicialitza la vista d'estadistiques.
      */
     private void initLoginForm() {
-        panelLoginForm = new VistaLoginForm(this);
+        panelLoginForm = new VistaLoginForm(this, mCp);
     }
 
     /**
      * Inicialitza la vista d'estadistiques.
      */
     private void initRegisterForm() {
-        panelRegisterForm = new VistaRegisterForm(this);
+        panelRegisterForm = new VistaRegisterForm(this, mCp);
     }
 
     /**
@@ -308,6 +308,13 @@ class VistaPrincipal {
         panelAnalisi.setAnalisi(ca);
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "analisi");
+    }
+
+    /**
+     * Crea un missatge d'error
+     */
+    void missatgeError(String missatge) {
+        JOptionPane.showMessageDialog(frameVista, missatge, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     /**
