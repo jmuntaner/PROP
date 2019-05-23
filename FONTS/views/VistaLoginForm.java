@@ -3,8 +3,6 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 
-//TODO: distribucio real
-
 /*
             TITOL
     USERNAME    textfield
@@ -16,7 +14,7 @@ import java.awt.*;
 
 public class VistaLoginForm extends JPanel {
     private JButton botoLogin, botoTornar;
-    private JLabel titol, username, password;
+    private JLabel titol, username, password; //TODO: titol
     private JPasswordField pwd;
     private JTextField usernameIn;
     private VistaPrincipal vp;
@@ -31,8 +29,6 @@ public class VistaLoginForm extends JPanel {
         this.vp = vp;
 
         placeComponents();
-        initBotoLogin();
-        initBotoTornar();
     }
 
     void clearForm() {
@@ -66,27 +62,16 @@ public class VistaLoginForm extends JPanel {
         botoTornar = new JButton("Tornar");
         botoTornar.setBounds(395, 80, 120, 28);
         add(botoTornar);
-    }
 
-    /**
-     * Inicialitza el botó de logout.
-     */
-    private void initBotoLogin() {
-        //botoLogin = new JButton("Inicia sesió");
-        //botoLogin.setPreferredSize(new Dimension(140, 28));
-        //botoLogin.addActionListener(e -> vp.mostraNotLogged()); //TODO: login
-    }
-
-    /**
-     * Inicialitza el botó de tornada.
-     */
-    private void initBotoTornar() {
-        //botoTornar = new JButton("Tornar");
-        //botoTornar.setPreferredSize(new Dimension(140, 28));
+        // Assigna els listeners als botons
+        botoLogin.addActionListener(e -> login());
         botoTornar.addActionListener(e -> vp.mostraNotLogged());
-        //GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.gridx = 0;
-        //gbc.gridy = 6;
-        //add(botoTornar, gbc);
+    }
+
+    /**
+     * Executa el login
+     */
+    private void login() {
+        //TODO: login
     }
 }

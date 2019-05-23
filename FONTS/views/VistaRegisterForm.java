@@ -3,8 +3,6 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 
-//TODO: distribucio real
-
 /*
             TITOL
     USERNAME    textfield
@@ -16,8 +14,8 @@ import java.awt.*;
  */
 
 public class VistaRegisterForm extends JPanel {
-    private JButton botoLogin, botoTornar;
-    private JLabel titol, username, password, repassword;
+    private JButton botoRegistre, botoTornar;
+    private JLabel titol, username, password, repassword; //TODO: títol
     private JPasswordField pwd, repwd;
     private JTextField usernameIn;
     private VistaPrincipal vp;
@@ -33,8 +31,6 @@ public class VistaRegisterForm extends JPanel {
         this.vp = vp;
 
         placeComponents();
-        initBotoLogin();
-        initBotoTornar();
     }
 
     void clearForm() {
@@ -70,40 +66,24 @@ public class VistaRegisterForm extends JPanel {
         repwd.setBounds(355, 70, 160, 25);
         add(repwd);
 
-        botoLogin = new JButton("Registro");
-        botoLogin.setBounds(265, 110, 120, 28);
-        add(botoLogin);
+        botoRegistre = new JButton("Registrar");
+        botoRegistre.setBounds(265, 110, 120, 28);
+        add(botoRegistre);
 
         botoTornar = new JButton("Tornar");
         botoTornar.setBounds(395, 110, 120, 28);
         add(botoTornar);
-    }
 
-    /**
-     * Inicialitza el botó de login.
-     */
-    private void initBotoLogin() {
-        //botoLogin = new JButton("Inicia sesió");
-        //botoLogin.setPreferredSize(new Dimension(140, 28));
-        //botoLogin.addActionListener(e -> vp.mostraNotLogged()); //TODO: login
-        //GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.gridx = 0;
-        //gbc.gridy = 4;
-        //add(botoLogin, gbc);
+        //Assigna els listeners als botons
 
-    }
-
-    /**
-     * Inicialitza el botó de tornada.
-     */
-    private void initBotoTornar() {
-        //botoTornar = new JButton("Tornar");
-        //botoTornar.setPreferredSize(new Dimension(140, 28));
+        botoRegistre.addActionListener(e -> register());
         botoTornar.addActionListener(e -> vp.mostraNotLogged());
-        /*GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        add(botoTornar, gbc);*/
+    }
+
+    /**
+     * Executa el registre
+     */
+    private void register() {
+        //TODO: registre
     }
 }
