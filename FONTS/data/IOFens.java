@@ -25,7 +25,7 @@ public class IOFens {
             GestioProblema gp = GestioProblema.getInstance();
             ArrayList<String> al = gp.getList();
             FileWriter wr = new FileWriter(f);
-            for (String s: al) {
+            for (String s : al) {
                 Problema p = gp.getProblema(s);
                 wr.write(p.getNom());
                 wr.write("_");
@@ -35,8 +35,7 @@ public class IOFens {
                 wr.write("\n");
             }
             wr.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("IOFen - write: " + e.getMessage());
         }
     }
@@ -52,13 +51,12 @@ public class IOFens {
         String fen = null;
         int i = prob.indexOf('_');
         int j = prob.lastIndexOf('_');
-        if (i>0 && j<prob.length()-1 && i < j) fen = prob.substring(j+1);
+        if (i > 0 && j < prob.length() - 1 && i < j) fen = prob.substring(j + 1);
         else return false; //if (fen==null) return false;
-        int numj = Integer.parseInt(prob.substring(i+1,j));
-        String nom = prob.substring(0,i);
+        int numj = Integer.parseInt(prob.substring(i + 1, j));
+        String nom = prob.substring(0, i);
         Problema pp = new Problema(nom);
-        if (!pp.initProblema(numj,fen)) {
-            System.out.println("false");
+        if (!pp.initProblema(numj, fen)) {
             return false;
         }
         GestioProblema gp = GestioProblema.getInstance();
@@ -81,18 +79,16 @@ public class IOFens {
             ArrayList<String> probs = new ArrayList<>();
             int rd;
             StringBuilder sb = new StringBuilder();
-            while ((rd=fr.read()) != -1) {
-                if (rd=='\n') {
+            while ((rd = fr.read()) != -1) {
+                if (rd == '\n') {
                     probs.add(sb.toString());
                     sb = new StringBuilder();
-                }
-                else if (rd!='\r') sb.append((char) rd); //Sistema anti-windows (no em peguis Alex)
+                } else if (rd != '\r') sb.append((char) rd); //Sistema anti-windows (no em peguis Alex)
             }
-            for (String fen: probs)
-                if (!afegeixProblema(fen)) return false;
+            for (String fen : probs)
+                afegeixProblema(fen);
             return true;
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("IOFens - read: " + e.getMessage());
         }
     }
