@@ -204,6 +204,8 @@ class VistaAnalisiPartides extends JPanel {
         this.ca = ca;
         numPartides = ca.getNumProbs();
         resetAll();
+        noms[0].setSelectedIndex(0);
+        noms[1].setSelectedIndex(0);
     }
 
 
@@ -284,6 +286,7 @@ class VistaAnalisiPartides extends JPanel {
         noms[0].setEnabled(true);
         noms[1].setEnabled(true);
         started = false;
+        buttonIniciar.setText("Iniciar");
     }
 
     private class DisabledItemSelectionModel extends DefaultListSelectionModel {

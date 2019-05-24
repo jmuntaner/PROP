@@ -15,6 +15,7 @@ class VistaFiPartida extends JPanel {
 
     /**
      * Creadora per defecte.
+     *
      * @param vp Vista principal.
      */
     VistaFiPartida(VistaPrincipal vp) {
@@ -63,17 +64,26 @@ class VistaFiPartida extends JPanel {
         // Add to layout
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
+        gbc.weightx = 1;
         gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        //gbc.anchor = GridBagConstraints.CENTER;
         add(labelPrincipal, gbc);
         gbc.gridy++;
         add(labelGuanyador, gbc);
         gbc.gridy++;
-        add(botoRanking, gbc);
-        gbc.gridy++;
-        add(botoLlista, gbc);
-        gbc.gridy++;
-        add(botoMenu, gbc);
+        JPanel subPanelBotons = new JPanel();
+        subPanelBotons.setLayout(new GridBagLayout());
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridx = 0;
+        gbc2.gridy = 0;
+        gbc2.fill = GridBagConstraints.HORIZONTAL;
+        gbc2.insets = new Insets(4, 4, 4, 4);
+        subPanelBotons.add(botoRanking, gbc2);
+        gbc2.gridy++;
+        subPanelBotons.add(botoLlista, gbc2);
+        gbc2.gridy++;
+        subPanelBotons.add(botoMenu, gbc2);
+
+        add(subPanelBotons, gbc);
+
     }
 }
