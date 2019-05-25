@@ -70,7 +70,7 @@ public class ControladorUsuari {
      *
      */
     public void logout() {
-        if(u.getNom().equals("guest")) {
+        if(!u.getNom().equals("guest")) {
             gu.delete(u.getNom());
             gu.saveUsuari(u);
         }
