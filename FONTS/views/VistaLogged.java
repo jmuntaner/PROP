@@ -64,15 +64,20 @@ public class VistaLogged extends JPanel {
     private void initEstadistiques() {
         JTextArea estadistiques = new JTextArea("Estadistiques: " +
                 "aquest usuari es AlphaZero");
-        estadistiques.setPreferredSize(new Dimension(300, 300));
+        estadistiques.setPreferredSize(new Dimension(300, 200));
         estadistiques.setEditable(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
         add(estadistiques, gbc);
-        //TODO: ficar les estadistiques
-        //estadistiques.setText(usuari.getEstadistiques()); (no estan implementades D:)
+        int intents = cu.getStatistics().getIntents();
+        int acabats = cu.getStatistics().getAcabats();
+        int guanyats = cu.getStatistics().getGuanyats();
+        estadistiques.setText("Intents: " + intents + '\n' +
+                "Acabats: " + acabats + '/' + intents + '\n' +
+                "Guanyats: " + guanyats + '/' + acabats + '\n');
+        //TODO: millorar interficie
     }
 
     /**

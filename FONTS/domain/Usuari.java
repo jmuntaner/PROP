@@ -9,7 +9,7 @@ public class Usuari {
     private String nom, hashPassword;
     private final String id;
     private final Set<Integer> problemesSuperats;
-    private final transient EstadistiquesJugador estadistiques; //TODO: remove transient
+    private EstadistiquesJugador estadistiques;
 
     public Usuari(String id, String nom, String contrasenya) {
         this.id = id;
@@ -109,6 +109,11 @@ public class Usuari {
     public void superaProblema(int pid) {
         problemesSuperats.add(pid);
     }
+
+    /**
+     * Retorna les estadistiques del jugador
+     */
+    public EstadistiquesJugador getStatistics() {return estadistiques;}
 
 
 }
