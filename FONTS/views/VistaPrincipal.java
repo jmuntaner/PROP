@@ -230,12 +230,11 @@ class VistaPrincipal {
      * Mostra perfil a pantalla.
      */
     void mostraPerfil() {
-        CardLayout cl = (CardLayout) contentPane.getLayout();
         if(mCp.getCUser().getNom().equals("guest")) {
-            cl.show(contentPane, "notLogged");
+            mostraNotLogged();
         }
         else {
-            cl.show(contentPane, "logged");
+            mostraLogged();
         }
     }
 
@@ -243,6 +242,7 @@ class VistaPrincipal {
      * Mostra perfil Logged a pantalla.
      */
     void mostraLogged() {
+        panelLogged.update();
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "logged");
     }

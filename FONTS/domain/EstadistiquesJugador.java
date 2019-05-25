@@ -1,7 +1,9 @@
 package domain;
 import java.io.Serializable;
 
-public class EstadistiquesJugador {
+import java.io.Serializable;
+
+public class EstadistiquesJugador implements Serializable {
     private int intents; // nombre de problemes intentats (començats)
     private int acabats; // nombre de problemes acabats
     private int guanyats; // nombre de problemes guanyats

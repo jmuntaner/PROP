@@ -1,5 +1,6 @@
 package controllers;
 
+import data.GestioUsuari;
 import domain.Maquina;
 import domain.Moviment;
 import domain.Problema;
@@ -21,6 +22,12 @@ public class ControladorPartidaHvM extends ControladorPartida {
     ControladorPartidaHvM(Problema problema, Usuari usuari, Maquina maquina, boolean ataca) {
         super(problema);
         this.usuari = usuari;
+        if(!usuari.getNom().equals("guest")) {
+            getUsuari().getStatistics().iniciaPartida();
+            GestioUsuari gu = GestioUsuari.getInstance();
+            gu.delete(getUsuari().getNom());
+            gu.saveUsuari(getUsuari());
+        }
         if (ataca) {
             setNoms(maquina.getNom(), usuari.getNom());
         } else {

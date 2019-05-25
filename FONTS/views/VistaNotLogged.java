@@ -184,11 +184,13 @@ public class VistaNotLogged extends JPanel {
     private void login() {
         String usuari = usernameIn.getText().trim();
         char[] pass = pwd.getPassword();
+        //existeix l'usuari
         if(!cu.existeixUsuari(usuari)) {
             vp.missatgeError("L'usuari introduït no existeix");
             usernameIn.setText("");
             return;
         }
+        //contrassenya erronea
         if(!cu.authenticate(usuari, String.valueOf(pass))) {
             vp.missatgeError("Contrassenya errònea");
             pwd.setText("");
@@ -216,6 +218,11 @@ public class VistaNotLogged extends JPanel {
             vp.missatgeError("Les contrassenyes no coincideixen");
             pwd.setText("");
             repwd.setText("");
+            return;
+        }
+        //nom buit
+        if(usuari.equals("")) {
+            vp.missatgeError("El camp del nom està sense rellenar, rellena'l per a continuar");
             return;
         }
         if(cu.existeixUsuari(usuari)) {
