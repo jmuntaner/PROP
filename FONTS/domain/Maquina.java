@@ -7,7 +7,7 @@ public abstract class Maquina {
     static final double maxVal = 9999;
     static final double minVal = -9999;
     private int profunditatInicial;
-    int count = 0;
+    int count;
 
     /**
      * Getter del nom de la màquina
@@ -35,6 +35,7 @@ public abstract class Maquina {
     public Moviment calcularMoviment(int profunditat, Tauler t, Color torn, Color tema) {
         //Color torn = partida.getTorn();
         //Tauler t = partida.getSituacioActual();
+        count = 0;
         profunditatInicial = profunditat;
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
         if (movPos.isEmpty()) return null;

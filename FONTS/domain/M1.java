@@ -21,6 +21,7 @@ public class M1 extends Maquina {
 
     @Override
     double minimax(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn) {
+        count++;
         if (profunditat==0 || codi == 2 || codi == 3) {
             return heuristica(esJugadorMaximal, codi);
         }

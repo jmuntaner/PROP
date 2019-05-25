@@ -1,8 +1,8 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
+
+import utils.Pair;
 
 public class M2 extends Maquina {
     private Map<String, TranspositionTableEntry> cache = new HashMap<>();
@@ -125,7 +125,7 @@ public class M2 extends Maquina {
         //return profunditat==0 || profunditat <= getProfunditatInicial()-LIMIT_PROFUNDITAT;
     }
 
-    private double heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn) {
+    /*private double heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn) {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
             else return minVal;
@@ -145,9 +145,9 @@ public class M2 extends Maquina {
             else v-=100;
         }
         return v;
-    }
+    }*/
 
-    /*private double heuristica(Tauler t, boolean esJugadorMaximal, int codi, Color torn) {
+    private double heuristica(Tauler t, boolean esJugadorMaximal, int codi, Color torn) {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
             else return minVal;
@@ -155,31 +155,52 @@ public class M2 extends Maquina {
             return minVal;
         }
         return 0;
-    }*/
+    }
 
     @Override
     public String getNom() {
         return "Barja";
     }
 
+    //Molt ineficient, ordena movs
+    private void order(ArrayList<Moviment> movs, Tauler t, boolean jmax, Color torn) {
+        ArrayList<Pair<Double,Moviment>> values = new ArrayList<>();
+        for (Moviment m: movs) {
+            int codi = t.mou(m);
+            values.add(new Pair<>(heuristica(t, jmax, codi, torn), m));
+            t.mouInvers(m);
+        }
+        Collections.sort(values, new Comparator<Pair<Double, Moviment>>() {
+            @Override
+            public int compare(Pair<Double, Moviment> o1, Pair<Double, Moviment> o2) {
+                int x = o1.first().compareTo(o2.first());
+                if (jmax) x *= -1;
+                return x;
+            }
+        });
+        movs.clear();
+        for (Pair<Double,Moviment> p: values) movs.add(p.second());
+    }
+
     //https://github.com/Vadman97/ChessGame/blob/master/src/vad/AIPlayer.java
     private double minimaxAux(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn) {
         count++;
         String fen = FenTranslator.generaFen(t,torn);
-        /*if (cache.containsKey(fen)) {
+        if (cache.containsKey(fen)) {
             //System.out.println("Key found in cache");
             TranspositionTableEntry entry = cache.get(fen);
             if (entry.getLower() >= beta) return entry.getLower();
             if (entry.getUpper() <= alfa) return entry.getUpper();
             alfa = Math.max(alfa, entry.getLower());
             beta = Math.min(beta, entry.getUpper());
-        }*/
+        }
         if (limitProfunditat(profunditat) || codi == 2 || codi==3) {
             return heuristica(t, esJugadorMaximal, codi, torn);
         }
         double bestMove = 0;
         Moviment best = null;
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
+        //order(movPos,t,esJugadorMaximal,torn);
         if (esJugadorMaximal) {
             bestMove = minVal;
             double a = alfa;
@@ -257,9 +278,32 @@ https://stackoverflow.com/questions/9964496/alpha-beta-move-ordering
         -> No es massa util per una partida tan rapida (esta posat per partides llargues)
     - Prioritat per a les jugades que acaben en mat
     - Move ordering: avalua els millors moviments primer
-        -> No implementat perque el minimax es poc profund i no compensa
-        -> Cal fer els moviments dos cops
     - Transposition tables: comprovacio de repeticions
     - Moviments: limita el nombre de vegades que es comprova un moviment
         Nomes serveix per problemes llargs (però no fa que trigui molt mes aixi que aqui es queda)
  */
+
+/*
+Resultats provisionals M2 (problema mat en 3, profunditat total):
+    - Heuristica M1 sense cache: 2700 ms - 168297 nodes
+    - Heuristica M1 amb cache: 2400 ms
+    - Heuristica M2 amb cache: 3445082 nodes (aprox 40-50 segons)
+    - Heuristica M2 sense cache: >~ 4M nodes
+    -> La llista de moviments repetits no modifica el numero de nodes al ser problemes petits
+    -> Com que no fa varia gaire el temps, la deixem per si pot ser util en algun cas
+    - Heuristica M2 amb cache i move ordering: 33 s - 555k nodes
+
+    - M1: 190k nodes - 2,7 s
+    - M2: 167k nodes - 2.7 s
+
+Problema de 4, profunditat total:
+    - Heuristica M1 sense millores: ~50s - 4,869M nodes
+    - Heuristica M2: 731 s - 49M nodes
+    - Heuristica M1 amb cache i ordering: 33s - 2.3M nodes
+
+ */
+
+//TODO:
+// - Triar heuristica
+// - Triar limit profunditat
+// - Eliminar codi duplicat
