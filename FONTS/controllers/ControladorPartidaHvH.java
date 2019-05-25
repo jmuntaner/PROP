@@ -1,5 +1,6 @@
 package controllers;
 
+import data.GestioUsuari;
 import domain.Problema;
 import domain.Usuari;
 
@@ -17,6 +18,12 @@ public class ControladorPartidaHvH extends ControladorPartida {
     public ControladorPartidaHvH(Problema problema, Usuari usuari, String oponent) {
         super(problema);
         this.usuari = usuari;
+        if(!usuari.getNom().equals("guest")) {
+            getUsuari().getStatistics().iniciaPartida();
+            GestioUsuari gu = GestioUsuari.getInstance();
+            gu.delete(getUsuari().getNom());
+            gu.saveUsuari(getUsuari());
+        }
         setNoms(usuari.getNom(), oponent);
     }
 

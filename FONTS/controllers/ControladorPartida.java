@@ -29,10 +29,6 @@ public abstract class ControladorPartida {
         partida = new Partida(problema);
         estadistiques = new EstadistiquesPartida();
         estadistiques.iniciaTorn(partida.getTorn());
-        getUsuari().getStatistics().iniciaPartida();
-        GestioUsuari gu = GestioUsuari.getInstance();
-        gu.delete(getUsuari().getNom());
-        gu.saveUsuari(getUsuari());
         taules = false;
         limit = false;
         profunditat = (problema.getNumJugades() * 2) - 1;
@@ -70,11 +66,13 @@ public abstract class ControladorPartida {
             ge.delete(problema.getNom());
             ge.saveProblema(problema);
         }
-        if (getNomGuanyador().equals(getUsuari().getNom())) getUsuari().getStatistics().acabaPartida(true);
-        else getUsuari().getStatistics().acabaPartida(false);
-        GestioUsuari gu = GestioUsuari.getInstance();
-        gu.delete(getUsuari().getNom());
-        gu.saveUsuari(getUsuari());
+        if((esJugadorHuma(nomA) || esJugadorHuma(nomB)) && !getUsuari().getNom().equals("guest")) {
+            if (getNomGuanyador().equals(getUsuari().getNom())) getUsuari().getStatistics().acabaPartida(true);
+            else getUsuari().getStatistics().acabaPartida(false);
+            GestioUsuari gu = GestioUsuari.getInstance();
+            gu.delete(getUsuari().getNom());
+            gu.saveUsuari(getUsuari());
+        }
     }
 
     /**

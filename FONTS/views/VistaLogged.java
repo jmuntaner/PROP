@@ -8,6 +8,8 @@ import java.awt.*;
 public class VistaLogged extends JPanel {
     private VistaPrincipal vp;
     private ControladorUsuari cu;
+    private JLabel benvinguda;
+    private JTextArea estadistiques;
     /**
      * Creadora per defecte
      *
@@ -24,6 +26,17 @@ public class VistaLogged extends JPanel {
         initBotoLogout();
         initBotoTornar();
         initGlues();
+    }
+
+    public void update() {
+        benvinguda.setText("Benvingut " + cu.getNom());
+        int intents = cu.getStatistics().getIntents();
+        int acabats = cu.getStatistics().getAcabats();
+        int guanyats = cu.getStatistics().getGuanyats();
+        estadistiques.setText("Intents: " + intents + '\n' +
+                "Acabats: " + acabats + '/' + intents + '\n' +
+                "Guanyats: " + guanyats + '/' + acabats + '\n');
+
     }
 
     /**
@@ -47,7 +60,7 @@ public class VistaLogged extends JPanel {
      * Inicialitza la benvinguda i el nom de l'usuari.
      */
     private void initBenvinguda() {
-        JLabel benvinguda = new JLabel("Benvingut " + cu.getNom());
+        benvinguda = new JLabel("Benvingut " + cu.getNom());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -62,9 +75,9 @@ public class VistaLogged extends JPanel {
      * Inicialitza el botó d'estadístiques
      */
     private void initEstadistiques() {
-        JTextArea estadistiques = new JTextArea("Estadistiques: " +
+        estadistiques = new JTextArea("Estadistiques: " +
                 "aquest usuari es AlphaZero");
-        estadistiques.setPreferredSize(new Dimension(300, 200));
+        estadistiques.setPreferredSize(new Dimension(150, 150));
         estadistiques.setEditable(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
