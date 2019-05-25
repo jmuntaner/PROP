@@ -54,15 +54,13 @@ public class DriverUsuari extends GenericDriver {
     }
 
     public void testConstructor() {
-        optPrint("Id: ");
-        int id = scan.nextInt();
         scan.nextLine();
         optPrint("Nom: ");
         String nom = scan.nextLine();
         optPrint("Contrasenya: ");
         String pass = scan.nextLine();
-        u = new Usuari(id, nom, pass);
-        System.out.printf("Creat: Id: %d, Nom: %s\r\n", u.getId(), u.getNom());
+        u = new Usuari(nom, nom, pass);
+        System.out.printf("Creat: Id: %s, Nom: %s\r\n", u.getId(), u.getNom());
     }
 
     public void testCheckPass() {

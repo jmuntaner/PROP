@@ -7,11 +7,11 @@ import java.util.Set;
 
 public class Usuari {
     private String nom, hashPassword;
-    private final int id;
+    private final String id;
     private final Set<Integer> problemesSuperats;
     private final transient EstadistiquesJugador estadistiques; //TODO: remove transient
 
-    public Usuari(int id, String nom, String contrasenya) {
+    public Usuari(String id, String nom, String contrasenya) {
         this.id = id;
         this.hashPassword = hashPass(contrasenya);
         this.nom = nom;
@@ -48,7 +48,7 @@ public class Usuari {
      *
      * @return Id d'usuari de l'usuari.
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 

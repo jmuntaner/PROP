@@ -1,9 +1,12 @@
 package views;
 
+import controllers.ControladorUsuari;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class VistaNotLogged extends JPanel {
+    private ControladorUsuari cu;
     private JButton botoSubmit;
     private JButton botoChangeMode;
     private VistaPrincipal vp;
@@ -16,11 +19,11 @@ public class VistaNotLogged extends JPanel {
      *
      * @param vp Vista principal.
      */
-    VistaNotLogged(VistaPrincipal vp) {
+    VistaNotLogged(VistaPrincipal vp, ControladorUsuari cu) {
         super();
         setLayout(new GridBagLayout());
         this.vp = vp;
-
+        this.cu = cu;
         initForm();
     }
 
@@ -130,6 +133,7 @@ public class VistaNotLogged extends JPanel {
     private void canviarMode() {
         logreg = !logreg;
         canvisVisuals();
+        clearForm();
     }
 
     /**
@@ -180,9 +184,19 @@ public class VistaNotLogged extends JPanel {
     private void login() {
         String usuari = usernameIn.getText().trim();
         char[] pass = pwd.getPassword();
-        char[] confirmation = repwd.getPassword();
-        //TODO: login
+        if(!cu.existeixUsuari(usuari)) {
+            vp.missatgeError("L'usuari introduït no existeix");
+            usernameIn.setText("");
+            return;
+        }
+        if(!cu.authenticate(usuari, String.valueOf(pass))) {
+            vp.missatgeError("Contrassenya errònea");
+            pwd.setText("");
+            return;
+        }
+        cu.selectUsuari(usuari);
         clearForm();
+        vp.mostraLogged();
     }
 
     /**
@@ -204,7 +218,14 @@ public class VistaNotLogged extends JPanel {
             repwd.setText("");
             return;
         }
-        //TODO: registre
+        if(cu.existeixUsuari(usuari)) {
+            vp.missatgeError("Ja existeix un usuari amb aquest nom, escull un altre nom si us plau");
+            usernameIn.setText("");
+            return;
+        }
+        String contra = String.valueOf(pass);
+        cu.register(usuari, contra);
         clearForm();
+        vp.mostraLogged();
     }
 }

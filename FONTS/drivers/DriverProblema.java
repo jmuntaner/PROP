@@ -107,7 +107,7 @@ public class DriverProblema extends GenericDriver {
 
     public void testGetRanking() {
         Ranking<PuntuacioProblema> r = p.getRanking();
-        Usuari u = new Usuari(1, "IdTest", "Pass");
+        Usuari u = new Usuari("IdTest", "IdTest", "Pass");
         EstadistiquesPartida e = new EstadistiquesPartida();
         PuntuacioProblema pp = new PuntuacioProblema(e, Color.BLANC);
         r.afegeixPuntuacio(u, pp);

@@ -8,6 +8,7 @@ import domain.Usuari;
 public class ControladorPrincipal {
     private ControladorEditor ce;
     private ControladorLlistaProblemes cl;
+    private ControladorUsuari cu;
     private Usuari usuari;
 
     /**
@@ -16,7 +17,8 @@ public class ControladorPrincipal {
     public ControladorPrincipal() {
         ce = new ControladorEditor();
         cl = new ControladorLlistaProblemes(this);
-        usuari = new Usuari(0, "Alex", "TheDarkLord");
+        cu = new ControladorUsuari(this);
+        usuari = new Usuari("guest", "guest", "guest"); //ControladorUsuari.guest?
     }
 
     /**
@@ -35,6 +37,22 @@ public class ControladorPrincipal {
      */
     public ControladorLlistaProblemes getControladorLlistaProblemes() {
         return cl;
+    }
+
+    /**
+     * Obté una nova instància del controlador d'usuari.
+     *
+     * @return Controlador d'usuari.
+     */
+    public ControladorUsuari getControladorUsuari() {
+        return cu;
+    }
+
+    /**
+     * Setter de l'usuari
+     */
+    void setUsuari(Usuari u) {
+        usuari = u;
     }
 
     /**
