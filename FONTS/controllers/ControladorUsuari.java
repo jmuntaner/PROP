@@ -15,6 +15,10 @@ public class ControladorUsuari {
         u  = guest;
     }
 
+    public EstadistiquesJugador getStatistics() {
+        return u.getStatistics();
+    }
+
     public String getNom() {
         return u.getNom();
     }
@@ -66,6 +70,10 @@ public class ControladorUsuari {
      *
      */
     public void logout() {
+        if(u.getNom().equals("guest")) {
+            gu.delete(u.getNom());
+            gu.saveUsuari(u);
+        }
         u = guest;
         cp.setUsuari(guest);
     }

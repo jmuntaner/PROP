@@ -111,5 +111,10 @@ public class Usuari implements Serializable  {
         problemesSuperats.add(pid);
     }
 
+    /**
+     * Retorna les estadistiques del jugador
+     */
+    public EstadistiquesJugador getStatistics() {return estadistiques;}
+
 
 }
