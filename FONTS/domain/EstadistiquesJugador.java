@@ -1,4 +1,6 @@
 package domain;
 
-public class EstadistiquesJugador {
+import java.io.Serializable;
+
+public class EstadistiquesJugador implements Serializable {
 }

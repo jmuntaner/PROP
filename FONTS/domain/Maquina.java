@@ -4,28 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Maquina {
-    static final int maxVal = 9999;
-    static final int minVal = -9999;
+    static final double maxVal = 9999;
+    static final double minVal = -9999;
     private int profunditatInicial;
-
-    /**
-     * Indica si s'ha arribat a la profunditat maxima del minimax
-     *
-     * @param profunditat Profunditat actual del minimax
-     * @return True si s'ha arribat a la profunditat maxima
-     */
-    public abstract boolean limitProfunditat(int profunditat);
-
-    /**
-     * Heurística de la situacio actual del tauler
-     *
-     * @param posicio Tauler actual
-     * @param esJugadorMaximal Indica si el jugador que ha de moure el següent es l'atacant
-     * @param codi Codi retornat al fer l'últim moviment
-     * @param torn Color del jugador que ha de moure
-     * @return Valor de l'heuristica per a la situacio del tauler
-     */
-    public abstract int heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn);
 
     /**
      * Getter del nom de la màquina
@@ -57,9 +38,9 @@ public abstract class Maquina {
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
         if (movPos.isEmpty()) return null;
         Moviment mov = null;
-        int bestMove;
+        double bestMove;
         int codi;
-        int ret;
+        double ret;
         //if (torn == Color.BLANC) {
         bestMove = torn == tema ? minVal : maxVal;
         for (Moviment m : movPos) { //primera "iteracio" del minimax
@@ -95,34 +76,5 @@ public abstract class Maquina {
      * @param torn             Color del jugador que ha de moure
      * @return Valor de la branca explorada
      */
-    private int minimax(Tauler t, int profunditat, int alfa, int beta, boolean esJugadorMaximal, int codi, Color torn) {
-        //possibles millores per M2:
-        // - Heuristica segons posicio de tauler, ordenacio de moviments,... (potser cal afegir parametres a l'heuristica)
-        // - Canviar funcio de node final, potser per limitar profunditat
-        if (limitProfunditat(profunditat) || codi == 2 || codi == 3) { //profunditat 0 o node final
-            return heuristica(t, esJugadorMaximal, codi, torn);
-        }
-        ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
-        int bestMove;
-        if (esJugadorMaximal) {
-            bestMove = minVal;
-            for (Moviment m : movPos) {
-                int c = t.mou(m);
-                bestMove = Math.max(bestMove, minimax(t, profunditat - 1, alfa, beta, false, c, torn.getNext()));
-                t.mouInvers(m);
-                alfa = Math.max(alfa, bestMove);
-                if (alfa >= beta) break; //beta cut-off
-            }
-        } else {
-            bestMove = maxVal;
-            for (Moviment m : movPos) {
-                int c = t.mou(m);
-                bestMove = Math.min(bestMove, minimax(t, profunditat - 1, alfa, beta, true, c, torn.getNext()));
-                t.mouInvers(m);
-                beta = Math.min(beta, bestMove);
-                if (alfa >= beta) break; //alfa cut-off
-            }
-        }
-        return bestMove;
-    }
+    abstract double minimax(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn);
 }

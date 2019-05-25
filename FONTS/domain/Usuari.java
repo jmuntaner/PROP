@@ -1,15 +1,16 @@
 package domain;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Usuari {
+public class Usuari implements Serializable  {
     private String nom, hashPassword;
     private final int id;
     private final Set<Integer> problemesSuperats;
-    private final transient EstadistiquesJugador estadistiques; //TODO: remove transient
+    private final EstadistiquesJugador estadistiques;
 
     public Usuari(int id, String nom, String contrasenya) {
         this.id = id;

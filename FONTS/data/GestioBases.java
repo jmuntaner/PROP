@@ -90,5 +90,5 @@ public abstract class GestioBases {
         if (!f.delete()) throw new RuntimeException("Base - delete: couldn't delete file");
     }
 
-
 }
+
