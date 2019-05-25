@@ -113,14 +113,14 @@ class VistaPrincipal {
      * Inicialitza la vista de perfil logged.
      */
     private void initLogged() {
-        panelLogged = new VistaLogged(this);
+        panelLogged = new VistaLogged(this, mCp.getCUser());
     }
 
     /**
      * Inicialitza la vista de perfil no logged.
      */
     private void initNotLogged() {
-        panelNotLogged = new VistaNotLogged(this);
+        panelNotLogged = new VistaNotLogged(this, mCp.getCUser());
     }
 
     /**
@@ -227,11 +227,16 @@ class VistaPrincipal {
     }
 
     /**
-     * Mostra les estadistiques a pantalla.
+     * Mostra perfil a pantalla.
      */
-    void mostraEstadistiques() {
+    void mostraPerfil() {
         CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "estadistiques");
+        if(mCp.getCUser().getNom().equals("guest")) {
+            cl.show(contentPane, "notLogged");
+        }
+        else {
+            cl.show(contentPane, "logged");
+        }
     }
 
     /**

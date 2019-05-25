@@ -91,7 +91,7 @@ class VistaMenuPrincipal extends JPanel {
     private void initBotoPerfil() {
         JButton botoGestio = new JButton("Perfil");
         botoGestio.setPreferredSize(new Dimension(140, 28));
-        botoGestio.addActionListener(e -> vp.mostraLogged()); //TODO: mostrar Logged o NotLogged segons si està logged o no
+        botoGestio.addActionListener(e -> vp.mostraPerfil());
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;

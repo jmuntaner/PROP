@@ -3,6 +3,7 @@ package views;
 import controllers.ControladorEditor;
 import controllers.ControladorLlistaProblemes;
 import controllers.ControladorPrincipal;
+import controllers.ControladorUsuari;
 
 /**
  * Controlador de la capa de presentació.
@@ -54,6 +55,13 @@ class CtrlPresentacion {
     ControladorLlistaProblemes getCLlista() {
         return cp.getControladorLlistaProblemes();
     }
+
+    /**
+     * Obté del domini un controlador d'usuari.
+     *
+     * @return Controlador d'usuari.
+     */
+    ControladorUsuari getCUser() { return cp.getControladorUsuari(); }
 
 
 }

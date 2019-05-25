@@ -1,22 +1,23 @@
 package views;
 
+import controllers.ControladorUsuari;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class VistaLogged extends JPanel {
     private VistaPrincipal vp;
-    /*
-    TEXT: BENVINGUT #NOMUSUARI // ESTADISTIQUES // LOGOUT // TORNAR
-     */
+    private ControladorUsuari cu;
     /**
      * Creadora per defecte
      *
      * @param vp Vista principal.
      */
-    VistaLogged(VistaPrincipal vp) {
+    VistaLogged(VistaPrincipal vp, ControladorUsuari cu) {
         super();
         setLayout(new GridBagLayout());
         this.vp = vp;
+        this.cu = cu;
 
         initBenvinguda();
         initEstadistiques();
@@ -46,7 +47,7 @@ public class VistaLogged extends JPanel {
      * Inicialitza la benvinguda i el nom de l'usuari.
      */
     private void initBenvinguda() {
-        JLabel benvinguda = new JLabel("Benvingut usuari #x"); //TODO: nom de l'usuari actual
+        JLabel benvinguda = new JLabel("Benvingut " + cu.getNom());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -80,7 +81,8 @@ public class VistaLogged extends JPanel {
     private void initBotoLogout() {
         JButton botoLogout = new JButton("Logout");
         botoLogout.setPreferredSize(new Dimension(140, 28));
-        botoLogout.addActionListener(e -> vp.mostraNotLogged()); //TODO: fer el logout efectiu (usuari actual -> null)
+        botoLogout.addActionListener(e -> cu.logout());
+        botoLogout.addActionListener(e -> vp.mostraNotLogged());
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
