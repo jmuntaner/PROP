@@ -7,6 +7,7 @@ public abstract class Maquina {
     static final double maxVal = 9999;
     static final double minVal = -9999;
     private int profunditatInicial;
+    int count = 0;
 
     /**
      * Getter del nom de la màquina
@@ -59,6 +60,7 @@ public abstract class Maquina {
         (* Initial call *)
         alphabeta(origin, depth, −∞, +∞, TRUE)
          */
+        System.out.println(count);
         return mov;
     }
 

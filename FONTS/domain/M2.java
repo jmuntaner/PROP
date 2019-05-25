@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class M2 extends Maquina {
     private Map<String, TranspositionTableEntry> cache = new HashMap<>();
-    private Map<Moviment, Integer> visitedMoves = new HashMap<>();
+    private Map<String, Integer> visitedMoves = new HashMap<>();
 
     private static final int MOVE_MAX_REPETITIONS = 1;
     private static final int LIMIT_PROFUNDITAT = 6;
@@ -147,23 +147,33 @@ public class M2 extends Maquina {
         return v;
     }
 
+    /*private double heuristica(Tauler t, boolean esJugadorMaximal, int codi, Color torn) {
+        if (codi == 2) { //mat del jugador anterior
+            if (!esJugadorMaximal) return maxVal;
+            else return minVal;
+        } else if (codi == 3) { //taules, atacant perd, defensor guanya.
+            return minVal;
+        }
+        return 0;
+    }*/
+
     @Override
     public String getNom() {
         return "Barja";
     }
 
     //https://github.com/Vadman97/ChessGame/blob/master/src/vad/AIPlayer.java
-    @Override
-    double minimax(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn) {
+    private double minimaxAux(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn) {
+        count++;
         String fen = FenTranslator.generaFen(t,torn);
-        if (cache.containsKey(fen)) {
+        /*if (cache.containsKey(fen)) {
             //System.out.println("Key found in cache");
             TranspositionTableEntry entry = cache.get(fen);
             if (entry.getLower() >= beta) return entry.getLower();
             if (entry.getUpper() <= alfa) return entry.getUpper();
             alfa = Math.max(alfa, entry.getLower());
             beta = Math.min(beta, entry.getUpper());
-        }
+        }*/
         if (limitProfunditat(profunditat) || codi == 2 || codi==3) {
             return heuristica(t, esJugadorMaximal, codi, torn);
         }
@@ -175,20 +185,20 @@ public class M2 extends Maquina {
             double a = alfa;
             for (Moviment m : movPos) {
                 if (bestMove >= beta) break;
-                if(visitedMoves.containsKey(m)) {
-                    int r = visitedMoves.get(m);
+                String sm = m.movCode();
+                if(visitedMoves.containsKey(sm)) {
+                    int r = visitedMoves.get(sm);
                     if (r >= MOVE_MAX_REPETITIONS) {
-                        System.out.println("Move visited too many times");
                         continue;
                     }
-                    else visitedMoves.put(m, r+1);
+                    else visitedMoves.put(sm, r+1);
                 }
-                else visitedMoves.put(m, 1);
+                else visitedMoves.put(sm, 1);
                 int c = t.mou(m);
-                double val = minimax(t, profunditat - 1, a, beta, false, c, torn.getNext());
+                double val = minimaxAux(t, profunditat - 1, a, beta, false, c, torn.getNext());
                 t.mouInvers(m);
-                if (visitedMoves.get(m)>1) visitedMoves.put(m,visitedMoves.get(m)-1);
-                else visitedMoves.remove(m);
+                if (visitedMoves.get(sm)>1) visitedMoves.put(sm,visitedMoves.get(sm)-1);
+                else visitedMoves.remove(sm);
                 if (val > bestMove) {
                     bestMove = val;
                     best = m;
@@ -200,19 +210,19 @@ public class M2 extends Maquina {
             double b = beta;
             for (Moviment m : movPos) {
                 if (bestMove <= alfa) break;
-                if (visitedMoves.containsKey(m)) {
-                    if (visitedMoves.get(m) >= MOVE_MAX_REPETITIONS) {
-                        System.out.println("Move visited too many times");
+                String sm = m.movCode();
+                if (visitedMoves.containsKey(sm)) {
+                    if (visitedMoves.get(sm) >= MOVE_MAX_REPETITIONS) {
                         continue;
                     }
-                    else visitedMoves.put(m,1);
+                    else visitedMoves.put(sm,1);
                 }
-                else visitedMoves.put(m,1);
+                else visitedMoves.put(sm,1);
                 int c = t.mou(m);
-                double val = minimax(t, profunditat - 1, alfa, b, true, c, torn.getNext());
+                double val = minimaxAux(t, profunditat - 1, alfa, b, true, c, torn.getNext());
                 t.mouInvers(m);
-                if (visitedMoves.get(m)>1) visitedMoves.put(m, visitedMoves.get(m)-1);
-                visitedMoves.remove(m);
+                if (visitedMoves.get(sm)>1) visitedMoves.put(sm, visitedMoves.get(sm)-1);
+                else visitedMoves.remove(sm);
                 if (val < bestMove) {
                     bestMove = val;
                     best = m;
@@ -225,6 +235,13 @@ public class M2 extends Maquina {
         else if (bestMove > alfa && bestMove < beta) cache.put(fen, new TranspositionTableEntry(bestMove, bestMove, best));
         else if (bestMove >= beta) cache.put(fen, new TranspositionTableEntry(bestMove, maxVal, best));
         return bestMove;
+    }
+
+    @Override
+    double minimax(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn) {
+        cache.clear();
+        visitedMoves.clear();
+        return minimaxAux(t, profunditat, alfa, beta, esJugadorMaximal, codi, torn);
     }
 }
 
@@ -244,4 +261,5 @@ https://stackoverflow.com/questions/9964496/alpha-beta-move-ordering
         -> Cal fer els moviments dos cops
     - Transposition tables: comprovacio de repeticions
     - Moviments: limita el nombre de vegades que es comprova un moviment
+        Nomes serveix per problemes llargs (però no fa que trigui molt mes aixi que aqui es queda)
  */

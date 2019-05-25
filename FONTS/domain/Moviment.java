@@ -93,4 +93,13 @@ public class Moviment {
         if (k != null && !posFinal.equals(k.getPosicio())) throw new RuntimeException("Posicio incorrecta");
         this.k = k;
     }
+
+    /**
+     * Retorna una representacio del Moviment
+     *
+     * @return String que representa el moviment
+     */
+    public String movCode() {
+        return String.format("%d%d%d%d%c%c", posIni.first(), posIni.second(), posFinal.first(), posFinal.second(), p.toChar(), k==null ? '-' : k.toChar());
+    }
 }
