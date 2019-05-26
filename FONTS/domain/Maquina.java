@@ -6,8 +6,6 @@ import java.util.Random;
 public abstract class Maquina {
     static final double maxVal = 9999;
     static final double minVal = -9999;
-    private int profunditatInicial;
-    int count;
 
     /**
      * Getter del nom de la màquina
@@ -16,12 +14,15 @@ public abstract class Maquina {
      */
     public abstract String getNom();
 
-    /**
-     * Getter profunditat inicial
-     *
-     * @return Retorna la profunditat inicial de l'ultim minimax executat
-     */
-    public int getProfunditatInicial() {return profunditatInicial;}
+    public double heuristica(boolean esJugadorMaximal, int codi) {
+        if (codi == 2) { //mat del jugador anterior
+            if (!esJugadorMaximal) return maxVal;
+            else return minVal;
+        } else if (codi == 3) { //taules, atacant perd, defensor guanya.
+            return minVal;
+        }
+        return 0;
+    }
 
     /**
      * Cerca el millor moviment per a la maquina
@@ -35,8 +36,6 @@ public abstract class Maquina {
     public Moviment calcularMoviment(int profunditat, Tauler t, Color torn, Color tema) {
         //Color torn = partida.getTorn();
         //Tauler t = partida.getSituacioActual();
-        count = 0;
-        profunditatInicial = profunditat;
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
         if (movPos.isEmpty()) return null;
         Moviment mov = null;
@@ -61,7 +60,6 @@ public abstract class Maquina {
         (* Initial call *)
         alphabeta(origin, depth, −∞, +∞, TRUE)
          */
-        System.out.println(count);
         return mov;
     }
 

@@ -2,15 +2,13 @@ package domain;
 
 import java.util.*;
 
-import utils.Pair;
-
 public class M2 extends Maquina {
     private Map<String, TranspositionTableEntry> cache = new HashMap<>();
     private Map<String, Integer> visitedMoves = new HashMap<>();
 
     private static final int MOVE_MAX_REPETITIONS = 1;
-    private static final int LIMIT_PROFUNDITAT = 6;
 
+    /*
     private static final double[][] posK = {
             {-3,-4,-4,-5,-5,-4,-4,-3},
             {-3,-4,-4,-5,-5,-4,-4,-3},
@@ -120,12 +118,7 @@ public class M2 extends Maquina {
         return v;
     }
 
-    private boolean limitProfunditat(int profunditat) {
-        return profunditat==0;
-        //return profunditat==0 || profunditat <= getProfunditatInicial()-LIMIT_PROFUNDITAT;
-    }
-
-    /*private double heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn) {
+    private double heuristica(Tauler posicio, boolean esJugadorMaximal, int codi, Color torn) {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
             else return minVal;
@@ -145,46 +138,51 @@ public class M2 extends Maquina {
             else v-=100;
         }
         return v;
-    }*/
-
-    private double heuristica(Tauler t, boolean esJugadorMaximal, int codi, Color torn) {
-        if (codi == 2) { //mat del jugador anterior
-            if (!esJugadorMaximal) return maxVal;
-            else return minVal;
-        } else if (codi == 3) { //taules, atacant perd, defensor guanya.
-            return minVal;
-        }
-        return 0;
     }
+
+    private void order(ArrayList<Moviment> movs, Tauler t, boolean jmax, Color torn) {
+        ArrayList<Pair<Double,Moviment>> values = new ArrayList<>();
+        for (Moviment m: movs) {
+            int codi = t.mou(m);
+            values.add(new Pair<>(heuristica(jmax, codi), m));
+            t.mouInvers(m);
+        }
+        //ordenacio en ordre ascendent
+        Collections.sort(values, new Comparator<Pair<Double, Moviment>>() {
+            @Override
+            public int compare(Pair<Double, Moviment> o1, Pair<Double, Moviment> o2) {
+                int x = o1.first().compareTo(o2.first());
+                return x;
+            }
+        });
+        movs.clear();
+        if (!jmax) Collections.reverse(values);
+        for (Pair<Double,Moviment> p: values) movs.add(p.second());
+    }
+    */
 
     @Override
     public String getNom() {
         return "Barja";
     }
 
-    //Molt ineficient, ordena movs
-    private void order(ArrayList<Moviment> movs, Tauler t, boolean jmax, Color torn) {
-        ArrayList<Pair<Double,Moviment>> values = new ArrayList<>();
-        for (Moviment m: movs) {
-            int codi = t.mou(m);
-            values.add(new Pair<>(heuristica(t, jmax, codi, torn), m));
-            t.mouInvers(m);
+    private void decVisited(String sm) {
+        if (visitedMoves.get(sm)>1) visitedMoves.put(sm, visitedMoves.get(sm)-1);
+        else visitedMoves.remove(sm);
+    }
+
+    private boolean incVisited(String sm) {
+        if (visitedMoves.containsKey(sm)) {
+            int r = visitedMoves.get(sm);
+            if (r >= MOVE_MAX_REPETITIONS) return true;
+            else visitedMoves.put(sm, r+1);
         }
-        Collections.sort(values, new Comparator<Pair<Double, Moviment>>() {
-            @Override
-            public int compare(Pair<Double, Moviment> o1, Pair<Double, Moviment> o2) {
-                int x = o1.first().compareTo(o2.first());
-                if (jmax) x *= -1;
-                return x;
-            }
-        });
-        movs.clear();
-        for (Pair<Double,Moviment> p: values) movs.add(p.second());
+        else visitedMoves.put(sm,1);
+        return false;
     }
 
     //https://github.com/Vadman97/ChessGame/blob/master/src/vad/AIPlayer.java
-    private double minimaxAux(Tauler t, int profunditat, double alfa, double beta, boolean esJugadorMaximal, int codi, Color torn) {
-        count++;
+    private double minimaxAux(Tauler t, int profunditat, double alfa, double beta, boolean jmax, int codi, Color torn) {
         String fen = FenTranslator.generaFen(t,torn);
         if (cache.containsKey(fen)) {
             //System.out.println("Key found in cache");
@@ -194,56 +192,32 @@ public class M2 extends Maquina {
             alfa = Math.max(alfa, entry.getLower());
             beta = Math.min(beta, entry.getUpper());
         }
-        if (limitProfunditat(profunditat) || codi == 2 || codi==3) {
-            return heuristica(t, esJugadorMaximal, codi, torn);
-        }
-        double bestMove = 0;
-        Moviment best = null;
+        if (profunditat==0 || codi == 2 || codi==3)
+            return heuristica(jmax, codi);
+
         ArrayList<Moviment> movPos = t.obteMovimentsJugador(torn);
-        //order(movPos,t,esJugadorMaximal,torn);
-        if (esJugadorMaximal) {
-            bestMove = minVal;
-            double a = alfa;
-            for (Moviment m : movPos) {
-                if (bestMove >= beta) break;
-                String sm = m.movCode();
-                if(visitedMoves.containsKey(sm)) {
-                    int r = visitedMoves.get(sm);
-                    if (r >= MOVE_MAX_REPETITIONS) {
-                        continue;
-                    }
-                    else visitedMoves.put(sm, r+1);
-                }
-                else visitedMoves.put(sm, 1);
-                int c = t.mou(m);
-                double val = minimaxAux(t, profunditat - 1, a, beta, false, c, torn.getNext());
-                t.mouInvers(m);
-                if (visitedMoves.get(sm)>1) visitedMoves.put(sm,visitedMoves.get(sm)-1);
-                else visitedMoves.remove(sm);
+
+        double bestMove = jmax ? minVal : maxVal;
+        double a = alfa;
+        double b = beta;
+        Moviment best = null;
+
+        for (Moviment m: movPos) {
+            if (jmax ? bestMove >= b : bestMove <= a) break;
+            String sm = m.movCode();
+            if (incVisited(sm)) continue;
+            int c = t.mou(m);
+            double val = minimaxAux(t, profunditat-1, a, b, !jmax, c, torn.getNext());
+            t.mouInvers(m);
+            decVisited(sm);
+            if (jmax) {
                 if (val > bestMove) {
                     bestMove = val;
                     best = m;
                 }
                 a = Math.max(a, bestMove);
             }
-        } else {
-            bestMove = maxVal;
-            double b = beta;
-            for (Moviment m : movPos) {
-                if (bestMove <= alfa) break;
-                String sm = m.movCode();
-                if (visitedMoves.containsKey(sm)) {
-                    if (visitedMoves.get(sm) >= MOVE_MAX_REPETITIONS) {
-                        continue;
-                    }
-                    else visitedMoves.put(sm,1);
-                }
-                else visitedMoves.put(sm,1);
-                int c = t.mou(m);
-                double val = minimaxAux(t, profunditat - 1, alfa, b, true, c, torn.getNext());
-                t.mouInvers(m);
-                if (visitedMoves.get(sm)>1) visitedMoves.put(sm, visitedMoves.get(sm)-1);
-                else visitedMoves.remove(sm);
+            else {
                 if (val < bestMove) {
                     bestMove = val;
                     best = m;
@@ -299,11 +273,11 @@ Resultats provisionals M2 (problema mat en 3, profunditat total):
 Problema de 4, profunditat total:
     - Heuristica M1 sense millores: ~50s - 4,869M nodes
     - Heuristica M2: 731 s - 49M nodes
-    - Heuristica M1 amb cache i ordering: 33s - 2.3M nodes
+    - Heuristica M1 amb cache: 33s - 2.3M nodes
+    - Heuristica M1 amb cache i ordenacio: 130s
 
+    -> Decisio final: M2
+        - Heuristica: M1
+        - Millores de rendiment: cache taulers, límit repetició de moviments, ordenació de moviments
+        - Profunditat: total (sense limitar)
  */
-
-//TODO:
-// - Triar heuristica
-// - Triar limit profunditat
-// - Eliminar codi duplicat
