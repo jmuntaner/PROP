@@ -14,6 +14,13 @@ public abstract class Maquina {
      */
     public abstract String getNom();
 
+    /**
+     * Heurística d'avaluació dels nodes de l'arbre del minimax
+     *
+     * @param esJugadorMaximal Indica si el jugador que ha de moure es l'atacant
+     * @param codi Codi retornat per l'últim moviment realitzat
+     * @return Valor donat al node
+     */
     public double heuristica(boolean esJugadorMaximal, int codi) {
         if (codi == 2) { //mat del jugador anterior
             if (!esJugadorMaximal) return maxVal;
@@ -69,7 +76,8 @@ public abstract class Maquina {
     /**
      * Calcula el minimax de cada posicio
      *
-     * @param profunditat      profunditat maxima d'exploracio de l'arbre
+     * @param t                situacio actual del tauler
+     * @param profunditat      profunditat restant d'exploracio de l'arbre
      * @param alfa             Valor minim
      * @param beta             Valor maxim
      * @param esJugadorMaximal Indica si el jugador que ha de moure es l'atacant (true si ho es)

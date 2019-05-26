@@ -106,6 +106,7 @@ public class ControladorLlistaProblemes {
     /**
      * Inicia una nova partida humà vs humà.
      *
+     * @param nomOp Nom de l'oponent
      * @return Controlador de la nova partida.
      */
     public ControladorPartida iniciaPartidaHvH(String nomOp) {
@@ -115,6 +116,8 @@ public class ControladorLlistaProblemes {
     /**
      * Inicia una nova partida humà vs màquina.
      *
+     * @param mType Tipus de maquina (true M2, false M1)
+     * @param ataca Indica si la maquina ataca (true) o defensa (false)
      * @return Controlador de la nova partida.
      */
     public ControladorPartida iniciaPartidaHvM(boolean mType, boolean ataca) {
@@ -125,6 +128,7 @@ public class ControladorLlistaProblemes {
      * Afegeix els fen d'un arxiu *.fendb a la base de dades.
      *
      * @param f Arxiu *.fendb amb problemes.
+     * @return True si s'han carregat tots els problemes, false si algun no s'ha pogut carregar
      */
     public boolean carregaProblemes(File f) {
         return IOFens.readFenList(f);

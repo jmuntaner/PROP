@@ -9,6 +9,8 @@ public class M2 extends Maquina {
     private static final int MOVE_MAX_REPETITIONS = 1;
 
     /*
+    POSSIBLE HEURISTICA (NO UTILITZADA)
+
     private static final double[][] posK = {
             {-3,-4,-4,-5,-5,-4,-4,-3},
             {-3,-4,-4,-5,-5,-4,-4,-3},
@@ -140,6 +142,8 @@ public class M2 extends Maquina {
         return v;
     }
 
+    POSSIBLE MILLORA D'EFICIENCIA: ORDENACIO DE MOVIMENTS (NO UTILITZADA)
+
     private void order(ArrayList<Moviment> movs, Tauler t, boolean jmax, Color torn) {
         ArrayList<Pair<Double,Moviment>> values = new ArrayList<>();
         for (Moviment m: movs) {
@@ -166,11 +170,23 @@ public class M2 extends Maquina {
         return "Barja";
     }
 
+    /**
+     * Decrementa el nombre de repeticions d'un moviment a la taula de moviments
+     *
+     * @param sm Moviment del qual es decrementen les repeticions
+     */
     private void decVisited(String sm) {
         if (visitedMoves.get(sm)>1) visitedMoves.put(sm, visitedMoves.get(sm)-1);
         else visitedMoves.remove(sm);
     }
 
+    /**
+     * Incrementa el nombre de repeticions d'un moviment a la taula de moviments
+     *
+     * @param sm Moviment del qual s'incrementen les repeticions
+     *
+     * @return True si s'ha assolit el màxim de repeticions del moviment
+     */
     private boolean incVisited(String sm) {
         if (visitedMoves.containsKey(sm)) {
             int r = visitedMoves.get(sm);
@@ -182,6 +198,19 @@ public class M2 extends Maquina {
     }
 
     //https://github.com/Vadman97/ChessGame/blob/master/src/vad/AIPlayer.java
+
+    /**
+     * Funcio auxiliar per a calcular el minimax de cada posicio del taule
+     *
+     * @param t Posicio del tauler a avaluar
+     * @param profunditat Profunditat restant a avaluar de l'arbre
+     * @param alfa Valor maxim
+     * @param beta Valor minim
+     * @param jmax Indica si el jugador que ha de moure es l'atacant
+     * @param codi Codi retornat al fer l'últim moviment
+     * @param torn Color del jugador que ha de moure
+     * @return Valor de la branca explorada
+     */
     private double minimaxAux(Tauler t, int profunditat, double alfa, double beta, boolean jmax, int codi, Color torn) {
         String fen = FenTranslator.generaFen(t,torn);
         if (cache.containsKey(fen)) {

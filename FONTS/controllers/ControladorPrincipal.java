@@ -48,6 +48,14 @@ public class ControladorPrincipal {
         return new ControladorPartidaHvH(p, usuari, nomOponent);
     }
 
+    /**
+     * Inicia una partida humà vs màquina
+     *
+     * @param p Problema a jugar
+     * @param mType Tipus de maquina (true = M2, false = M1)
+     * @param ataca Indica si la maquina ataca (true) o defensa (false)
+     * @return Controlador per a la nova partida
+     */
     ControladorPartidaHvM iniciaHvM(Problema p, boolean mType, boolean ataca) {
         return new ControladorPartidaHvM(p, usuari, mType ? new M2() : new M1(), ataca);
     }

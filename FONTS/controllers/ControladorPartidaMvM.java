@@ -9,6 +9,13 @@ public class ControladorPartidaMvM extends ControladorPartida{
     private Maquina atacant, defensor;
     boolean torn;
 
+    /**
+     * Crea una partida Màquina vs Màquina
+     *
+     * @param problema El problema en que es basarà la partida
+     * @param m1 Màquina que ataca
+     * @param m2 Màquina que defensa
+     */
     ControladorPartidaMvM(Problema problema, Maquina m1, Maquina m2) {
         super(problema);
         this.atacant = m1;

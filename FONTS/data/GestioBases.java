@@ -64,9 +64,9 @@ public abstract class GestioBases {
     public abstract String getExt();
 
     /**
-     * Llista els problemes que hi ha a la base de problemes
+     * Llista els elements que hi ha a la base
      *
-     * @return Llista amb els noms dels problemes
+     * @return Llista amb els noms dels elements
      */
     public ArrayList<String> getList() {
         File f = new File(getPath());

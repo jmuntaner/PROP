@@ -226,7 +226,7 @@ class VistaJugar extends VistaAmbTauler {
             int yp = posIni.second();
             int pos = movs.indexOf(new Pair<>(x, y));
             if (pos != -1) {
-                int res = cp.mou(pos);
+                int res = cp.mouIndex(pos);
                 setPos(xp, yp, cp.getPos(xp, yp));
                 setPos(x, y, cp.getPos(x, y));
                 iniciTorn = System.currentTimeMillis();

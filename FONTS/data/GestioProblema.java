@@ -9,10 +9,18 @@ public class GestioProblema extends  GestioBases {
 
     private static GestioProblema instance = new GestioProblema();
 
+    /**
+     * Constructora de GestioProblema
+     */
     private GestioProblema() {
         super();
     }
 
+    /**
+     * Getter instància única de GestioProblema
+     *
+     * @return instància de GestióProblema
+     */
     public static GestioProblema getInstance() {
         return instance;
     }

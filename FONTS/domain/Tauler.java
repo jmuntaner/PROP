@@ -26,9 +26,6 @@ public class Tauler {
      *
      * @param pecesInicials situació inicial de les peces al tauler
      */
-    //TODO:
-    // - El controlador ha de cridar "finalitzaEntradaTauler" un cop s'han entrat totes les peces
-    // - Tant si s'entren totes de cop o una per una
     public Tauler(Peca[][] pecesInicials) {
         Peca rb = null;
         Peca rn = null;
@@ -92,21 +89,6 @@ public class Tauler {
      */
     private boolean esMat(Color b) {
         return obteMovimentsJugador(b.getNext()).size() == 0;
-        /*
-        Pair<Integer, Integer> posRei;
-        if (b == BLANC) posRei = _reiNegre.getPosicio();
-        else posRei = _reiBlanc.getPosicio();
-        ArrayList<Moviment> movs = obteMovimentsJugador(b.getNext());
-        for (Moviment m : movs) {
-            if (esPosicioAmenaca(posRei, m.getPosFinal())) {
-                executaMoviment(m);
-                boolean esc = esEscac(b);
-                mouInvers(m);
-                if (!esc) return false;
-            }
-        }
-        return true;
-        */
     }
 
 
@@ -381,13 +363,6 @@ public class Tauler {
         return 0;
     }
 
-    // Comprova que totes les jugades de l'oponent porten a un mat
-    // Comprova que almenys una jugada de l'atacant porta a un mat
-    // http://www.human-competitive.org/sites/default/files/gpsearch.pdf
-    // Límit de jugades: 3 (5 es inviable per numero de nodes, 4 no ho sembla però a la pràctica triga massa)
-    // Execució problema mat en 4 aprox 15 minuts (2:12 si no es busca el número de solucions)
-    // Es calcula el nombre de decisions de l'atacant pq crear l'arbre sencer per saber la mida és massa costós
-
     /**
      * Funció auxiliar per comprovar si el problema té solució i cercar paràmetres per calcular la dificultat
      * - Si torn = tema, comprova que almenys un moviment porta a un mat.
@@ -410,12 +385,7 @@ public class Tauler {
                     //data[1]++;
                     if (x == 2) data[0]++; //final amb solució
                     else {
-                        //int sols = data[0];
                         comprovaSolAux(torn.getNext(), tema, jugada + 1, numJugades, data);
-                        /*if (data[0]>sols) {
-                            mouInvers(m);
-                            return; //ha trobat una solucio
-                        }*/
                     }
                 }
                 mouInvers(m);

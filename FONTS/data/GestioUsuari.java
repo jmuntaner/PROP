@@ -8,10 +8,18 @@ public class GestioUsuari extends GestioBases {
 
     private static GestioUsuari instance = new GestioUsuari();
 
+    /**
+     * Constructora de GestioUsuari
+     */
     private GestioUsuari() {
         super();
     }
 
+    /**
+     * Getter instància única de GestioUsuari
+     *
+     * @return Instància de GestioUsuari
+     */
     public static GestioUsuari getInstance() {
         return instance;
     }
@@ -33,7 +41,7 @@ public class GestioUsuari extends GestioBases {
     }
 
     /**
-     * Llegeix un usuari de la base de problemes
+     * Llegeix un usuari de la base d'usuaris
      *
      * @param nom Nom de l'usuari a llegir
      * @return Usuari llegit

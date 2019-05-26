@@ -92,9 +92,10 @@ public abstract class ControladorPartida {
     /**
      * Executa el moviment indicat
      *
-     * @param index Índex del moviment a la llista generada anteriorment.
+     * @param index Index del moviment a la llista generada anteriorment.
+     * @return codi associat a l'execució del moviment
      */
-    public int mou(int index) {
+    public int mouIndex(int index) {
         Moviment m = moviments.get(index);
         return mou(m);
     }
@@ -103,6 +104,7 @@ public abstract class ControladorPartida {
      * Executa el moviment indicat
      *
      * @param m Moviment a executar.
+     * @return Codi associat a l'execucio del moviment (o -1 si s'arriba al limit de jugades)
      */
     int mou(Moviment m) {
         Color torn = partida.getTorn();
@@ -212,7 +214,7 @@ public abstract class ControladorPartida {
     /**
      * Obté el ranking d'un problema
      *
-     * @return
+     * @return Ranking del problema associat a la partida
      */
     public ArrayList<Pair<String, String>> getRanking() {
         return problema.getRanking().getLlistaRanking(10);
@@ -233,6 +235,8 @@ public abstract class ControladorPartida {
 
     /**
      * Executa un moviment de màquina.
+     *
+     * @return Codi associat al moviment executat
      */
     public abstract int executaMoviment();
 

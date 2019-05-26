@@ -130,12 +130,3 @@ public class Problema implements Serializable{
     }
 }
 
-//TODO: usage classe
-// - Es crida initProblema a l'intentar guardar/jugar problema introduït o modificat
-// - Si initProblema retorna false, ha de donar opció a modificar problema
-// - El controlador gestiona color, tema i tauler
-// - En cas de guardar, CtrlProblema ha de comprovar si el problema repeticions, si s'introdueix/modifica:
-// -    -> Nom
-// -    -> Tema + numJugades + situacióInicial
-// - El ranking el gestiona directament el controlador
-
