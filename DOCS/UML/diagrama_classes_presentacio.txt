@@ -1,0 +1,5 @@
+DIAGRAMA DE CLASSES DE PRESENTACIO
+
+.pdf
+
+Diagrama de classes de les vistes

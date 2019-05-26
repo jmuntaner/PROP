@@ -1,0 +1,6 @@
+RELACIO CLASSES
+
+.txt
+
+Classes que ha implementat cadascú
+Aportacio de cada membre del grup

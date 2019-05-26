@@ -1,0 +1,19 @@
+JocsProva
+
+En aquesta carpeta han d'anar els jocs de prova, aixi com la seva descripcio.
+La qualitat dels jocs de prova es avaluable i, per tant, es molt important explicar (breument) l'objectiu de cada un d'ells.
+
+Hi ha d'haver una subcarpeta amb el nom de cada funcionalitat oferida per l'aplicacio.
+A la carpeta de cada funcionalitat s'han d'incloure els jocs de prova corresponents.
+
+Categories dels jps: La carpeta de cada funcionalitat haura d'incloure les categories dels jocs de proves seguents.
+    - Senzills: per provar el comportament esperat
+    - Normals: que provin el correcte funcionament tenint en compte la casuistica associada a la funcionalitat
+    Addicionalment, per a les funcionalitat associades a les maquines, la carpeta tambe haura d'incloure jocs de proves de la categoria seguent
+    - Exigents: que provin a l'extrem la potencia de la solucio emprada
+
+Format d'un jp: Cada joc de proves sera una arxiu que contingui.
+    - Categoria de la prova
+    - Descripcio dels efectes estudiats
+    - Descripcio de les dades d'entrada i de la resposta del sistema tal i com vam especificar a la descripcio dels casos d'us
+    - Captures de pantalla de l'entorn grafic que demostrin que el joc de proves ha estat provat

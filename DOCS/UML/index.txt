@@ -1,0 +1,8 @@
+UML
+
+Diagrames de classes
+
+Fitxers:
+    - diagrama_classes_dades
+    - diagrama_classes_domini
+    - diagrama_classes_presentacio

@@ -1,0 +1,134 @@
+EDA
+
+Breu descripcio de les estructures de dades i algoritmes utilitzats per a implementar les funcionalitats principals.
+__________________
+------------------
+
+Algorismes utilitzats: Minimax amb podes alfa-beta (recursiu), exploracio DFS (recursiu i iteratiu) i el SHA1.
+
+______
+
+
+Respecte a la primera funcionalitat principal demanada a la classe Maquina (funcions minimax i calcularMoviment) s'ha usat
+l'algorisme de minimax amb podes alfa-beta per a calcular el seguent moviment de la maquina.
+
+L'aplicacio de l'algorisme de minimax a aquest problema concret (calcular la seguent jugada a un problema d'escacs) es
+obvia ja que els escacs son un joc amb adversari (dos jugadors) i d'informacio perfecte, cas que s'adequa perfectament als
+requisits del minimax.
+
+La idea de l'algorisme es buscar el millor moviment suposant que el contrincant escollira el pitjor per a tu.
+
+D'aquesta manera els passos de l'algorisme son:
+
+1. Generar l'arbre: es generen tots els nodes fins a arribar a un node terminal (o haver assolit la maxima profunditat)
+
+2. Assignar un valor als nodes terminals
+
+3. Propagar els valors cap els nodes superiors, triant major o menor d'entre els fills segons el node sigui del jugador
+maximal o no (nodes alternats).
+
+4. Escollir la jugada mirant els valors del nivell superior
+
+El problema de l'algorisme del minimax tal qual es que el pas 1 acostuma a ser massa complex, particularment en el cas
+dels escacs es impossible generar tot l'arbre de possibles moviments, per evitar aquesta complexitat hem introduit al nostre
+algorisme podes alfa-beta que te com a objectiu descartar nodes que ja sabem que no son bons i per tant reduir el tamany
+de l'arbre de cerca.
+
+La idea de les podes alfa-beta es que l'algorisme mante dos valors, alfa i beta, que representen el valor minim que sabem
+que el jugador maximal pot assolir i el maxim valor que el jugador minimal te assegurat assolir, respectivament. Si en
+algun moment de l'exploracio l'alfa supera la beta, el jugador maximal pot descartar aquest node i la branca que el descendeix.
+
+______
+
+
+A la classe Tauler per a calcular si la posicio es escac (funcio esEscac) tambe hem implementat el seguent algorisme:
+
+Primerament obte la posicio del rei i despres procedeix fent una exploracio DFS per a totes les direccions relatives
+possibles i mirant si a alguna posicio explorada hi ha una Peca (de l'altre color) que pot moure a la posicio del rei. Es
+para l'exploracio d'aquella direccio en cas de que sigui la d'un cavall (ja que nomes fan salts d'un pas en la seva
+direccio), de sortir-se del tauler o de que es trobi una Peca que no pugui moure a la posicio del rei (i per tant
+bloqueji ja la direccio). En cas de que existeixi una Peca que pugui atacar al rei retorna true, si no, al acabar
+l'exploracio retorna false.
+
+A la mateixa classe Tauler per veure si la posico es mat (funcio esMat) simplement mirem que el jugador no tingui moviments
+valids. Per a calcular els moviments valids d'un jugador calculem per cada Peca del jugador els seus moviments valids.
+Aixo ens porta a la funcio obteMovimentsPeca que retorna tots els moviments valids per a una Peca a una posicio. Aquesta
+funciona de la seguent manera:
+
+De manera similar a esEscac fa una exploracio DFS per a totes les direccions relatives possibles i mira si pot moure
+(matar en cas de que no sigui buida) a cada posicio, si es aixi comprova que el moviment no provoqui escac del jugador
+oposat i en aquest cas l'afegeix a la llista de moviments possibles (i mata a la peca desti si calia). Talla l'exploracio
+de cada branca en cas de sortirse del tauler, en cas de moviment de cavall (step=1 i ja) i en cas de trobar-se una peca
+en aquella direccio (no podra moure mes enlla de la peca si segueix per aquella branca).
+
+______
+
+
+Per a la segona funcionalitat principal demanada, a la classe Tauler hem implementat la funcio comprovaSolAux per comprovar
+que el problema te solucio i obtenir alguns parametres (numero de decisions de l'atacant i numero de solucions trobades)
+per a calcular la dificultat del problema posteriorment.
+
+Procedim recorrent l'arbre de moviments possibles mitjançant una exploracio en profunditat (DFS).
+
+Quan es el torn de l'atacant afegeix a data[1] (decisions de l'atacant) el nombre de jugades possibles i per a cada
+moviment possible, si troba mat, suma 1 a data[0] (nombre de mats) i si no segueix la cerca amb els moviments del contrari.
+
+Quan es el torn del defensor, comprova que el mat es inevitable, es a dir que qualsevol moviment porti igualment al mat.
+Aixo ho fa tallant l'execucio de qualsevol branca que contingui un moviment posible que sigui mat del defensor o un
+moviment que al continuar la cerca no troba el mat de l'atacant (comprovant si data[0] varia entre crides successives).
+
+______
+
+
+A la classe Usuari a l'hora de guardar les contrassenyes, guardem el hash SHA1 de la mateixa. L'algorisme SHA1 es un
+funcio hash criptografica que agafa un input i produeix un valor hash de 20 bytes. Aixi no ens cal guardar la contrasenya
+de l'usuari i nomes guardem el hash, d'aquesta manera, si volem comprovar que una contrasenya introduida es correcta
+simplement comparem els hashes i no ens cal saber la contrasenya original. La idea d'usar el valor hash es que es
+practicament impossible a partir del hash trobar la contrasenya original i per tant tot i que un atacant conseguis el
+hash seria molt dificil robar la contrasenya.
+
+L'algorisme SHA1 esta implementat a la llibreria de Java java.security.MessageDigest, nosaltres simplement a la funcio
+hashPass cridem al MessageDigest (amb parametre SHA1) que ens retorna el hash de la contrasenya en bytes[] i finalment
+el passem a String.
+
+_____________________
+---------------------
+
+Estructures de dades:
+
+Hem usat les seguents estructures de dades: Arrays, ArrayList, Set, Pair i la classe Moviment
+
+
+Un Array es objecte contenidor que guarda un nombre fixe d'elements i te un tamany fixe (es a dir estatic). Usem Arrays
+a les seguents classes:
+Tauler: Array d'Arrays de Peca (8x8) representa el tauler,
+        Array d'Arrays de ints (16x2) (static) per representar els moviments relatius
+______
+
+Un ArrayList representa un array pero es un objecte de tamany variable (es a dir dinamic) i es una interficie d'un tipus
+(i.e ArrayList<T>). Usem ArrayList a les seguents classes:
+Ranking: Usem ArrayList<Pair<String, T>> per representar un ranking.
+Partida: Usem un ArrayList<Moviment> per a representar l'historial de moviments de la partida.
+Tauler:  Usem un ArrayList<Moviment> per a retornar els moviments possibles per a una peca i per a un jugador.
+______
+
+Un Set es una colleccio que no conte elements duplicats. Formalment, un set no conte cap parella d'elements e1, e2 tal
+que e1.equals(e2) i com a molt un element nul. Aquesta interficie modela un conjunt matematic. L'usem a les seguents classes:
+Usuari: Usem Set<Integer> per a representar el conjunt de problemes superats per un usuari.
+______
+
+La classe Pair ens serveix per representar una parella d'elements, l'usem a les seguents classes:
+Peca:       Usem Pair<Integer,Integer> per representar posicions (coordenades X i Y), particularment la posicio de la peca
+Ranking:    Usem Pair<String, T> com a tipus dins d'un ArrayList
+Tauler:     Usem Pair<Integer,Integer> per representar posicions (coordenades X i Y)
+Moviment:   Usem Pair<Integer,Integer> per representar posicions (coordenades X i Y), particularment la posicio inicial i
+            final del moviment.
+______
+
+La classe Moviment ens serveix -tal com diu el nom- per representar un moviment dins la partida, aixi la classe consisteix
+de dos Pair<Integer,Integer> que representen les posicions inicial i final del moviment i de dues Peca que representen
+la Peca a moure i la morta. Usem la classe Moviment a les seguents classes:
+Maquina:    Usem Moviment al calcular el moviment de la maquina (al executar el mimimax).
+Tauler:     Usem Moviment al moure, comprovar si un problema te solucio, per obtenir la llista de moviments possibles.
+Partida:    Usem Moviment per guardar l'historial de moviments (ArrayList<Moviment>) al moure o al recuperar l'historial
+            de moviments

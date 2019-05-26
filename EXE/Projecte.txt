@@ -1,0 +1,3 @@
+EXE
+
+En aquesta carpeta ha d'anar l'executable de tot el projecte.

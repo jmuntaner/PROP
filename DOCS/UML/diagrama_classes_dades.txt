@@ -1,0 +1,5 @@
+DIAGRAMA DE CLASSES DE DADES
+
+.pdf
+
+Diagrama de classes dels gestors de dades

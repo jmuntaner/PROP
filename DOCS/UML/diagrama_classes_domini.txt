@@ -1,0 +1,5 @@
+DIAGRAMA DE CLASSES DE DOMINI
+
+.pdf
+
+Copiar diagrama de classes de la 1a entrega i afegir controladors
