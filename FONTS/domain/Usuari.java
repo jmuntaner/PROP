@@ -3,20 +3,16 @@ package domain;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Usuari implements Serializable {
     private String nom, hashPassword;
     private final String id;
-    private final Set<Integer> problemesSuperats;
     private EstadistiquesJugador estadistiques;
 
     public Usuari(String nom, String contrasenya) {
         this.id = nom;
         this.hashPassword = hashPass(contrasenya);
         this.nom = nom;
-        problemesSuperats = new HashSet<>();
         estadistiques = new EstadistiquesJugador();
     }
 
@@ -91,24 +87,6 @@ public class Usuari implements Serializable {
      */
     public boolean checkPass(String pass) {
         return hashPassword.equals(hashPass(pass));
-    }
-
-    /**
-     * Obté la llista de problemes superats
-     *
-     * @return Set
-     */
-    public Set<Integer> getProblemesSuperats() {
-        return problemesSuperats;
-    }
-
-    /**
-     * Afegeix un problema a la llista de problemes superats.
-     *
-     * @param pid Id del Problema a afegir a la llista.
-     */
-    public void superaProblema(int pid) {
-        problemesSuperats.add(pid);
     }
 
     /**
