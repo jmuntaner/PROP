@@ -5,12 +5,11 @@ import controllers.ControladorUsuari;
 import javax.swing.*;
 import java.awt.*;
 
-public class VistaLogged extends JPanel {
+class VistaLogged extends JPanel {
     private VistaPrincipal vp;
     private ControladorUsuari cu;
     private JLabel benvinguda;
     private JLabel vIntents, vAcabats, vGuanyats;
-    private JTextArea estadistiques;
     /**
      * Creadora per defecte
      *
@@ -32,7 +31,7 @@ public class VistaLogged extends JPanel {
     /**
      * Actualitza la vista segons l'usuari
      */
-    public void update() {
+    void update() {
         benvinguda.setText("Benvingut " + cu.getNom());
         Font defaultFont = benvinguda.getFont();
         benvinguda.setFont(new Font(defaultFont.getName(), Font.PLAIN, 18));

@@ -251,6 +251,7 @@ class VistaPrincipal {
      * Mostra perfil NotLogged a pantalla.
      */
     void mostraNotLogged() {
+        panelNotLogged.clearForm();
         CardLayout cl = (CardLayout) contentPane.getLayout();
         cl.show(contentPane, "notLogged");
     }

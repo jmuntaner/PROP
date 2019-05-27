@@ -5,7 +5,7 @@ import controllers.ControladorUsuari;
 import javax.swing.*;
 import java.awt.*;
 
-public class VistaNotLogged extends JPanel {
+class VistaNotLogged extends JPanel {
     private ControladorUsuari cu;
     private JButton botoSubmit;
     private JButton botoChangeMode;
