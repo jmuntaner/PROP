@@ -5,7 +5,7 @@ import domain.*;
 
 public class ControladorUsuari {
     private Usuari u;
-    private static Usuari guest = new Usuari("guest", "guest", "guest");
+    private static Usuari guest = new Usuari( "guest", "guest");
     private GestioUsuari gu;
     private ControladorPrincipal cp;
 
@@ -14,6 +14,8 @@ public class ControladorUsuari {
         gu = GestioUsuari.getInstance();
         u  = guest;
     }
+
+    public static Usuari getGuest() {return guest;}
 
     public EstadistiquesJugador getStatistics() {
         return u.getStatistics();
@@ -60,7 +62,7 @@ public class ControladorUsuari {
      * @param pass Contrassenya del nou usuari
      */
     public void register (String nom, String pass) {
-        u = new Usuari(nom, nom, pass);
+        u = new Usuari(nom, pass);
         gu.saveUsuari(u);
         cp.setUsuari(u);
     }

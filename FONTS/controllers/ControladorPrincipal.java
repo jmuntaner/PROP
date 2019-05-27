@@ -18,7 +18,7 @@ public class ControladorPrincipal {
         ce = new ControladorEditor();
         cl = new ControladorLlistaProblemes(this);
         cu = new ControladorUsuari(this);
-        usuari = new Usuari("guest", "guest", "guest"); //ControladorUsuari.guest?
+        usuari = ControladorUsuari.getGuest();
     }
 
     /**

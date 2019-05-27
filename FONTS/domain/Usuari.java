@@ -12,8 +12,8 @@ public class Usuari implements Serializable {
     private final Set<Integer> problemesSuperats;
     private EstadistiquesJugador estadistiques;
 
-    public Usuari(String id, String nom, String contrasenya) {
-        this.id = id;
+    public Usuari(String nom, String contrasenya) {
+        this.id = nom;
         this.hashPassword = hashPass(contrasenya);
         this.nom = nom;
         problemesSuperats = new HashSet<>();

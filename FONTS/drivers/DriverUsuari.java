@@ -59,7 +59,7 @@ public class DriverUsuari extends GenericDriver {
         String nom = scan.nextLine();
         optPrint("Contrasenya: ");
         String pass = scan.nextLine();
-        u = new Usuari(nom, nom, pass);
+        u = new Usuari(nom, pass);
         System.out.printf("Creat: Id: %s, Nom: %s\r\n", u.getId(), u.getNom());
     }
 

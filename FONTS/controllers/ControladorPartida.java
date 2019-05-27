@@ -58,7 +58,7 @@ public abstract class ControladorPartida {
      * Finalitza la partida actual, actualitzant els rankings corresponents.
      */
     public void finalitzaPartida() {
-        if (getNomGuanyador().equals(nomA) && esJugadorHuma(nomA)) { //només actualitza si guanya el jugador atacant (A)
+        if (getNomGuanyador().equals(nomA) && esJugadorHuma(nomA) && !nomA.equals("guest")) { //només actualitza si guanya el jugador atacant (A)
             Ranking<PuntuacioProblema> ranking = problema.getRanking();
             PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
             ranking.afegeixPuntuacio(getUsuari(), punts);

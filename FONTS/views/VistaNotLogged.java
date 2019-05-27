@@ -34,7 +34,7 @@ public class VistaNotLogged extends JPanel {
         titol = new JLabel("Inici de sessió");
         titol.setFont(new Font("Serif", Font.BOLD, 20));
         JLabel username = new JLabel("Usuari");
-        JLabel password = new JLabel("Contrassenya");
+        JLabel password = new JLabel("Contrasenya");
         usernameIn = new JTextField(20);
         pwd = new JPasswordField(20);
 
@@ -137,20 +137,20 @@ public class VistaNotLogged extends JPanel {
     }
 
     /**
-     * Efectua els canvis visuals entre Iniciar Sesió i Registrar-se
+     * Efectua els canvis visuals entre Iniciar Sessió i Registrar-se
      */
     private void canvisVisuals() {
         if(logreg) {
             remove(repassword);
             remove(repwd);
-            titol.setText("Iniciar Sesió");
+            titol.setText("Iniciar Sessió");
             botoSubmit.setText("Login");
             botoChangeMode.setText("Registrar-se");
         }
         else {
             titol.setText("Registre d'usuari");
             botoSubmit.setText("Registrar");
-            botoChangeMode.setText("Iniciar Sesió");
+            botoChangeMode.setText("Iniciar Sessió");
 
             GridBagConstraints c = new GridBagConstraints();
             c.insets = new Insets(3, 3, 3, 3);
@@ -190,9 +190,9 @@ public class VistaNotLogged extends JPanel {
             usernameIn.setText("");
             return;
         }
-        //contrassenya erronea
+        //contrasenya erronea
         if(!cu.authenticate(usuari, String.valueOf(pass))) {
-            vp.missatgeError("Contrassenya errònea");
+            vp.missatgeError("Contrasenya errònea");
             pwd.setText("");
             return;
         }
@@ -215,14 +215,19 @@ public class VistaNotLogged extends JPanel {
             ++i;
         }
         if(!match) {
-            vp.missatgeError("Les contrassenyes no coincideixen");
+            vp.missatgeError("Les contrasenyes no coincideixen");
             pwd.setText("");
             repwd.setText("");
             return;
         }
         //nom buit
         if(usuari.equals("")) {
-            vp.missatgeError("El camp del nom està sense rellenar, rellena'l per a continuar");
+            vp.missatgeError("El camp del nom està sense omplir, omple'l per a continuar");
+            return;
+        }
+        //nom = guest -> invalid
+        if(usuari.equals("guest")) {
+            vp.missatgeError("El nom introduït és invàlid, escull un altre nom per a continuar");
             return;
         }
         if(cu.existeixUsuari(usuari)) {
