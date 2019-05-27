@@ -44,11 +44,13 @@ public class VistaNotLogged extends JPanel {
         c.insets = new Insets(3, 3, 3, 3);
 
         //Tamanys preferits
+        Dimension sizeBoto = new Dimension(140, 28);
+        Dimension sizeCamp = new Dimension(250, 28);
         titol.setPreferredSize(new Dimension(200, 40));
-        username.setPreferredSize(new Dimension(140, 28));
-        usernameIn.setPreferredSize(new Dimension(250, 28));
-        password.setPreferredSize(new Dimension(140, 28));
-        pwd.setPreferredSize(new Dimension(250, 28));
+        username.setPreferredSize(sizeBoto);
+        usernameIn.setPreferredSize(sizeCamp);
+        password.setPreferredSize(sizeBoto);
+        pwd.setPreferredSize(sizeCamp);
 
         // Titol
 
@@ -84,7 +86,7 @@ public class VistaNotLogged extends JPanel {
         //Boto tornar
 
         JButton botoTornar = new JButton("Tornar");
-        botoTornar.setPreferredSize(new Dimension(140, 28));
+        botoTornar.setPreferredSize(sizeBoto);
         botoTornar.addActionListener(e -> vp.mostraMenuPrincipal());
         c.gridx = 0;
         c.gridy = 4;
@@ -95,7 +97,7 @@ public class VistaNotLogged extends JPanel {
 
         // Boto submit
         botoSubmit = new JButton("Login");
-        botoSubmit.setPreferredSize(new Dimension(140, 28));
+        botoSubmit.setPreferredSize(sizeBoto);
         botoSubmit.addActionListener(e -> submit());
 
         c.gridx = 2;
@@ -108,7 +110,7 @@ public class VistaNotLogged extends JPanel {
         // Botó changeMode
 
         botoChangeMode = new JButton("Registrar-se");
-        botoChangeMode.setPreferredSize(new Dimension(140, 28));
+        botoChangeMode.setPreferredSize(sizeBoto);
         botoChangeMode.addActionListener(e -> canviarMode());
 
         c.gridx = 2;
@@ -122,8 +124,8 @@ public class VistaNotLogged extends JPanel {
 
         repassword = new JLabel("Confirma la pwd");
         repwd = new JPasswordField(20);
-        repassword.setPreferredSize(new Dimension(140, 28));
-        repwd.setPreferredSize(new Dimension(250, 28));
+        repassword.setPreferredSize(sizeBoto);
+        repwd.setPreferredSize(sizeCamp);
 
         canvisVisuals();
     }

@@ -30,6 +30,8 @@ public class VistaLogged extends JPanel {
 
     public void update() {
         benvinguda.setText("Benvingut " + cu.getNom());
+        Font defaultFont = benvinguda.getFont();
+        benvinguda.setFont(new Font(defaultFont.getName(), Font.PLAIN, 18));
         int intents = cu.getStatistics().getIntents();
         int acabats = cu.getStatistics().getAcabats();
         int guanyats = cu.getStatistics().getGuanyats();
@@ -61,7 +63,8 @@ public class VistaLogged extends JPanel {
      */
     private void initBenvinguda() {
         benvinguda = new JLabel("Benvingut " + cu.getNom());
-
+        Font defaultFont = benvinguda.getFont();
+        benvinguda.setFont(new Font(defaultFont.getName(), Font.PLAIN, 18));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
