@@ -9,6 +9,7 @@ public class VistaLogged extends JPanel {
     private VistaPrincipal vp;
     private ControladorUsuari cu;
     private JLabel benvinguda;
+    private JLabel vIntents, vAcabats, vGuanyats;
     private JTextArea estadistiques;
     /**
      * Creadora per defecte
@@ -38,10 +39,9 @@ public class VistaLogged extends JPanel {
         int intents = cu.getStatistics().getIntents();
         int acabats = cu.getStatistics().getAcabats();
         int guanyats = cu.getStatistics().getGuanyats();
-        estadistiques.setText("Intents: " + intents + '\n' +
-                "Acabats: " + acabats + '/' + intents + '\n' +
-                "Guanyats: " + guanyats + '/' + acabats);
-
+        vIntents.setText("Intents: " + intents);
+        vAcabats.setText("Acabats: " + acabats + '/' + intents);
+        vGuanyats.setText("Guanyats: " + guanyats + '/' + acabats);
     }
 
     /**
@@ -51,12 +51,12 @@ public class VistaLogged extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         gbc.weighty = 0.1;
         add(Box.createGlue(), gbc);
-        gbc.gridy = 5;
-        add(Box.createGlue(), gbc);
         gbc.gridy = 7;
+        add(Box.createGlue(), gbc);
+        gbc.gridy = 9;
         gbc.weighty = 1;
         add(Box.createGlue(), gbc);
     }
@@ -81,21 +81,21 @@ public class VistaLogged extends JPanel {
      * Inicialitza el botó d'estadístiques
      */
     private void initEstadistiques() {
-        estadistiques = new JTextArea("Estadistiques: " +
-                "aquest usuari es AlphaZero");
-        estadistiques.setEditable(false);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(estadistiques, gbc);
         int intents = cu.getStatistics().getIntents();
         int acabats = cu.getStatistics().getAcabats();
         int guanyats = cu.getStatistics().getGuanyats();
-        estadistiques.setText("Intents: " + intents + '\n' +
-                "Acabats: " + acabats + '/' + intents + '\n' +
-                "Guanyats: " + guanyats + '/' + acabats);
-        //TODO: millorar interficie
+        vIntents = new JLabel("Intents: " + intents);
+        vAcabats = new JLabel("Acabats: " + acabats + '/' + intents);
+        vGuanyats = new JLabel("Guanyats: " + guanyats + '/' + acabats);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 2;
+        add(vIntents, gbc);
+        gbc.gridy = 3;
+        add(vAcabats, gbc);
+        gbc.gridy = 4;
+        add(vGuanyats, gbc);
     }
 
     /**
@@ -109,7 +109,7 @@ public class VistaLogged extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 6;
         add(botoLogout, gbc);
     }
 
@@ -123,7 +123,7 @@ public class VistaLogged extends JPanel {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 8;
         add(botoTornar, gbc);
     }
 }
