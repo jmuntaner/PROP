@@ -14,8 +14,7 @@ public class DriverUsuari extends GenericDriver {
                 "Check contrasenya",
                 "Obté ID",
                 "Modifica nom",
-                "Modifica contrasenya",
-                "Supera problema"};
+                "Modifica contrasenya"};
     }
 
     public static void main(String[] args) {
@@ -44,9 +43,6 @@ public class DriverUsuari extends GenericDriver {
                 break;
             case 5:
                 testSetPass();
-                break;
-            case 6:
-                testSuperaProblema();
                 break;
             default:
                 System.out.println("Test no valid");
@@ -85,18 +81,5 @@ public class DriverUsuari extends GenericDriver {
         String pass = scan.nextLine();
         u.setPass(pass);
         System.out.println(u.checkPass(pass));
-    }
-
-    public void testSuperaProblema() {
-        optPrint("Problema a superar: ");
-        int id = scan.nextInt();
-        scan.nextLine();
-        u.superaProblema(id);
-        Set<Integer> s = u.getProblemesSuperats();
-
-        optPrintln("Problemes superats");
-        for (int idp : s) {
-            System.out.println(idp);
-        }
     }
 }
