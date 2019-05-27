@@ -28,6 +28,9 @@ public class VistaLogged extends JPanel {
         initGlues();
     }
 
+    /**
+     * Actualitza la vista segons l'usuari
+     */
     public void update() {
         benvinguda.setText("Benvingut " + cu.getNom());
         Font defaultFont = benvinguda.getFont();
@@ -37,12 +40,12 @@ public class VistaLogged extends JPanel {
         int guanyats = cu.getStatistics().getGuanyats();
         estadistiques.setText("Intents: " + intents + '\n' +
                 "Acabats: " + acabats + '/' + intents + '\n' +
-                "Guanyats: " + guanyats + '/' + acabats + '\n');
+                "Guanyats: " + guanyats + '/' + acabats);
 
     }
 
     /**
-     * Inicialitza les separacions entre elements del menu.
+     * Inicialitza les separacions entre elements de la vista.
      */
     private void initGlues() {
         GridBagConstraints gbc = new GridBagConstraints();
@@ -80,19 +83,18 @@ public class VistaLogged extends JPanel {
     private void initEstadistiques() {
         estadistiques = new JTextArea("Estadistiques: " +
                 "aquest usuari es AlphaZero");
-        estadistiques.setPreferredSize(new Dimension(150, 150));
         estadistiques.setEditable(false);
-
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         add(estadistiques, gbc);
         int intents = cu.getStatistics().getIntents();
         int acabats = cu.getStatistics().getAcabats();
         int guanyats = cu.getStatistics().getGuanyats();
         estadistiques.setText("Intents: " + intents + '\n' +
                 "Acabats: " + acabats + '/' + intents + '\n' +
-                "Guanyats: " + guanyats + '/' + acabats + '\n');
+                "Guanyats: " + guanyats + '/' + acabats);
         //TODO: millorar interficie
     }
 
