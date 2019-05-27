@@ -21,10 +21,10 @@ class VistaCasella extends JPanel {
     private static final Color COL_FOSC_POSSIBLE_HOVER = new Color(163, 43, 41);
     private static final Color COL_FOSC_SELEC = new Color(120, 33, 29);
     private static final Color COL_CLAR_SELEC = new Color(171, 64, 53);
-    private int x, y;
+    private final int x, y;
     private char peca;
     private JLabel labelPeca;
-    private VistaTauler vt;
+    private final VistaTauler vt;
     private boolean hovering, interactable, selected, possible;
 
     /**

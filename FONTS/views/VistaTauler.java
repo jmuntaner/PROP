@@ -12,12 +12,12 @@ import java.util.concurrent.Executors;
 /**
  * Representació gràfica d'un tauler d'escacs.
  */
-public class VistaTauler extends JPanel {
+class VistaTauler extends JPanel {
     private TaulerListener tl;
     private ImageIcon empty;
-    private ImageIcon[] fitxes;
-    private VistaCasella[][] caselles;
-    private ExecutorService executor;
+    private final ImageIcon[] fitxes;
+    private final VistaCasella[][] caselles;
+    private final ExecutorService executor;
     private int lastLado;
 
     /**

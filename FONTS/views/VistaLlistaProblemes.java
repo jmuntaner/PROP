@@ -14,8 +14,8 @@ import java.util.List;
  */
 class VistaLlistaProblemes extends JPanel {
 
-    private ControladorLlistaProblemes cp;
-    private VistaPrincipal vp;
+    private final ControladorLlistaProblemes cp;
+    private final VistaPrincipal vp;
     private VistaTauler preview;
     private JLabel labelNom, labelDificultat, labelJugades;
     private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar, buttonRanking, buttonAvaluar;
@@ -81,7 +81,7 @@ class VistaLlistaProblemes extends JPanel {
      */
     private void avaluaConjunt() {
         List<String> seleccio = problemes.getSelectedValuesList();
-        ControladorAnalisi ca = cp.getAnalisi(seleccio, true, true);
+        ControladorAnalisi ca = cp.getAnalisi(seleccio);
         vp.iniciaAnalisi(ca);
     }
 
@@ -99,11 +99,9 @@ class VistaLlistaProblemes extends JPanel {
             final File file = filepre;
             new Thread(() -> {
                 cp.exportaProblemes(file);
-                SwingUtilities.invokeLater(() -> {
-                    JOptionPane.showMessageDialog(this,
-                            "Problemes exportats!", "Exportació de problemes",
-                            JOptionPane.INFORMATION_MESSAGE);
-                });
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this,
+                        "Problemes exportats!", "Exportació de problemes",
+                        JOptionPane.INFORMATION_MESSAGE));
             }).start();
         }
     }
@@ -118,11 +116,9 @@ class VistaLlistaProblemes extends JPanel {
             final File file = fc.getSelectedFile();
             new Thread(() -> {
                 cp.carregaProblemes(file);
-                SwingUtilities.invokeLater(() -> {
-                    JOptionPane.showMessageDialog(this,
-                            "Problemes carregats!", "Càrrega de problemes",
-                            JOptionPane.INFORMATION_MESSAGE);
-                });
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this,
+                        "Problemes carregats!", "Càrrega de problemes",
+                        JOptionPane.INFORMATION_MESSAGE));
                 update();
 
             }).start();

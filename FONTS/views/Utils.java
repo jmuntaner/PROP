@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 class Utils {
     static final String llistaFitxes = "KQRNBPkqrnbp";
-    private static ImageIcon[] lastGenerated = new ImageIcon[llistaFitxes.length()];
+    private static final ImageIcon[] lastGenerated = new ImageIcon[llistaFitxes.length()];
     private static int lastSize = -1;
 
     /**

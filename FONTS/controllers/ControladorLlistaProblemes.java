@@ -153,11 +153,9 @@ public class ControladorLlistaProblemes {
      * Obté un controlador d'analisi de problemes.
      *
      * @param seleccio Llista de problemes a avaluar.
-     * @param m1       Tipus de la maquina 1.
-     * @param m2       Tipus de la maquina 2.
      * @return Controlador d'analisi m1 vs m2 en els problemes seleccionats.
      */
-    public ControladorAnalisi getAnalisi(List<String> seleccio, boolean m1, boolean m2) {
-        return new ControladorAnalisi(seleccio.toArray(new String[0]), m1, m2);
+    public ControladorAnalisi getAnalisi(List<String> seleccio) {
+        return new ControladorAnalisi(seleccio.toArray(new String[0]));
     }
 }

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class VistaRankingProblema extends JPanel {
+class VistaRankingProblema extends JPanel {
     private JList<String[]> llista;
     private JScrollPane panelRanking;
 
@@ -38,7 +38,7 @@ public class VistaRankingProblema extends JPanel {
      */
     private void initpanelLlista() {
         llista = new JList<>();
-        ListCellRenderer rend = new RankingRenderer();
+        ListCellRenderer<String[]> rend = new RankingRenderer();
         llista.setCellRenderer(rend);
         panelRanking = new JScrollPane(llista);
     }
@@ -53,19 +53,17 @@ public class VistaRankingProblema extends JPanel {
         llista.setListData(array);
     }
 
-    private class RankingRenderer implements ListCellRenderer {
-
+    private class RankingRenderer implements ListCellRenderer<String[]> {
         @Override
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            String[] fila = (String[]) value;
+        public Component getListCellRendererComponent(JList<? extends String[]> list, String[] value, int index, boolean isSelected, boolean cellHasFocus) {
             JPanel pfila = new JPanel();
             pfila.setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridy = 0;
             gbc.gridx = 0;
-            pfila.add(new JLabel((index + 1) + ". " + fila[0]), gbc);
+            pfila.add(new JLabel((index + 1) + ". " + value[0]), gbc);
             gbc.gridx = 2;
-            pfila.add(new JLabel(fila[1]), gbc);
+            pfila.add(new JLabel(value[1]), gbc);
             gbc.gridx = 1;
             gbc.weightx = 1;
             pfila.add(Box.createGlue(), gbc);

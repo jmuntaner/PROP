@@ -5,13 +5,14 @@ import controllers.ControladorAnalisi;
 import javax.swing.*;
 import java.awt.*;
 
-public class VistaAnalisiPartides extends JPanel {
-    private VistaPrincipal vp;
+class VistaAnalisiPartides extends JPanel {
+    private final VistaPrincipal vp;
     private ControladorAnalisi ca;
     private int numPartides;
     private JLabel labelTorn;
-    private JLabel[] labelNom, labelVict, labelTT, labelTM;
+    private JLabel[] labelVict, labelTT, labelTM;
     private JPanel[] players;
+    private JComboBox[] noms;
     private JButton buttonIniciar;
     private JPanel panelStats, panelSuperior;
     private JList<String> listProblemes;
@@ -57,7 +58,7 @@ public class VistaAnalisiPartides extends JPanel {
     }
 
     private void initPlayers() {
-        labelNom = new JLabel[2];
+        noms = new JComboBox[2];
         labelVict = new JLabel[2];
         labelTT = new JLabel[2];
         labelTM = new JLabel[2];
@@ -65,9 +66,16 @@ public class VistaAnalisiPartides extends JPanel {
         for (int i = 0; i < 2; i++) {
             players[i] = new JPanel();
             players[i].setLayout(new GridBagLayout());
-            labelNom[i] = new JLabel("-");
-            Font defaulltFont = labelNom[i].getFont();
-            labelNom[i].setFont(new Font(defaulltFont.getName(), Font.PLAIN, 20));
+            noms[i] = new JComboBox<String>();
+            //noinspection unchecked
+            noms[i].addItem("Xicu (M1)");
+            //noinspection unchecked
+            noms[i].addItem("Barja (M2)");
+            final int pos = i;
+            noms[i].addActionListener(e -> {
+                ca.setMaquina(pos, noms[pos].getSelectedIndex());
+            });
+
             labelVict[i] = new JLabel("0");
             labelTT[i] = new JLabel("0");
             labelTM[i] = new JLabel("0");
@@ -79,7 +87,7 @@ public class VistaAnalisiPartides extends JPanel {
             gbc.gridwidth = 2;
             gbc.weightx = 1;
             gbc.insets = new Insets(0, 4, 0, 4);
-            players[i].add(labelNom[i], gbc);
+            players[i].add(noms[i], gbc);
             gbc.gridwidth = 1;
 
             gbc.gridy = 1;
@@ -119,7 +127,7 @@ public class VistaAnalisiPartides extends JPanel {
         JButton buttonTornar = new JButton("Tornar");
         buttonTornar.addActionListener(e -> vp.mostraLlistaProblemes());
 
-        buttonIniciar = new JButton("Iniciar");
+
         buttonIniciar.addActionListener(e -> iniciaPartides());
 
 
@@ -128,8 +136,7 @@ public class VistaAnalisiPartides extends JPanel {
         gbc.gridy = 0;
         gbc.insets = new Insets(0, 0, 0, 4);
         panelSuperior.add(buttonTornar, gbc);
-        gbc.gridx++;
-        panelSuperior.add(buttonIniciar, gbc);
+
         // Glues
         gbc.gridx++;
         gbc.weightx = 1;
@@ -142,13 +149,13 @@ public class VistaAnalisiPartides extends JPanel {
         panelStats.setLayout(new GridBagLayout());
         panelStats.setBorder(BorderFactory.createTitledBorder("Estat"));
         labelTorn = new JLabel("Esperant inici.");
+        buttonIniciar = new JButton("Iniciar");
 
         listProblemes = new JList<>(genLlista());
-        listProblemes.setSelectedIndex(0);
         listProblemes.setSelectionModel(new DisabledItemSelectionModel());
         listProblemes.setBackground(new Color(0, 0, 0, 0));
         listProblemes.setCellRenderer(new ListCellRenderer<String>() {
-            DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+            final DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
             @Override
             public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -162,11 +169,15 @@ public class VistaAnalisiPartides extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panelStats.add(labelTorn, gbc);
-        gbc.gridy = 1;
+        gbc.gridy++;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 4, 4, 4);
+        panelStats.add(buttonIniciar, gbc);
+        gbc.gridy++;
         gbc.weighty = 1;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(4, 4, 4, 4);
+
         panelStats.add(spListProblemes, gbc);
     }
 
@@ -176,7 +187,7 @@ public class VistaAnalisiPartides extends JPanel {
         String[] wins = ca.getWinners();
         int act = ca.getNumAct() - 1;
         for (int i = 0; i < noms.length; i++) {
-            noms[i] += ": ";
+            noms[i] += ":    ";
             if (i < act) noms[i] += wins[i];
             else if (started && i == act) noms[i] += "[Jugant]";
             else noms[i] += "[Pendent]";
@@ -193,6 +204,8 @@ public class VistaAnalisiPartides extends JPanel {
         this.ca = ca;
         numPartides = ca.getNumProbs();
         resetAll();
+        noms[0].setSelectedIndex(0);
+        noms[1].setSelectedIndex(0);
     }
 
 
@@ -208,6 +221,9 @@ public class VistaAnalisiPartides extends JPanel {
             }
             SwingUtilities.invokeLater(() -> {
                 buttonIniciar.setEnabled(false);
+                buttonIniciar.setText("Executant...");
+                noms[0].setEnabled(false);
+                noms[1].setEnabled(false);
                 started = true;
             });
             do {
@@ -217,7 +233,10 @@ public class VistaAnalisiPartides extends JPanel {
             SwingUtilities.invokeLater(() -> {
                 updateStats();
                 labelTorn.setText("Partides finalitzades");
+                buttonIniciar.setText("Repetir");
                 buttonIniciar.setEnabled(true);
+                noms[0].setEnabled(true);
+                noms[1].setEnabled(true);
             });
         }).start();
     }
@@ -252,22 +271,22 @@ public class VistaAnalisiPartides extends JPanel {
 
         // Update victory list
         listProblemes.setListData(genLlista());
-        listProblemes.clearSelection();
-        listProblemes.setSelectedIndex(ca.getNumAct() - 1);
     }
 
-    void resetAll() {
-        labelNom[0].setText(ca.getNomM(false));
-        labelNom[1].setText(ca.getNomM(true));
+    private void resetAll() {
         labelTorn.setText("Esperant Inici");
         labelVict[0].setText("-");
         labelVict[1].setText("-");
         labelTT[0].setText("-");
-        labelTM[1].setText("-");
-        labelTT[0].setText("-");
+        labelTM[0].setText("-");
+        labelTT[1].setText("-");
         labelTM[1].setText("-");
         listProblemes.setListData(genLlista());
+        buttonIniciar.setEnabled(true);
+        noms[0].setEnabled(true);
+        noms[1].setEnabled(true);
         started = false;
+        buttonIniciar.setText("Iniciar");
     }
 
     private class DisabledItemSelectionModel extends DefaultListSelectionModel {

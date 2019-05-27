@@ -14,9 +14,9 @@ public class ControladorAnalisi {
     private int partidaAct, winsA, winsD;
 
 
-    public ControladorAnalisi(String[] noms, boolean mtype1, boolean mtype2) {
-        a = mtype1 ? new M1() : new M2();
-        d = mtype2 ? new M1() : new M2();
+    public ControladorAnalisi(String[] noms) {
+        a = new M1();
+        d = new M1();
         wins = new ArrayList<>();
         ep = new ArrayList<>();
         probs = new ArrayList<>();
@@ -55,8 +55,10 @@ public class ControladorAnalisi {
 
     public String[] getWinners() {
         String[] res = new String[wins.size()];
-        for (int i = 0; i < wins.size(); ++i)
-            res[i] = wins.get(i) ? ("A (" + a.getNom() + ")") : ("D (" + d.getNom() + ")");
+        for (int i = 0; i < wins.size(); ++i) {
+            String elvira = wins.get(i) ? ("A (" + a.getNom() + ")") : ("D (" + d.getNom() + ")");
+            res[i] = elvira;
+        }
         return res;
     }
 
@@ -104,5 +106,12 @@ public class ControladorAnalisi {
         winsA = 0;
         winsD = 0;
         partidaAct = 0;
+    }
+
+    public void setMaquina(int jugador, int maquina) {
+        if (jugador == 0)
+            a = maquina == 0 ? new M1() : new M2();
+        else
+            d = maquina == 0 ? new M1() : new M2();
     }
 }

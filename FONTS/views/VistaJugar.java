@@ -16,7 +16,7 @@ import static java.lang.Thread.interrupted;
 /**
  * Vista de partida
  */
-public class VistaJugar extends VistaAmbTauler {
+class VistaJugar extends VistaAmbTauler {
     private long iniciTorn, iniciPartida;
     private final ScheduledExecutorService executorService;
     private JLabel labelTempsTorn, labelTempsPatida, labelTorn, labelEscac;
@@ -107,8 +107,7 @@ public class VistaJugar extends VistaAmbTauler {
     @Override
     JPanel getPanelDreta() {
         JPanel panelInfo = new JPanel();
-        GridBagLayout gbl = new GridBagLayout();
-        panelInfo.setLayout(gbl);
+        panelInfo.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc_info = new GridBagConstraints();
 
@@ -261,7 +260,7 @@ public class VistaJugar extends VistaAmbTauler {
     /**
      * Inicia un torn de màquina en un nou fil.
      */
-    void tornMaquina() {
+    private void tornMaquina() {
         tMaquina = new Thread(() -> {
 
             boolean end = false;

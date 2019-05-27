@@ -11,8 +11,8 @@ import java.util.ArrayList;
 /**
  * Vista principal del programa
  */
-public class VistaPrincipal {
-    private CtrlPresentacion mCp;
+class VistaPrincipal {
+    private final CtrlPresentacion mCp;
     private JFrame frameVista;
     private VistaMenuPrincipal panelMenuPrincipal;
     private VistaJugar panelJugar;
