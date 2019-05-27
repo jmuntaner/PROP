@@ -5,7 +5,6 @@ import domain.Problema;
 public class GestioProblema extends  GestioBases {
     private static final String rp = "data/baseProbs/"; //relative path
     private static final String ext = ".prob";
-    //potser canviar '/' per File.pathSeparator
 
     private static GestioProblema instance = new GestioProblema();
 

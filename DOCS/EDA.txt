@@ -13,10 +13,286 @@ Breu descripcio de les estructures de dades i algorismes utilitzats per a implem
 - Breu descripcio de l'us que en fem del polimorfisme. Nom de les classes i metodes que implementen el polimorfisme.
 
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ESTRUCTURES DE DADES I ALGORISMES
+________________________________________
+----------------------------------------
+
+ESTRUCTURES DE DADES
+
+Estructures de dades usades en el programa.
+
+Observacions:
+    - Es detallen els usos que se'n fan com a atribut de les classes.
+    - En cas que s'usin com a parametre o tipus de retorn de metodes, s'especifica la classe en
+      que s'usen, pero no es detalla la seva funcio.
+    - Idem a l'anterior per a l'us com a parametre d'estructures de dades parametritzades.
+    - Els usos locals no queden recollits en aquest document
+    - Per a les estructures de dades parametritzades, s'especifiquen els tipus dels parametres.
+_____
+
+Array: objecte contenidor que guarda un nombre fix d'elements i te un tamany fix (es a dir, estatic).
+    ControladorAnalisi
+        Array d'Strings
+        Array de longs
+    ControladorLlistaProblemes
+        Array d'array de chars
+        Array d'Strings
+    Tauler
+        Array d'Arrays de Peca (8x8) - situacio del tauler
+        Array d'Arrays d'ints (16x2) - moviments relatius
+        Array d'ints
+    Escacs
+        Arrays d'Strings
+    Utils
+        Arrays d'ImageIcons - representacions grafiques de les peces (imatges)
+    VistaAnalisiPartides
+        Array de JLabels - etiquetes de victories, torns
+        Array de JPanels - panels dels jugadors
+        Array de JComboBoxs - noms
+        Array d'Strings
+    VistaRankingProblema
+        Array d'Strings
+_____
+
+ArrayList: contenidor parametritzat que representa un array pero es un objecte de mida variable (es a dir, dinamic).
+    ControladorAnalisi
+        ArrayList<Problema> - problemes a analitzar
+        ArrayList<Boolean> - guanyadors de les partides jugades
+        ArrayList<EstadistiquesPartida> - estadistiques de les partides jugades
+    ControladorLlistaProblemes
+        ArrayList<Pair<String,String>>
+    ControladorPartida
+        ArrayList<Moviment> - moviments possibles
+        ArrayList<Pair<Integer,Integer>>
+        ArrayList<Pair<String,String>>
+    GestioBases
+        ArrayList<String>
+    Partida
+        ArrayList<Moviment> - historial de moviments de la partida
+    Ranking
+        ArrayList<Pair<String,T>> - ranking
+        ArrayList<Pair<String,String>>
+    Tauler
+        ArrayList<Moviment>
+    VistaJugar
+        ArrayList<Pair<Integer,Integer>> - moviments
+    VistaRankingProblema
+        Arraylist<Pair<String,String>>
+_____
+
+List: col·leccio ordenada que permet repeticions.
+    ControladorLlistaProblemes
+        List<String>
+_____
+
+HashMap: Implementacio de la interficie Map basada en una taula de hash. Un Map es un objecte que associa valor a claus,
+i que no pot contenir claus duplicades.
+    M2
+        Map<String, TranspositionTableEntry> - taula de transposicio
+        Map<String, Integer> - taula de moviments visitats
+_____
+
+Pair: parella d'elements.
+    ControladorLlistaProblemes
+        Pair<String,String>
+    ControladorPartida
+        Pair<Integer,Integer>
+        Pair<String,String>
+    Moviment
+        Pair<Integer, Integer> - posicion inicial, posicio final (coordenades x i y)
+    Peca
+        Pair<Integer, Integer>
+    Ranking
+        Pair<String,T>
+        Pair<String,String>
+    Tauler
+        Pair<Integer,Integer>
+    VistaJugar
+        Pair<Integer,Integer> - posicio inicial
+    VistaRankingProblema
+        Pair<String,String>
+_____
+
+Moviment: moviment dins la partida. Conte la posicio inicial i final del moviment, la Peca a moure i la Peca morta.
+    ControladorPartida
+    Maquina
+    Partida
+_____
+
+EstadistiquesPartida: estadistiques associades a una partida. Conte el color del torn actual, si hi ha un torn en curs
+o no, el temps quan ha començat la partida, els temps de jocs dels dos jugadors i el nombre de jugades dels dos.
+    ControladorAnalisi
+    ControladorPartida
+        - estadistiques de la partida
+_____
+
+EstadistiquesJugador
+    Usuari
+        - estadistiques de l'usuari
+_____
+
+Ranking: ranking d'usuaris, ordenats per puntuacio
+    Problema
+        Ranking<PuntuacioProblema> - ranking del problema
+_____
+
+TranspositionTableEntry: entrada per a la taula de transposicio. Conte el millor moviment que s'ha trobat per al node
+del minimax i els valors maxim i minim que se'n deriven.
+    M2
+
+____________________
+--------------------
+
+ALGORISMES
+
+- Maquina:
+    - Heuristica
+        M1/M2 (usada)
+        M2 (provada)
+    - CalcularMoviment
+    - Minimax
+        M1
+        M2
+    - Millora M2: ordenacio moviments (provada)
+    - Millora M2: taula de transposicio
+    - Millora M2: taula de moviments visitats
+
+- Problema:
+    - Limit jugades (4)
+    - Dificultat
+    - ComprovaSol (tauler -> comprovaSolAux)
+
+- Tauler
+    - esEscacMat (esEscac, esMat...)
+    - obteMovimentsPeca (?)
+    - comprovaSolAux
+
+- Usuari
+    - Hash password (SHA-1)
+
+____________________
+--------------------
+
+FUNCIONALITATS
+
+____________________
+--------------------
+
+POLIMORFISME
+
+El polimorfisme s'usa en tres llocs: Puntuacio, Peca i Maquina.
+
+A mes, algunes classes implementen la interficie Serializable. que ofereix una implementacio per defecte dels metodes
+readObject i writeObject, que permeten llegir i escriure objectes a fitxers.
+
+Les classes que implementen Serializable son:
+_____
+
+Serializable:
+    Interficie que ofereix una implementacio per defecte dels metodes readObject i writeObject, que permeten llegir i
+    escriure objectes a fitxers.
+
+- Classes que la implementen:
+    - EstadistiquesJugador
+    - Problema
+    - Puntuacio
+    - Ranking
+    - Usuari
+    - Pair
+_____
+
+Puntuacio:
+
+    Interficie que permet definir diferents puntuacions per a l'ordenacio dels usuaris en el ranking.
+    Permet la comparacio entre diferents instancies de les classes que la implementen.
+    Permet definir diferents puntuacions per a establir diferents rankings d'usuaris.
+
+- Metodes que requereix implementar:
+    - boolean esMillor(T)
+        Funcio de comparacio de puntuacions. Retorna true si l'objecte des del que es crida la funcio es millor que
+        el parametre. En cas contrari, ha de retornar false.
+    - String representa()
+        Retorna la representacio de la puntuacio en format String.
+
+- Classes que la implementen:
+    - PuntuacioProblema
+        Puntuacio per a problemes, composta pel nombre de jugades en que s'han resolt i el temps que ha necessitat
+        el jugador per a fer-ho.
+_____
+
+Peca:
+
+    Classe abstracta que representa una peca en el tauler d'escacs.
+    Permet tractar per igual diferents tipus de peces, que es caracteritzen per tenir diferents moviments.
+
+- Metodes abstractes:
+    - toChar()
+        Retorna el codi char corresponent al tipus de peca i color
+    - boolean esMovimentValid(boolean, int, int)
+        Indica si la peca es pot moure a la posicio indicada, segons el seu tipus.
+
+- Subclasses:
+    - Alfil
+    - Cavall
+    - Peo
+    - Rei
+    - Reina
+    - Torre
+_____
+
+Maquina:
+
+    Classe abstracta que permet definir diferents "jugadors virtuals", es a dir, diferents intel·ligencies que cerquin
+    automaticament el seguent moviment a realitzar.
+    Permet usar diferents implementacions de l'algorisme fent servir les mateixes crides.
+
+    Per simplicitat, la primera iteracio de l'algorisme (funcio calcularMoviment) es comuna per a totes les maquines .
+    A partir de la segona, l'algorisme ja es diferent per a cada maquina (funcio minimax).
+    En aquest cas el metode "heuristica" no es abstracte perque les dues maquines implementades usen la mateixa funcio,
+    pero si es volguessin usar heuristiques diferents ho podria ser (o mantenir la implementacio per defecte i fer
+    override).
 
 
+- Metodes abstractes:
+    - double minimax(Tauler, int, double, double, boolean, int, Color)
+        Calcula el valor del minimax de cada posicio del tauler (cada node de l'arbre)
 
-Artxiu EDA.txt amb una breu descripció de les estructures de dades i algorismes utilitzats per a implementar les funcionalitats principals. És MOLT IMPORTANT per la valoració del projecte, que aquest artxiu contingui:
-Descripció de la "inteligència" dels vostres algorismes. Podeu detallar breument la vostra recerca a la litertura. Comenteu els resultats obtingut fent referència als jocs de proves que entregueu.
-Descripció de les funcionalitats obligatòries i optatives afegides i/o eliminades de la vostra implementació respecte al vostre diagrama de casos d'ús de la 1a entrega.
-Breu descripció de l'ús que en feu del polimorfisme. Nom de les classes i mètodes que implementen el polimorfisme.
+- Subclasses:
+    M1
+        Maquina senzilla.
+        Millores d'eficiencia: poda alfa-beta.
+    M2
+        Maquina complexa.
+        Millores d'eficiencia: poda alfa-beta, taula de transposicio, taula de moviments visitats.
+_____
+
+VistaAmbTauler:
+
+    Classe abstracta que representa una vista amb panel lateral i tauler redimensionable.
+    Permet gestionar la visualitzacio del tauler i el panel lateral amb diferents elements.
+
+- Metodes abstractes:
+    - JPanel getPanelDreta()
+        Crear el JPanel d'informació
+
+- Subclasses:
+    - VistaEditor
+        Vista que permet crear i modificar problemes
+    - VistaJugar
+        Vista que permet jugar partides
+
+El metode getPanelBotons no es abstracte, pero tambe esta redefinit a les subclasses.
+_____
+
+VistaTauler.TaulerListener:
+
+    Interficie per a Listeners d'events de tauler
+
+- Metodes que requereix implementar:
+    - void clicPeca(int,int)
+        Gestiona els clics a una casella
+
+- Classes que la implementen:
+    - VistaAmbTauler (i subclasses)

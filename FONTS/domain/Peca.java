@@ -70,7 +70,7 @@ public abstract class Peca {
 
     /**
      * Indica si la peça es pot moure a la posició indicada.
-     * Ho comprova segons el tipus de peça i segons si hi ha peces entremig
+     * Ho comprova segons el tipus de peça.
      *
      * @param mata Indica si la peça mata o no
      * @param x    Fila a on es vol moure la peça.

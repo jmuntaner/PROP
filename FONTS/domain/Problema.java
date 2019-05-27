@@ -23,7 +23,6 @@ public class Problema implements Serializable{
         int[] data = new int[]{0, 0};
         Color tema = FenTranslator.getColor(situacioInicial);
         FenTranslator.generaTauler(situacioInicial).comprovaSolAux(tema, tema, 0, numJugades, data);
-        //situacioInicial.comprovaSolAux(tema, tema, 0, numJugades, data);
         if (data[0] == 0) return false;
         dificultat = data[1] / data[0];
         return true;

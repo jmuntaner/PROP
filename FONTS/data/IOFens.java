@@ -12,7 +12,7 @@ public class IOFens {
     /*
     Format del fitxer que llegeix:
         - Un problema per línia
-        - Cada línia: numJugades_FEN
+        - Cada línia: nom_numJugades_FEN\n
      */
 
     /**
