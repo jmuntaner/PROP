@@ -32,7 +32,8 @@ public class VistaNotLogged extends JPanel {
      */
     private void initForm() {
         titol = new JLabel("Inici de sessió");
-        titol.setFont(new Font("Serif", Font.BOLD, 20));
+        Font defaultFont = titol.getFont();
+        titol.setFont(new Font(defaultFont.getName(), Font.BOLD, 20));
         JLabel username = new JLabel("Usuari");
         JLabel password = new JLabel("Contrasenya");
         usernameIn = new JTextField(20);
