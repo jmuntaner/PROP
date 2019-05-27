@@ -91,25 +91,6 @@ public class Tauler {
         return obteMovimentsJugador(b.getNext()).size() == 0;
     }
 
-
-    /**
-     * Indica si la posició pos pertany a "l'estrella" de posicions que amenacen centre
-     * El cas centre == pos no es considera d'amenaça
-     *
-     * @param centre Posició de la peça amenaçada
-     * @param pos    Posició a comprovar si amenaça
-     * @return true si la posició pos amenaça centre
-     */
-    private boolean esPosicioAmenaca(Pair<Integer, Integer> centre, Pair<Integer, Integer> pos) {
-        int incx = centre.first() - pos.first();
-        int incy = centre.second() - pos.second();
-        if (incx == 0 && incy == 0) return false; //centre == pos
-        else if (incx == 0 || incy == 0) return true; //moviment horitzontal o vertical
-        else if (Math.abs(incx) == Math.abs(incy)) return true; //moviment diagonal
-        else
-            return (Math.abs(incx) == 2 && Math.abs(incy) == 1) || (Math.abs(incx) == 1 && Math.abs(incy) == 2); //cavalls
-    }
-
     /**
      * Indica si la partida està en taules perquè només queden els dos reis
      *

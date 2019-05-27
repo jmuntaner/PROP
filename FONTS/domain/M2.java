@@ -9,7 +9,7 @@ public class M2 extends Maquina {
     private static final int MOVE_MAX_REPETITIONS = 1;
 
     /*
-    POSSIBLE HEURISTICA (NO UTILITZADA)
+    POSSIBLE HEURISTICA DE POSICIONS I PECES (NO UTILITZADA)
 
     private static final double[][] posK = {
             {-3,-4,-4,-5,-5,-4,-4,-3},
@@ -268,45 +268,3 @@ public class M2 extends Maquina {
         return minimaxAux(t, profunditat, alfa, beta, esJugadorMaximal, codi, torn);
     }
 }
-
-/*
-Idees:
-https://stackoverflow.com/questions/9964496/alpha-beta-move-ordering
-    - Alpha-beta pruning (igual que M1)
-    - Cut-off profunditat: no calcula tot el minimax
-        -> Calcula maxim dos moviments per jugador (arbitrari)
-        -> Aixi esperem tenir una avaluació decent pero no exacta
-    - Heurística de peces: cada peça al tauler te un valor segons el seu tipus
-    - Heurística de posicions: cada tipus de peça te un valor diferent segons la posicio al tauler
-        -> No es massa util per una partida tan rapida (esta posat per partides llargues)
-    - Prioritat per a les jugades que acaben en mat
-    - Move ordering: avalua els millors moviments primer
-    - Transposition tables: comprovacio de repeticions
-    - Moviments: limita el nombre de vegades que es comprova un moviment
-        Nomes serveix per problemes llargs (però no fa que trigui molt mes aixi que aqui es queda)
- */
-
-/*
-Resultats provisionals M2 (problema mat en 3, profunditat total):
-    - Heuristica M1 sense cache: 2700 ms - 168297 nodes
-    - Heuristica M1 amb cache: 2400 ms
-    - Heuristica M2 amb cache: 3445082 nodes (aprox 40-50 segons)
-    - Heuristica M2 sense cache: >~ 4M nodes
-    -> La llista de moviments repetits no modifica el numero de nodes al ser problemes petits
-    -> Com que no fa varia gaire el temps, la deixem per si pot ser util en algun cas
-    - Heuristica M2 amb cache i move ordering: 33 s - 555k nodes
-
-    - M1: 190k nodes - 2,7 s
-    - M2: 167k nodes - 2.7 s
-
-Problema de 4, profunditat total:
-    - Heuristica M1 sense millores: ~50s - 4,869M nodes
-    - Heuristica M2: 731 s - 49M nodes
-    - Heuristica M1 amb cache: 33s - 2.3M nodes
-    - Heuristica M1 amb cache i ordenacio: 130s
-
-    -> Decisio final: M2
-        - Heuristica: M1
-        - Millores de rendiment: cache taulers, límit repetició de moviments, ordenació de moviments
-        - Profunditat: total (sense limitar)
- */

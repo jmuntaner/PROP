@@ -8,10 +8,6 @@ Breu descripcio de les estructures de dades i algorismes utilitzats per a implem
 - Descripcio de la intel·ligència dels algorismes.
   Breu detall de la recerca a la literatura.
   Comentari dels resultats obtinguts fent referencia als jocs de proves que entreguem.
-- Descripcio de les funcionalitats obligatories i optatives afegides i/o eliminades de la implementacio respecte al
-  diagrama de casos d'us de la primera entrega.
-- Breu descripcio de l'us que en fem del polimorfisme. Nom de les classes i metodes que implementen el polimorfisme.
-
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -159,23 +155,300 @@ ALGORISMES
     - Millora M2: taula de transposicio
     - Millora M2: taula de moviments visitats
 
-- Problema:
-    - Limit jugades (4)
-    - Dificultat
-    - ComprovaSol (tauler -> comprovaSolAux)
+_____
 
-- Tauler
-    - esEscacMat (esEscac, esMat...)
-    - obteMovimentsPeca (?)
-    - comprovaSolAux
+Comprovacio Escac/Mat: DFS iteratiu
 
-- Usuari
-    - Hash password (SHA-1)
+A la classe Tauler, per a calcular si la posicio es escac (funcio esEscac) hem implementat el seguent algorisme.
+
+Primerament obte la posicio del rei i despres procedeix a fer una exploracio DFS per a totes les direccions relatives
+possibles, mirant si a alguna posicio explorada hi ha una Peca (del color contrari) que pot moure a la posicio del rei.
+Es para l'exploracio d'aquella direccio en cas que sigui la d'un cavall (ja que nomes fan salts d'un pas en la seva
+direccio), que se surti del tauler o que es trobi una Peca que no pugui moure a la posicio del rei i, per tant, bloquegi
+la direccio (aixo inclou peces del mateix color que el rei). En cas que existeixi una Peca que pugui atacar el rei, es
+retorna true; si no, a l'acabar l'exploracio es retorna false.
+
+A la mateixa classe Tauler, per veur si la posicio es mat (funcio esMat) simplement mirem que el jugador no tingui
+moviments valids. Per a calcular els moviemnts valids d'un jugador, calculem per a cada Peca del jugador els seus
+moviments valuds. Aixo ens porta a la funcio obteMovimentsPeca, que retorna tots els moviments valids per a una Peca a
+una posicio. Aquesta funcio funciona de la seguent manera:
+
+De manera similar a esEscac, fa una exploracio DFS per a totes les direccions relatives possibles i mira si pot moure
+(matar en cas que no sigui buida) a cada posicio. Si es aixi, comprova que el moviment no provoqui escac del jugador
+oposat, i si aixi es (no hi ha escac contrari), l'afegeix a la llista de moviments possibles (i mata a la peca destia si
+calia). Talla l'exploracio de cada branca en cas de sortir del tauler, de moviment de cavall (step nomes pot ser 1) i de
+trobar-se una peca en aquella direccio (no podra moure mes enlla de la peca si segueix per aquella branca).
+_____
+
+Comprovacio Solucio: DFS recursiu
+
+La comprovacio de solucio engloba tres accions important:
+
+    1. Limita el nombre de jugades que poden tenir els problemes
+    2. Realitza propiament la comprovacio de si el problema te solucio
+    3. Calcula la dificultat del problema
+
+El limit de jugades es comprova abans d'iniciar la comprovacio de si existeix solucio per al problema. Com ja vam
+exposar en la primera entrega, no s'aplica un limit de peces perque el nombre de peces no te una gran implicacio en el
+rendiment de l'algorisme. El nombre de jugades, per la seva part, esta limitat a 4, pels seguents arguments:
+
+    - Segons [ref 1], la mida de l'arbre per a 3 jugades es de 50k nodes, mentre que per a 4 es de 138k i per a 5 de
+      1.6M nodes.
+    - A la practica, els problemes de 3 jugades es comproven en algun segons (fins a mig minut aproximadament, en els
+      casos mes lents que hem provat). Algun problema de 4 ha trigat uns 15 minuts, i nomes l'hem pogut reduir fins els
+      2m 20s aplicant millores que impedien el calcul de la dificultat, i que no milloraven els casos pitjors.
+
+La capa de presentacio no permet definir el nombre de jugades a mes de 3 per no fer massa lenta la comprovacio. De tota
+manera, el domini permet afegir problemes de fins a 4 jugades per tal de poder realitzar proves que forcin el sistema,
+afegint el problema des d'un fitxer de text.
+
+La dificultat es calcula aproximadament com la divisio entre el nombre de decisions valides que pot prendre l'atacant
+entre el nombre de solucions que existeixen, sent la primera el nombre de branques que corresponen a moviments del
+jugador que ataca (noti's que nomes es aproximat, ja que no son totes donat que no es recorre l'arbre sencer). Per la
+seva part, el nombre de solcions es el nombre de fulles de l'arbre que donen l'atacant com a guanyador. Ens hem basat en
+l'exposat a [ref 2], segons el qual les caracteristiques propies dels escacs (com ara el nombre de peces o les seves
+posicions) no son tan importants a l'hora de trobar la dificultat d'un problema, sino que el que afecta mes es la forma
+de l'arbre. Els resultats no tenen perque reflexar la dificultat real del problema, pero tal i com es diu a [ref 2],
+aquesta es dificil de trobar fins i tot per a persones experimentades.
+
+Per a comprovar que existeix solucio al problema, hem implementat a la classe Tauler la funcio comprovaSolAux, que tambe
+permet obtenir els parametres que usem posteriorment per a calcular la dificultat del problema (numero de decisions de
+l'atacant i numero de solucions trobades).
+
+Procedim recorrent l'arbre de moviments possibles emprant una exploracio en profunditat (DFS). Quan es el torn de
+l'atacant, s'afegeix a data[1] (decisions de l'atacant) el nombre de jugades possibles. Per a cada moviment possible,
+si troba mat, incrementa data[0] (nombre de mats); si no, segueix la cerca amb els moviments del contrari.
+
+Quan es el torn del defensor, comprova que el mat es inevitable, es a dir, que qualsevol moviment porta a un mat. Aixo
+ho fa tallant l'execucio de qualsevol branca que contingui un moviment possible que sigui mat del defensor o un moviment
+que al continuar la cerca no trobi el mat de l'atacant (comprovant si data[0] varia entre crides successives).
+_____
+
+SHA-1
+
+A la classe usuari, guardem un hash de la constrasenya. Per a calcular-lo, s'utilitza l'algoritme SHA-1. Aquest
+algorisme es una funcio de hash criptografica que agafa un input i produeix un valor de hash de 20 bytes. Aixi no cal
+guardar la contrasenya de l'usuari i nomes guardem el hash; d'aquesta manera, si volem comprovar que una contrasenya
+introduida es correcta simplement comparem els hash i no ens cal saber la contrasenya original. La idea d'usar el valor
+hash es que es practicament impossible a partir del hash trobar la contrasenya original i, per tant, tot i que un
+atacant aconseguis el hash seria molt dificil robar la contrasenya.
+
+L'algorisme SHA-1 esta implementat a la llibreria de Java java.security.MessageDigest, nosaltres simplement cridem el
+MessageDigest (amb parametre SHA1) a la funcio hashPass, ens retorna el hash de la contrasenya en byte[], i finalment el
+passem a String.
+
+_____
+
+Maquines: minimax
+
+En la maquina senzilla, s'ha utilitzat l'algorisme de minimax amb podes alfa-beta per a calcular el seguent moviment.
+La primera iteracio de l'algoritme es du a terme a la funcio calculaMoviment, que es comu per a totes les maquines, i
+despres s'usa la funcio minimax, que implementa l'algoritme amb les particularitats de cada maquina.
+
+L'aplicacio de l'algoritme minimax a aquest problema concret (calcular la seguent jugada a un problema d'escac) es
+obvia, ja que els escac son un joc amb adversari (dos jugadors) i d'informacio perfecta, cas que s'adequa perfectament
+als requisits del minimax.
+
+La idea de l'algorisme es buscar el millor moviment suposant que el contrincant escollira el pitjor per a tu. D'aquesta
+manera, els passos per l'algorisme son:
+
+    1. Generar l'arbre: es generen tots els nodes fins a arribar a un node terminal (o haver assolit la maxima
+       profunditat)
+    2. Assignar un valor als nodes terminals
+    3. Propagar els valors cap als nodes superiors, triant major o menor d'entre els fills segons el node sigui del
+       jugador maximal o no (nodes alternats).
+    4. Escollir la jugada mirant els valors del nivell superior.
+
+El problema de l'algorisme minimax es que el pas 1 acostuma a ser massa complex; particularment en el cas dels escacs es
+impossible generar tot l'arbre de possibles moviments. Per evitar aquesta complexitat hem introduit al nostre algorisme
+podes alfa-beta, que tenen com a objectiu descartar nodes que ja sabem que no son bons i, per tant, reduir la mida de
+l'arbre de cerca.
+
+La idea de les podes alfa-beta es que l'algorisme mante dos valors, alfa i beta, que representen el valor minim que
+sabem que el jugador maximal pot assolir i el valor maxim quye el juador minimal te assegurat assolir, respectivament.
+Si en algun moment de l'exploracio l'alfa supera la beta, el jugador maximal pot descartar aquest node i la branca que
+el descendeix.
+
+-> M1 (minimax amb podes alfa-beta, heuristica simple)
+
+Seguint [ref 3], vam decidir aplicar a la maquina simple (M1) un minimax simple, amb l'optimitzacio de podes alfa-beta
+per questions de rendiment. Aquesta millora s'ha implementat amb l'algoritme descrit a [ref 4].
+
+L'avaluacio dels nodes es fa a partir d'una heuristica trivial, que dona al node el valor maxim si hi ha mat del jugador
+atacant, el valor minim si hi ha mat del jugador defensor o taules (cas en el qual tambe guanya el defensor), i zero si
+no es produeixen cap d'aquestes situacions.
+
+La profunditat nomes queda limitada pel nombre maxim de jugades del problema, de manera que aquest algoritme sempre
+trobara la solucio en cas que ataqui o, en cas que defensi i l'atacant faci un moviment erroni, sempre evitara el mat.
+
+-> M2
+
+L'algoritme de la M1 es exacte, pero es molt costos. Amb la maquina M2 es preten buscar un algoritme que permeti jugar
+amb un cost computacional mes baix, encara que aixo provoqui que les jugades no siguin perfectes.
+
+Les possibles millores que s'han tingut en compte son:
+    - Podes alfa-beta (igual que a M1)
+    - Cut-off de profunditat
+    - Heuristica de peces
+    - Heuristica de posicions
+    - Prioritat per a les jugades que acaben en escac
+    - Ordenacio de moviments
+    - Taules de transposicio
+    - Taules de moviments visitats
+
+Totes aquestes millores han estat implementades i provades. A continuacio s'explica en que consisteixen i s'exposen els
+resultats obtinguts. A la classe M2 es poden trobar els codis de les millores; les funcions que finalment no han estat
+usades estan dins un comentari (excepte el cut-off de profunditat, que es trivial d'implementar sabent la profunditat
+inicial).
+
+- Cut-off de profunditat
+    Consisteix en establir un limit de profunditat, per tal que el minimax no calculi tot l'arbre.
+    Es calcula el valor de l'ultim node, esperant tenir una avaluacio decent pero no exacta.
+
+- Heuristica de peces:
+    Cada peca al tauler te un valor assignat segons el seu tipus i color.
+
+- Heuristica de posicions:
+    S'incrementa o decrementa lleugerament la puntuacio d'una peca segons la seva posicio al tauler.
+
+- Prioritat per a les jugades que acaben en escac
+    Donat que molts dels problemes es basen en forçar situacions d'escac fins a arribar al mat, donar prioritat a
+    l'escac ajudaria a trobar la solucio a certs problemes sense haver de trobar el mat.
+    No mencionarem mes aquesta heuristica, ja que els resultats son similars tant si es fa servir com si no.
+
+- Ordenacio de moviments:
+    Abans de provar els moviments seguents, s'ordenen segons la puntuacio del node seguent, amb l'objectiu de provar
+    primer moviments potencialment bons i aixi ajudar a la poda.
+
+- Taules de transposicio:
+    Actuen com una cache de nodes. Si un node ja ha estat visitat, es guarda el valor minim i el maxim que s'ha trobat,
+    aixi com el millor moviment, i s'utilitzen aquests valors per a afavorir la poda i, si es possible, no haver de
+    tornar a provar el node.
+
+- Taules de moviments visitat:
+    Guarden els moviments de la branca actual (es a dir, els moviments que s'han realitzat per arribar al node actual) i
+    el nombre de vegades que s'han provat. Aixo permet limitar el nombre maxim de repeticions dels moviments.
+
+L'heuristica complexa (com anomenarem a partir d'ara a la combinacio de l'heuristica de peces i la de posicions)
+que hem utilitzat es la que es troba a [ref 3], mentre que les millores de taules de transposicio i taules de
+moviments visitat s'han extret de [ref 5].
+
+Els resultats numerics s'han obtingut executant dos problemes:
+    1. 3 jugades, FEN r2n1rk1/1ppb2pp/1p1p4/3Ppq1n/2B3P1/2P4P/PP1N1P1K/R2Q1RN1 b - - 0 1
+    2. 4 jugades, FEN r1bqr3/ppp1B1kp/1b4p1/n2B4/3PQ1P1/2P5/P4P2/RN4K1 w - - 1 0
+
+Per comparar els metodes, s'ha tingut en compte el temps d'execucio que es mostra per pantalla a l'avaluar el problema
+en questio amb la funcionalitat de l'aplicacio, seleccionant la maquina adequada, i el nombre de nodes visitats per
+l'algoritme, fent servir un contador inicialitzat a zero a l'inici de la funcio calcularMoviment i incrementat en cada
+crida a la funcio minimax.
+
+Els problemes s'han provar primer amb profunditat limitades a 4 i 6 moviments, per provar l'heuristica. Com que els
+moviments que en resultaven no eren prou bons, creiem que per la naturalesa del problema, que es diferent a la d'una
+partida normal d'escacs (per al que estan fetes les heuristiques que hem trobat, que es basen en intentar controlar el
+tauler), hem decidit no buscar una millor avaluacio dels nodes per poder limitar la profunditat, sino optimitzacions que
+permetin arribar a la profunditat maxima mes rapidament. Aixi doncs, les proves que es mostren s'han realitzat sense
+establir un limit de profunditat de l'algoritme, mes enlla del que ja estableix el propi problema.
+
+Els resultats obtinguts son:
+
+    - Problema de 3 jugades
+        - M1: 190k nodes, 2.7 s
+        - M2, heuristica simple, sense cache: 168k nodes, 2.7 s
+        - M2, heuristica simple, amb cache: 2.4 s
+        - M2, heuristica complexa, sense cache: >~ 4M nodes
+        - M2, heuristica complexa, amb cache: 3.4M nodes, ~45 s
+        - M2, heuristica complexa, amb cache i move ordering: 555k nodes, 33 s
+    - Problema de 4 jugades:
+        - M2, heuristica simple, sense cache: 4.869M nodes, ~50 s
+        - M2, heuristica complexa, sense cache: 731 s, 49M nodes
+        - M2, heuristica simple, amb cache: 33s, 2.3M nodes
+        - M2, heuristica simple, amb cache i move ordering: 130s
+
+Per a la M2 s'ha utilitzat sempre una taula de moviment limitada a 1 repeticio. Tot i que no s'aprecia una millora de
+temps en problemes petits, si que ofereix una lleugera millora en nombre de nodes, que pot ser mes notable en problemes
+mes grans. Aquesta es la diferencia entre M1 i M2, amb heuristica simple i sense cache. Augmentar el limit de
+repeticions permeses donava resultats lleugerament pitjors.
+
+Podem treure varies conclusions d'aquests resultats, a mes de l'exposat en l'anterior paragraf:
+    - L'heuristica complexa no funciona. Tot i que en principi ha de donar resultats bons, ja que la maquina es exacta
+      al no tenir la profunditat limitada, fa que empitjori considerablement l'efecte de les podes. Com que, tal i com
+      hem comentat abans, no es prou bona com per limitar la profunditat, obtenim millors resultats amb l'heuristica
+      simple.
+    - La cache de moviments (taula de transposicio) proporciona una millora considerable, tant en termes de temps com de
+      nodes.
+    - L'ordenacio de moviments ofereix una millora notable en termes de nodes recorreguts, com a minim amb l'heuristica
+      complexa. Tambe es apreciable la millora en temps, tot i que no es tan exagerada. Amb l'heuristica simple, pero,
+      no hi ha una millora prou singificativa, si s'accentua el cost que requereix l'ordenacio, fent que sigui molt mes
+      lent. Com que hem decidit usar l'heuristica simple, l'ordenacio no ofereix cap millora.
+
+Aixi doncs, un cop analitzats els resultats obtinguts, ens hem decantat per implementar la M2 utilitzant la mateixa
+heuristica trivial que la M1, sense limitar la profunditat, i afegint una taula de transposicio i una taula de moviments
+visitats.
+
+_____
+
+Llista de referencies usades per als algorismes
+(Els [ref i] citen la referencia [i])
+
+[1] http://www.human-competitive.org/sites/default/files/gpsearch.pdf
+[2] http://www.cogsys.org/app/webroot/papers/ACS2015/article7.pdf
+[3] https://medium.freecodecamp.org/simple-chess-ai-step-by-step-1d55a9266977
+[4] https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
+[5] https://github.com/Vadman97/ChessGame/blob/master/src/vad/AIPlayer.java
 
 ____________________
 --------------------
 
 FUNCIONALITATS
+
+Funcionalitats afegides o eliminades respecte el diagrama de casos d'us de la primera entrega.
+
+A continuacio es llisten totes les funcionalitats plantejades en el diagrama de casos d'us, classificades segons si han
+estat implementades (afegides) o no (eliminades). Les funcionalitats obligatories es destaquen amb un asterisc (*).
+
+- Funcionalitats afegides:
+    - Jugar:
+        - Escollir jugadors (*)
+        - Jugar partida (joc):
+            - Iniciar partida (*)
+            - Moure peca (*)
+            - Finalitzar partida
+        - Avaluar conjunt de problemes (*)
+    - Gestionar problemes
+        - Llistar problemes (*)
+        - Carregar problema (*)
+        - Afegir problema (*)
+        - Modificar problema (*)
+        - Eliminar problema (*)
+        - Introduir problema manualment (*)
+    - Estadistiques
+        - Consultar ranking de problema (*)
+    - Gestionar jugadors (humans):
+        - Carrega jugador
+        - Alta jugador (*)
+        - Consultar assoliments
+
+- Funcionalitats eliminades:
+    - Jugar:
+        - Jugar partida
+            - Reset partida
+            - Desfer moviment
+            - Consultar ultims moviments
+    - Gestionar problemes:
+        - Filtrar problemes
+    - Estadistiques
+        - Consultar ranking general
+    - Gestionar jugadors (humans):
+        - Modificacio jugador
+        - Baixa jugador
+        - Reset jugador
+
+Observacions (comentades a classe amb la professora):
+    - La base de problemes no es en format textual (FEN) com es deia en l'enunciat.
+      Aixo es degut a que cal guardar el Ranking dels problemes, per exemple.
+    - La introduccio del problema pot ser:
+        - Carregant una llista de problemes, en format FEN, des d'un fitxer a la base.
+        - Manualment des de la interficie grafica.
 
 ____________________
 --------------------
