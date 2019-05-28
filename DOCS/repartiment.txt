@@ -1,6 +1,68 @@
-RELACIO CLASSES
+RELACIÓ DE CLASSES IMPLEMENTADES PELS MEMBRES DEL GRUP
 
-.txt
+FONTS
+├── controllers
+│   ├── ControladorAnalisi.java         - Àlex + Roger
+│   ├── ControladorEditor.java          - Àlex
+│   ├── ControladorLlistaProblemes.java - Àlex
+│   ├── ControladorPartidaHvH.java      - Àlex
+│   ├── ControladorPartidaHvM.java      - Àlex
+│   ├── ControladorPartida.java         - Àlex
+│   ├── ControladorPartidaMvM.java      - Roger
+│   ├── ControladorPrincipal.java       - Àlex
+│   ├── ControladorUsuari.java          - Joan
+│   └── index.txt
+├── data
+│   ├── GestioBases.java                - Roger
+│   ├── GestioProblema.java             - Roger
+│   ├── GestioUsuari.java               - Roger
+│   └── IOFens.java                     - Roger
+├── domain
+│   ├── Alfil.java                      - Joan
+│   ├── Cavall.java                     - Joan
+│   ├── Color.java                      - Àlex
+│   ├── EstadistiquesJugador.java       - Joan
+│   ├── EstadistiquesPartida.java       - Àlex
+│   ├── FenTranslator.java              - Àlex
+│   ├── M1.java                         - Joan
+│   ├── M2.java                         - Roger
+│   ├── Maquina.java                    - Joan
+│   ├── Moviment.java                   - Roger
+│   ├── Partida.java                    - Àlex
+│   ├── Peca.java                       - Joan
+│   ├── Peo.java                        - Joan
+│   ├── Problema.java                   - Roger
+│   ├── Puntuacio.java                  - Àlex
+│   ├── PuntuacioProblema.java          - Àlex
+│   ├── Ranking.java                    - Àlex
+│   ├── Rei.java                        - Joan
+│   ├── Reina.java                      - Joan
+│   ├── Tauler.java                     - Roger
+│   ├── Torre.java                      - Joan
+│   ├── TranspositionTableEntry.java    - Roger
+│   └── Usuari.java                     - Àlex
+├── test
+│   └── domain
+│       ├── M1Test.java                 - Àlex
+│       └── M2Test.java                 - Joan
+├── utils
+│   └── Pair.java                       - Codi extern
+└── views
+    ├── CtrlPresentacion.java           - Àlex
+    ├── Escacs.java                     - Àlex
+    ├── Utils.java                      - Àlex
+    ├── VistaAmbTauler.java             - Àlex
+    ├── VistaAnalisiPartides.java       - Àlex
+    ├── VistaCasella.java               - Àlex
+    ├── VistaEditor.java                - Àlex
+    ├── VistaFiPartida.java             - Àlex
+    ├── VistaJugar.java                 - Àlex
+    ├── VistaLlistaProblemes.java       - Àlex
+    ├── VistaLogged.java                - Joan
+    ├── VistaMenuPrincipal.java         - Àlex
+    ├── VistaNotLogged.java             - Joan
+    ├── VistaPrincipal.java             - Àlex
+    ├── VistaRankingProblema.java       - Àlex
+    └── VistaTauler.java                - Àlex
 
-Classes que ha implementat cadascú
-Aportacio de cada membre del grup
+18 directories, 199 files
