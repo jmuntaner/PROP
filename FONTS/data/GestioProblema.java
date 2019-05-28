@@ -3,7 +3,7 @@ package data;
 import domain.Problema;
 
 public class GestioProblema extends  GestioBases {
-    private static final String rp = "data/baseProbs/"; //relative path
+    private static final String rp = "bases/baseProbs/"; //relative path
     private static final String ext = ".prob";
 
     private static GestioProblema instance = new GestioProblema();
@@ -12,7 +12,7 @@ public class GestioProblema extends  GestioBases {
      * Constructora de GestioProblema
      */
     private GestioProblema() {
-        super();
+        super(rp);
     }
 
     /**

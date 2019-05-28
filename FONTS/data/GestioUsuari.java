@@ -3,7 +3,7 @@ package data;
 import domain.Usuari;
 
 public class GestioUsuari extends GestioBases {
-    private static final String rp = "data/baseUsuaris/";
+    private static final String rp = "bases/baseUsuaris/";
     private static final String ext = ".user";
 
     private static GestioUsuari instance = new GestioUsuari();
@@ -12,7 +12,7 @@ public class GestioUsuari extends GestioBases {
      * Constructora de GestioUsuari
      */
     private GestioUsuari() {
-        super();
+        super(rp);
     }
 
     /**

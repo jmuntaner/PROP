@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public abstract class GestioBases {
+    GestioBases(String path) {
+        new File(path).mkdirs();
+    }
+
     /**
      * Llegeix un element de la base corresponent
      * El nom ha de coincidir amb el nom del fitxer
