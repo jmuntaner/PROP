@@ -1,6 +1,7 @@
 package controllers;
 
 import data.GestioProblema;
+import data.GestioUsuari;
 import domain.*;
 import utils.Pair;
 
@@ -57,13 +58,20 @@ public abstract class ControladorPartida {
      * Finalitza la partida actual, actualitzant els rankings corresponents.
      */
     public void finalitzaPartida() {
-        if (getNomGuanyador().equals(nomA) && esJugadorHuma(nomA)) { //només actualitza si guanya el jugador atacant (A)
+        if (getNomGuanyador().equals(nomA) && esJugadorHuma(nomA) && !nomA.equals("guest")) { //només actualitza si guanya el jugador atacant (A)
             Ranking<PuntuacioProblema> ranking = problema.getRanking();
             PuntuacioProblema punts = new PuntuacioProblema(estadistiques, problema.getTema());
             ranking.afegeixPuntuacio(getUsuari(), punts);
             GestioProblema ge = GestioProblema.getInstance();
             ge.delete(problema.getNom());
             ge.saveProblema(problema);
+        }
+        if((esJugadorHuma(nomA) || esJugadorHuma(nomB)) && !getUsuari().getNom().equals("guest")) {
+            if (getNomGuanyador().equals(getUsuari().getNom())) getUsuari().getStatistics().acabaPartida(true);
+            else getUsuari().getStatistics().acabaPartida(false);
+            GestioUsuari gu = GestioUsuari.getInstance();
+            gu.delete(getUsuari().getNom());
+            gu.saveUsuari(getUsuari());
         }
     }
 
