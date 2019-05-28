@@ -1,11 +1,7 @@
 package views;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Vista amb el menú principal del programa.
@@ -52,12 +48,7 @@ class VistaMenuPrincipal extends JPanel {
      * Inicialitza la imatge amb el nom del programa.
      */
     private void initNomPrograma() {
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("res/logo.png"));
-            nomPrograma = new JLabel(new ImageIcon(myPicture));
-        } catch (IOException ex) {
-            System.out.println("Error de lectura del logo");
-        }
+        nomPrograma = new JLabel(new ImageIcon(this.getClass().getResource("/res/logo.png")));
 
         //nomPrograma.setText("Increible programa d'escacs");
 

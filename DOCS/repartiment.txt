@@ -50,6 +50,7 @@ FONTS
 └── views
     ├── CtrlPresentacion.java           - Àlex
     ├── Escacs.java                     - Àlex
+    ├── ImatgePecaLoader.java           - Àlex
     ├── Utils.java                      - Àlex
     ├── VistaAmbTauler.java             - Àlex
     ├── VistaAnalisiPartides.java       - Àlex

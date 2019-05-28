@@ -19,6 +19,7 @@ class VistaTauler extends JPanel {
     private final VistaCasella[][] caselles;
     private final ExecutorService executor;
     private int lastLado;
+    private ImatgePecaLoader iml;
 
     /**
      * Creadora de tauler interactiu.
@@ -44,6 +45,7 @@ class VistaTauler extends JPanel {
 
         setLayout(new GridLayout(8, 8));
 
+        iml = ImatgePecaLoader.getLoader();
         generaImatges();
 
         for (int i = 0; i < 8; i++)
@@ -106,7 +108,7 @@ class VistaTauler extends JPanel {
             empty = new ImageIcon(new BufferedImage(lado, lado, BufferedImage.TYPE_INT_ARGB));
             for (int i = 0; i < Utils.llistaFitxes.length(); i++) {
                 char ficha = Utils.llistaFitxes.charAt(i);
-                fitxes[i] = Utils.getIconPeca(ficha, lado);
+                fitxes[i] = iml.getCachedIcon(ficha, lado);
             }
             SwingUtilities.invokeLater(() -> {
                 for (VistaCasella[] f : caselles)
