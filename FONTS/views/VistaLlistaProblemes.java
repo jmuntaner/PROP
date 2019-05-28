@@ -17,7 +17,7 @@ class VistaLlistaProblemes extends JPanel {
     private final ControladorLlistaProblemes cp;
     private final VistaPrincipal vp;
     private VistaTauler preview;
-    private JLabel labelNom, labelDificultat, labelJugades;
+    private JLabel labelNom, labelDificultat, labelJugades, labelTema;
     private JButton buttonJugarHvH, buttonJugarHvM, buttonEditar, buttonEliminar, buttonRanking, buttonAvaluar;
     private JList<String> problemes;
     private final JFileChooser fc;
@@ -175,11 +175,14 @@ class VistaLlistaProblemes extends JPanel {
 
         labelDificultat = new JLabel("Dificultat: -");
         labelJugades = new JLabel("Jugades: -");
+        labelTema = new JLabel("Tema: -");
 
         gbc_n.gridy++;
         visor.add(labelJugades, gbc_n);
         gbc_n.gridy++;
         visor.add(labelDificultat, gbc_n);
+        gbc_n.gridy++;
+        visor.add(labelTema, gbc_n);
 
         // Boto Jugar HvH
         gbc_n.gridy++;
@@ -292,6 +295,7 @@ class VistaLlistaProblemes extends JPanel {
             labelNom.setText("");
             labelDificultat.setText("Dificultat: -");
             labelJugades.setText("Jugades: -");
+            labelTema.setText("Tema: -");
             clearPreview();
         } else {
             // Seleccionat
@@ -305,6 +309,7 @@ class VistaLlistaProblemes extends JPanel {
             labelNom.setText(cp.getNom());
             labelDificultat.setText("Dificultat: " + cp.getDificultat());
             labelJugades.setText("Jugades: " + cp.getJugades());
+            labelTema.setText("Tema: " + (cp.getTema() ? "Blanc" : "Negre"));
             updatePreview();
         }
     }

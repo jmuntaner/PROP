@@ -2,6 +2,7 @@ package controllers;
 
 import data.GestioProblema;
 import data.IOFens;
+import domain.Color;
 import domain.Problema;
 import domain.Tauler;
 import utils.Pair;
@@ -161,5 +162,9 @@ public class ControladorLlistaProblemes {
      */
     public ControladorAnalisi getAnalisi(List<String> seleccio) {
         return new ControladorAnalisi(seleccio.toArray(new String[0]));
+    }
+
+    public boolean getTema() {
+        return p.getTema() == Color.BLANC;
     }
 }
