@@ -164,6 +164,11 @@ public class ControladorLlistaProblemes {
         return new ControladorAnalisi(seleccio.toArray(new String[0]));
     }
 
+    /**
+     * Obté el color inicial del problema.
+     *
+     * @return True si el color és blanc.
+     */
     public boolean getTema() {
         return p.getTema() == Color.BLANC;
     }

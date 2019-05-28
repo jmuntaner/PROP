@@ -40,6 +40,7 @@ class VistaRankingProblema extends JPanel {
         llista = new JList<>();
         ListCellRenderer<String[]> rend = new RankingRenderer();
         llista.setCellRenderer(rend);
+        llista.setBackground(new Color(0, 0, 0, 0));
         panelRanking = new JScrollPane(llista);
     }
 

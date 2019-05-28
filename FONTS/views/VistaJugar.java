@@ -83,7 +83,7 @@ class VistaJugar extends VistaAmbTauler {
                 this::updateTimer, 1, 1, TimeUnit.SECONDS);
         // Actualitza panel
         updateData();
-        labelEscac.setEnabled(false);
+        labelEscac.setVisible(false);
         setInteractable(true);
         tornMaquina();
     }
@@ -136,6 +136,7 @@ class VistaJugar extends VistaAmbTauler {
         panelInfo.add(labelTempsPatida, gbc_info);
 
         // Nom del jugador
+        gbc_info.insets = new Insets(0, 4, 0, 0);
         gbc_info.gridy++;
         gbc_info.gridx = 0;
         gbc_info.gridwidth = 2;
@@ -144,19 +145,24 @@ class VistaJugar extends VistaAmbTauler {
         labelTorn.setFont(new Font(defaulltFont.getName(), Font.PLAIN, 14));
         panelInfo.add(labelTorn, gbc_info);
 
+
+        //Escac
+        gbc_info.gridy++;
+        gbc_info.weighty = 0;
+        gbc_info.weightx = 1;
+        gbc_info.fill = GridBagConstraints.NONE;
+        gbc_info.anchor = GridBagConstraints.CENTER;
+        labelEscac = new JLabel("Escac!");
+        labelEscac.setFont(new Font(defaulltFont.getName(), Font.PLAIN, 30));
+        labelEscac.setVisible(false);
+        panelInfo.add(labelEscac, gbc_info);
+
         // Glue
         gbc_info.gridy++;
         gbc_info.weighty = 1;
         gbc_info.fill = GridBagConstraints.BOTH;
         panelInfo.add(Box.createGlue(), gbc_info);
 
-        gbc_info.gridy++;
-        gbc_info.weighty = 0;
-        gbc_info.fill = GridBagConstraints.HORIZONTAL;
-        labelEscac = new JLabel("Escac!");
-        labelEscac.setFont(new Font(defaulltFont.getName(), Font.PLAIN, 20));
-        labelEscac.setVisible(false);
-        panelInfo.add(labelEscac, gbc_info);
         // Posa un borde senzill al panel
         panelInfo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 

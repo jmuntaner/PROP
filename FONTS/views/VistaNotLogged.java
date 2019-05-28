@@ -14,6 +14,7 @@ class VistaNotLogged extends JPanel {
     private JPasswordField pwd, repwd;
     private JTextField usernameIn;
     private boolean logreg = true; //true = login / false = register
+
     /**
      * Creadora per defecte
      *
@@ -140,17 +141,25 @@ class VistaNotLogged extends JPanel {
     }
 
     /**
+     * Mostra la vista de login.
+     */
+    void showLogin() {
+        logreg = true;
+        canvisVisuals();
+        clearForm();
+    }
+
+    /**
      * Efectua els canvis visuals entre Iniciar Sessió i Registrar-se
      */
     private void canvisVisuals() {
-        if(logreg) {
+        if (logreg) {
             remove(repassword);
             remove(repwd);
             titol.setText("Iniciar Sessió");
             botoSubmit.setText("Login");
             botoChangeMode.setText("Registrar-se");
-        }
-        else {
+        } else {
             titol.setText("Registre d'usuari");
             botoSubmit.setText("Registrar");
             botoChangeMode.setText("Iniciar Sessió");
@@ -177,7 +186,7 @@ class VistaNotLogged extends JPanel {
     }
 
     private void submit() {
-        if(logreg) login();
+        if (logreg) login();
         else register();
     }
 
@@ -188,13 +197,13 @@ class VistaNotLogged extends JPanel {
         String usuari = usernameIn.getText().trim();
         char[] pass = pwd.getPassword();
         //existeix l'usuari
-        if(!cu.existeixUsuari(usuari)) {
+        if (!cu.existeixUsuari(usuari)) {
             vp.missatgeError("L'usuari introduït no existeix");
             usernameIn.setText("");
             return;
         }
         //contrasenya erronea
-        if(!cu.authenticate(usuari, String.valueOf(pass))) {
+        if (!cu.authenticate(usuari, String.valueOf(pass))) {
             vp.missatgeError("Contrasenya errònea");
             pwd.setText("");
             return;
@@ -213,27 +222,27 @@ class VistaNotLogged extends JPanel {
         char[] confirmation = repwd.getPassword();
         boolean match = (pass.length == confirmation.length);
         int i = 0;
-        while(match && i < pass.length) {
-            if(pass[i]!=confirmation[i]) match = false;
+        while (match && i < pass.length) {
+            if (pass[i] != confirmation[i]) match = false;
             ++i;
         }
-        if(!match) {
+        if (!match) {
             vp.missatgeError("Les contrasenyes no coincideixen");
             pwd.setText("");
             repwd.setText("");
             return;
         }
         //nom buit
-        if(usuari.equals("")) {
+        if (usuari.equals("")) {
             vp.missatgeError("El camp del nom està sense omplir, omple'l per a continuar");
             return;
         }
         //nom = guest -> invalid
-        if(usuari.equals("guest")) {
+        if (usuari.equals("guest")) {
             vp.missatgeError("El nom introduït és invàlid, escull un altre nom per a continuar");
             return;
         }
-        if(cu.existeixUsuari(usuari)) {
+        if (cu.existeixUsuari(usuari)) {
             vp.missatgeError("Ja existeix un usuari amb aquest nom, escull un altre nom si us plau");
             usernameIn.setText("");
             return;

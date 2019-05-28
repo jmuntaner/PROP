@@ -105,6 +105,9 @@ class VistaPrincipal {
         panelRanking = new VistaRankingProblema(this);
     }
 
+    /**
+     * Inicialitza la vista d'analisi de partides
+     */
     private void initAnalisi() {
         panelAnalisi = new VistaAnalisiPartides(this);
     }
@@ -253,6 +256,7 @@ class VistaPrincipal {
     void mostraNotLogged() {
         panelNotLogged.clearForm();
         CardLayout cl = (CardLayout) contentPane.getLayout();
+        panelNotLogged.showLogin();
         cl.show(contentPane, "notLogged");
     }
 
