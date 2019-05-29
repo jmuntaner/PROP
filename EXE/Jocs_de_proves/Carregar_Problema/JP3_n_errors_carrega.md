@@ -8,7 +8,7 @@ Normal
 
 S'introdueixen manualment diversos fens amb error de format per a comprovar que apareix un missatge d'error al validar.los.
 
-## Entrada i resposta
+## Entrada
 
 Executar l'aplicació i entrar a Jugar -> Crear problema.
 
@@ -36,6 +36,10 @@ A la caixa de text superior introduir un a un el s següents FEN i prémer enter
   ```
   8/k7/k7/8/8/8/8/8 w - - 0 1
   ```
+
+# Resposta esperada
+
+Es mostra un missatge d'error.
 
 ## Captures de pantalla de la sortida
 
