@@ -41,12 +41,8 @@ FONTS
 │   ├── Torre.java                      - Joan
 │   ├── TranspositionTableEntry.java    - Roger
 │   └── Usuari.java                     - Àlex
-├── test
-│   └── domain
-│       ├── M1Test.java                 - Àlex
-│       └── M2Test.java                 - Joan
 ├── utils
-│   └── Pair.java                       - Codi extern
+│   └── Pair.java                       - Codi extern (Lleugera modificació per Roger)
 └── views
     ├── CtrlPresentacion.java           - Àlex
     ├── Escacs.java                     - Àlex
@@ -66,4 +62,3 @@ FONTS
     ├── VistaRankingProblema.java       - Àlex
     └── VistaTauler.java                - Àlex
 
-18 directories, 199 files
