@@ -91,6 +91,8 @@ public class Usuari implements Serializable {
 
     /**
      * Retorna les estadistiques del jugador
+     *
+     * @return Estadistiques del jugador
      */
     public EstadistiquesJugador getStatistics() {return estadistiques;}
 

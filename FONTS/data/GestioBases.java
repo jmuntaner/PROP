@@ -4,6 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 public abstract class GestioBases {
+
+    /**
+     * Constructora de GestioBases
+     * Si no existeix el directori de la base, el crea.
+     *
+     * @param path Path a la base
+     */
     GestioBases(String path) {
         new File(path).mkdirs();
     }

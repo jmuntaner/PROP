@@ -14,6 +14,7 @@ class VistaLogged extends JPanel {
      * Creadora per defecte
      *
      * @param vp Vista principal.
+     * @param cu Controlador usuari
      */
     VistaLogged(VistaPrincipal vp, ControladorUsuari cu) {
         super();

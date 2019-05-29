@@ -273,6 +273,8 @@ class VistaPrincipal {
 
     /**
      * Crea un missatge d'error
+     *
+     * @param missatge Missatge d'error
      */
     void missatgeError(String missatge) {
         JOptionPane.showMessageDialog(frameVista, missatge, "Error", JOptionPane.ERROR_MESSAGE);
