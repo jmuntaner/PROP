@@ -50,6 +50,8 @@ public class ControladorPrincipal {
 
     /**
      * Setter de l'usuari
+     *
+     * @param u Usuari a desar
      */
     void setUsuari(Usuari u) {
         usuari = u;

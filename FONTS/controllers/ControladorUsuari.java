@@ -26,9 +26,10 @@ public class ControladorUsuari {
     }
 
     /**
-     * Retorna true si existeix l'usuari amb nom nom i fals altrament.
+     * Comprova si existeix un usuari
      *
      * @param nom Identificador de l'usuari a buscar.
+     * @return True si existeix l'usuari, false si no.
      */
     public boolean existeixUsuari(String nom) {
         for (String s : gu.getList()) if (s.equals(nom)) return true;
@@ -36,10 +37,11 @@ public class ControladorUsuari {
     }
 
     /**
-     * Retorna true si existeix l'usuari amb nom nom i fals altrament.
+     * Comprova si l'usuari amb el nom donat te el password proporcionat
      *
      * @param nom Identificador de l'usuari a comprovar.
      * @param pass Contrassenya a comprovar
+     * @return True si existeix l'usuari i el password es correcte, false altrament
      */
     public boolean authenticate(String nom, String pass) {
         return gu.getUsuari(nom).checkPass(pass);

@@ -27,7 +27,7 @@ class ImatgePecaLoader {
     /**
      * Obté la instància Singleton del carregador.
      *
-     * @return
+     * @return Instancia del carregador
      */
     static ImatgePecaLoader getLoader() {
         if (me == null) me = new ImatgePecaLoader();
