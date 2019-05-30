@@ -7,7 +7,7 @@ import domain.Usuari;
 
 public class ControladorPartidaMvM extends ControladorPartida{
     private Maquina atacant, defensor;
-    boolean torn;
+    private boolean torn;
 
     /**
      * Crea una partida Màquina vs Màquina

@@ -12,7 +12,6 @@ public class EstadistiquesJugador implements Serializable {
         intents = 0;
         acabats = 0;
         guanyats = 0;
-        //TODO: afegir-ne mes
     }
 
     /**
