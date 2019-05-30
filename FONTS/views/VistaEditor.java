@@ -267,11 +267,16 @@ class VistaEditor extends VistaAmbTauler {
         if (ce.esNou()) {
 
             String nom = JOptionPane.showInputDialog(this, "Introdueix un nom pel problema");
+            if (nom == null) {
+                setGlobalEnabled(true);
+                return;
+            }
             if (nom.indexOf('_') != -1) {
                 JOptionPane.showMessageDialog(
                         this,
                         "El nom del problema no pot contenir '_'",
                         "Nom invalid", JOptionPane.WARNING_MESSAGE);
+                setGlobalEnabled(true);
                 return;
             }
             ce.setIdProblema(nom);
