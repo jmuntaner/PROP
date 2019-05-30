@@ -12,14 +12,15 @@ Es pot carregar a la base de dades un arxiu fendb
 
 Executar l'aplicació i entrar a Jugar.
 
-Utilitzant l'opció 'Carregar arxiu' obrir un dels arxius `.fendb` de la carpeta arxius associada a aquest joc de proves.
+Utilitzant l'opció 'Carregar arxiu' obrir un dels següents arxius `.fendb` de la carpeta arxius associada a aquest joc de proves.
 
 - **jp_1.fendb:**
   Dos problemes de dos jugades
 - **jp_2.fendb:**
   Tres problemes de dos jugades
 - **jp_3.fendb:**
-  Tres problemes de dos jugades i un de tres.
+  Tres problemes de dos jugades i un de tres. 
+  _(Triga uns instants en validar el de tres)_
 
 ## Resposta esperada
 
