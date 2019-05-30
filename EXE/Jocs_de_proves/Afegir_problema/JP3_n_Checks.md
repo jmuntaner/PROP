@@ -1,4 +1,4 @@
-# JP2: Detecció d'errors al afegir un problema
+# JP3: Detecció d'errors al afegir un problema
 
 ## Tipus JP
 

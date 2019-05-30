@@ -21,7 +21,7 @@ Utilitzant l'opció 'Carregar arxiu' obrir un dels arxius `.fendb` de la carpeta
 - **jp_3.fendb:**
   Tres problemes de dos jugades i un de tres.
 
-# Resposta esperada
+## Resposta esperada
 
 El programa carrega els FENs de l'arxiu i els mostra a la llista. Es pot observar el tauler de cada fen al panel de la dreta després de seleccionar-lo fent-hi clic.
 

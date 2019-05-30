@@ -37,7 +37,7 @@ A la caixa de text superior introduir un a un el s següents FEN i prémer enter
   8/k7/k7/8/8/8/8/8 w - - 0 1
   ```
 
-# Resposta esperada
+## Resposta esperada
 
 Es mostra un missatge d'error.
 

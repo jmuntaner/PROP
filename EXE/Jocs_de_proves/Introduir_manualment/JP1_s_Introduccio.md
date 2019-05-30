@@ -22,7 +22,7 @@ Utilitzant els botons laterals, introduir:
 
 Tornar a fer clic a la reina negra per a esborrar-la.
 
-# Resposta esperada
+## Resposta esperada
 
 Les peces apareixen a la pantalla. El tauler queda com a la imatge associada.
 

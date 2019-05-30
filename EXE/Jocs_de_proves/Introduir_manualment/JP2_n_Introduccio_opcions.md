@@ -22,7 +22,7 @@ Moure el slider de nombre de jugades a 2
 
 Fer clic al botó de guardar i introduir com a nom "Problema Test 2"
 
-# Resposta esperada
+## Resposta esperada
 
 Apareix a la llista de problemes un problema de nom "Problema test 2", amb el tauler introduit, color inicial negre, i dos jugades.
 
