@@ -22,7 +22,7 @@ Fer clic al botó "Ranking".
 
 ## Resposta esperada
 
-El ranking està buit.
+Es mostra un ranking buit.
 
 ## Captures de pantalla de la sortida
 

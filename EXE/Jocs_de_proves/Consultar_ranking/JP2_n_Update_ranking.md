@@ -32,7 +32,7 @@ aquest cop amb nom d'usuari TestRanking2 al login. A més jugarem la partida len
 
 Tornar a jugar el mateix problema però amb més rapidesa.
 
-Repetir el mateix procediment d'abans entrant amb l'usuari TestRanking3 aquest cop. A més al jugar la partida moure'm 
+Repetir el mateix procediment d'abans entrant amb l'usuari TestRanking3 aquest cop. A més, al jugar la partida, moure 
 només el rei (conseqüentment no guanyant).
 
 Finalment, tornarem a jugar amb el mateix usuari però movent la torre primer a la fila superior i després a la columna
@@ -44,7 +44,7 @@ del rei (fent mat en dues jugades).
 
 Les estadístiques s'actualitzen correctament, mostra els intents completats de `TestRanking1` i `TestRanking2`, 
 `TestRanking2` millora els seus resultats, inicialment no mostra a `TestRanking3` i finalment el mostra també a 
-l'última posició per haver fet 2 jugades..
+l'última posició per haver fet 2 jugades.
 
 ## Captures de pantalla de la sortida
 

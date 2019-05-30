@@ -23,7 +23,8 @@ Fer clic al botó "Registrar".
 
 ## Resposta esperada
 
-Les estadístiques inicialment estan totes a 0.
+Es mostren les estadístiques associades al jugador actual (nombre de intents realitzats, nombre de partides 
+acabades i nombre de partides guanyades) i aquestes estan inicialitzades a 0.
 
 ## Captures de pantalla de la sortida
 
