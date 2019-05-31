@@ -1,0 +1,17 @@
+CONSULTAR ESTADISTIQUES
+
+    Jocs de proves dels assoliments de l'usuari.
+
+Fitxers:
+    - JP1_s_ConsultarStats_buit.md
+        - Joc de proves 1, consultar estadistiques buides.
+    - JP1_s_ConsultarStats_buit.pdf
+        - Joc de proves 1, consultar estadistiques buides (pdf).
+    - JP2_n_Actualitzar_stats.md
+        - Joc de proves 2, actualitzar estadistiques.
+    - JP2_n_Actualitzar_stats.pdf
+        - Joc de proves 2, actualitzar estadistiques (pdf).
+
+Directoris:
+    - bases_JP/
+        - Carpeta d'usuaris i problemes usats pels jocs de proves.
