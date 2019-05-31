@@ -4,8 +4,9 @@ Documents descrits en el contingut de l'entrega.
 S'inclouen tots els fitxers que no son codis, executables o jocs de proves.
 
 Fitxers:
-    - ...
-
+    - EDA.txt: Descripció dels algorismes utilitzats,estructures de dades, recerca realitzada, funcionalitats i polimorfisme.
+    - Manual_Usuari.pdf: Manual d'usuari del programa.
+    - repartiment.txt: Descripció de l'aportacio de cada membre del grup.
 
 Directoris:
     - javadoc

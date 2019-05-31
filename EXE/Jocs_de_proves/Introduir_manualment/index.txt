@@ -1,0 +1,15 @@
+INTRODUIR_MANUALMENT
+
+    Jocs de proves de la funcionalitat Introduir problema manualment.
+
+Arxius:
+
+
+- JP1_s_Introduccio.pdf
+    Joc de proves simple Introduccio manual de problema
+
+- JP2_n_Introduccio_opcions.pdf
+    Joc de proves normal Introduccio manual de problema complex
+
+- JP3_n_errors_carrega.pdf
+    Joc de proves normal Errors en introduccio manual de problema

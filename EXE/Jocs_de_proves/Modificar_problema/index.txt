@@ -1,0 +1,13 @@
+MODIFICAR_PROBLEMA
+
+    Jocs de proves de la funcionalitat Modificar problema.
+
+Directoris:
+    - bases_JP
+        Arxius de la base de dades del joc de proves
+
+Arxius:
+    - JP1_s_Modificar.pdf
+        Joc de proves simple Modificar problema
+    - JP2_n_Errors_mod.pdf
+        Joc de proves normal Errors al modificar problema

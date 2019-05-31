@@ -1,0 +1,11 @@
+LLISTAR_PROBLEMES
+
+    Jocs de proves de la funcionalitat Mostrar llista de problemes.
+
+Directoris:
+    - bases_JP
+        Arxius de la base de dades del joc de proves
+
+Arxius:
+    - JP1_s_Mostra_Llista.pdf
+        Joc de proves simple Mostrar llista de problemes

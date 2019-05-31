@@ -1,0 +1,11 @@
+CARREGAR_PROBLEMA
+
+    Jocs de proves de la funcionalitat Carregar problema.
+
+Directoris:
+    - bases_JP1
+        Arxius de la base de dades del joc de proves
+
+Arxius:
+    - JP1_s_Mostra_Problemes.pdf
+        Joc de proves simple Carregar problemes

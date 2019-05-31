@@ -1,0 +1,17 @@
+AVALUAR_CONJUNT
+
+    Jocs de proves de la funcionalitat Avaluar conjunt de problemes.
+
+Directoris:
+    - bases_JP
+        Arxius de la base de dades del joc de proves
+
+Arxius:
+    - JP1_s_avaluar_problema.pdf
+        Joc de proves simple Avaluar un sol problema
+    - JP2_s_avaluar_conjunt.pdf
+        Joc de proves simple Avaluar conjunt de problemes
+    - JP3_n_partides_3_movs.pdf
+        Joc de proves normal Avaluar conjunt de problemes (3 moviments)
+    - JP4_e_partides_4_movs.pdf
+        Joc de proves exigent Avaluar conjunt de problemes (4 moviments)

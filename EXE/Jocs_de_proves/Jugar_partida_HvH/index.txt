@@ -1,0 +1,15 @@
+JUGAR_PARTIDA_HVH
+
+    Jocs de proves de la funcionalitat Jugar partida huma contra huma
+
+Directoris:
+    - bases_JP
+        Arxius de la base de dades del joc de proves
+
+Arxius:
+    - JP1_s_guanyar_partida.pdf
+        Joc de proves simple Guanyar partida
+    - JP2_s_perdre_partida.pdf
+        Joc de proves simple Perdre partida
+    - JP3_n_partida_2_mov.pdf
+        Joc de proves simple Guanyar partida de 2 moviments

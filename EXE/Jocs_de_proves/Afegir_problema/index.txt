@@ -1,0 +1,20 @@
+AFEGIR_PROBLEMA
+
+    Jocs de proves de la funcionalitat afegir problema
+
+Directoris:
+    - arxius
+        Arxius dels jocs de proves
+
+Arxius:
+    - JP1_s_Afegir.pdf
+        Joc de proves simple Afegir problema
+
+    - JP2_s_Carregar_arxiu.pdf
+        Joc de proves simple Carregar problemes d'arxiu
+
+    - JP3_n_Checks.pdf
+        Joc de proves normal: Errors al afegir problema
+
+    - JP4_e_Carregar_problema_4.pdf
+        Joc de proves exigent: Carregar problema de 4 jugades.

@@ -1,0 +1,13 @@
+ELIMINAR_PROBLEMA
+
+    Jocs de proves de la funcionalitat Avaluar conjunt de problemes.
+
+Directoris:
+    - bases_JP
+        Arxius de la base de dades del joc de proves
+
+Arxius:
+- JP1_s_Elimina_prob.pdf
+    Joc de proves simple Eliminar problema
+- JP2_n_Cancelar_eliminacio.pdf
+    Joc de proves normal Cancelar eliminacio de problema
