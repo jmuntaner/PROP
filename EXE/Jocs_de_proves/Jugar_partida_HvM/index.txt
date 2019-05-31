@@ -1,0 +1,50 @@
+JUGAR PARTIDA HvM
+
+    Jocs de proves de la funcionalitat jugar huma contra maquina.
+
+Fitxers:
+    - JP1_s_guanyar_partida_M1.md
+        - Joc de proves 1, guanyar partida contra la maquina 1.
+    - JP1_s_guanyar_partida_M1.pdf
+        - Joc de proves 1, guanyar partida contra la maquina 1 (pdf).
+    - JP2_s_guanyar_partida_M2.md
+        - Joc de proves 2, guanyar partida contra la maquina 2.
+    - JP2_s_guanyar_partida_M2.pdf
+        - Joc de proves 2, guanyar partida contra la maquina 2 (pdf).
+    - JP3_s_perdre_partida_M1.md
+        - Joc de proves 3, perdre partida contra la maquina 1.
+    - JP3_s_perdre_partida_M1.pdf
+        - Joc de proves 3, perdre partida contra la maquina 1 (pdf).
+    - JP4_s_perdre_partida_M2.md
+        - Joc de proves 4, perdre partida contra la maquina 2.
+    - JP4_s_perdre_partida_M2.pdf
+        - Joc de proves 4, perdre partida contra la maquina 2 (pdf).
+    - JP5_s_defensor_1_mov.md
+        - Joc de proves 5, defensar partida de 1 moviment.
+    - JP5_s_defensor_1_mov.pdf
+        - Joc de proves 5, defensar partida de 1 moviment (pdf).
+    - JP6_n_guanyar_partida_2_mov.md
+        - Joc de proves 6, guanyar partida de 2 moviments.
+    - JP6_n_guanyar_partida_2_mov.pdf
+        - Joc de proves 6, guanyar partida de 2 moviments (pdf).
+    - JP7_n_defensor_2_mov.md
+        - Joc de proves 7, defensar partida de 2 moviments.
+    - JP7_n_defensor_2_mov.pdf
+        - Joc de proves 7, defensar partida de 2 moviments (pdf).
+    - JP8_n_guanyar_partida_3_mov.md
+        - Joc de proves 8, guanyar partida de 3 moviments.
+    - JP8_n_guanyar_partida_3_mov.pdf
+        - Joc de proves 8, guanyar partida de 3 moviments (pdf).
+    - JP9_n_defensor_3_mov.md
+        - Joc de proves 9, defensar partida de 3 moviments.
+    - JP9_n_defensor_3_mov.pdf
+        - Joc de proves 9, defensar partida de 3 moviments (pdf).
+    - JP10_n_enunciat.md
+        - Joc de proves 10, problema de l'enunciat.
+    - JP10_n_enunciat.pdf
+        - Joc de proves 10, problema de l'enunciat (pdf).
+
+Directoris:
+
+    - bases_JP/
+        Carpeta d'usuaris i problemes usats pels jocs de proves

@@ -1,0 +1,17 @@
+CONSULTAR RANKING
+
+    Jocs de proves del ranking dels problemes.
+
+Fitxers:
+    - JP1_s_Ranking.md
+        - Joc de proves 1, ranking buit.
+    - JP1_s_Ranking.pdf
+        - Joc de proves 1, ranking buit (pdf).
+    - JP2_n_Update_ranking.md
+        - Joc de proves 2, actualitzar ranking.
+    - JP2_n_Update_ranking.pdf
+        - Joc de proves 2, actualitzar ranking (pdf).
+
+Directoris:
+    - bases_JP/
+        - Carpeta d'usuaris i problemes usats pels jocs de proves.
