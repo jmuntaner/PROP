@@ -1,0 +1,10 @@
+EXE
+    Executable i jocs de proves.
+    
+Arxius:
+    - Escacs.jar
+        Executable del projecte
+        
+Carpetes:
+    - Jocs_de_proves
+        Jocs de proves del projecte

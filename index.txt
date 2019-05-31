@@ -6,11 +6,13 @@ DIRECTORI ARREL
 
 Fitxers:
     - compilar.sh
-        Script per compilar el projecte
+        Script per a compilar el projecte
+    - compilar.sh
+        Script per a compilar el projecte a la fib (veure avis a instruccions)
     - descripcio_grup.txt
         Noms i adreces de correu dels integrants del grup
     - makeJars.sh
-        Script per a generar els .jar de tots els drivers i el test JUnit a la carpeta EXE.
+        Script per a generar l'arxiu .jar de la carpeta EXE.
     - INSTRUCCIONS_COMPILAR.txt
         Instruccions sobre com compilar el projecte.
 
@@ -18,7 +20,7 @@ Directoris:
     - DOCS
         Documents demanats en l'entrega que no son codis, executables o jocs de proves.
     - EXE
-        Executables (drivers que permeten provar les classes i les funcionalitats) i jocs de proves corresponents
+        Executable del programa i jocs de proves corresponents
     - FONTS
         Codis del projecte
     

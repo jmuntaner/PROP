@@ -1,0 +1,17 @@
+DATA
+
+    Capa de dades.
+    
+Arxius
+
+    - GestioBases.java
+        Classe generica de gestio de bases de dades.
+        
+    - GestioProblema.java
+        Gestio de la carrega i escriptura de problemes a disc.
+        
+    - GestioUsuari.java
+        Gestio de la carrega i escriptura de usuaris a disc.
+
+    - IOFens.java
+        Classe per a carregar i generar arxius de fens (.fendb).

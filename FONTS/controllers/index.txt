@@ -1,4 +1,35 @@
 CONTROLLERS
 
-Controladors.
-Els fitxers d'aquesta carpeta son provisionals i, per tant, no formen part del primer lliurament.
+Controladors de domini.
+
+Arxius:
+    - ControladorAnalisi.java
+        Controlador de l'avaluacio de partides maquina contra maquina.
+        
+    - ControladorEditor.java
+        Controlador de l'editor de partides.
+        
+    - ControladorLlistaProblemes.java
+        Controlador de la llista de problemes.
+        
+    - ControladorPartidaHvH.java
+        Controlador de les partides huma contra huma.
+    
+    - ControladorPartidaHvM.java
+        Controlador de les partides huma contra maquina.
+    
+    - ControladorPartida.java
+        Classe generica per a crear controladors de partida.
+    
+    - ControladorPartidaMvM.java
+        Controlador de les partides maquina contra maquina.
+    
+    - ControladorPrincipal.java
+        Controlador principal de domini.
+        
+    - ControladorUsuari.java
+        Controlador de la gestio d'usuaris.
+    
+    
+    
+

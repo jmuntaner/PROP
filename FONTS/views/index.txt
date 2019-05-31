@@ -1,0 +1,58 @@
+VIEWS
+
+    Classes de la capa de presentacio
+    
+Arxius
+
+    - CtrlPresentacion.java
+        Controlador de presentació.
+        
+    - Escacs.java
+        Classe principal per a executar el programa.
+        
+    - ImatgePecaLoader.java
+        Carregador i redimensionador d'imatges de peces, amb cache.
+        
+    - Utils.java
+        Utilitats de la capa de presentacio.
+        
+    - VistaAmbTauler.java
+        Classe generica per a vistes amb tauler gran redimensionable.
+        
+    - VistaAnalisiPartides.java
+        Vista d'analisi de partides maquina contra maquina.
+        
+    - VistaCasella.java
+        Vista d'una casella del tauler.
+        
+    - VistaEditor.java
+        Exten VistaAmbTauler.
+        Vista de l'editor de problemes.
+          
+    - VistaFiPartida.java
+        Vista de finalització de partida.
+        
+    - VistaJugar.java
+        Exten VistaAmbTauler.
+        Vista del joc de partida.
+        
+    - VistaLlistaProblemes.java
+        Vista de la llista de problemes.
+        
+    - VistaLogged.java
+        Vista de les estadistiques d'un usuari.
+        
+    - VistaMenuPrincipal.java
+        Vista del menu principal.
+        
+    - VistaNotLogged.java
+        Vista dels formularis de registre/inici de sessio.
+        
+    - VistaPrincipal.java
+        Vista principal de l'aplicacio.
+        
+    - VistaRankingProblema.java
+        Vista del ranking d'un problema.
+        
+    - VistaTauler.java
+        Vista de tauler d'escacs.

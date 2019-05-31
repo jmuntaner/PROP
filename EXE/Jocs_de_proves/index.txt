@@ -1,0 +1,32 @@
+JOCS DE PROVES
+
+    Jocs de proves del projecte
+
+Directoris:
+
+    - Afegir_problema
+        Joc de proves de la funcionalitat afegir problema
+    - Avaluar_conjunt
+        Joc de proves de la funcionalitat avaluar conjunt de problemes
+    - Carregar_Problema
+        Joc de proves de la funcionalitat carregar problema
+    - Consultar_estadistiques
+        Joc de proves de la funcionalitat consultar estadistiques
+    - Consultar_ranking
+        Joc de proves de la funcionalitat consultar ranking
+    - Eliminar_problema
+        Joc de proves de la funcionalitat eliminar problema
+    - Introduir_manualment
+        Joc de proves de la funcionalitat introduir problema mnualment
+    - Jugar_partida_HvH
+        Joc de proves de la funcionalitat jugar partida huma contra huma
+    - Jugar_partida_HvM
+        Joc de proves de la funcionalitat jugar partida huma contra maquina
+    - Llistar_problemes
+        Joc de proves de la funcionalitat llistar problemes
+    - Login_usuari
+        Joc de proves de la funcionalitat iniciar sessio d'usuari
+    - Modificar_problema
+        Joc de proves de la funcionalitat modificar problema
+    - Registar_usuari
+        Joc de proves de la funcionalitat registrar usuari

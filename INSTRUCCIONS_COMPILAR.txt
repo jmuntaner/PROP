@@ -1,4 +1,6 @@
 Per a compilar el codi cal executar l'arxiu compilar.sh. Es crearà una carpeta "out"
 on es trobaràn els .class seguint l'estructura 'package', igual que a FONTS.
 
-Per a generar els .jar de EXE, executar makeJars.sh després d'haver generat la carpeta "out" amb compilar.sh.
+AVIS: L'arxiu compilar.sh no funciona correctament als ordinadors de la fib, ja que la comanda 'javac' instalada es la versio 1.7, que no correspon amb la versio del jre que hi ha, la 1.8. Per a aquest cas disposem de l'arxiu 'compilar_fib.sh' que realitza la compilació utilitzant el path absolut a l'executable de javac 1.8.
+
+Per a generar el .jar de EXE, executar makeJars.sh després d'haver generat la carpeta "out" amb compilar.sh.

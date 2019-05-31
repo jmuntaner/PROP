@@ -13,7 +13,6 @@ Fitxers:
         Enumeracio per distingir els colors de les peces (BLANC/NEGRE).
     - EstadistiquesJugador
         Estadistiques individuals de cada jugador.
-        Classe sense implementar, necessaria per al segon lliurament.
     - EstadistiquesPartida
         Estadistiques propies de cada partida.
     - FenTranslator
@@ -24,7 +23,6 @@ Fitxers:
     - M2
         Subclasse de maquina.
         Heuristica complexa per a la maquina.
-        Classe sense implementar, necessaria per al segon lliurament.
     - Maquina (abstracta)
         Algorismia necessaria per a calcular els moviments que realitza la maquina.
     - Moviment
@@ -56,5 +54,10 @@ Fitxers:
     - Tauler
         Posicio del tauler, segons les peces que el conformen i les seves posicions.
         Permet trobar situacions d'escac, mat i taules.
+    - Torre
+        Subclasse de peca.
+        Te el comportament caracteristic de la torre.
+    - TranspositionTableEntry
+        Entrada per a la taula de transposicio (Cache de nodes visitats en el minimax)
     - Usuari
         Informacio de login i estadistiques propies de cada usuari.

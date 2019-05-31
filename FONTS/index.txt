@@ -1,15 +1,18 @@
 FONTS
 
-Classes implementades pel grup fins al moment (incloent-hi drivers).
+Classes implementades pel grup i javadoc.
 
 Directoris:
+    - Views
+        Codis de les classes de presentació.
     - Controllers
-        Controladors (qualsevol fitxer dins aquest directori es provisional)
+        Codis dels controladors de domini.
     - Domain
-        Codis de les classes de domini
-    - Drivers
-        Codis de tots els drivers utilitzats
+        Codis de les classes de domini.
+    -  Data
+        Codis de les classes de la capa de dades.
     - Utils:
         Codis externs usats (en concret, codi de la classe Pair).
-    - Test.domain
-        Codi de la classe de test (JUnit) per a la maquina M1
+    - Javadoc
+        Javadoc del codi
+  
