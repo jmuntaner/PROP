@@ -6,7 +6,11 @@ Normal
 
 ## Efectes estudiats
 
-El ranking s'actualitza correctament.
+El ranking s'actualitza correctament:
+ 
+Amb aquest joc de proves es comprova que s'inserten diferents usuaris al guanyar 
+i aquests s'ordenen adequadament segons les jugades i el temps, es verifica també que si un usuari no guanya no entra al ranking.
+Finalment, prova que les entrades s'actualitzen quan l'usuari millora.
 
 ## Entrada
 

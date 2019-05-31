@@ -6,7 +6,8 @@ Normal
 
 ## Efectes estudiats
 
-Les estadístiques s'actualitzen correctament.
+Es vol comprovar que les estadístiques s'actualitzen adequadament, d'aquesta manera, al joc de proves
+s'estudien els efectes de variar cadascuna de les variables (intents, acabats i guanyats) de les estadístiques i verificar que s'actualitzen de manera correcta al perfil.
 
 ## Entrada
 

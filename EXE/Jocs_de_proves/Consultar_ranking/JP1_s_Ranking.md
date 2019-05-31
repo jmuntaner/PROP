@@ -6,7 +6,7 @@ Simple
 
 ## Efectes estudiats
 
-Es pot accedir al ranking buit d'un problema.
+Es pot accedir al ranking buit d'un problema. Assegura que el ranking s'inicialitza buit i la vista funciona.
 
 ## Entrada
 
