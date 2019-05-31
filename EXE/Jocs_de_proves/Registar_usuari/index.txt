@@ -1,0 +1,10 @@
+REGISTRAR_USUARI
+
+    Jocs de proves de la funcionalitat Registrar usuari.
+
+Arxius:
+    - JP1_s_Registre.pdf
+        Joc de proves simple Registre d'usuari.
+    - JP2_n_errors_registre.pdf
+        Joc de proves normal Errors durant registre d'usuari.
+

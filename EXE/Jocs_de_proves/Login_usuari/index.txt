@@ -1,0 +1,13 @@
+LOGIN_USUARI
+
+    Jocs de proves de la funcionalitat Inici de sessio d'usuari.
+
+Directoris:
+    - bases_JP
+        Arxius de la base de dades del joc de proves
+Arxius:
+    - JP1_s_login.pdf
+        Joc de proves simple Login usuari
+    - JP2_n_errors.pdf
+        Joc de proves normal Errors de login usuari
+

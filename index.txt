@@ -23,4 +23,6 @@ Directoris:
         Executable del programa i jocs de proves corresponents
     - FONTS
         Codis del projecte
+    - res
+        Recuros gràfics del programa
     
