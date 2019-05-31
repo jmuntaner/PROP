@@ -6,7 +6,7 @@ Normal
 
 ## Efectes estudiats
 
-Es pot jugar una partida humà contra màquina de dos moviments atacant.
+Es pot jugar i guanyar una partida humà contra màquina de dos moviments atacant.
 
 ## Entrada
 
