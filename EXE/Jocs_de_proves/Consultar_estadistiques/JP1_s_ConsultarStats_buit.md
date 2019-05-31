@@ -6,7 +6,7 @@ Simple
 
 ## Efectes estudiats
 
-Es poden consultar les estadístiques d'un usuari recén creat.
+Es pretén veure que es poden consultar les estadístiques d'un usuari nou i comprovar que s'inicialitzen correctament (a 0).
 
 ## Entrada
 
